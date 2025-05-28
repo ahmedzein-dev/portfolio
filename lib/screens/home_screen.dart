@@ -21,7 +21,6 @@ class PortfolioHomePage extends StatelessWidget {
           children: [
             // Header Section
             const HeaderSection(),
-            const SizedBox(height: 40),
 
             // Main Content
             LayoutBuilder(

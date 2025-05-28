@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../utils/functions.dart';
+import 'hover_link_text.dart';
 
 class ExperienceCard extends StatelessWidget {
   const ExperienceCard({super.key});
@@ -105,34 +104,15 @@ class ExperienceCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              GestureDetector(
-                                onTap:
-                                    () => openUrl(
-                                      exp['link'],
-                                      mode: LaunchMode.externalApplication,
-                                    ),
-                                child: Text(
-                                  exp['title'],
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                              HoverLinkText(
+                                text: exp['title'],
+                                url: exp['link'],
                               ),
-                              GestureDetector(
-                                onTap:
-                                    () => openUrl(
-                                      exp['link'],
-                                      mode: LaunchMode.externalApplication,
-                                    ),
-                                child: Text(
-                                  exp['company'],
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
-                                ),
+                              HoverLinkText(
+                                text: exp['company'],
+                                url: exp['link'],
                               ),
+
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

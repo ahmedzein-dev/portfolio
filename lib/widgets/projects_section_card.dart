@@ -106,7 +106,7 @@ class ProjectsSection extends StatelessWidget {
           'Directories for furnishing and supply companies',
         ],
         techTags: ['Flutter', 'Marketplace', 'Real Estate'],
-        icon: '🏘️',
+        icon: '👷‍♂️',
         url: 'https://play.google.com/store/apps/details?id=com.home_osta.Osta',
       ),
 
@@ -176,7 +176,7 @@ class ProjectsSection extends StatelessWidget {
             'Streamlined e-marketing solution with fast campaign launches and consistent service quality.',
         features: ['Easy-to-use campaign tools', 'Time-saving automation'],
         techTags: ['Marketing', 'Automation', 'Web'],
-        icon: '📣',
+        icon: '☁️',
         url:
             'https://play.google.com/store/apps/details?id=com.ikoomedia&pcampaignid=web_share',
       ),

@@ -1,5 +1,6 @@
-import 'package:ahmed_portfolio/utils/functions.dart';
 import 'package:flutter/material.dart';
+
+import 'hover_link_text.dart';
 
 class CertificationsCard extends StatelessWidget {
   const CertificationsCard({super.key});
@@ -95,16 +96,8 @@ class CertificationsCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        onTap: () => openUrl(cert['url']!),
-                        child: Text(
-                          cert['title']!,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ),
+                      HoverLinkText(text: cert['title']!, url: cert['url']!),
+
                       if (cert['subtitle']!.isNotEmpty)
                         const SizedBox(height: 2),
                       if (cert['subtitle']!.isNotEmpty)
