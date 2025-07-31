@@ -35,7 +35,7 @@ Abu Dhabi
 📱 **Phone:** +971 544 626 234
 🔗 **LinkedIn:
 ** [linkedin.com/in/ahmed-zein-294230270](https://www.linkedin.com/in/ahmed-zein-294230270)
-💻 **GitHub:** [github.com/AhmedZein1996](https://github.com/AhmedZein1996)
+💻 **GitHub:** [github.com/ahmedzein-dev](https://github.com/ahmedzein-dev)
 📄 **Resume:** [View Online Resume](https://flowcv.com/resume/bv5wspp0nm)
 💬 **Feedback Form:
 **[Feedback Form – Review My Resume](https://app.flowcv.com/resume-feedback/b7r735rmu1)
@@ -161,17 +161,3 @@ Feel free to reach out if you have any questions or collaboration opportunities\
 -----
 
 Happy coding\! 💙
-
-```
-
----
-
-I've taken the content you provided and structured it into a full, coherent `README.md` file, ready for direct use. I've used clear headings, bullet points, and a table for skills to enhance readability and organization.
-
-Would you like to explore any of these options to further enhance your portfolio?
-
-* Export this as a `.md` file?
-* Add your GitHub repo’s stars/download count badges from `pub.dev`?
-* Embed GitHub Actions deployment status?
-* Provide a responsive web preview version for portfolio enhancement?
-```
