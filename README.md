@@ -156,7 +156,7 @@ Feel free to reach out if you have any questions or collaboration opportunities\
 🌐 **Portfolio:** [ahmedzein.dev](https://ahmedzein.dev)
 💼 **LinkedIn:
 ** [linkedin.com/in/ahmed-zein-294230270](https://www.linkedin.com/in/ahmed-zein-294230270)
-💻 **GitHub:** [github.com/AhmedZein1996](https://github.com/AhmedZein1996)
+💻 **GitHub:** [github.com/ahmedzein-dev](https://github.com/ahmedzein-dev)
 
 -----
 
