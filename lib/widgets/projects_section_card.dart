@@ -33,7 +33,6 @@ class ProjectsSection extends StatelessWidget {
       //   url: '',
       // ),
       // SizedBox(height: 30),
-<<<<<<< HEAD
       // _buildProjectCard(
       //   title: 'Gainz AI',
       //   description: 'AI-powered fitness app with personalized training.',
@@ -48,22 +47,6 @@ class ProjectsSection extends StatelessWidget {
       //   url:
       //       'https://apps.apple.com/us/app/gainz-ai-chat-train-track/id6474649083',
       // ),
-=======
-      _buildProjectCard(
-        title: 'Gainz AI',
-        description: 'AI-powered fitness app with personalized training.',
-        features: [
-          'Hyper-realistic AI athlete avatars and adaptive training plans',
-          'Real-time coaching and personalized workouts',
-          'Published Flutter package: Scroll Highlight Text',
-        ],
-        techTags: ['Flutter', 'AI Operations', 'Package Development', 'UI/UX'],
-        icon: '🦾',
-        // NEW ICON
-        url:
-            'https://apps.apple.com/us/app/gainz-ai-chat-train-track/id6474649083',
-      ),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
       const SizedBox(height: 30),
       _buildProjectCard(
         title: 'BA3 Business Solution',
@@ -225,7 +208,6 @@ Widget _buildProjectCard({
   required String url,
 }) => Container(
   decoration: BoxDecoration(
-<<<<<<< HEAD
     color: const Color(0xFF1E293B),
     borderRadius: BorderRadius.circular(16),
     border: Border.all(
@@ -235,13 +217,6 @@ Widget _buildProjectCard({
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.3),
-=======
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(16),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black.withAlpha(20),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
         blurRadius: 15,
         offset: const Offset(0, 4),
       ),
@@ -259,7 +234,6 @@ Widget _buildProjectCard({
               Container(
                 width: 300,
                 height: 250,
-<<<<<<< HEAD
                 decoration: BoxDecoration(
                   color: const Color(0xFF0F172A),
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
@@ -267,11 +241,6 @@ Widget _buildProjectCard({
                     color: const Color(0xFF10B981).withOpacity(0.2),
                     width: 1,
                   ),
-=======
-                decoration: const BoxDecoration(
-                  color: AppStyle.primaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
                 ),
                 child: Center(
                   child: Text(icon, style: const TextStyle(fontSize: 80)),
@@ -296,7 +265,6 @@ Widget _buildProjectCard({
             Container(
               width: double.infinity,
               height: 200,
-<<<<<<< HEAD
               decoration: BoxDecoration(
                 color: const Color(0xFF0F172A),
                 borderRadius: const BorderRadius.only(
@@ -309,14 +277,6 @@ Widget _buildProjectCard({
                     width: 1,
                   ),
                 ),
-=======
-              decoration: const BoxDecoration(
-                color: AppStyle.primaryColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
               ),
               child: Center(
                 child: Text(icon, style: const TextStyle(fontSize: 80)),
@@ -361,21 +321,13 @@ Widget _buildProjectContent(
                 style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w700,
-<<<<<<< HEAD
                   color: Colors.white,
-=======
-                  color: Color(0xFF2C3E50),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
                 ),
               ),
               const SizedBox(height: 8),
               Text(
                 description,
-<<<<<<< HEAD
                 style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 16),
-=======
-                style: const TextStyle(color: Color(0xFF6C757D), fontSize: 16),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
               ),
             ],
           ),
@@ -395,11 +347,7 @@ Widget _buildProjectContent(
                   }
                   openUrl(url);
                 },
-<<<<<<< HEAD
                 icon: const Icon(Icons.link, color: Color(0xFF10B981)),
-=======
-                icon: const Icon(Icons.link, color: Color(0xFF6C757D)),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
                 tooltip: 'App Link',
               ),
           ],
@@ -411,11 +359,7 @@ Widget _buildProjectContent(
       'Key Features:',
       style: TextStyle(
         fontWeight: FontWeight.w600,
-<<<<<<< HEAD
         color: Colors.white,
-=======
-        color: Color(0xFF2C3E50),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
         fontSize: 16,
       ),
     ),
@@ -431,11 +375,7 @@ Widget _buildProjectContent(
               height: 6,
               margin: const EdgeInsets.only(top: 8, right: 12),
               decoration: const BoxDecoration(
-<<<<<<< HEAD
                 color: Color(0xFF10B981),
-=======
-                color: Color(0xFF3498DB),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
                 shape: BoxShape.circle,
               ),
             ),
@@ -443,11 +383,7 @@ Widget _buildProjectContent(
               child: Text(
                 feature,
                 style: const TextStyle(
-<<<<<<< HEAD
                   color: Color(0xFFCBD5E1),
-=======
-                  color: Color(0xFF6C757D),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
                   fontSize: 15,
                   height: 1.5,
                 ),
@@ -470,26 +406,17 @@ Widget _buildProjectContent(
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-<<<<<<< HEAD
                     color: const Color(0xFF0F172A),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: const Color(0xFF10B981).withOpacity(0.3),
                       width: 1,
                     ),
-=======
-                    color: const Color(0xFFF8F9FA),
-                    borderRadius: BorderRadius.circular(20),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
                   ),
                   child: Text(
                     tag,
                     style: const TextStyle(
-<<<<<<< HEAD
                       color: Color(0xFF10B981),
-=======
-                      color: Color(0xFF495057),
->>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),

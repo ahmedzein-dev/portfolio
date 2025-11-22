@@ -5,6 +5,7 @@ import 'package:ahmed_portfolio/utils/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import '../email_constants.dart';
 
 class ContactSection extends StatefulWidget {
   const ContactSection({super.key});
@@ -22,9 +23,9 @@ class _ContactSectionState extends State<ContactSection> {
   bool _isLoading = false;
 
   // EmailJS Configuration
-  static const String _serviceId = 'service_8i6c89x';
-  static const String _templateId = 'template_8y5elfg';  // Get this from EmailJS
-  static const String _publicKey = 'AWhK80EypqJMXG8ho';    // Get this from EmailJS Account > API Keys
+  static const String _serviceId = EmailConstants.serviceId;
+  static const String _templateId = EmailConstants.templateId; // Get this from EmailJS
+  static const String _publicKey = EmailConstants.publicKey; // Get this from EmailJS Account > API Keys
 
   @override
   void dispose() {
@@ -54,8 +55,8 @@ class _ContactSectionState extends State<ContactSection> {
           'template_params': {
             'name': _nameController.text,
             'email': _emailController.text,
-            'title': _subjectController.text,      // matches {{title}} in Subject line
-            'subject': _subjectController.text,    // matches {{subject}} in content
+            'title': _subjectController.text, // matches {{title}} in Subject line
+            'subject': _subjectController.text, // matches {{subject}} in content
             'message': _messageController.text,
             'time': formattedTime,
           },
@@ -65,7 +66,8 @@ class _ContactSectionState extends State<ContactSection> {
       if (response.statusCode == 200) {
         _showSnackBar('Message sent successfully! I\'ll get back to you soon.', isSuccess: true);
         _clearForm();
-      } else {  log('Error in _sendEmail ${response.statusCode} ${response.body}');
+      } else {
+        log('Error in _sendEmail ${response.statusCode} ${response.body}');
         _showSnackBar('Failed to send message. Please try again or email me directly.');
       }
     } catch (e) {
@@ -181,7 +183,8 @@ class _ContactSectionState extends State<ContactSection> {
           icon: Icons.link,
           title: 'LinkedIn',
           content: 'Connect with me',
-          onTap: () => openUrl('https://www.linkedin.com/in/ahmed-zein-294230270', mode: LaunchMode.externalApplication),
+          onTap:
+              () => openUrl('https://www.linkedin.com/in/ahmed-zein-294230270', mode: LaunchMode.externalApplication),
         ),
         const SizedBox(height: 24),
         _buildContactItem(
@@ -256,7 +259,10 @@ class _ContactSectionState extends State<ContactSection> {
                   decoration: const BoxDecoration(color: Color(0xFF10B981), shape: BoxShape.circle),
                 ),
                 const SizedBox(width: 10),
-                const Text('Available for new projects', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white)),
+                const Text(
+                  'Available for new projects',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                ),
               ],
             ),
             const SizedBox(height: 24),
@@ -305,16 +311,21 @@ class _ContactSectionState extends State<ContactSection> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   elevation: 0,
                 ),
-                child: _isLoading
-                    ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
-                    : const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.send, size: 18),
-                    SizedBox(width: 8),
-                    Text('Send Message', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                  ],
-                ),
+                child:
+                    _isLoading
+                        ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                        )
+                        : const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.send, size: 18),
+                            SizedBox(width: 8),
+                            Text('Send Message', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                          ],
+                        ),
               ),
             ),
           ],
@@ -345,10 +356,22 @@ class _ContactSectionState extends State<ContactSection> {
             hintStyle: const TextStyle(color: Color(0xFF64748B)),
             filled: true,
             fillColor: const Color(0xFF0F172A),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: const Color(0xFF10B981).withOpacity(0.3))),
-            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide(color: const Color(0xFF10B981).withOpacity(0.3))),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Color(0xFF10B981), width: 2)),
-            errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Colors.red)),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: const Color(0xFF10B981).withOpacity(0.3)),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: const Color(0xFF10B981).withOpacity(0.3)),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: Color(0xFF10B981), width: 2),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: Colors.red),
+            ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
         ),
