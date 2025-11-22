@@ -83,6 +83,10 @@ linter:
     - prefer_constructors_over_static_methods
     - prefer_contains
     - prefer_equal_for_default_values
+<<<<<<< HEAD
+=======
+    - prefer_expression_function_bodies
+>>>>>>> 3b06d18a1555965556e30adaeac731e9128addac
     - prefer_final_fields
     - prefer_final_in_for_each
     - prefer_final_locals
