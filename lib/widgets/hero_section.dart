@@ -1,14 +1,8 @@
-import 'package:ahmed_portfolio/utils/functions.dart';
 import 'package:ahmed_portfolio/widgets/profile_card.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HeroSection extends StatelessWidget {
-  const HeroSection({
-    super.key,
-    this.onViewWork,
-    this.onGetInTouch,
-  });
+  const HeroSection({super.key, this.onViewWork, this.onGetInTouch});
 
   final VoidCallback? onViewWork;
   final VoidCallback? onGetInTouch;
@@ -21,10 +15,7 @@ class HeroSection extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF0F172A),
-            Color(0xFF1E293B),
-          ],
+          colors: [Color(0xFF0F172A), Color(0xFF1E293B)],
         ),
       ),
       child: LayoutBuilder(
@@ -87,7 +78,7 @@ class HeroSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF10B981).withOpacity(0.1),
+        color: const Color(0xFF10B981).withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0xFF10B981), width: 1.5),
       ),
@@ -110,10 +101,10 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget _buildTitle() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           "Hi, I'm",
           style: TextStyle(
             fontSize: 24,
@@ -121,8 +112,8 @@ class HeroSection extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
         ),
-        const SizedBox(height: 8),
-        const Text(
+        SizedBox(height: 8),
+        Text(
           'Ahmed Zein Elabedin',
           style: TextStyle(
             fontSize: 56,
@@ -131,8 +122,8 @@ class HeroSection extends StatelessWidget {
             height: 1.1,
           ),
         ),
-        const SizedBox(height: 12),
-        const Text(
+        SizedBox(height: 12),
+        Text(
           'Flutter Developer',
           style: TextStyle(
             fontSize: 32,
@@ -175,10 +166,7 @@ class HeroSection extends StatelessWidget {
           ),
           child: const Text(
             'View My Work',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
         OutlinedButton(
@@ -193,10 +181,7 @@ class HeroSection extends StatelessWidget {
           ),
           child: const Text(
             'Get In Touch',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
         ),
       ],
@@ -237,4 +222,3 @@ class HeroSection extends StatelessWidget {
     );
   }
 }
-

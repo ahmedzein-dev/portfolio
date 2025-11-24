@@ -7,12 +7,16 @@ class NavigationHeader extends StatelessWidget {
     this.onServicesTap,
     this.onProjectsTap,
     this.onContactTap,
+    this.onThemeToggle,
+    this.isDarkMode = true,
   });
 
   final VoidCallback? onAboutTap;
   final VoidCallback? onServicesTap;
   final VoidCallback? onProjectsTap;
   final VoidCallback? onContactTap;
+  final VoidCallback? onThemeToggle;
+  final bool isDarkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +29,13 @@ class NavigationHeader extends StatelessWidget {
         color: const Color(0xFF0F172A),
         border: Border(
           bottom: BorderSide(
-            color: const Color(0xFF10B981).withOpacity(0.2),
+            color: const Color(0xFF10B981).withValues(alpha: 0.2),
             width: 1,
           ),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -136,7 +140,7 @@ class NavigationHeader extends StatelessWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.3),
+                  color: Colors.white.withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -145,10 +149,14 @@ class NavigationHeader extends StatelessWidget {
                 Navigator.pop(context);
                 onAboutTap?.call();
               }),
-              _buildMobileNavItem('Services', Icons.design_services_outlined, () {
-                Navigator.pop(context);
-                onServicesTap?.call();
-              }),
+              _buildMobileNavItem(
+                'Services',
+                Icons.design_services_outlined,
+                () {
+                  Navigator.pop(context);
+                  onServicesTap?.call();
+                },
+              ),
               _buildMobileNavItem('Projects', Icons.work_outline, () {
                 Navigator.pop(context);
                 onProjectsTap?.call();

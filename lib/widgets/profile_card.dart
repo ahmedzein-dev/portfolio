@@ -48,7 +48,7 @@ class _ProfileCardState extends State<ProfileCard> with TickerProviderStateMixin
                   height: 380,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xFF10B981).withOpacity(0.15), width: 1),
+                    border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.15), width: 1),
                   ),
                 ),
               );
@@ -61,8 +61,8 @@ class _ProfileCardState extends State<ProfileCard> with TickerProviderStateMixin
             height: 320,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFF10B981).withOpacity(0.5), width: 2),
-              boxShadow: [BoxShadow(color: const Color(0xFF10B981).withOpacity(0.2), blurRadius: 30, spreadRadius: 5)],
+              border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.5), width: 2),
+              boxShadow: [BoxShadow(color: const Color(0xFF10B981).withValues(alpha: 0.2), blurRadius: 30, spreadRadius: 5)],
             ),
             child: ClipOval(
               child: Image.asset(
@@ -132,8 +132,8 @@ class _ProfileCardState extends State<ProfileCard> with TickerProviderStateMixin
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.white.withOpacity(0.1), width: 1),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4))],
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1), width: 1),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 4))],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

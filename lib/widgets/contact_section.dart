@@ -215,7 +215,7 @@ class _ContactSectionState extends State<ContactSection> {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: const Color(0xFF10B981).withOpacity(0.2),
+                color: const Color(0xFF10B981).withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: const Color(0xFF10B981)),
@@ -244,8 +244,8 @@ class _ContactSectionState extends State<ContactSection> {
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF10B981).withOpacity(0.2), width: 1),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 20, offset: const Offset(0, 4))],
+        border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.2), width: 1),
+        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 4))],
       ),
       child: Form(
         key: _formKey,
@@ -307,7 +307,7 @@ class _ContactSectionState extends State<ContactSection> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF10B981),
                   foregroundColor: Colors.white,
-                  disabledBackgroundColor: const Color(0xFF10B981).withOpacity(0.5),
+                  disabledBackgroundColor: const Color(0xFF10B981).withValues(alpha: 0.5),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   elevation: 0,
@@ -359,11 +359,11 @@ class _ContactSectionState extends State<ContactSection> {
             fillColor: const Color(0xFF0F172A),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: const Color(0xFF10B981).withOpacity(0.3)),
+              borderSide: BorderSide(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: const Color(0xFF10B981).withOpacity(0.3)),
+              borderSide: BorderSide(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),

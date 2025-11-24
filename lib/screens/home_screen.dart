@@ -6,12 +6,18 @@ import 'package:ahmed_portfolio/widgets/featured_projects_section.dart';
 import 'package:ahmed_portfolio/widgets/footer.dart';
 import 'package:ahmed_portfolio/widgets/hero_section.dart';
 import 'package:ahmed_portfolio/widgets/navigation_header.dart';
-import 'package:ahmed_portfolio/widgets/projects_section_card.dart';
 import 'package:ahmed_portfolio/widgets/services_section.dart';
 import 'package:flutter/material.dart';
 
 class PortfolioHomePage extends StatefulWidget {
-  const PortfolioHomePage({super.key});
+  const PortfolioHomePage({
+    super.key,
+    this.onThemeToggle,
+    this.isDarkMode = true,
+  });
+
+  final VoidCallback? onThemeToggle;
+  final bool isDarkMode;
 
   @override
   State<PortfolioHomePage> createState() => _PortfolioHomePageState();
@@ -28,7 +34,11 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
   void _scrollToSection(GlobalKey key) {
     final context = key.currentContext;
     if (context != null) {
-      Scrollable.ensureVisible(context, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
     }
   }
 
@@ -50,6 +60,8 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
             onServicesTap: () => _scrollToSection(_servicesKey),
             onProjectsTap: () => _scrollToSection(_projectsKey),
             onContactTap: () => _scrollToSection(_contactKey),
+            onThemeToggle: widget.onThemeToggle,
+            isDarkMode: widget.isDarkMode,
           ),
 
           // Main Content
@@ -126,14 +138,22 @@ class _PortfolioHomePageState extends State<PortfolioHomePage> {
                   ScrollAwareAnimatedSection(
                     scrollController: _scrollController,
                     threshold: 0.15,
-                    child: Container(key: _contactKey, child: const ContactSection()),
+                    child: Container(
+                      key: _contactKey,
+                      child: const ContactSection(),
+                    ),
                   ),
 
                   // Footer
                   ScrollAwareAnimatedSection(
                     scrollController: _scrollController,
                     threshold: 0.15,
-                    child: const Footer(),
+                    child: Footer(
+                      onAboutTap: () => _scrollToSection(_aboutKey),
+                      onServicesTap: () => _scrollToSection(_servicesKey),
+                      onProjectsTap: () => _scrollToSection(_projectsKey),
+                      onContactTap: () => _scrollToSection(_contactKey),
+                    ),
                   ),
                 ],
               ),

@@ -3,27 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
-  const Footer({super.key});
+  const Footer({
+    super.key,
+    this.onAboutTap,
+    this.onServicesTap,
+    this.onProjectsTap,
+    this.onContactTap,
+  });
+
+  final VoidCallback? onAboutTap;
+  final VoidCallback? onServicesTap;
+  final VoidCallback? onProjectsTap;
+  final VoidCallback? onContactTap;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-      decoration: const BoxDecoration(
-        color: Color(0xFF111827),
-      ),
+      decoration: const BoxDecoration(color: Color(0xFF111827)),
       child: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth > 900) {
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
+                const Expanded(
                   flex: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Ahmed Zein Elabedin',
                         style: TextStyle(
                           fontSize: 24,
@@ -31,8 +40,8 @@ class Footer extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
+                      SizedBox(height: 8),
+                      Text(
                         'Creating exceptional mobile experiences through innovative Flutter development.',
                         style: TextStyle(
                           fontSize: 16,
@@ -43,12 +52,8 @@ class Footer extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: _buildNavigationColumn(),
-                ),
-                Expanded(
-                  child: _buildConnectColumn(),
-                ),
+                Expanded(child: _buildNavigationColumn()),
+                Expanded(child: _buildConnectColumn()),
               ],
             );
           } else {
@@ -97,13 +102,13 @@ class Footer extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        _buildFooterLink('About', () {}),
+        _buildFooterLink('About', onAboutTap ?? () {}),
         const SizedBox(height: 12),
-        _buildFooterLink('Services', () {}),
+        _buildFooterLink('Services', onServicesTap ?? () {}),
         const SizedBox(height: 12),
-        _buildFooterLink('Projects', () {}),
+        _buildFooterLink('Projects', onProjectsTap ?? () {}),
         const SizedBox(height: 12),
-        _buildFooterLink('Contact', () {}),
+        _buildFooterLink('Contact', onContactTap ?? () {}),
       ],
     );
   }
@@ -140,10 +145,7 @@ class Footer extends StatelessWidget {
             scheme: 'mailto',
             path: 'ahmed.zein1896@gmail.com',
           );
-          openUrl(
-            emailUri.toString(),
-            mode: LaunchMode.externalApplication,
-          );
+          openUrl(emailUri.toString(), mode: LaunchMode.externalApplication);
         }),
       ],
     );
@@ -154,12 +156,8 @@ class Footer extends StatelessWidget {
       onTap: onTap,
       child: Text(
         text,
-        style: const TextStyle(
-          fontSize: 16,
-          color: Color(0xFF9CA3AF),
-        ),
+        style: const TextStyle(fontSize: 16, color: Color(0xFF9CA3AF)),
       ),
     );
   }
 }
-

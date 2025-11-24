@@ -289,7 +289,7 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
           height: height,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3), width: 1),
+            border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 1),
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
@@ -464,9 +464,9 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFF10B981).withOpacity(0.2),
+            color: const Color(0xFF10B981).withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3), width: 1),
+            border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 1),
           ),
           child: const Text(
             '5+ Years Experience',
@@ -497,7 +497,7 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3), width: 1),
+        border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 1),
       ),
       child: Text(text, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF10B981))),
     );

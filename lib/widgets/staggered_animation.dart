@@ -16,15 +16,16 @@ class StaggeredAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: children.asMap().entries.map((entry) {
-        final index = entry.key;
-        final child = entry.value;
-        return _StaggeredItem(
-          delay: delay * index,
-          duration: duration,
-          child: child,
-        );
-      }).toList(),
+      children:
+          children.asMap().entries.map((entry) {
+            final index = entry.key;
+            final child = entry.value;
+            return _StaggeredItem(
+              delay: delay * index,
+              duration: duration,
+              child: child,
+            );
+          }).toList(),
     );
   }
 }
@@ -58,21 +59,22 @@ class _StaggeredItemState extends State<_StaggeredItem>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.8, curve: Curves.easeOut),
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOut),
+      ),
+    );
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.2),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
+      ),
+    );
 
     Future.delayed(Duration(milliseconds: widget.delay), () {
       if (mounted) {
@@ -91,11 +93,7 @@ class _StaggeredItemState extends State<_StaggeredItem>
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _fadeAnimation,
-      child: SlideTransition(
-        position: _slideAnimation,
-        child: widget.child,
-      ),
+      child: SlideTransition(position: _slideAnimation, child: widget.child),
     );
   }
 }
-

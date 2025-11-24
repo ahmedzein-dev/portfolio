@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 class AnimatedSection extends StatefulWidget {
-  const AnimatedSection({
-    super.key,
-    required this.child,
-    this.delay = 0,
-  });
+  const AnimatedSection({super.key, required this.child, this.delay = 0});
 
   final Widget child;
   final int delay;
@@ -31,29 +26,29 @@ class _AnimatedSectionState extends State<AnimatedSection>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.8, curve: Curves.easeOut),
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOut),
+      ),
+    );
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.4),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
+      ),
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 0.95,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
-    ));
+    _scaleAnimation = Tween<double>(begin: 0.95, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.8, curve: Curves.easeOutCubic),
+      ),
+    );
 
     // Start checking visibility after a delay
     Future.delayed(Duration(milliseconds: widget.delay), () {
@@ -78,8 +73,9 @@ class _AnimatedSectionState extends State<AnimatedSection>
       final screenHeight = MediaQuery.of(context).size.height;
 
       // Check if widget is in viewport (with some threshold)
-      final isVisible = position.dy < screenHeight * 0.8 && 
-                       position.dy + size.height > -screenHeight * 0.2;
+      final isVisible =
+          position.dy < screenHeight * 0.8 &&
+          position.dy + size.height > -screenHeight * 0.2;
 
       if (isVisible && !_hasAnimated) {
         setState(() {
@@ -110,10 +106,7 @@ class _AnimatedSectionState extends State<AnimatedSection>
       opacity: _fadeAnimation,
       child: SlideTransition(
         position: _slideAnimation,
-        child: ScaleTransition(
-          scale: _scaleAnimation,
-          child: widget.child,
-        ),
+        child: ScaleTransition(scale: _scaleAnimation, child: widget.child),
       ),
     );
   }
@@ -137,8 +130,7 @@ class ScrollAwareAnimatedSection extends StatefulWidget {
       _ScrollAwareAnimatedSectionState();
 }
 
-class _ScrollAwareAnimatedSectionState
-    extends State<ScrollAwareAnimatedSection>
+class _ScrollAwareAnimatedSectionState extends State<ScrollAwareAnimatedSection>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
@@ -155,32 +147,32 @@ class _ScrollAwareAnimatedSectionState
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.85, curve: Curves.easeOut),
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.85, curve: Curves.easeOut),
+      ),
+    );
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.5),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.85, curve: Curves.easeOutCubic),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.85, curve: Curves.easeOutCubic),
+      ),
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 0.92,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.0, 0.85, curve: Curves.easeOutCubic),
-    ));
+    _scaleAnimation = Tween<double>(begin: 0.92, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.85, curve: Curves.easeOutCubic),
+      ),
+    );
 
     widget.scrollController?.addListener(_onScroll);
-    
+
     // Check initial visibility after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkVisibility();
@@ -220,8 +212,9 @@ class _ScrollAwareAnimatedSectionState
 
     // Calculate if widget is visible in viewport
     // Widget is visible if it's within the viewport with threshold
-    final isVisible = position.dy < screenHeight * (1 - widget.threshold) &&
-                     position.dy + size.height > screenHeight * widget.threshold;
+    final isVisible =
+        position.dy < screenHeight * (1 - widget.threshold) &&
+        position.dy + size.height > screenHeight * widget.threshold;
 
     if (isVisible && !_hasAnimated) {
       setState(() {
@@ -246,10 +239,7 @@ class _ScrollAwareAnimatedSectionState
         opacity: _fadeAnimation,
         child: SlideTransition(
           position: _slideAnimation,
-          child: ScaleTransition(
-            scale: _scaleAnimation,
-            child: widget.child,
-          ),
+          child: ScaleTransition(scale: _scaleAnimation, child: widget.child),
         ),
       ),
     );
