@@ -44,3 +44,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+
+# Deploy script with secrets
+deploy.sh

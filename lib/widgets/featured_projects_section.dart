@@ -198,7 +198,7 @@ class FeaturedProjectsSection extends StatelessWidget {
 
     final Widget imageWidget = HoverCard(
       child: Container(
-        height: isDesktop ? 550 : 425,
+        height: isDesktop ? 550 : 350,
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
