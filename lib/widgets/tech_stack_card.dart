@@ -24,6 +24,11 @@ class TechStackCard extends StatelessWidget {
       'icon': '🗄️',
       'colors': [Color(0xFF00618A), Color(0xFF4479A1)],
     },
+    {
+      'name': 'Node.js',
+      'icon': '🟢',
+      'colors': [Color(0xFF215732), Color(0xFF68A063)],
+    },
   ];
 
   static const toolsTechnologies = [

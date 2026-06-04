@@ -170,7 +170,7 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF10B981),
+                  color: Color(0xFFD4AA7D),
                   letterSpacing: 2,
                 ),
               ),
@@ -198,12 +198,12 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
               _buildStatRow(),
               const SizedBox(height: 24),
               const Text(
-                'With over five years of dedicated experience in mobile development, I specialize in using Flutter to bring innovative ideas to life.',
+                'Senior Flutter engineer with 5+ years building cross-platform apps shipped to users across the UAE and beyond. I\'ve led development of a financial system processing 3.5M AED/month, cut 829M Firestore reads/year through architectural optimization, and published open-source Flutter packages used by the developer community.',
                 style: TextStyle(color: Color(0xFFCBD5E1), fontSize: 18, height: 1.7, fontWeight: FontWeight.w400),
               ),
               const SizedBox(height: 16),
               const Text(
-                'My focus is on writing clean, efficient code and designing user interfaces that are both intuitive and visually appealing. I\'m committed to continuous learning and always stay updated with the latest industry trends to deliver modern and scalable solutions.',
+                'I specialize in clean architecture, real-time systems, and polished UI/UX — building apps that are fast, scalable, and a pleasure to use. Currently leading mobile development at Kief Consultancy & Technology in Abu Dhabi.',
                 style: TextStyle(color: Color(0xFFCBD5E1), fontSize: 18, height: 1.7, fontWeight: FontWeight.w400),
               ),
               const SizedBox(height: 32),
@@ -223,7 +223,7 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
       children: [
         const Text(
           'ABOUT ME',
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFF10B981), letterSpacing: 2),
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: Color(0xFFD4AA7D), letterSpacing: 2),
         ),
         const SizedBox(height: 16),
         const Text(
@@ -242,13 +242,13 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
         _buildStatRow(),
         const SizedBox(height: 24),
         const Text(
-          'With over five years of dedicated experience in mobile development, I specialize in using Flutter to bring innovative ideas to life.',
+          'Senior Flutter engineer with 5+ years building cross-platform apps shipped to users across the UAE and beyond. I\'ve led development of a financial system processing 3.5M AED/month, cut 829M Firestore reads/year through architectural optimization, and published open-source Flutter packages used by the developer community.',
           style: TextStyle(color: Color(0xFFCBD5E1), fontSize: 16, height: 1.7, fontWeight: FontWeight.w400),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
         const Text(
-          'My focus is on writing clean, efficient code and designing user interfaces that are both intuitive and visually appealing. I\'m committed to continuous learning and always stay updated with the latest industry trends to deliver modern and scalable solutions.',
+          'I specialize in clean architecture, real-time systems, and polished UI/UX — building apps that are fast, scalable, and a pleasure to use. Currently leading mobile development at Kief Consultancy & Technology in Abu Dhabi.',
           style: TextStyle(color: Color(0xFFCBD5E1), fontSize: 16, height: 1.7, fontWeight: FontWeight.w400),
           textAlign: TextAlign.center,
         ),
@@ -289,11 +289,11 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
           height: height,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 1),
+            border: Border.all(color: const Color(0xFFD4AA7D).withValues(alpha: 0.3), width: 1),
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.asset('assets/images/about600.png', fit: BoxFit.cover),
+            child: Image.asset('assets/images/ahmed_profile.jpeg', fit: BoxFit.cover),
           ),
         ),
         // Animated Experience Badge - Bottom Left with VisibilityDetector
@@ -324,8 +324,8 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              Color(0xFF00F2A0),
-                              Color(0xFF00D6A9),
+                              Color(0xFFD4AA7D),
+                              Color(0xFFC49A6D),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(16),
@@ -371,7 +371,7 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
         ElevatedButton(
           onPressed: widget.onWorkTogether,
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF10B981),
+            backgroundColor: const Color(0xFFD4AA7D),
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -390,8 +390,8 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
         OutlinedButton(
           onPressed: widget.onViewWork,
           style: OutlinedButton.styleFrom(
-            foregroundColor: const Color(0xFF10B981),
-            side: const BorderSide(color: Color(0xFF10B981), width: 2),
+            foregroundColor: const Color(0xFFD4AA7D),
+            side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
@@ -416,7 +416,7 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
           child: ElevatedButton(
             onPressed: widget.onWorkTogether,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF10B981),
+              backgroundColor: const Color(0xFFD4AA7D),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -438,8 +438,8 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
           child: OutlinedButton(
             onPressed: widget.onViewWork,
             style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF10B981),
-              side: const BorderSide(color: Color(0xFF10B981), width: 2),
+              foregroundColor: const Color(0xFFD4AA7D),
+              side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
@@ -464,13 +464,13 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFF10B981).withValues(alpha: 0.2),
+            color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 1),
+            border: Border.all(color: const Color(0xFFD4AA7D).withValues(alpha: 0.3), width: 1),
           ),
           child: const Text(
             '5+ Years Experience',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF10B981)),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFFD4AA7D)),
           ),
         ),
       ],
@@ -497,9 +497,9 @@ class _AboutCardState extends State<AboutCard> with TickerProviderStateMixin {
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 1),
+        border: Border.all(color: const Color(0xFFD4AA7D).withValues(alpha: 0.3), width: 1),
       ),
-      child: Text(text, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFF10B981))),
+      child: Text(text, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color(0xFFD4AA7D))),
     );
   }
 }

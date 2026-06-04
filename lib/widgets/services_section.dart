@@ -131,7 +131,7 @@ class ServicesSection extends StatelessWidget {
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFF10B981).withValues(alpha: 0.2),
+          color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
           width: 1,
         ),
         boxShadow: [
@@ -150,7 +150,7 @@ class ServicesSection extends StatelessWidget {
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF10B981),
+              color: Color(0xFFD4AA7D),
             ),
           ),
           const SizedBox(height: 20),
@@ -182,7 +182,7 @@ class ServicesSection extends StatelessWidget {
                   width: 6,
                   height: 6,
                   decoration: const BoxDecoration(
-                    color: Color(0xFF10B981),
+                    color: Color(0xFFD4AA7D),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -203,8 +203,8 @@ class ServicesSection extends StatelessWidget {
           OutlinedButton(
             onPressed: () {},
             style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF10B981),
-              side: const BorderSide(color: Color(0xFF10B981), width: 2),
+              foregroundColor: const Color(0xFFD4AA7D),
+              side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),

@@ -21,7 +21,7 @@ class FeaturedProjectsSection extends StatelessWidget {
                 color: const Color(0xFF1E293B),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: const Color(0xFF10B981).withValues(alpha: 0.3),
+                  color: const Color(0xFFD4AA7D).withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -32,7 +32,7 @@ class FeaturedProjectsSection extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
-                          color: const Color(0xFF10B981).withValues(alpha: 0.2),
+                          color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
                           width: 1,
                         ),
                       ),
@@ -87,7 +87,7 @@ class FeaturedProjectsSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF10B981),
+              color: Color(0xFFD4AA7D),
               letterSpacing: 2,
             ),
           ),
@@ -151,7 +151,7 @@ class FeaturedProjectsSection extends StatelessWidget {
           TextButton(
             onPressed: () {},
             style: TextButton.styleFrom(
-              foregroundColor: const Color(0xFF10B981),
+              foregroundColor: const Color(0xFFD4AA7D),
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             ),
             child: const Text(
@@ -163,8 +163,8 @@ class FeaturedProjectsSection extends StatelessWidget {
           OutlinedButton(
             onPressed: () => _showAllProjects(context),
             style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFF10B981),
-              side: const BorderSide(color: Color(0xFF10B981), width: 2),
+              foregroundColor: const Color(0xFFD4AA7D),
+              side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -203,12 +203,12 @@ class FeaturedProjectsSection extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: const Color(0xFF10B981).withValues(alpha: 0.2),
+            color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
             width: 1,
           ),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF10B981).withValues(alpha: 0.1),
+              color: const Color(0xFFD4AA7D).withValues(alpha: 0.1),
               blurRadius: 30,
               offset: const Offset(0, 10),
             ),
@@ -229,7 +229,7 @@ class FeaturedProjectsSection extends StatelessWidget {
                       Icon(
                         Icons.image_outlined,
                         size: 60,
-                        color: const Color(0xFF10B981).withValues(alpha: 0.5),
+                        color: const Color(0xFFD4AA7D).withValues(alpha: 0.5),
                       ),
                       const SizedBox(height: 12),
                       Text(
@@ -262,7 +262,7 @@ class FeaturedProjectsSection extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: const Color(0xFF10B981).withValues(alpha: 0.2),
+                color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -270,7 +270,7 @@ class FeaturedProjectsSection extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF10B981),
+                  color: Color(0xFFD4AA7D),
                 ),
               ),
             ),
@@ -339,7 +339,7 @@ class FeaturedProjectsSection extends StatelessWidget {
                     color: const Color(0xFF1E293B),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: const Color(0xFF10B981).withValues(alpha: 0.3),
+                      color: const Color(0xFFD4AA7D).withValues(alpha: 0.3),
                       width: 1,
                     ),
                   ),
@@ -348,7 +348,7 @@ class FeaturedProjectsSection extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFF10B981),
+                      color: Color(0xFFD4AA7D),
                     ),
                   ),
                 );
@@ -363,8 +363,8 @@ class FeaturedProjectsSection extends StatelessWidget {
                 icon: const Icon(Icons.open_in_new, size: 18),
                 label: const Text('View Project'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF10B981),
-                  side: const BorderSide(color: Color(0xFF10B981), width: 2),
+                  foregroundColor: const Color(0xFFD4AA7D),
+                  side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
                     vertical: 14,
@@ -381,8 +381,8 @@ class FeaturedProjectsSection extends StatelessWidget {
                   icon: const Icon(Icons.open_in_new, size: 18),
                   label: const Text('View Project'),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF10B981),
-                    side: const BorderSide(color: Color(0xFF10B981), width: 2),
+                    foregroundColor: const Color(0xFFD4AA7D),
+                    side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
                       vertical: 14,

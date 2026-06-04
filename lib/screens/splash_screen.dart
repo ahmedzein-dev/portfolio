@@ -91,7 +91,7 @@ class _SplashScreenState extends State<SplashScreen>
               style: TextStyle(
                 fontSize: 120,
                 fontWeight: FontWeight.w300,
-                color: Color(0xFF10B981),
+                color: Color(0xFFD4AA7D),
                 letterSpacing: 8,
               ),
             ),
@@ -126,7 +126,7 @@ class _SplashScreenState extends State<SplashScreen>
                             width: 8,
                             height: 8,
                             decoration: const BoxDecoration(
-                              color: Color(0xFF10B981),
+                              color: Color(0xFFD4AA7D),
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -155,7 +155,7 @@ class _SplashScreenState extends State<SplashScreen>
                       width: 200 * _lineAnimation.value,
                       height: 2,
                       decoration: const BoxDecoration(
-                        color: Color(0xFF10B981),
+                        color: Color(0xFFD4AA7D),
                         borderRadius: BorderRadius.all(Radius.circular(1)),
                       ),
                     ),

@@ -12,13 +12,20 @@ class ExperienceCard extends StatelessWidget {
       'location': 'Abu Dhabi, United Arab Emirates · On-site',
       'period': 'May 2025 - Present',
       'link': 'https://kief.ae/',
-      'details': [],
+      'details': [
+        'Leading development of Taggo — a multi-service mobility platform (ride, cargo, rental, recovery) for the UAE market, built with Flutter, BLoC, Socket.io, and Telr payments.',
+        'Architecting the companion Taggo Driver app with real-time offer management, surge zone mapping, earnings analytics, and iOS Dynamic Island integration.',
+        'Modernizing legacy Flutter codebases: introduced state management best practices, refactored for maintainability, and improved UI/UX consistency.',
+        'Conducting code reviews and mentoring junior developers, fostering a culture of clean code and continuous improvement.',
+        'Integrating third-party services including payment gateways, real-time WebSocket APIs, Firebase Auth, and Google Maps.',
+        'Managing CI/CD pipelines and coordinating App Store and Google Play deployments.',
+      ],
     },
     {
       'title': 'Senior Software Engineer',
       'company': 'BA3.co · Full-time',
       'location': 'Ras al-Khaimah, United Arab Emirates · On-site',
-      'period': 'Jul 2024 - May 2025',
+      'period': 'May 2024 - May 2025',
       'link': 'https://ba3.co/',
       'details': [
         'Led development of RAK Rent (Android, iOS) apps for car rentals with search, reservation management, Stripe payments, and Google Maps integration.',

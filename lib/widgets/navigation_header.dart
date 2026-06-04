@@ -29,7 +29,7 @@ class NavigationHeader extends StatelessWidget {
         color: const Color(0xFF0F172A),
         border: Border(
           bottom: BorderSide(
-            color: const Color(0xFF10B981).withValues(alpha: 0.2),
+            color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -109,7 +109,7 @@ class NavigationHeader extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF10B981),
+        backgroundColor: const Color(0xFFD4AA7D),
         foregroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -175,7 +175,7 @@ class NavigationHeader extends StatelessWidget {
 
   Widget _buildMobileNavItem(String text, IconData icon, VoidCallback onTap) {
     return ListTile(
-      leading: Icon(icon, color: const Color(0xFF10B981)),
+      leading: Icon(icon, color: const Color(0xFFD4AA7D)),
       title: Text(
         text,
         style: const TextStyle(

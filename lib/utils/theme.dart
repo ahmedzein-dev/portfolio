@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: avoid_classes_with_only_static_members
 abstract final class AppTheme {
   static const Color _primaryColor = Color(0xFF4F46E5);
-  static const Color _secondaryColor = Color(0xFF10B981);
+  static const Color _secondaryColor = Color(0xFFD4AA7D);
   static const Color _darkBackground = Color(0xFF0F172A);
   static const Color _lightBackground = Color(0xFFF8F9FA);
 

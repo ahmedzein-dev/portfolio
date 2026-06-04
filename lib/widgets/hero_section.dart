@@ -78,19 +78,19 @@ class HeroSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xFF10B981).withValues(alpha: 0.1),
+        color: const Color(0xFFD4AA7D).withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF10B981), width: 1.5),
+        border: Border.all(color: const Color(0xFFD4AA7D), width: 1.5),
       ),
       child: const Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.circle, size: 8, color: Color(0xFF10B981)),
+          Icon(Icons.circle, size: 8, color: Color(0xFFD4AA7D)),
           SizedBox(width: 8),
           Text(
             'Available for work',
             style: TextStyle(
-              color: Color(0xFF10B981),
+              color: Color(0xFFD4AA7D),
               fontWeight: FontWeight.w600,
               fontSize: 14,
             ),
@@ -124,11 +124,11 @@ class HeroSection extends StatelessWidget {
         ),
         SizedBox(height: 12),
         Text(
-          'Flutter Developer',
+          'Senior Flutter Developer',
           style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF10B981),
+            color: Color(0xFFD4AA7D),
             height: 1.2,
           ),
         ),
@@ -138,7 +138,7 @@ class HeroSection extends StatelessWidget {
 
   Widget _buildDescription() {
     return const Text(
-      'Passionate about crafting high-quality Flutter apps that merge functionality with stunning UI, creating experiences users love.',
+      'I build cross-platform Flutter apps that scale — from financial systems handling 3.5M AED/month to real-time mobility platforms serving the UAE. Clean architecture, polished UI, and production-ready code.',
       style: TextStyle(
         fontSize: 18,
         color: Color(0xFF9CA3AF),
@@ -156,7 +156,7 @@ class HeroSection extends StatelessWidget {
         ElevatedButton(
           onPressed: onViewWork,
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF10B981),
+            backgroundColor: const Color(0xFFD4AA7D),
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             shape: RoundedRectangleBorder(
@@ -172,8 +172,8 @@ class HeroSection extends StatelessWidget {
         OutlinedButton(
           onPressed: onGetInTouch,
           style: OutlinedButton.styleFrom(
-            foregroundColor: const Color(0xFF10B981),
-            side: const BorderSide(color: Color(0xFF10B981), width: 2),
+            foregroundColor: const Color(0xFFD4AA7D),
+            side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),

@@ -48,7 +48,7 @@ class _ProfileCardState extends State<ProfileCard> with TickerProviderStateMixin
                   height: 380,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.15), width: 1),
+                    border: Border.all(color: const Color(0xFFD4AA7D).withValues(alpha: 0.15), width: 1),
                   ),
                 ),
               );
@@ -61,12 +61,12 @@ class _ProfileCardState extends State<ProfileCard> with TickerProviderStateMixin
             height: 320,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.5), width: 2),
-              boxShadow: [BoxShadow(color: const Color(0xFF10B981).withValues(alpha: 0.2), blurRadius: 30, spreadRadius: 5)],
+              border: Border.all(color: const Color(0xFFD4AA7D).withValues(alpha: 0.5), width: 2),
+              boxShadow: [BoxShadow(color: const Color(0xFFD4AA7D).withValues(alpha: 0.2), blurRadius: 30, spreadRadius: 5)],
             ),
             child: ClipOval(
               child: Image.asset(
-                'assets/images/about600.png',
+                'assets/images/ahmed_profile.jpeg',
                 fit: BoxFit.contain, // Shows full image
                 alignment: Alignment.center,
               ),
@@ -93,7 +93,7 @@ class _ProfileCardState extends State<ProfileCard> with TickerProviderStateMixin
               return Positioned(
                 left: 0,
                 top: 200 + (_floatController.value * 8),
-                child: _buildTechBadge(icon: Icons.phone_android, label: 'Mobile', color: const Color(0xFF10B981)),
+                child: _buildTechBadge(icon: Icons.phone_android, label: 'Mobile', color: const Color(0xFFD4AA7D)),
               );
             },
           ),

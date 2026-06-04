@@ -83,7 +83,7 @@ class _ContactSectionState extends State<ContactSection> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: isSuccess ? const Color(0xFF10B981) : Colors.red,
+        backgroundColor: isSuccess ? const Color(0xFFD4AA7D) : Colors.red,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -215,10 +215,10 @@ class _ContactSectionState extends State<ContactSection> {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: const Color(0xFF10B981).withValues(alpha: 0.2),
+                color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: const Color(0xFF10B981)),
+              child: Icon(icon, color: const Color(0xFFD4AA7D)),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -244,7 +244,7 @@ class _ContactSectionState extends State<ContactSection> {
       decoration: BoxDecoration(
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.2), width: 1),
+        border: Border.all(color: const Color(0xFFD4AA7D).withValues(alpha: 0.2), width: 1),
         boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 4))],
       ),
       child: Form(
@@ -257,7 +257,7 @@ class _ContactSectionState extends State<ContactSection> {
                 Container(
                   width: 12,
                   height: 12,
-                  decoration: const BoxDecoration(color: Color(0xFF10B981), shape: BoxShape.circle),
+                  decoration: const BoxDecoration(color: Color(0xFFD4AA7D), shape: BoxShape.circle),
                 ),
                 const SizedBox(width: 10),
                 const Text(
@@ -305,9 +305,9 @@ class _ContactSectionState extends State<ContactSection> {
               child: ElevatedButton(
                 onPressed: _isLoading ? null : _sendEmail,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF10B981),
+                  backgroundColor: const Color(0xFFD4AA7D),
                   foregroundColor: Colors.white,
-                  disabledBackgroundColor: const Color(0xFF10B981).withValues(alpha: 0.5),
+                  disabledBackgroundColor: const Color(0xFFD4AA7D).withValues(alpha: 0.5),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   elevation: 0,
@@ -359,15 +359,15 @@ class _ContactSectionState extends State<ContactSection> {
             fillColor: const Color(0xFF0F172A),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
+              borderSide: BorderSide(color: const Color(0xFFD4AA7D).withValues(alpha: 0.3)),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
+              borderSide: BorderSide(color: const Color(0xFFD4AA7D).withValues(alpha: 0.3)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF10B981), width: 2),
+              borderSide: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),

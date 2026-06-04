@@ -26,7 +26,7 @@ class AchievementsSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Color(0xFF10B981),
+              color: Color(0xFFD4AA7D),
               letterSpacing: 2,
             ),
           ),
@@ -78,7 +78,7 @@ class AchievementsSection extends StatelessWidget {
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFF10B981).withValues(alpha: 0.2),
+          color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
           width: 1,
         ),
         boxShadow: [
@@ -102,11 +102,11 @@ class AchievementsSection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            'Android, iOS, Windows, macOS, Web',
+            'Android · iOS · Windows · macOS · Web',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF10B981),
+              color: Color(0xFFD4AA7D),
             ),
           ),
           const SizedBox(height: 24),
@@ -140,18 +140,52 @@ class AchievementsSection extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Color(0xFF10B981),
+              color: Color(0xFFD4AA7D),
             ),
           ),
           const SizedBox(height: 24),
           _buildImpactItem(
-            'Reduced development time by 40% with modular architecture',
+            'Dual-role app: renter and provider flows in a single Flutter codebase',
           ),
           _buildImpactItem(
-            'Created proprietary document scanning package eliminating third-party dependencies',
+            'Stripe Connect integration with payment intents, webhooks, and automated provider payouts',
           ),
           _buildImpactItem(
-            'Integrated Stripe Connected Accounts with 100% payment reliability',
+            'UAE Pass government authentication + biometric login (Face ID / fingerprint)',
+          ),
+          _buildImpactItem(
+            'ML Kit OCR for real-time driver license and passport scanning and validation',
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            'Taggo & Taggo Driver',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Android & iOS — In Development',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFFD4AA7D),
+            ),
+          ),
+          const SizedBox(height: 24),
+          _buildImpactItem(
+            '4-service mobility ecosystem: ride, cargo, car rental, and car recovery in one app',
+          ),
+          _buildImpactItem(
+            'Real-time WebSocket architecture with Socket.io for live driver tracking and offer dispatch',
+          ),
+          _buildImpactItem(
+            'iOS Dynamic Island integration for active ride status display',
+          ),
+          _buildImpactItem(
+            'GeoJSON surge zone rendering with real-time zone socket updates for driver earnings optimization',
           ),
         ],
       ),
@@ -169,7 +203,7 @@ class AchievementsSection extends StatelessWidget {
             width: 6,
             height: 6,
             decoration: const BoxDecoration(
-              color: Color(0xFF10B981),
+              color: Color(0xFFD4AA7D),
               shape: BoxShape.circle,
             ),
           ),
@@ -195,7 +229,7 @@ class AchievementsSection extends StatelessWidget {
         color: const Color(0xFF1E293B),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFF10B981).withValues(alpha: 0.2),
+          color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
           width: 1,
         ),
         boxShadow: [
@@ -219,17 +253,17 @@ class AchievementsSection extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           _buildPackageCard(
-            title: 'scroll_highlight_text',
-            description: 'Flutter package for highlighting and scrolling through text in Latin and Arabic languages.',
-            url: 'https://pub.dev/packages/scroll_highlight_text',
-            stats: '42 likes • 160 points',
+            title: 'document_camera_frame',
+            description: 'Scan, crop, and extract text from physical documents — ML Kit edge detection, on-device OCR, 5 UI modes, and PDF/PNG/JPG/TIFF export. Zero network calls.',
+            url: 'https://pub.dev/packages/document_camera_frame',
+            stats: '52 likes · 160/160 pub points · 600+ avg weekly downloads',
           ),
           const SizedBox(height: 16),
           _buildPackageCard(
-            title: 'document_camera_frame',
-            description: 'Customizable camera interface for capturing and cropping document images with auto-detection.',
-            url: 'https://pub.dev/packages/document_camera_frame',
-            stats: '42 likes • 160 points',
+            title: 'scroll_highlight_text',
+            description: 'Search, highlight, and navigate text matches in Latin and Arabic (RTL). Match count callbacks, regex support, and built-in Prev/Next navigation UI.',
+            url: 'https://pub.dev/packages/scroll_highlight_text',
+            stats: '43 likes · 160/160 pub points · 200+ avg weekly downloads',
           ),
         ],
       ),
@@ -250,7 +284,7 @@ class AchievementsSection extends StatelessWidget {
           color: const Color(0xFF0F172A),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: const Color(0xFF10B981).withValues(alpha: 0.2),
+            color: const Color(0xFFD4AA7D).withValues(alpha: 0.2),
             width: 1,
           ),
         ),
@@ -265,14 +299,14 @@ class AchievementsSection extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF10B981),
+                      color: Color(0xFFD4AA7D),
                     ),
                   ),
                 ),
                 const Icon(
                   Icons.open_in_new,
                   size: 18,
-                  color: Color(0xFF10B981),
+                  color: Color(0xFFD4AA7D),
                 ),
               ],
             ),

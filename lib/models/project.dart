@@ -10,8 +10,10 @@ class Project {
     this.features = const [],
     this.url = '',
     this.imagePath = '',
+    this.screenshotPaths = const [],
     this.icon = '',
     this.isFeatured = false,
+    this.isInDevelopment = false,
   });
 
   final String title;
@@ -23,6 +25,8 @@ class Project {
   final List<String> features;
   final String url;
   final String imagePath;
+  final List<String> screenshotPaths;
   final String icon;
   final bool isFeatured;
+  final bool isInDevelopment;
 }

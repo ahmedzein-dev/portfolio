@@ -29,17 +29,17 @@ class OpenSourceSection extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         _buildPackageItem(
-          title: 'Scroll Highlight Text',
+          title: 'document_camera_frame',
           description:
-              'Highlight and scroll through bilingual text (Latin/Arabic). Ideal for educational or reading apps.',
-          url: 'https://pub.dev/packages/scroll_highlight_text',
+              'Scan, crop, and extract text from physical documents with a single Flutter widget. Features ML Kit edge detection, perspective correction, on-device OCR (fully offline), five UI modes (default, minimal, overlay, kiosk, textExtract, camScanner), dual-sided scanning for IDs and passports, and export to JPG, PNG, PDF, or TIFF — with zero external network calls.',
+          url: 'https://pub.dev/packages/document_camera_frame',
         ),
         const Divider(height: 40, color: Color(0xFFE0E0E0)),
         _buildPackageItem(
-          title: 'Document Camera Frame',
+          title: 'scroll_highlight_text',
           description:
-              'Custom Flutter camera UI with live preview and smart cropping for document scanning.',
-          url: 'https://pub.dev/packages/document_camera_frame',
+              'Search, highlight, and navigate text matches in both Latin and Arabic (RTL) with a single widget. Supports match-by-match navigation with Prev/Next controls, live match count callbacks, case-insensitive and regex search modes, fully customisable highlight styles, and optional built-in navigation UI — no boilerplate required.',
+          url: 'https://pub.dev/packages/scroll_highlight_text',
         ),
       ],
     ),
