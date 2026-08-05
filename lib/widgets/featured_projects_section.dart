@@ -136,6 +136,8 @@ class FeaturedProjectsSection extends StatelessWidget {
                             description: project.description,
                             technologies: project.technologies,
                             url: project.url,
+                            playStoreUrl: project.playStoreUrl,
+                            appStoreUrl: project.appStoreUrl,
                             imagePath: project.imagePath,
                             isReversed: index % 2 != 0,
                           ),
@@ -190,6 +192,8 @@ class FeaturedProjectsSection extends StatelessWidget {
     required String description,
     required List<String> technologies,
     required String url,
+    required String playStoreUrl,
+    required String appStoreUrl,
     required String imagePath,
     bool isReversed = false,
   }) {
@@ -248,6 +252,12 @@ class FeaturedProjectsSection extends StatelessWidget {
           ),
         ),
       ),
+    );
+
+    final List<Widget> storeButtons = _buildStoreButtons(
+      appStoreUrl: appStoreUrl,
+      playStoreUrl: playStoreUrl,
+      fallbackUrl: url,
     );
 
     final Widget contentWidget = Column(
@@ -355,43 +365,13 @@ class FeaturedProjectsSection extends StatelessWidget {
               }).toList(),
         ),
         const SizedBox(height: 28),
-        // View Project Button
-        if (url.isNotEmpty)
+        // Store links (falls back to a generic "View Project" button)
+        if (storeButtons.isNotEmpty)
           isDesktop
-              ? OutlinedButton.icon(
-                onPressed: () => openUrl(url),
-                icon: const Icon(Icons.open_in_new, size: 18),
-                label: const Text('View Project'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFFD4AA7D),
-                  side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 14,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              )
-              : SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  onPressed: () => openUrl(url),
-                  icon: const Icon(Icons.open_in_new, size: 18),
-                  label: const Text('View Project'),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFFD4AA7D),
-                    side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 14,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
+              ? Wrap(spacing: 12, runSpacing: 12, children: storeButtons)
+              : Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: _withVerticalGaps(storeButtons),
               ),
       ],
     );
@@ -412,5 +392,53 @@ class FeaturedProjectsSection extends StatelessWidget {
         children: [imageWidget, const SizedBox(height: 24), contentWidget],
       );
     }
+  }
+
+  /// Builds one button per available store. When a project has no store
+  /// links at all, falls back to a single generic "View Project" button so
+  /// non-published projects still get a call to action.
+  List<Widget> _buildStoreButtons({
+    required String appStoreUrl,
+    required String playStoreUrl,
+    required String fallbackUrl,
+  }) {
+    final buttons = <Widget>[];
+    if (appStoreUrl.isNotEmpty) {
+      buttons.add(_storeButton('App Store', Icons.apple, appStoreUrl));
+    }
+    if (playStoreUrl.isNotEmpty) {
+      buttons.add(_storeButton('Google Play', Icons.android, playStoreUrl));
+    }
+    if (buttons.isEmpty && fallbackUrl.isNotEmpty) {
+      buttons.add(
+        _storeButton('View Project', Icons.open_in_new, fallbackUrl),
+      );
+    }
+    return buttons;
+  }
+
+  Widget _storeButton(String label, IconData icon, String url) {
+    return OutlinedButton.icon(
+      onPressed: () => openUrl(url),
+      icon: Icon(icon, size: 18),
+      label: Text(label),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: const Color(0xFFD4AA7D),
+        side: const BorderSide(color: Color(0xFFD4AA7D), width: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _withVerticalGaps(List<Widget> children) {
+    final out = <Widget>[];
+    for (var i = 0; i < children.length; i++) {
+      if (i > 0) out.add(const SizedBox(height: 12));
+      out.add(children[i]);
+    }
+    return out;
   }
 }

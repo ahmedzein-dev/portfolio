@@ -9,6 +9,8 @@ class Project {
     this.technologies = const [],
     this.features = const [],
     this.url = '',
+    this.playStoreUrl = '',
+    this.appStoreUrl = '',
     this.imagePath = '',
     this.screenshotPaths = const [],
     this.icon = '',
@@ -24,6 +26,8 @@ class Project {
   final List<String> technologies;
   final List<String> features;
   final String url;
+  final String playStoreUrl;
+  final String appStoreUrl;
   final String imagePath;
   final List<String> screenshotPaths;
   final String icon;
