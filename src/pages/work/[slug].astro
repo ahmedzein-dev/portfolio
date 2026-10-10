@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { flagships, profile } from '../../data/site';
+
+export function getStaticPaths() {
+  return flagships.map((p, i) => ({
+    params: { slug: p.slug },
+    props: { project: p, next: flagships[(i + 1) % flagships.length] },
+  }));
+}
+
+const { project: p, next } = Astro.props;
+---
+
+<Base title={`${p.name}: ${p.headline} · ${profile.name}`} description={p.summary}>
+  <main class="page" id="main">
+    <header class="topbar">
+      <a class="brand" href="/"><span class="az" aria-hidden="true">AZ</span><span class="nm">{profile.name}</span></a>
+      <nav class="toplinks" aria-label="Main">
+        <a href="/#work">Work</a>
+        <a href="/#open-source">Open source</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="Change theme">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13z" fill="currentColor"></path><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"></circle></svg>
+      </button>
+    </header>
+
+    <article>
+      <div class="case-head">
+        <p class="label"><a href="/#work" style="text-decoration:none">← Selected work</a> · {p.name}</p>
+        <h1 style="font-size:clamp(2.2rem,5.6vw,4.2rem)">{p.headline}</h1>
+        <p class="lede">{p.summary}</p>
+        <dl class="case-meta">
+          <div><dt>Role</dt><dd>{p.role}</dd></div>
+          <div><dt>Period</dt><dd>{p.period}</dd></div>
+          <div><dt>Platforms</dt><dd>{p.platforms}</dd></div>
+        </dl>
+        {p.links.length > 0 && (
+          <div class="store-links">
+            {p.links.map((l) => <a class="btn btn-ghost btn-sm" href={l.href}>{l.label}</a>)}
+          </div>
+        )}
+      </div>
+
+      {p.constraint && (
+        <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label="The constraint">
+          <p class="label">The constraint</p>
+          <p class="constraint" style="margin-top:12px">{p.constraint}</p>
+        </section>
+      )}
+
+      <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label="Screens">
+        <div class="case-shots">
+          {p.shots.map((s) => (
+            <figure>
+              <Image src={s.src} alt={s.alt} widths={[360, 720]} sizes="(min-width: 760px) 360px, 90vw" />
+              {s.kind === 'window' && p.caption && <figcaption>{p.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-labelledby="built-title">
+        <div class="section-head">
+          <p class="label">What I built</p>
+          <h2 id="built-title">The engineering</h2>
+        </div>
+        <ul class="highlights">
+          {p.highlights.map((h) => <li>{h}</li>)}
+        </ul>
+      </section>
+
+      {p.numbers && (
+        <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label="Results">
+          <ul class="numbers">
+            {p.numbers.map((n) => <li><b>{n.value}</b><span>{n.label}</span></li>)}
+          </ul>
+        </section>
+      )}
+
+      <nav class="next-case section" style="padding-top:22px;margin-top:clamp(56px,8vw,96px)" aria-label="Next case study">
+        <span class="label">Next case study</span>
+        <a class="btn btn-ghost" href={`/work/${next.slug}/`}>{next.name}: {next.headline} →</a>
+      </nav>
+    </article>
+
+    <footer class="footer">
+      <span>© {new Date().getFullYear()} {profile.fullName}</span>
+      <a href="/#contact">Contact</a>
+    </footer>
+  </main>
+</Base>

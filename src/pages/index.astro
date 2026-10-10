@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SelectedWork from '../components/SelectedWork.astro';
+import OpenSource from '../components/OpenSource.astro';
+import MoreWork from '../components/MoreWork.astro';
+import About from '../components/About.astro';
+import { profile } from '../data/site';
+
+const sections = [
+  { id: 'work', title: 'Selected work', num: '1' },
+  { id: 'open-source', title: 'Open source', num: '2' },
+  { id: 'more-work', title: 'More work', num: '3' },
+  { id: 'experience', title: 'Experience', num: '4' },
+  { id: 'contact', title: 'Contact', num: '5' },
+];
+const year = new Date().getFullYear();
+---
+
+<Base title={`${profile.name} · ${profile.title}`} description={profile.description} sections={sections}>
+  <main class="page" id="main">
+    <Hero />
+
+    <section class="section" id="work" data-section="Selected work" data-num="1" aria-labelledby="work-title">
+      <div class="section-head">
+        <p class="label"><span class="n">1</span> Selected work</p>
+        <h2 id="work-title">Apps people use every day</h2>
+        <p class="lede">Four products, each with the hard part named. Open a case study for the engineering behind it.</p>
+      </div>
+      <SelectedWork />
+    </section>
+
+    <section class="section" id="open-source" data-section="Open source" data-num="2" aria-labelledby="os-title">
+      <div class="section-head">
+        <p class="label"><span class="n">2</span> Open source</p>
+        <h2 id="os-title">Three Flutter packages</h2>
+        <p class="lede">Each one came out of a production app. The numbers come from pub.dev when the site is built.</p>
+      </div>
+      <OpenSource />
+    </section>
+
+    <section class="section" id="more-work" data-section="More work" data-num="3" aria-labelledby="mw-title">
+      <div class="section-head">
+        <p class="label"><span class="n">3</span> More work</p>
+        <h2 id="mw-title">Earlier projects</h2>
+        <p class="lede">Open one for details. Each has its own link, so you can share exactly the one you mean.</p>
+      </div>
+      <MoreWork />
+    </section>
+
+    <section class="section" aria-label="Experience and capabilities">
+      <About />
+    </section>
+
+    <section class="section" id="contact" data-section="Contact" data-num="5" aria-labelledby="contact-title">
+      <div class="contact">
+        <p class="label" style="color:rgba(242,237,229,.7)"><span class="n">5</span> Contact</p>
+        <h2 id="contact-title">Have a mobile app that needs to stay live?</h2>
+        <p>{profile.availability.long}. Email is the fastest way to reach me.</p>
+        <div class="mail">
+          <span id="mail-text">{profile.email}</span>
+          <button class="btn btn-sm" type="button" data-copy={profile.email} data-copy-msg="Email copied" data-copy-target="#mail-text">Copy email</button>
+        </div>
+        <div class="contact-links">
+          <a href={profile.links.linkedin}>LinkedIn</a>
+          <a href={profile.links.github}>GitHub</a>
+          <a href={profile.links.pubdev}>pub.dev</a>
+          <a href={`mailto:${profile.email}`}>Send an email</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© {year} {profile.fullName}</span>
+      <span>Built with Astro. Fonts: Hubot Sans, Mona Sans and Martian Mono (SIL OFL).</span>
+    </footer>
+  </main>
+</Base>

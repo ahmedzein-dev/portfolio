@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import { flagships } from '../data/site';
+---
+
+<ol class="stack">
+  {flagships.map((p, i) => (
+    <li class="scard" data-theme-card={p.theme} style={`--i:${i}`}>
+      <div class="scard-text">
+        <p class="scard-eyebrow">{p.eyebrow}</p>
+        <h3>{p.headline}</h3>
+        <p>{p.summary}</p>
+        <ul class="tags">
+          {p.tags.map((t) => <li>{t}</li>)}
+        </ul>
+        <a class="scard-cta" href={`/work/${p.slug}/`}>
+          Read the case study
+          <span class="sr-only">: {p.name}</span>
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h9M7.5 3.5 11 7l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </a>
+        {p.caption && <p class="scard-caption">{p.caption}</p>}
+      </div>
+      <div class={`scard-visual ${p.shots.length > 1 ? 'v-two' : ''}`}>
+        {p.shots[0].kind === 'phone' &&
+          p.shots.map((s, j) => (
+            <div class={`phone p${j + 1}`}>
+              <Image src={s.src} alt={s.alt} widths={[280, 420]} sizes="(min-width: 900px) 220px, 40vw" />
+            </div>
+          ))}
+        {p.shots[0].kind === 'square' && (
+          <div class="v-sq">
+            <Image src={p.shots[0].src} alt={p.shots[0].alt} widths={[400, 640]} sizes="(min-width: 900px) 460px, 90vw" />
+          </div>
+        )}
+        {p.shots[0].kind === 'window' && (
+          <div class="winframe">
+            <div class="wb" aria-hidden="true"><i></i><i></i><i></i></div>
+            <Image src={p.shots[0].src} alt={p.shots[0].alt} widths={[480, 960]} sizes="(min-width: 900px) 480px, 90vw" />
+          </div>
+        )}
+        {p.slug === 'the-events' && (
+          <div class="v-badge" aria-hidden="true">App launch <s>~12 s</s> <b>~3 s</b></div>
+        )}
+      </div>
+    </li>
+  ))}
+</ol>

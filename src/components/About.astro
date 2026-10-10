@@ -1,0 +1,40 @@
+---
+import { capabilities, capabilityTiles, education, experience } from '../data/site';
+---
+
+<div class="two">
+  <div id="experience" data-section="Experience" data-num="4" class="section" style="padding-top:0">
+    <div class="section-head">
+      <p class="label"><span class="n">4</span> Experience</p>
+      <h2>Five stops so far</h2>
+    </div>
+    <ol class="timeline">
+      {experience.map((e) => (
+        <li class={e.current ? 'now' : undefined}>
+          <p class="tl-when">{e.when} · {e.place}</p>
+          <h3 style="font-size:1.05rem">{e.role}, {e.org}</h3>
+          <p class="tl-note">{e.note}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="edu">{education}</p>
+  </div>
+  <div>
+    <div class="section-head">
+      <p class="label">Capabilities</p>
+      <h2>Skills, with proof attached</h2>
+      <p class="lede">Pick a capability to see which projects prove it.</p>
+    </div>
+    <div class="cap-btns" role="group" aria-label="Capabilities">
+      {capabilities.map((c) => (
+        <button class="cap-btn" type="button" data-ids={c.ids.join(' ')} data-proof={c.proof} aria-pressed="false">{c.name}</button>
+      ))}
+    </div>
+    <ul class="cap-tiles">
+      {capabilityTiles.map((t) => (
+        <li class="cap-tile" data-id={t.id}>{t.name}<small>{t.note}</small></li>
+      ))}
+    </ul>
+    <p class="cap-out" id="cap-out" aria-live="polite"></p>
+  </div>
+</div>

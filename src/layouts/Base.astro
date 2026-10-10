@@ -1,0 +1,100 @@
+---
+import { Font, getImage } from 'astro:assets';
+import '../styles/global.css';
+import { profile } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Sections the island and the route rail track, in page order. */
+  sections?: { id: string; title: string; num?: string }[];
+}
+
+const { title, description, sections = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const share = await getImage({ src: profile.photo, width: 1200, height: 1200, fit: 'cover', format: 'jpg' });
+const shareUrl = new URL(share.src, Astro.site);
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.fullName,
+  alternateName: profile.name,
+  jobTitle: profile.title,
+  url: Astro.site?.toString(),
+  image: shareUrl.toString(),
+  email: `mailto:${profile.email}`,
+  address: { '@type': 'PostalAddress', addressLocality: profile.location, addressCountry: 'AE' },
+  worksFor: { '@type': 'Organization', name: 'Kief Consultancy & Technology' },
+  sameAs: [profile.links.linkedin, profile.links.github, profile.links.pubdev],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0e1219" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareUrl} />
+    <meta name="twitter:card" content="summary" />
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-mono" />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="island" id="island" data-open="false">
+      <button class="island-btn" id="island-btn" type="button" aria-expanded="false" aria-controls="island-panel">
+        <span class="island-now">
+          <span class="island-dot" aria-hidden="true"></span>
+          <span class="t" id="island-now">{profile.availability.short}</span>
+        </span>
+        <svg class="island-ring" viewBox="0 0 20 20" aria-hidden="true">
+          <circle class="bg" cx="10" cy="10" r="8"></circle>
+          <circle class="fg" id="island-ring" cx="10" cy="10" r="8"></circle>
+        </svg>
+        <span class="island-toast">
+          <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span id="island-toast"></span>
+        </span>
+      </button>
+      <nav class="island-panel" id="island-panel" aria-label="Sections" hidden>
+        <ol>
+          {sections.map((s) => (
+            <li><a href={`#${s.id}`}><span>{s.num ?? '·'}</span>{s.title}</a></li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+    <div class="sr-only" aria-live="polite" id="live-region"></div>
+
+    {sections.length > 0 && (
+      <nav class="rail" id="rail" aria-label="Route through the page">
+        <span class="rail-track"></span><span class="rail-fill" id="rail-fill"></span><span class="rail-puck" id="rail-puck"></span>
+      </nav>
+    )}
+
+    <slot />
+
+    <script>
+      import '../scripts/site.ts';
+    </script>
+  </body>
+</html>

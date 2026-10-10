@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { profile } from '../data/site';
+---
+
+<Base title={`Page not found · ${profile.name}`} description="This page doesn’t exist.">
+  <main class="page" id="main">
+    <div class="case-head" style="min-height:60vh;align-content:center">
+      <p class="label">404</p>
+      <h1 style="font-size:clamp(2.2rem,5.6vw,4rem)">This route doesn’t exist.</h1>
+      <p class="lede">The page may have moved when the site was rebuilt.</p>
+      <p><a class="btn btn-primary" href="/">Go to the home page</a></p>
+    </div>
+  </main>
+</Base>

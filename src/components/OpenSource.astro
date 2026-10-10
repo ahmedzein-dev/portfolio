@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import { packages } from '../data/site';
+import windowsDemo from '../assets/work/windows_demo.png';
+
+// Live numbers from pub.dev at build time; the stored values are the fallback.
+type Stats = { points: string; likes?: number; downloads30?: number; version: string; published?: string };
+
+async function stats(name: string, fallback: Stats): Promise<Stats> {
+  try {
+    const [scoreRes, pkgRes] = await Promise.all([
+      fetch(`https://pub.dev/api/packages/${name}/score`, { signal: AbortSignal.timeout(6000) }),
+      fetch(`https://pub.dev/api/packages/${name}`, { signal: AbortSignal.timeout(6000) }),
+    ]);
+    if (!scoreRes.ok || !pkgRes.ok) return fallback;
+    const score = await scoreRes.json();
+    const pkg = await pkgRes.json();
+    return {
+      points: `${score.grantedPoints}/${score.maxPoints}`,
+      likes: score.likeCount,
+      downloads30: score.downloadCount30Days,
+      version: pkg.latest?.version ?? fallback.version,
+      published: (pkg.latest?.published ?? '').slice(0, 10) || fallback.published,
+    };
+  } catch {
+    return fallback;
+  }
+}
+
+const rows = await Promise.all(packages.map(async (p) => ({ ...p, stats: await stats(p.name, p.fallback) })));
+const date = (iso?: string) =>
+  iso ? new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '';
+---
+
+<div class="pkgs">
+  {rows.map((p) => (
+    <article class="pkg">
+      {p.name === 'draggable_floating_window' && (
+        <div class="pkg-visual">
+          <Image src={windowsDemo} alt="Floating Tasks and Calculator windows from the example app" widths={[360, 720]} sizes="(min-width: 960px) 340px, 90vw" />
+        </div>
+      )}
+      {p.name === 'document_camera_frame' && (
+        <div class="pkg-visual dcf" aria-hidden="true"><span class="card"></span><i class="c c1"></i><i class="c c2"></i><i class="c c3"></i><i class="c c4"></i></div>
+      )}
+      {p.name === 'scroll_highlight_text' && (
+        <div class="pkg-visual sht" aria-hidden="true">
+          Search, <mark class="cur">highlight</mark> and step through matches. Every <mark>highlight</mark> is counted.
+          <span class="ar">ابحث وحدد كل <mark>نتيجة</mark> في النص</span>
+          <span class="cnt">1 of 3</span>
+        </div>
+      )}
+      <h3><a href={`https://pub.dev/packages/${p.name}`}>{p.name}</a></h3>
+      <p>{p.description}{p.note && <> {p.note}</>}</p>
+      <dl class="pkg-stats">
+        <div><dt>Points</dt><dd>{p.stats.points}</dd></div>
+        {p.stats.likes ? <div><dt>Likes</dt><dd>{p.stats.likes}</dd></div> : null}
+        {p.stats.downloads30 ? <div><dt>Downloads</dt><dd>{p.stats.downloads30.toLocaleString('en')} / 30 days</dd></div> : null}
+        <div><dt>Version</dt><dd>{p.stats.version}</dd></div>
+        {p.name === 'draggable_floating_window' && p.stats.published && <div><dt>Published</dt><dd>{date(p.stats.published)}</dd></div>}
+      </dl>
+      <div class="install">
+        <code id={`install-${p.name}`}>flutter pub add {p.name}</code>
+        <button class="btn btn-ghost btn-sm" type="button" data-copy={`flutter pub add ${p.name}`} data-copy-msg="Install command copied" data-copy-target={`#install-${p.name}`}>Copy</button>
+      </div>
+      {p.github && (
+        <div class="pkg-links"><a class="btn btn-ghost btn-sm" href={p.github}>Source on GitHub</a></div>
+      )}
+    </article>
+  ))}
+</div>
