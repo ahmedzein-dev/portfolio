@@ -6,7 +6,6 @@ import taggoDriver from '../assets/work/driver1.png';
 import theEvents from '../assets/work/theevents_image.png';
 import gainz from '../assets/work/gainz_image.jpg';
 import rakRent from '../assets/work/rak_rent.png';
-import visionSchool from '../assets/work/vision_school.png';
 import osta from '../assets/work/osta1.png';
 import alTaher from '../assets/work/altaher_home.png';
 import spark from '../assets/work/spark1.png';
@@ -231,19 +230,6 @@ export const moreWork: MoreWork[] = [
     links: [],
   },
   {
-    id: 'vision-school',
-    name: 'Vision School',
-    year: '2022',
-    platforms: 'Web',
-    tags: ['web'],
-    summary: 'School management with attendance, salaries and schedules.',
-    description: 'A school management system for attendance, salaries and schedules.',
-    points: ['Attendance for students and staff', 'Student and staff records', 'Timetables and fees'],
-    image: visionSchool,
-    fit: 'cover',
-    links: [],
-  },
-  {
     id: 'osta-home',
     name: 'Osta Home',
     year: '2022',
@@ -366,8 +352,8 @@ export const capabilities = [
   },
   {
     name: 'Desktop and web',
-    ids: ['ba3', 'dfw', 'vision'],
-    proof: 'BA3: five platforms from one codebase, with floating windows. draggable_floating_window: that windowing layer as a package. Vision School: a web dashboard.',
+    ids: ['ba3', 'dfw'],
+    proof: 'BA3: five platforms from one codebase, with floating windows. draggable_floating_window: that windowing layer as a package.',
   },
   {
     name: 'AI and voice',
@@ -383,7 +369,6 @@ export const capabilityTiles = [
   { id: 'ba3', name: 'BA3', note: 'Accounting' },
   { id: 'gainz', name: 'Gainz AI', note: 'Fitness' },
   { id: 'rak', name: 'RAK Rent', note: 'Rental' },
-  { id: 'vision', name: 'Vision School', note: 'Web' },
   { id: 'dfw', name: 'Floating windows', note: 'Open-source package' },
 ];
 
