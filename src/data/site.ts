@@ -223,7 +223,7 @@ export const moreWork: MoreWork[] = [
       'Licence capture with an on-device OCR camera frame, where document_camera_frame started',
       'Cars on a custom-styled map with routes, and slide-to-book',
       'Stripe payments, and Stripe Connect payouts to owners',
-      'Owner fleet board, booking approvals, damage photos and revenue charts',
+      'Owner fleet board, booking approvals and damage reports with photos',
     ],
     image: rakRent,
     fit: 'contain',
