@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import taggoRider from '../assets/work/taggo_rider_home.png';
 import taggoDriver from '../assets/work/taggo_captain_pickup.png';
 import theEvents from '../assets/work/theevents_home.png';
+import theEventsSearch from '../assets/work/theevents_visual_search.png';
 import gainz from '../assets/work/gainz_image.jpg';
 import amberDrive from '../assets/work/amber_drive.jpg';
 import osta from '../assets/work/osta1.png';
@@ -137,7 +138,10 @@ export const flagships: Flagship[] = [
     tags: ['Launch performance', 'Telr', 'Apple Pay', 'Google Pay', 'Forced updates'],
     card: { year: '2025 to now', platforms: 'Mobile', summary: 'Flowers and gifts across nine Gulf countries.', kinds: ['mobile'], image: theEventsCard },
     theme: 'events',
-    shots: [{ src: theEvents, alt: 'The Events app home: occasion picks, Celebrate Occasions and Curated For You', kind: 'phone' }],
+    shots: [
+      { src: theEvents, alt: 'The Events app home: occasion picks, Celebrate Occasions and Curated For You', kind: 'phone' },
+      { src: theEventsSearch, alt: 'The Events visual search: point the camera at a gift to find it in the store', kind: 'phone' },
+    ],
     constraint: 'The app took about 12 seconds to open on the same phone.',
     highlights: [
       'App launch from about 12 s to about 3 s on the same phone: lazy home sections and tabs, de-duplicated provider requests, a native splash, shimmer skeletons and pre-cached SVGs.',

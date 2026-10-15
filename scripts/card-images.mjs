@@ -14,7 +14,7 @@ const OUT = 'src/assets/cards/';
 
 const cards = [
   { id: 'taggo', tint: ['#2e2810', '#100e07'], glow: '#f2d23c', phones: ['taggo_rider_home.png', 'taggo_captain_pickup.png'] },
-  { id: 'the-events', tint: ['#33191d', '#12090b'], glow: '#e8837a', phones: ['theevents_home.png'] },
+  { id: 'the-events', tint: ['#33191d', '#12090b'], glow: '#e8837a', phones: ['theevents_home.png', 'theevents_visual_search.png'] },
   { id: 'ba3', tint: ['#13233f', '#080e1a'], glow: '#4a8fe7', window: 'ba3_control_panel.png' },
   { id: 'gainz', still: 'gainz_image.jpg', trim: 40 },
   { id: 'amber-drive', still: 'amber_drive.jpg', trim: 0 },
