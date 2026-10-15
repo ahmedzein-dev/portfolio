@@ -1,5 +1,5 @@
 ---
-import { Font, getImage } from 'astro:assets';
+import { Font } from 'astro:assets';
 import '../styles/global.css';
 import { profile } from '../data/site';
 
@@ -12,8 +12,8 @@ interface Props {
 
 const { title, description, sections = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const share = await getImage({ src: profile.photo, width: 1200, height: 1200, fit: 'cover', format: 'jpg' });
-const shareUrl = new URL(share.src, Astro.site);
+// Link previews: a 1200px square cut from the original photo (public/photo), metadata stripped.
+const shareUrl = new URL('/photo/ahmed-zein-share.jpg', Astro.site);
 
 const person = {
   '@context': 'https://schema.org',
