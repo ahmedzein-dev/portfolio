@@ -1,7 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
-import taggoRider from '../assets/work/customer1.png';
-import taggoDriver from '../assets/work/driver1.png';
+import taggoRider from '../assets/work/taggo_rider_home.png';
+import taggoDriver from '../assets/work/taggo_captain_pickup.png';
 import theEvents from '../assets/work/theevents_image.png';
 import gainz from '../assets/work/gainz_image.jpg';
 import amberDrive from '../assets/work/rak_rent.png';
@@ -93,8 +93,8 @@ export const flagships: Flagship[] = [
     card: { year: '2025 to now', platforms: 'Mobile', summary: 'Ride-hailing and cargo, rider and driver apps.', kinds: ['mobile'], image: taggoRider, fit: 'cover' },
     theme: 'taggo',
     shots: [
-      { src: taggoRider, alt: 'Taggo rider app home with ride and cargo services', kind: 'phone' },
-      { src: taggoDriver, alt: 'Taggo Captain waiting for the rider, with a countdown and the route on the map', kind: 'phone' },
+      { src: taggoRider, alt: 'Taggo rider app home: live ride, cargo delivery, VIP service and airport travel', kind: 'phone' },
+      { src: taggoDriver, alt: 'Taggo Captain at the pickup: you have arrived, the free-wait countdown, the rider and Start ride', kind: 'phone' },
     ],
     constraint: 'An offer the driver never hears is lost income.',
     highlights: [

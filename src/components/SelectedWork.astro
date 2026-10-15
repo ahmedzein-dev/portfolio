@@ -24,7 +24,7 @@ import { flagships } from '../data/site';
         {p.shots[0].kind === 'phone' &&
           p.shots.map((s, j) => (
             <div class={`phone p${j + 1}`}>
-              <Image src={s.src} alt={s.alt} widths={[280, 420]} sizes="(min-width: 900px) 220px, 40vw" />
+              <Image src={s.src} alt={s.alt} widths={[280, 440, 660]} sizes="(min-width: 900px) 220px, 40vw" quality={90} />
             </div>
           ))}
         {p.shots[0].kind === 'square' && (
