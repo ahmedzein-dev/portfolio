@@ -295,7 +295,7 @@ function openDrawer(id: string) {
   drawer.showModal();
   if (location.hash !== `#${id}`) history.replaceState(null, '', `#${id}`);
 }
-$$<HTMLButtonElement>('.mw-card').forEach((b) => b.addEventListener('click', () => openDrawer(b.dataset.id ?? '')));
+$$<HTMLButtonElement>('button.mw-card').forEach((b) => b.addEventListener('click', () => openDrawer(b.dataset.id ?? '')));
 drawer?.addEventListener('click', (e) => {
   if (e.target === drawer) drawer.close();
 });

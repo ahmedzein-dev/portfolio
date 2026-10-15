@@ -10,7 +10,7 @@ import { profile } from '../data/site';
 const sections = [
   { id: 'work', title: 'Selected work', num: '1' },
   { id: 'open-source', title: 'Open source', num: '2' },
-  { id: 'more-work', title: 'More work', num: '3' },
+  { id: 'more-work', title: 'All projects', num: '3' },
   { id: 'experience', title: 'Experience', num: '4' },
   { id: 'contact', title: 'Contact', num: '5' },
 ];
@@ -39,11 +39,11 @@ const year = new Date().getFullYear();
       <OpenSource />
     </section>
 
-    <section class="section" id="more-work" data-section="More work" data-num="3" aria-labelledby="mw-title">
+    <section class="section" id="more-work" data-section="All projects" data-num="3" aria-labelledby="mw-title">
       <div class="section-head">
-        <p class="label"><span class="n">3</span> More work</p>
-        <h2 id="mw-title">Earlier projects</h2>
-        <p class="lede">Open one for details. Each has its own link, so you can share exactly the one you mean.</p>
+        <p class="label"><span class="n">3</span> All projects</p>
+        <h2 id="mw-title">Every app, in one place</h2>
+        <p class="lede">Filter by platform. The four above open their case studies; the rest open a quick view with its own link.</p>
       </div>
       <MoreWork />
     </section>

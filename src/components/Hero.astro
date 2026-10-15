@@ -17,18 +17,32 @@ import { profile, proof } from '../data/site';
 </header>
 
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-meta">
-    <button class="status" id="status-btn" type="button" aria-expanded="false" aria-controls="status-panel">
-      <i aria-hidden="true"></i>
-      <span><span class="long">{profile.availability.long}</span><span class="short">{profile.availability.short}</span></span>
-      <svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
-    </button>
-    <div class="status-panel" id="status-panel" hidden>
-      {profile.now.map((row) => (
-        <div><span>{row.label}</span>{row.value}</div>
-      ))}
+  <div class="hero-id">
+    <figure class="hero-avatar">
+      <Picture
+        src={profile.photo}
+        alt={profile.name}
+        widths={[96, 160, 240]}
+        sizes="80px"
+        formats={['avif', 'webp']}
+        loading="eager"
+        fetchpriority="high"
+      />
+    </figure>
+    <div class="hero-meta">
+      <p class="hero-name">{profile.name}</p>
+      <p class="eyebrow">{profile.title} · {profile.location}</p>
+      <button class="status" id="status-btn" type="button" aria-expanded="false" aria-controls="status-panel">
+        <i aria-hidden="true"></i>
+        <span><span class="long">{profile.availability.long}</span><span class="short">{profile.availability.short}</span></span>
+        <svg class="chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+      </button>
+      <div class="status-panel" id="status-panel" hidden>
+        {profile.now.map((row) => (
+          <div><span>{row.label}</span>{row.value}</div>
+        ))}
+      </div>
     </div>
-    <p class="eyebrow">{profile.name} · {profile.title}</p>
   </div>
   <div class="hero-text">
     <h1 id="hero-title">{profile.headline}</h1>
@@ -38,19 +52,6 @@ import { profile, proof } from '../data/site';
       <button class="btn btn-ghost" type="button" data-copy={profile.email} data-copy-msg="Email copied">Copy email</button>
     </div>
   </div>
-  <figure class="hero-photo">
-    <svg class="hero-route" viewBox="0 0 136 124" preserveAspectRatio="none" aria-hidden="true"><path d="M2 40 C 18 30, 26 56, 40 52 S 70 20, 96 34 S 132 70, 126 112"></path></svg>
-    <Picture
-      src={profile.photo}
-      alt={profile.name}
-      widths={[320, 480, 640, 800]}
-      sizes="(min-width: 900px) 400px, 42vw"
-      formats={['avif', 'webp']}
-      loading="eager"
-      fetchpriority="high"
-    />
-    <figcaption class="pin">{profile.location}</figcaption>
-  </figure>
 </section>
 
 <ul class="proof" aria-label="In numbers">

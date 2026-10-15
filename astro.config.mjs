@@ -4,6 +4,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 // Fonts are self-hosted from src/fonts (latin subsets, variable axes, OFL).
 export default defineConfig({
   site: 'https://ahmedzein.dev',
+  // The dev toolbar only shows on the local dev server; off, so reviews see the page as published.
+  devToolbar: { enabled: false },
   fonts: [
     {
       provider: fontProviders.local(),

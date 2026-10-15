@@ -5,12 +5,11 @@ import taggoRider from '../assets/work/customer1.png';
 import taggoDriver from '../assets/work/driver1.png';
 import theEvents from '../assets/work/theevents_image.png';
 import gainz from '../assets/work/gainz_image.jpg';
-import rakRent from '../assets/work/rak_rent.png';
+import amberDrive from '../assets/work/rak_rent.png';
 import osta from '../assets/work/osta1.png';
 import alTaher from '../assets/work/altaher_home.png';
 import spark from '../assets/work/spark1.png';
-import chefchaoun from '../assets/work/chefchaoun2.png';
-import windowsDemo from '../assets/work/windows_demo.png';
+import ba3Windows from '../assets/work/ba3_windows.jpg';
 
 export const profile = {
   name: 'Ahmed Zein',
@@ -71,7 +70,12 @@ export type Flagship = {
   numbers?: { value: string; label: string }[];
   links: StoreLink[];
   film?: Film;
+  /** How the project appears in the All projects grid. */
+  card: { year: string; platforms: string; summary: string; kinds: Kind[]; image: ImageMetadata; fit: 'cover' | 'contain' };
 };
+
+/** Filters in the All projects grid. */
+export type Kind = 'mobile' | 'web';
 
 /** A product film: an H.264 MP4 and its poster frame, both under public/films. */
 export type Film = { src: string; poster: string; title: string; length: string; caption: string };
@@ -88,6 +92,7 @@ export const flagships: Flagship[] = [
     period: '2025 to now',
     platforms: 'iOS and Android',
     tags: ['Socket.IO', 'Background isolates', 'Live Activities', 'Stripe 3DS', 'Gemini Live'],
+    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Ride-hailing and cargo, rider and driver apps.', kinds: ['mobile'], image: taggoRider, fit: 'cover' },
     theme: 'taggo',
     shots: [
       { src: taggoRider, alt: 'Taggo rider app home with ride and cargo services', kind: 'phone' },
@@ -123,6 +128,7 @@ export const flagships: Flagship[] = [
     period: 'April 2025 to now',
     platforms: 'iOS and Android',
     tags: ['Launch performance', 'Telr', 'Apple Pay', 'Google Pay', 'Forced updates'],
+    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Flowers and gifts across nine Gulf countries.', kinds: ['mobile'], image: theEvents, fit: 'cover' },
     theme: 'events',
     shots: [{ src: theEvents, alt: 'The Events app promotional screen', kind: 'square' }],
     constraint: 'The app took about 12 seconds to open on the same phone.',
@@ -152,15 +158,16 @@ export const flagships: Flagship[] = [
     period: 'May 2024 to April 2025',
     platforms: 'Android, iOS, Windows, macOS and web',
     tags: ['Firestore', 'Desktop windowing', 'Six languages', 'PDF and e-invoices'],
+    card: { year: '2024 to 2025', platforms: 'Mobile, desktop and web', summary: 'Accounting on five platforms, with floating windows.', kinds: ['mobile', 'web'], image: ba3Windows, fit: 'cover' },
     theme: 'ba3',
     shots: [
       {
-        src: windowsDemo,
-        alt: 'Floating Tasks and Calculator windows from the draggable_floating_window example app',
+        src: ba3Windows,
+        alt: 'BA3 on an iPad with two sales invoices open in floating windows over the bills list',
         kind: 'window',
       },
     ],
-    caption: 'Shown: the example app of draggable_floating_window, the open-source rewrite of BA3’s windowing layer.',
+    caption: 'Shown: BA3 on sample data, with two sales invoices open side by side in floating windows.',
     highlights: [
       'A Firestore re-architecture that saved about 829M reads a year (about $497) and made invoice creation about 99% faster.',
       'About 3.5M AED a month in transactions through bills, vouchers, cheques and accounts.',
@@ -197,6 +204,7 @@ export const flagships: Flagship[] = [
     period: 'February to May 2024',
     platforms: 'iOS',
     tags: ['On-device AI', 'Search highlighting', 'Summarisation', 'Translation'],
+    card: { year: '2024', platforms: 'Mobile', summary: 'AI fitness coaching with searchable notes.', kinds: ['mobile'], image: gainz, fit: 'cover' },
     theme: 'gainz',
     shots: [{ src: gainz, alt: 'Gainz AI app screens', kind: 'square' }],
     highlights: [
@@ -212,7 +220,7 @@ export type MoreWork = {
   name: string;
   year: string;
   platforms: string;
-  tags: ('mobile' | 'web' | 'market')[];
+  tags: Kind[];
   summary: string;
   description: string;
   points: string[];
@@ -224,11 +232,11 @@ export type MoreWork = {
 
 export const moreWork: MoreWork[] = [
   {
-    id: 'rak-rent',
-    name: 'RAK Rent',
+    id: 'amber-drive',
+    name: 'Amber Drive',
     year: '2024 to 2025',
     platforms: 'Mobile and web',
-    tags: ['mobile', 'web', 'market'],
+    tags: ['mobile', 'web'],
     summary: 'Car rental with renter and owner flows in one app.',
     description: 'A car rental marketplace for the UAE. One Flutter app serves renters and car owners with separate flows, switched at login.',
     points: [
@@ -238,24 +246,24 @@ export const moreWork: MoreWork[] = [
       'Stripe payments, and Stripe Connect payouts to owners',
       'Owner fleet board, booking approvals and damage reports with photos',
     ],
-    image: rakRent,
+    image: amberDrive,
     fit: 'contain',
     links: [],
     film: {
       src: '/films/amber-drive.mp4',
       poster: '/films/amber-drive.jpg',
-      title: 'Car rental product film',
+      title: 'Amber Drive product film',
       length: '1:28',
       caption:
-        'The app on sample data, under a working name: search with filters, booking, the owner’s fleet, and an approval reaching the renter’s phone.',
+        'The app on sample data: search with filters, booking, the owner’s fleet, and an approval reaching the renter’s phone.',
     },
   },
   {
     id: 'osta-home',
     name: 'Osta Home',
-    year: '2022',
+    year: '2023',
     platforms: 'Mobile',
-    tags: ['mobile', 'market'],
+    tags: ['mobile'],
     summary: 'Real-estate and construction services marketplace.',
     description: 'A marketplace for real-estate, construction and finishing services, in Arabic.',
     points: ['Direct contact with verified experts', 'Broker IDs and work scheduling', 'Directories of furnishing and supply companies'],
@@ -279,7 +287,7 @@ export const moreWork: MoreWork[] = [
   {
     id: 'spark-fitness',
     name: 'Spark Fitness',
-    year: '2023',
+    year: '2022',
     platforms: 'Mobile',
     tags: ['mobile'],
     summary: 'Coach-led group training and subscriptions.',
@@ -288,19 +296,6 @@ export const moreWork: MoreWork[] = [
     image: spark,
     fit: 'cover',
     links: [{ label: 'App Store', href: 'https://apps.apple.com/ae/app/spark-fitness/id6450647441' }],
-  },
-  {
-    id: 'chefchaoun',
-    name: 'Chefchaoun',
-    year: '2021',
-    platforms: 'Mobile',
-    tags: ['mobile'],
-    summary: 'Coworking space booking, events and trips.',
-    description: 'Coworking spaces with lecture halls, events, workshops and stargazing trips.',
-    points: ['Space rentals for meetings and events', 'Community activities and trips'],
-    image: chefchaoun,
-    fit: 'contain',
-    links: [{ label: 'App Store', href: 'https://apps.apple.com/eg/app/chefchaoun/id1601105136' }],
   },
 ];
 
@@ -318,7 +313,7 @@ export const experience = [
     place: 'Ras Al Khaimah',
     role: 'Senior Software Engineer',
     org: 'BA3',
-    note: 'BA3 Business Solutions and RAK Rent. document_camera_frame started here.',
+    note: 'BA3 Business Solutions and Amber Drive. document_camera_frame started here.',
   },
   {
     when: 'February to May 2024',
@@ -359,7 +354,7 @@ export const capabilities = [
   {
     name: 'Payments',
     ids: ['taggo', 'events', 'rak'],
-    proof: 'Taggo: Stripe with 3D Secure and saved cards. The Events: Telr, Apple Pay and Google Pay. RAK Rent: Stripe Connect payouts.',
+    proof: 'Taggo: Stripe with 3D Secure and saved cards. The Events: Telr, Apple Pay and Google Pay. Amber Drive: Stripe Connect payouts.',
   },
   {
     name: 'Performance',
@@ -389,7 +384,7 @@ export const capabilityTiles = [
   { id: 'events', name: 'The Events', note: 'E-commerce' },
   { id: 'ba3', name: 'BA3', note: 'Accounting' },
   { id: 'gainz', name: 'Gainz AI', note: 'Fitness' },
-  { id: 'rak', name: 'RAK Rent', note: 'Rental' },
+  { id: 'rak', name: 'Amber Drive', note: 'Rental' },
   { id: 'dfw', name: 'Floating windows', note: 'Open-source package' },
 ];
 
