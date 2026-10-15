@@ -444,7 +444,7 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 .numbers span { color: var(--muted); font-size: 0.86rem; }
 .store-links { display: flex; gap: 10px 22px; flex-wrap: wrap; align-items: center; }
 .store-group { display: inline-flex; align-items: center; gap: 8px; }
-.store-app { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-right: 2px; }
+.store-app { font-size: 0.86rem; font-weight: 600; color: var(--text); margin-right: 4px; }
 .store-icon { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--raised); color: var(--text); transition: border-color 0.2s ease, transform 0.2s ease; }
 .store-icon:hover { border-color: var(--line-strong); transform: translateY(-2px); }
 .store-icon svg { width: 18px; height: 18px; fill: currentColor; }

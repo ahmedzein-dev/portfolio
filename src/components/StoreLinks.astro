@@ -3,7 +3,8 @@ import type { StoreLink } from '../data/site';
 
 /**
  * Store links as icons: App Store and Google Play links are grouped per app ("Taggo on the App Store" and
- * "Taggo on Google Play" become "Taggo" with two icon buttons). Any other link stays a text button.
+ * "Taggo on Google Play" become "Taggo" with two icon buttons). A project with one app reads "Get the app".
+ * Any other link stays a text button.
  */
 interface Props {
   links: StoreLink[];
@@ -31,7 +32,7 @@ for (const l of links) {
 <div class="store-links">
   {groups.map((g) => (
     <div class="store-group">
-      {g.app && <span class="store-app">{g.app}</span>}
+      <span class="store-app">{groups.length > 1 && g.app ? g.app : 'Get the app'}</span>
       {g.links.map((l) => (
         <a class="store-icon" href={l.href} aria-label={l.label} title={l.label} rel="noopener">
           {l.store === 'apple' ? (
