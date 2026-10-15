@@ -202,10 +202,10 @@ export const flagships: Flagship[] = [
     eyebrow: 'Gainz AI · AI fitness · 2024 · Contract',
     headline: 'Notes you can search, summarise and translate',
     summary:
-      'An iOS fitness app with AI athlete avatars and adaptive plans. I built note search with match highlighting, later published as scroll_highlight_text, plus on-device summarisation and translation.',
+      'A fitness app with AI athlete avatars and adaptive plans. I built note search with match highlighting, later published as scroll_highlight_text, plus on-device summarisation and translation.',
     role: 'Mobile developer, contract (remote, London)',
     period: 'February to May 2024',
-    platforms: 'iOS',
+    platforms: 'iOS and Android',
     tags: ['On-device AI', 'Search highlighting', 'Summarisation', 'Translation'],
     card: { year: '2024', platforms: 'Mobile', summary: 'AI fitness coaching with searchable notes.', kinds: ['mobile'], image: gainz, fit: 'cover' },
     theme: 'gainz',
@@ -214,7 +214,10 @@ export const flagships: Flagship[] = [
       'Note search with match highlighting and step-through navigation, later published as the scroll_highlight_text package.',
       'On-device summarisation and translation of notes.',
     ],
-    links: [{ label: 'Gainz AI on the App Store', href: 'https://apps.apple.com/us/app/gainz-ai-chat-train-track/id6474649083' }],
+    links: [
+      { label: 'Gainz AI on the App Store', href: 'https://apps.apple.com/us/app/gainz-ai-chat-train-track/id6474649083' },
+      { label: 'Gainz AI on Google Play', href: 'https://play.google.com/store/apps/details?id=ai.gainz.app' },
+    ],
   },
 ];
 
