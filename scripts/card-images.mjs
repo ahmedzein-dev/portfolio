@@ -1,16 +1,20 @@
-// Builds the 4:3 thumbnails of the All projects grid, so every card frames its screens the same way:
-// whole screens, never cropped, centred on a dark stage tinted with the app's colour.
+// Builds the 4:3 thumbnails of the More projects grid, so every card frames its screens the same way:
+// whole screens, never cropped, centred on a dark stage tinted with the app's colour. The same stages,
+// at 1200×630, are the link previews (og:image) of the case studies.
 //
 //   node scripts/card-images.mjs
 //
-// Writes src/assets/cards/<id>.jpg (1600×1200, metadata-free).
+// Writes src/assets/cards/<id>.jpg (1600×1200) and public/share/<slug>.jpg (1200×630), metadata-free.
 import sharp from 'sharp';
 import { mkdir } from 'node:fs/promises';
 
-const W = 1600;
-const H = 1200;
+let W = 1600;
+let H = 1200;
 const SRC = 'src/assets/work/';
 const OUT = 'src/assets/cards/';
+const SHARE = 'public/share/';
+/** Case studies, which get a link preview each: card id -> page slug. */
+const FLAGSHIPS = { taggo: 'taggo', 'the-events': 'the-events', ba3: 'ba3', gainz: 'gainz-ai' };
 
 const cards = [
   { id: 'taggo', tint: ['#2e2810', '#100e07'], glow: '#f2d23c', phones: ['taggo_rider_home.png', 'taggo_captain_pickup.png'] },
@@ -96,11 +100,17 @@ async function stillCard(c) {
   return sharp(img).extend({ left: x, right: W - w - x, top: y, bottom: H - h - y, extendWith: 'copy' });
 }
 
-await mkdir(OUT, { recursive: true });
-for (const c of cards) {
+async function write(c, file) {
   const img = c.phones ? await phonesCard(c) : c.window ? await windowCard(c) : await stillCard(c);
   // Flatten in a second pass: composite layers resolve before resize/format options apply.
   const flat = await img.png().toBuffer();
-  await sharp(flat).sharpen({ sigma: 0.5 }).jpeg({ quality: 88, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile(`${OUT}${c.id}.jpg`);
-  console.log(c.id);
+  await sharp(flat).sharpen({ sigma: 0.5 }).jpeg({ quality: 88, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile(file);
+  console.log(file);
 }
+
+await mkdir(OUT, { recursive: true });
+for (const c of cards) await write(c, `${OUT}${c.id}.jpg`);
+
+[W, H] = [1200, 630];
+await mkdir(SHARE, { recursive: true });
+for (const c of cards.filter((c) => c.id in FLAGSHIPS)) await write(c, `${SHARE}${FLAGSHIPS[c.id]}.jpg`);

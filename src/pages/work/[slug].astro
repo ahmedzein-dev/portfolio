@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const { project: p, next } = Astro.props;
 ---
 
-<Base title={`${p.name}: ${p.headline} · ${profile.name}`} description={p.summary}>
+<Base title={`${p.name}: ${p.headline} · ${profile.name}`} description={p.summary} image={`/share/${p.slug}.jpg`}>
   <main class="page" id="main">
     <header class="topbar">
       <a class="brand" href="/"><span class="az" aria-hidden="true">AZ</span><span class="nm">{profile.name}</span></a>

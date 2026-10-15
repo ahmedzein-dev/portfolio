@@ -8,12 +8,15 @@ interface Props {
   description: string;
   /** Sections the island and the route rail track, in page order. */
   sections?: { id: string; title: string; num?: string }[];
+  /** Link preview for this page (1200×630, under public/); the photo when left out. */
+  image?: string;
 }
 
-const { title, description, sections = [] } = Astro.props;
+const { title, description, sections = [], image } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 // Link previews: a 1200px square cut from the original photo (public/photo), metadata stripped.
 const shareUrl = new URL('/photo/ahmed-zein-share.jpg', Astro.site);
+const previewUrl = image ? new URL(image, Astro.site) : shareUrl;
 
 const person = {
   '@context': 'https://schema.org',
@@ -44,8 +47,10 @@ const person = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={shareUrl} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={previewUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content={image ? '630' : '1200'} />
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload />
     <Font cssVariable="--font-mono" />
