@@ -1,5 +1,4 @@
 ---
-import { Picture } from 'astro:assets';
 import { profile, proof } from '../data/site';
 ---
 
@@ -19,15 +18,16 @@ import { profile, proof } from '../data/site';
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-id">
     <figure class="hero-avatar">
-      <Picture
-        src={profile.avatar}
+      {/* Pre-sized and lightly sharpened from the original photo (public/photo), so no second compression softens it. */}
+      <img
+        src="/photo/ahmed-zein-240.jpg"
+        srcset="/photo/ahmed-zein-120.jpg 1x, /photo/ahmed-zein-240.jpg 2x, /photo/ahmed-zein-360.jpg 3x, /photo/ahmed-zein-480.jpg 4x"
+        width="120"
+        height="120"
         alt={profile.name}
-        widths={[112, 224, 336]}
-        sizes="(max-width: 680px) 88px, 112px"
-        quality={90}
-        formats={['avif', 'webp']}
         loading="eager"
         fetchpriority="high"
+        decoding="async"
       />
     </figure>
     <div class="hero-meta">
