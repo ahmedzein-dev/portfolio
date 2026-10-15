@@ -13,8 +13,8 @@ let H = 1200;
 const SRC = 'src/assets/work/';
 const OUT = 'src/assets/cards/';
 const SHARE = 'public/share/';
-/** Case studies, which get a link preview each: card id -> page slug. */
-const FLAGSHIPS = { taggo: 'taggo', 'the-events': 'the-events', ba3: 'ba3', gainz: 'gainz-ai' };
+/** Project pages, which get a link preview each: card id -> page slug. */
+const FLAGSHIPS = { taggo: 'taggo', 'the-events': 'the-events', ba3: 'ba3', gainz: 'gainz-ai', 'amber-drive': 'amber-drive' };
 
 const cards = [
   { id: 'taggo', tint: ['#2e2810', '#100e07'], glow: '#f2d23c', phones: ['taggo_rider_home.png', 'taggo_captain_pickup.png'] },
