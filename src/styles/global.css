@@ -443,11 +443,11 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 .numbers b { font-family: var(--display); font-weight: 760; font-stretch: 110%; font-size: 1.6rem; }
 .numbers span { color: var(--muted); font-size: 0.86rem; }
 .store-links { display: flex; gap: 10px 22px; flex-wrap: wrap; align-items: center; }
-.store-group { display: inline-flex; align-items: center; gap: 8px; }
+.store-group { display: inline-flex; align-items: center; gap: 6px; }
 .store-app { font-size: 0.86rem; font-weight: 600; color: var(--text); margin-right: 4px; }
-.store-icon { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--raised); color: var(--text); transition: border-color 0.2s ease, transform 0.2s ease; }
+.store-icon { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--line); background: var(--raised); color: var(--text); transition: border-color 0.2s ease, transform 0.2s ease; }
 .store-icon:hover { border-color: var(--line-strong); transform: translateY(-2px); }
-.store-icon svg { width: 18px; height: 18px; fill: currentColor; }
+.store-icon svg { width: 15px; height: 15px; fill: currentColor; }
 .next-case { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 
 @media (prefers-reduced-motion: reduce) {
