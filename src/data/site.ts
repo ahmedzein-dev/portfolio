@@ -163,7 +163,7 @@ export const flagships: Flagship[] = [
     shots: [
       {
         src: ba3ControlPanel,
-        alt: 'The BA3 Control Panel on an iPad, in Arabic: main account balances, invoice and employee counts, and sales per seller',
+        alt: 'The BA3 Control Panel on an iPad, in Arabic: main account balances, invoice and employee counts, and each seller’s share of sales as a donut chart',
         kind: 'window',
       },
     ],
