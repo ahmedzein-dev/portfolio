@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { packages } from '../data/site';
-import windowsDemo from '../assets/work/windows_demo.png';
+import windowsDemo from '../assets/work/dfw_overview.webp';
 
 // Live numbers from pub.dev at build time; the stored values are the fallback.
 type Stats = { points: string; likes?: number; downloads30?: number; version: string; published?: string };
@@ -37,7 +37,7 @@ const date = (iso?: string) =>
     <article class="pkg">
       {p.name === 'draggable_floating_window' && (
         <div class="pkg-visual">
-          <Image src={windowsDemo} alt="Floating Tasks and Calculator windows from the example app" widths={[360, 720]} sizes="(min-width: 960px) 340px, 90vw" />
+          <Image src={windowsDemo} alt="The draggable_floating_window example app: Tasks, a note, a calculator and the window switcher open at once" widths={[400, 800, 1200, 1600]} sizes="(min-width: 960px) 340px, 90vw" quality={90} />
         </div>
       )}
       {p.name === 'document_camera_frame' && (

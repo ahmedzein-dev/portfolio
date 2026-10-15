@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
 import photo from '../assets/photo/ahmed-zein.jpg';
+import avatar from '../assets/photo/ahmed-zein-square.jpg';
 import taggoRider from '../assets/work/customer1.png';
 import taggoDriver from '../assets/work/driver1.png';
 import theEvents from '../assets/work/theevents_image.png';
@@ -18,6 +19,8 @@ export const profile = {
   location: 'Abu Dhabi',
   email: 'ahmed.zein1896@gmail.com',
   photo,
+  /** Square head-and-shoulders crop of the photo, for the hero. */
+  avatar,
   availability: {
     long: 'Open to full-time roles and freelance work',
     short: 'Open to work',

@@ -20,10 +20,11 @@ import { profile, proof } from '../data/site';
   <div class="hero-id">
     <figure class="hero-avatar">
       <Picture
-        src={profile.photo}
+        src={profile.avatar}
         alt={profile.name}
-        widths={[96, 160, 240]}
-        sizes="80px"
+        widths={[112, 224, 336]}
+        sizes="(max-width: 680px) 88px, 112px"
+        quality={90}
         formats={['avif', 'webp']}
         loading="eager"
         fetchpriority="high"
