@@ -10,7 +10,7 @@ import { profile } from '../data/site';
 const sections = [
   { id: 'work', title: 'Selected work', num: '1' },
   { id: 'open-source', title: 'Open source', num: '2' },
-  { id: 'more-work', title: 'All projects', num: '3' },
+  { id: 'more-work', title: 'More projects', num: '3' },
   { id: 'experience', title: 'Experience', num: '4' },
   { id: 'contact', title: 'Contact', num: '5' },
 ];
@@ -37,10 +37,10 @@ const year = new Date().getFullYear();
       <OpenSource />
     </section>
 
-    <section class="section" id="more-work" data-section="All projects" data-num="3" aria-labelledby="mw-title">
+    <section class="section" id="more-work" data-section="More projects" data-num="3" aria-labelledby="mw-title">
       <div class="section-head">
-        <p class="label"><span class="n">3</span> All projects</p>
-        <h2 id="mw-title">Everything I’ve shipped</h2>
+        <p class="label"><span class="n">3</span> More projects</p>
+        <h2 id="mw-title">A few of my 15+ shipped apps</h2>
       </div>
       <MoreWork />
     </section>

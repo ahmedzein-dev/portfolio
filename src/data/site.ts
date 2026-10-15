@@ -10,7 +10,7 @@ import osta from '../assets/work/osta1.png';
 import alTaher from '../assets/work/altaher_home.png';
 import spark from '../assets/work/spark1.png';
 import ba3ControlPanel from '../assets/work/ba3_control_panel.png';
-// The All projects grid: 4:3 thumbnails made by scripts/card-images.mjs.
+// The More projects grid: 4:3 thumbnails made by scripts/card-images.mjs.
 import taggoCard from '../assets/cards/taggo.jpg';
 import theEventsCard from '../assets/cards/the-events.jpg';
 import ba3Card from '../assets/cards/ba3.jpg';
@@ -80,11 +80,11 @@ export type Flagship = {
   numbers?: { value: string; label: string }[];
   links: StoreLink[];
   film?: Film;
-  /** How the project appears in the All projects grid. */
+  /** How the project appears in the More projects grid. */
   card: { year: string; platforms: string; summary: string; kinds: Kind[]; image: ImageMetadata };
 };
 
-/** Filters in the All projects grid. */
+/** Filters in the More projects grid. */
 export type Kind = 'mobile' | 'web';
 
 /** A product film: an H.264 MP4 and its poster frame, both under public/films. */
