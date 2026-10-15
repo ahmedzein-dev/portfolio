@@ -4,7 +4,7 @@ import taggoRider from '../assets/work/taggo_rider_home.png';
 import taggoDriver from '../assets/work/taggo_captain_pickup.png';
 import theEvents from '../assets/work/theevents_image.png';
 import gainz from '../assets/work/gainz_image.jpg';
-import amberDrive from '../assets/work/rak_rent.png';
+import amberDrive from '../assets/work/amber_drive.png';
 import osta from '../assets/work/osta1.png';
 import alTaher from '../assets/work/altaher_home.png';
 import spark from '../assets/work/spark1.png';
@@ -248,7 +248,7 @@ export const moreWork: MoreWork[] = [
       'Owner fleet board, booking approvals and damage reports with photos',
     ],
     image: amberDrive,
-    fit: 'contain',
+    fit: 'cover',
     links: [],
     film: {
       src: '/films/amber-drive.mp4',
