@@ -66,6 +66,8 @@ export type Flagship = {
   eyebrow: string;
   headline: string;
   summary: string;
+  /** One line under the headline in Selected work; the full summary opens the case study. */
+  pitch: string;
   role: string;
   period: string;
   platforms: string;
@@ -94,6 +96,7 @@ export const flagships: Flagship[] = [
     name: 'Taggo',
     eyebrow: 'Taggo · Rider and driver apps · 2025 to now',
     headline: 'Both sides of a ride-hailing platform',
+    pitch: 'Ride-hailing and cargo for the UAE, with live tracking and Live Activities.',
     summary:
       'Ride-hailing and cargo for the UAE, live on the App Store and Google Play. Real-time dispatch and tracking over Socket.IO, background location, Live Activities, Stripe with 3D Secure, and Taggo Buddy, a push-to-talk voice assistant on Gemini Live.',
     role: 'Lead mobile engineer, Kief Consultancy & Technology',
@@ -130,6 +133,7 @@ export const flagships: Flagship[] = [
     name: 'The Events',
     eyebrow: 'The Events · Gifting e-commerce · 2025 to now',
     headline: 'A 12-second launch, down to 3',
+    pitch: 'Flowers and gifts across nine Gulf countries, on Telr, Apple Pay and Google Pay.',
     summary:
       'Flowers and gifts across nine Gulf countries. App launch went from about 12 s to about 3 s on the same phone, through lazy home sections, de-duplicated requests, a native splash and skeleton loading. Checkout runs on Telr, Apple Pay and Google Pay.',
     role: 'Lead mobile engineer, Kief Consultancy & Technology',
@@ -163,6 +167,7 @@ export const flagships: Flagship[] = [
     name: 'BA3 Business Solutions',
     eyebrow: 'BA3 Business Solutions · Accounting · 2024 to 2025',
     headline: 'Five platforms, one codebase, 3.5M AED a month',
+    pitch: 'Accounting on Android, iOS, Windows, macOS and the web, in floating windows.',
     summary:
       'Accounting and business management on Android, iOS, Windows, macOS and the web. A Firestore re-architecture saved about 829M reads a year and made invoice creation about 99% faster. Desktop users work in floating windows, now open source as draggable_floating_window.',
     role: 'Senior Software Engineer, BA3',
@@ -209,6 +214,7 @@ export const flagships: Flagship[] = [
     name: 'Gainz AI',
     eyebrow: 'Gainz AI · AI fitness · 2024 · Contract',
     headline: 'Notes you can search, summarise and translate',
+    pitch: 'AI fitness coaching, with note search published as scroll_highlight_text.',
     summary:
       'A fitness app with AI athlete avatars and adaptive plans. I built note search with match highlighting, later published as scroll_highlight_text, plus on-device summarisation and translation.',
     role: 'Mobile developer, contract (remote, London)',
@@ -414,20 +420,18 @@ export type Package = {
 export const packages: Package[] = [
   {
     name: 'draggable_floating_window',
-    description:
-      'Draggable, resizable windows inside a Flutter app, with priority stacking, dialogs that block only their own window, and keyboard focus that comes back.',
+    description: 'Draggable, resizable windows inside a Flutter app.',
     github: 'https://github.com/ahmedzein-dev/draggable_floating_window',
     fallback: { points: '160/160', version: '0.0.1', published: '2026-10-08' },
   },
   {
     name: 'document_camera_frame',
-    description: 'Document capture with a camera frame, cropping and export.',
-    note: 'Runs in production in Taggo Captain’s driver onboarding.',
+    description: 'Document capture with a camera frame, in Taggo Captain’s onboarding.',
     fallback: { points: '150/160', likes: 55, downloads30: 735, version: '2.6.11' },
   },
   {
     name: 'scroll_highlight_text',
-    description: 'Search, highlight and step through text matches in Latin and Arabic, with match counts and previous and next controls.',
+    description: 'Search and highlight text matches, in Latin and Arabic.',
     fallback: { points: '160/160', likes: 43, downloads30: 88, version: '1.0.10' },
   },
 ];
