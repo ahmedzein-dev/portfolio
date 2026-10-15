@@ -316,8 +316,8 @@ code { font-size: 0.86em; }
 /* ---------- open source ---------- */
 .pkgs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 @media (max-width: 960px) { .pkgs { grid-template-columns: 1fr; } }
-.pkg { border: 1px solid var(--line); border-radius: 20px; background: var(--raised); padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
-.pkg-visual { height: 160px; border-radius: 12px; overflow: hidden; background: var(--sunken); border: 1px solid var(--line); position: relative; }
+.pkg { border: 1px solid var(--line); border-radius: 20px; background: var(--raised); padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.pkg-visual { height: 130px; border-radius: 12px; overflow: hidden; background: var(--sunken); border: 1px solid var(--line); position: relative; }
 .pkg-visual img { width: 100%; height: 100%; object-fit: cover; }
 .pkg h3 { font-size: 1rem; }
 .pkg h3 a { text-decoration: none; font-family: var(--mono); font-stretch: 87.5%; font-weight: 500; overflow-wrap: anywhere; }
@@ -327,9 +327,10 @@ code { font-size: 0.86em; }
 .pkg-stats div { display: grid; }
 .pkg-stats dt { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); }
 .pkg-stats dd { font-weight: 600; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
-.install { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); padding: 6px 6px 6px 10px; min-width: 0; }
-.install code { flex: 1; min-width: 0; font-size: 0.68rem; line-height: 1.5; overflow-wrap: anywhere; }
-.pkg-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.pkg-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pkg-gh { flex: none; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); color: var(--text); transition: border-color 0.2s ease, transform 0.2s ease; }
+.pkg-gh:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.pkg-gh svg { width: 17px; height: 17px; fill: currentColor; }
 .dcf { display: grid; place-items: center; }
 .dcf .card { position: relative; width: 62%; aspect-ratio: 1.586; border-radius: 8px; background: linear-gradient(135deg, #c9d3df, #9fb0c4); box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5); }
 .dcf .card::before { content: ''; position: absolute; left: 8%; top: 22%; width: 22%; height: 46%; border-radius: 4px; background: rgba(20, 30, 45, 0.35); }

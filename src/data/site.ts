@@ -413,8 +413,8 @@ export type Package = {
   name: string;
   description: string;
   note?: string;
-  github?: string;
-  fallback: { points: string; likes?: number; downloads30?: number; version: string; published?: string };
+  github: string;
+  fallback: { points: string; likes?: number; downloads30?: number; version: string };
 };
 
 export const packages: Package[] = [
@@ -422,16 +422,18 @@ export const packages: Package[] = [
     name: 'draggable_floating_window',
     description: 'Draggable, resizable windows inside a Flutter app.',
     github: 'https://github.com/ahmedzein-dev/draggable_floating_window',
-    fallback: { points: '160/160', version: '0.0.1', published: '2026-10-08' },
+    fallback: { points: '160/160', version: '0.0.1' },
   },
   {
     name: 'document_camera_frame',
     description: 'Document capture with a camera frame, in Taggo Captain’s onboarding.',
+    github: 'https://github.com/ahmedzein-dev/document_camera_frame',
     fallback: { points: '150/160', likes: 55, downloads30: 735, version: '2.6.11' },
   },
   {
     name: 'scroll_highlight_text',
     description: 'Search and highlight text matches, in Latin and Arabic.',
+    github: 'https://github.com/ahmedzein-dev/scroll_highlight_text',
     fallback: { points: '160/160', likes: 43, downloads30: 88, version: '1.0.10' },
   },
 ];
