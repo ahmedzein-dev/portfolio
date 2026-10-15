@@ -2,13 +2,22 @@ import type { ImageMetadata } from 'astro';
 
 import taggoRider from '../assets/work/taggo_rider_home.png';
 import taggoDriver from '../assets/work/taggo_captain_pickup.png';
-import theEvents from '../assets/work/theevents_image.png';
+import theEvents from '../assets/work/theevents_home.png';
 import gainz from '../assets/work/gainz_image.jpg';
 import amberDrive from '../assets/work/amber_drive.jpg';
 import osta from '../assets/work/osta1.png';
 import alTaher from '../assets/work/altaher_home.png';
 import spark from '../assets/work/spark1.png';
 import ba3ControlPanel from '../assets/work/ba3_control_panel.png';
+// The All projects grid: 4:3 thumbnails made by scripts/card-images.mjs.
+import taggoCard from '../assets/cards/taggo.jpg';
+import theEventsCard from '../assets/cards/the-events.jpg';
+import ba3Card from '../assets/cards/ba3.jpg';
+import gainzCard from '../assets/cards/gainz.jpg';
+import amberDriveCard from '../assets/cards/amber-drive.jpg';
+import ostaCard from '../assets/cards/osta-home.jpg';
+import alTaherCard from '../assets/cards/al-taher.jpg';
+import sparkCard from '../assets/cards/spark-fitness.jpg';
 
 export const profile = {
   name: 'Ahmed Zein',
@@ -69,7 +78,7 @@ export type Flagship = {
   links: StoreLink[];
   film?: Film;
   /** How the project appears in the All projects grid. */
-  card: { year: string; platforms: string; summary: string; kinds: Kind[]; image: ImageMetadata; fit: 'cover' | 'contain' };
+  card: { year: string; platforms: string; summary: string; kinds: Kind[]; image: ImageMetadata };
 };
 
 /** Filters in the All projects grid. */
@@ -90,7 +99,7 @@ export const flagships: Flagship[] = [
     period: '2025 to now',
     platforms: 'iOS and Android',
     tags: ['Socket.IO', 'Background isolates', 'Live Activities', 'Stripe 3DS', 'Gemini Live'],
-    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Ride-hailing and cargo, rider and driver apps.', kinds: ['mobile'], image: taggoRider, fit: 'cover' },
+    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Ride-hailing and cargo, rider and driver apps.', kinds: ['mobile'], image: taggoCard },
     theme: 'taggo',
     shots: [
       { src: taggoRider, alt: 'Taggo rider app home: live ride, cargo delivery, VIP service and airport travel', kind: 'phone' },
@@ -126,9 +135,9 @@ export const flagships: Flagship[] = [
     period: 'April 2025 to now',
     platforms: 'iOS and Android',
     tags: ['Launch performance', 'Telr', 'Apple Pay', 'Google Pay', 'Forced updates'],
-    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Flowers and gifts across nine Gulf countries.', kinds: ['mobile'], image: theEvents, fit: 'cover' },
+    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Flowers and gifts across nine Gulf countries.', kinds: ['mobile'], image: theEventsCard },
     theme: 'events',
-    shots: [{ src: theEvents, alt: 'The Events app promotional screen', kind: 'square' }],
+    shots: [{ src: theEvents, alt: 'The Events app home: occasion picks, Celebrate Occasions and Curated For You', kind: 'phone' }],
     constraint: 'The app took about 12 seconds to open on the same phone.',
     highlights: [
       'App launch from about 12 s to about 3 s on the same phone: lazy home sections and tabs, de-duplicated provider requests, a native splash, shimmer skeletons and pre-cached SVGs.',
@@ -156,7 +165,7 @@ export const flagships: Flagship[] = [
     period: 'May 2024 to April 2025',
     platforms: 'Android, iOS, Windows, macOS and web',
     tags: ['Firestore', 'Desktop windowing', 'Six languages', 'PDF and e-invoices'],
-    card: { year: '2024 to 2025', platforms: 'Mobile, desktop and web', summary: 'Accounting on five platforms, with floating windows.', kinds: ['mobile', 'web'], image: ba3ControlPanel, fit: 'cover' },
+    card: { year: '2024 to 2025', platforms: 'Mobile, desktop and web', summary: 'Accounting on five platforms, with floating windows.', kinds: ['mobile', 'web'], image: ba3Card },
     theme: 'ba3',
     shots: [
       {
@@ -202,7 +211,7 @@ export const flagships: Flagship[] = [
     period: 'February to May 2024',
     platforms: 'iOS and Android',
     tags: ['On-device AI', 'Search highlighting', 'Summarisation', 'Translation'],
-    card: { year: '2024', platforms: 'Mobile', summary: 'AI fitness coaching with searchable notes.', kinds: ['mobile'], image: gainz, fit: 'cover' },
+    card: { year: '2024', platforms: 'Mobile', summary: 'AI fitness coaching with searchable notes.', kinds: ['mobile'], image: gainzCard },
     theme: 'gainz',
     shots: [{ src: gainz, alt: 'Gainz AI app screens', kind: 'square' }],
     highlights: [
@@ -226,8 +235,8 @@ export type MoreWork = {
   description: string;
   points: string[];
   image: ImageMetadata;
-  /** cover fills the thumbnail; contain fits it on white; frame fits a 16:9 film still on black. */
-  fit: 'cover' | 'contain' | 'frame';
+  /** The 4:3 grid thumbnail. */
+  thumb: ImageMetadata;
   links: StoreLink[];
   film?: Film;
 };
@@ -249,7 +258,7 @@ export const moreWork: MoreWork[] = [
       'Owner fleet board, booking approvals and damage reports with photos',
     ],
     image: amberDrive,
-    fit: 'frame',
+    thumb: amberDriveCard,
     links: [],
     film: {
       src: '/films/amber-drive.mp4',
@@ -270,7 +279,7 @@ export const moreWork: MoreWork[] = [
     description: 'A marketplace for real-estate, construction and finishing services, in Arabic.',
     points: ['Direct contact with verified experts', 'Broker IDs and work scheduling', 'Directories of furnishing and supply companies'],
     image: osta,
-    fit: 'cover',
+    thumb: ostaCard,
     links: [{ label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.home_osta.Osta' }],
   },
   {
@@ -283,7 +292,7 @@ export const moreWork: MoreWork[] = [
     description: 'Client and manager apps for a gold jewellery store.',
     points: ['Client app with live gold prices and search', 'Manager app for stock and price updates'],
     image: alTaher,
-    fit: 'cover',
+    thumb: alTaherCard,
     links: [{ label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=ahmedzein.taher.jewellery.altaher_jewellery' }],
   },
   {
@@ -296,7 +305,7 @@ export const moreWork: MoreWork[] = [
     description: 'Group training in coach-led sessions.',
     points: ['Personalised training activities', 'Monitoring by coaches', 'Subscriptions'],
     image: spark,
-    fit: 'cover',
+    thumb: sparkCard,
     links: [{ label: 'App Store', href: 'https://apps.apple.com/ae/app/spark-fitness/id6450647441' }],
   },
 ];
