@@ -2,6 +2,17 @@
 import { Image } from 'astro:assets';
 import { flagships, moreWork } from '../data/site';
 import StoreLinks from './StoreLinks.astro';
+
+// Newest first: by the year a project ended ("now" counts as latest), then by the year it began.
+const span = (year: string) => {
+  const [from, to = from] = year.split(' to ');
+  return { from: Number(from), to: to === 'now' ? Infinity : Number(to) };
+};
+const newestFirst = (a: string, b: string) => span(b).to - span(a).to || span(b).from - span(a).from;
+const cards = [
+  ...flagships.map((p) => ({ year: p.card.year, flagship: p, more: undefined })),
+  ...moreWork.map((p) => ({ year: p.year, flagship: undefined, more: p })),
+].sort((a, b) => newestFirst(a.year, b.year));
 ---
 
 <div class="mw-filters" id="mw-filters" role="group" aria-label="Filter projects">
@@ -11,7 +22,7 @@ import StoreLinks from './StoreLinks.astro';
 </div>
 
 <ul class="mw-grid" id="mw-grid">
-  {flagships.map((p) => (
+  {cards.map(({ flagship: p, more }) => p ? (
     <li data-tags={p.card.kinds.join(' ')}>
       <a class="mw-card" href={`/work/${p.slug}/`}>
         <span class="thumb">
@@ -25,8 +36,7 @@ import StoreLinks from './StoreLinks.astro';
         </span>
       </a>
     </li>
-  ))}
-  {moreWork.map((p) => (
+  ) : more && ((p) => (
     <li data-id={p.id} data-tags={p.tags.join(' ')} id={p.id}>
       <button class="mw-card" type="button" data-id={p.id} aria-haspopup="dialog">
         <span class="thumb">
@@ -41,6 +51,7 @@ import StoreLinks from './StoreLinks.astro';
       <template id={`mw-${p.id}`}>
         <p class="label">{p.year} · {p.platforms}</p>
         <h2 id="drawer-title">{p.name}</h2>
+        {p.links.length > 0 && <StoreLinks links={p.links} />}
         {p.film ? (
           <figure class="film film-drawer">
             <video controls playsinline preload="none" poster={p.film.poster} aria-label={p.film.title}>
@@ -55,10 +66,9 @@ import StoreLinks from './StoreLinks.astro';
         <ul>
           {p.points.map((pt) => <li>{pt}</li>)}
         </ul>
-        {p.links.length > 0 && <StoreLinks links={p.links} />}
       </template>
     </li>
-  ))}
+  ))(more))}
 </ul>
 
 <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">

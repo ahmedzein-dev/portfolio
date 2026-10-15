@@ -204,7 +204,7 @@ export const flagships: Flagship[] = [
       src: '/films/ba3-business-solutions.mp4',
       poster: '/films/ba3-business-solutions.jpg',
       title: 'BA3 Business Solutions product film',
-      length: '3:28',
+      length: '2:54',
       caption:
         'The app on sample data: the control panel, invoices, floating windows, bill search and export, data import, the year-end migration with the cash statement before and after, the activity log and six languages.',
     },
