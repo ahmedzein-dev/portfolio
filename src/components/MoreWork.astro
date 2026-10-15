@@ -26,7 +26,16 @@ import { moreWork } from '../data/site';
       <template id={`mw-${p.id}`}>
         <p class="label">{p.year} · {p.platforms}</p>
         <h2 id="drawer-title">{p.name}</h2>
-        <Image class="drawer-img" src={p.image} alt={`${p.name} screens`} widths={[460, 920]} sizes="460px" />
+        {p.film ? (
+          <figure class="film film-drawer">
+            <video controls playsinline preload="none" poster={p.film.poster} aria-label={p.film.title}>
+              <source src={p.film.src} type="video/mp4" />
+            </video>
+            <figcaption><span class="film-len">{p.film.length}</span> {p.film.caption}</figcaption>
+          </figure>
+        ) : (
+          <Image class="drawer-img" src={p.image} alt={`${p.name} screens`} widths={[460, 920]} sizes="460px" />
+        )}
         <p>{p.description}</p>
         <ul>
           {p.points.map((pt) => <li>{pt}</li>)}

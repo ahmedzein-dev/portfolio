@@ -300,6 +300,8 @@ drawer?.addEventListener('click', (e) => {
   if (e.target === drawer) drawer.close();
 });
 drawer?.addEventListener('close', () => {
+  // A film playing in the drawer stops with it.
+  drawer.querySelectorAll('video').forEach((v) => v.pause());
   if (location.hash && items.some((li) => `#${li.dataset.id}` === location.hash)) history.replaceState(null, '', location.pathname);
 });
 $('#drawer-close')?.addEventListener('click', () => drawer?.close());

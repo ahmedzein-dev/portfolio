@@ -52,6 +52,17 @@ const { project: p, next } = Astro.props;
         </section>
       )}
 
+      {p.film && (
+        <section class="section" id="film" style="padding-top:clamp(48px,7vw,80px);scroll-margin-top:80px" aria-label="Product film">
+          <figure class="film">
+            <video controls playsinline preload="none" poster={p.film.poster} aria-label={p.film.title}>
+              <source src={p.film.src} type="video/mp4" />
+            </video>
+            <figcaption><span class="film-len">{p.film.length}</span> {p.film.caption}</figcaption>
+          </figure>
+        </section>
+      )}
+
       <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label="Screens">
         <div class="case-shots">
           {p.shots.map((s) => (

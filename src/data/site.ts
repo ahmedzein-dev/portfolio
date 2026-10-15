@@ -70,7 +70,11 @@ export type Flagship = {
   highlights: string[];
   numbers?: { value: string; label: string }[];
   links: StoreLink[];
+  film?: Film;
 };
+
+/** A product film: an H.264 MP4 and its poster frame, both under public/films. */
+export type Film = { src: string; poster: string; title: string; length: string; caption: string };
 
 export const flagships: Flagship[] = [
   {
@@ -173,6 +177,14 @@ export const flagships: Flagship[] = [
       { value: '~99%', label: 'faster invoice creation' },
     ],
     links: [{ label: 'draggable_floating_window on pub.dev', href: 'https://pub.dev/packages/draggable_floating_window' }],
+    film: {
+      src: '/films/ba3-business-solutions.mp4',
+      poster: '/films/ba3-business-solutions.jpg',
+      title: 'BA3 Business Solutions product film',
+      length: '3:28',
+      caption:
+        'The app on sample data: the control panel, invoices, floating windows, bill search and export, data import, the year-end migration with the cash statement before and after, the activity log and six languages.',
+    },
   },
   {
     slug: 'gainz-ai',
@@ -207,6 +219,7 @@ export type MoreWork = {
   image: ImageMetadata;
   fit: 'cover' | 'contain';
   links: StoreLink[];
+  film?: Film;
 };
 
 export const moreWork: MoreWork[] = [
@@ -228,6 +241,14 @@ export const moreWork: MoreWork[] = [
     image: rakRent,
     fit: 'contain',
     links: [],
+    film: {
+      src: '/films/amber-drive.mp4',
+      poster: '/films/amber-drive.jpg',
+      title: 'Car rental product film',
+      length: '1:28',
+      caption:
+        'The app on sample data, under a working name: search with filters, booking, the owner’s fleet, and an approval reaching the renter’s phone.',
+    },
   },
   {
     id: 'osta-home',

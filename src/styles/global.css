@@ -432,6 +432,11 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 .case-meta dd { font-size: 0.95rem; }
 @media (max-width: 760px) { .case-meta { grid-template-columns: 1fr; } }
 .constraint { font-family: var(--display); font-weight: 720; font-stretch: 108%; font-size: clamp(1.3rem, 2.6vw, 1.9rem); line-height: 1.15; border-left: 3px solid var(--accent); padding-left: 18px; max-width: 34ch; }
+.film { margin: 0; }
+.film video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; border: 1px solid var(--line); background: #000; }
+.film figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 10px; max-width: 72ch; }
+.film-len { font-family: var(--mono, monospace); font-size: 0.78rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); margin-right: 6px; }
+.film-drawer video { border-radius: 14px; }
 .case-shots { display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-start; }
 .case-shots figure { flex: 1 1 260px; max-width: 360px; }
 .case-shots img { border-radius: 22px; border: 1px solid var(--line); background: var(--sunken); }
