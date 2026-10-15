@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { flagships, moreWork } from '../data/site';
+import StoreLinks from './StoreLinks.astro';
 ---
 
 <div class="mw-filters" id="mw-filters" role="group" aria-label="Filter projects">
@@ -54,11 +55,7 @@ import { flagships, moreWork } from '../data/site';
         <ul>
           {p.points.map((pt) => <li>{pt}</li>)}
         </ul>
-        {p.links.length > 0 && (
-          <div class="drawer-links">
-            {p.links.map((l) => <a class="btn btn-ghost btn-sm" href={l.href}>{l.label}</a>)}
-          </div>
-        )}
+        {p.links.length > 0 && <StoreLinks links={p.links} />}
       </template>
     </li>
   ))}

@@ -9,7 +9,7 @@ import amberDrive from '../assets/work/rak_rent.png';
 import osta from '../assets/work/osta1.png';
 import alTaher from '../assets/work/altaher_home.png';
 import spark from '../assets/work/spark1.png';
-import ba3Windows from '../assets/work/ba3_windows.jpg';
+import ba3ControlPanel from '../assets/work/ba3_control_panel.png';
 
 export const profile = {
   name: 'Ahmed Zein',
@@ -158,16 +158,16 @@ export const flagships: Flagship[] = [
     period: 'May 2024 to April 2025',
     platforms: 'Android, iOS, Windows, macOS and web',
     tags: ['Firestore', 'Desktop windowing', 'Six languages', 'PDF and e-invoices'],
-    card: { year: '2024 to 2025', platforms: 'Mobile, desktop and web', summary: 'Accounting on five platforms, with floating windows.', kinds: ['mobile', 'web'], image: ba3Windows, fit: 'cover' },
+    card: { year: '2024 to 2025', platforms: 'Mobile, desktop and web', summary: 'Accounting on five platforms, with floating windows.', kinds: ['mobile', 'web'], image: ba3ControlPanel, fit: 'cover' },
     theme: 'ba3',
     shots: [
       {
-        src: ba3Windows,
-        alt: 'BA3 on an iPad with two sales invoices open in floating windows over the bills list',
+        src: ba3ControlPanel,
+        alt: 'The BA3 Control Panel on an iPad, in Arabic: main account balances, invoice and employee counts, and sales per seller',
         kind: 'window',
       },
     ],
-    caption: 'Shown: BA3 on sample data, with two sales invoices open side by side in floating windows.',
+    caption: 'Shown: the BA3 Control Panel on sample data, in Arabic, right to left.',
     highlights: [
       'A Firestore re-architecture that saved about 829M reads a year (about $497) and made invoice creation about 99% faster.',
       'About 3.5M AED a month in transactions through bills, vouchers, cheques and accounts.',

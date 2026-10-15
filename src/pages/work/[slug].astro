@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { flagships, profile } from '../../data/site';
+import StoreLinks from '../../components/StoreLinks.astro';
 
 export function getStaticPaths() {
   return flagships.map((p, i) => ({
@@ -38,11 +39,7 @@ const { project: p, next } = Astro.props;
           <div><dt>Period</dt><dd>{p.period}</dd></div>
           <div><dt>Platforms</dt><dd>{p.platforms}</dd></div>
         </dl>
-        {p.links.length > 0 && (
-          <div class="store-links">
-            {p.links.map((l) => <a class="btn btn-ghost btn-sm" href={l.href}>{l.label}</a>)}
-          </div>
-        )}
+        {p.links.length > 0 && <StoreLinks links={p.links} />}
       </div>
 
       {p.constraint && (
@@ -66,8 +63,12 @@ const { project: p, next } = Astro.props;
       <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label="Screens">
         <div class="case-shots">
           {p.shots.map((s) => (
-            <figure>
-              <Image src={s.src} alt={s.alt} widths={[360, 720]} sizes="(min-width: 760px) 360px, 90vw" />
+            <figure class={s.kind === 'window' ? 'wide' : undefined}>
+              {s.kind === 'window' ? (
+                <Image src={s.src} alt={s.alt} widths={[720, 1280, 1960]} sizes="(min-width: 1040px) 980px, 94vw" quality={90} />
+              ) : (
+                <Image src={s.src} alt={s.alt} widths={[360, 720]} sizes="(min-width: 760px) 360px, 90vw" />
+              )}
               {s.kind === 'window' && p.caption && <figcaption>{p.caption}</figcaption>}
             </figure>
           ))}

@@ -35,7 +35,7 @@ import { flagships } from '../data/site';
         {p.shots[0].kind === 'window' && (
           <div class="winframe">
             <div class="wb" aria-hidden="true"><i></i><i></i><i></i></div>
-            <Image src={p.shots[0].src} alt={p.shots[0].alt} widths={[480, 960]} sizes="(min-width: 900px) 480px, 90vw" />
+            <Image src={p.shots[0].src} alt={p.shots[0].alt} widths={[640, 960, 1280, 1600]} sizes="(min-width: 1200px) 640px, (min-width: 900px) 52vw, 90vw" quality={90} />
           </div>
         )}
         {p.slug === 'the-events' && (
