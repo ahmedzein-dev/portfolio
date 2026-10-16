@@ -59,8 +59,7 @@ export const proof: Proof[] = [
   { value: '3', count: 3, label: 'packages on pub.dev', href: '#open-source' },
 ];
 
-/** tablets: for a window, two iPad screenshots shown instead in the card's narrow column on phones and tablets. */
-export type Shot = { src: ImageMetadata; alt: string; kind: 'phone' | 'square' | 'window'; tablets?: { src: ImageMetadata; alt: string }[] };
+export type Shot = { src: ImageMetadata; alt: string; kind: 'phone' | 'tablet' | 'square' | 'window' };
 export type StoreLink = { label: string; href: string };
 
 export type Flagship = {
@@ -180,14 +179,12 @@ export const flagships: Flagship[] = [
     card: { year: '2024 to 2025', platforms: 'Mobile, desktop and web', summary: 'Accounting on five platforms, with floating windows.', kinds: ['mobile', 'web'], image: ba3Card },
     theme: 'ba3',
     shots: [
+      { src: ba3IpadDashboard, alt: 'BA3 on an iPad, in Arabic: the Control Panel with sales per seller', kind: 'tablet' },
+      { src: ba3IpadInvoice, alt: 'BA3 on an iPad: a sales invoice open in a floating window, with its items, VAT and totals', kind: 'tablet' },
       {
         src: ba3ControlPanel,
         alt: 'The BA3 Control Panel on an iPad, in Arabic: main account balances, invoice and employee counts, and each seller’s share of sales as a donut chart',
         kind: 'window',
-        tablets: [
-          { src: ba3IpadDashboard, alt: 'BA3 on an iPad, in Arabic: the Control Panel with sales per seller' },
-          { src: ba3IpadInvoice, alt: 'BA3 on an iPad: a sales invoice open in a floating window, with its items, VAT and totals' },
-        ],
       },
     ],
     caption: 'Shown: the BA3 Control Panel on sample data, in Arabic, right to left.',

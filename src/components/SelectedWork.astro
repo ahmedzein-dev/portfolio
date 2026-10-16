@@ -19,31 +19,19 @@ import { flagships } from '../data/site';
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h9M7.5 3.5 11 7l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         </a>
       </div>
-      <div class={`scard-visual ${p.shots.length > 1 ? 'v-two' : ''}`}>
-        {p.shots[0].kind === 'phone' &&
-          p.shots.map((s, j) => (
-            <div class={`phone p${j + 1}`}>
-              <Image src={s.src} alt={s.alt} widths={[280, 440, 660]} sizes="(min-width: 900px) 220px, 40vw" quality={90} />
-            </div>
-          ))}
+      {/* Phones or tablets, two tilted side by side (a desktop window shows on the case study instead). */}
+      <div class={`scard-visual ${p.shots.filter((s) => s.kind === p.shots[0].kind).length > 1 ? 'v-two' : ''}`}>
+        {(p.shots[0].kind === 'phone' || p.shots[0].kind === 'tablet') &&
+          p.shots
+            .filter((s) => s.kind === p.shots[0].kind)
+            .map((s, j) => (
+              <div class={`${s.kind} p${j + 1}`}>
+                <Image src={s.src} alt={s.alt} widths={[280, 440, 660]} sizes="(min-width: 900px) 280px, 40vw" quality={90} />
+              </div>
+            ))}
         {p.shots[0].kind === 'square' && (
           <div class="v-sq">
             <Image src={p.shots[0].src} alt={p.shots[0].alt} widths={[400, 640]} sizes="(min-width: 900px) 460px, 90vw" />
-          </div>
-        )}
-        {p.shots[0].tablets && (
-          <div class="v-tablets">
-            {p.shots[0].tablets.map((t, j) => (
-              <div class={`tablet t${j + 1}`}>
-                <Image src={t.src} alt={t.alt} widths={[320, 640]} sizes="200px" />
-              </div>
-            ))}
-          </div>
-        )}
-        {p.shots[0].kind === 'window' && (
-          <div class="winframe">
-            <div class="wb" aria-hidden="true"><i></i><i></i><i></i></div>
-            <Image src={p.shots[0].src} alt={p.shots[0].alt} widths={[640, 960, 1280, 1600]} sizes="(min-width: 1200px) 640px, (min-width: 900px) 52vw, 90vw" quality={90} />
           </div>
         )}
         {p.slug === 'the-events' && (

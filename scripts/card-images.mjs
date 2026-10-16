@@ -19,7 +19,7 @@ const FLAGSHIPS = { taggo: 'taggo', 'the-events': 'the-events', ba3: 'ba3', gain
 const cards = [
   { id: 'taggo', tint: ['#2e2810', '#100e07'], glow: '#f2d23c', phones: ['taggo_rider_home.png', 'taggo_captain_pickup.png'] },
   { id: 'the-events', tint: ['#33191d', '#12090b'], glow: '#e8837a', phones: ['theevents_home.png', 'theevents_visual_search.png'] },
-  { id: 'ba3', tint: ['#13233f', '#080e1a'], glow: '#4a8fe7', window: 'ba3_control_panel.png' },
+  { id: 'ba3', tint: ['#13233f', '#080e1a'], glow: '#4a8fe7', phones: ['ba3_ipad_dashboard.png', 'ba3_ipad_invoice.png'], radius: 0.05 },
   { id: 'gainz', still: 'gainz_image.jpg', trim: 40 },
   { id: 'amber-drive', still: 'amber_drive.jpg', trim: 0 },
   { id: 'osta-home', tint: ['#30230c', '#120d05'], glow: '#f2a516', phones: ['osta1.png', 'osta2.png'] },
@@ -58,27 +58,20 @@ async function framed(file, w, h, radius, left, top) {
   ];
 }
 
+// Phones, or tablets (radius: their smaller corner), side by side; wide screens shrink to fit the width.
 async function phonesCard(c) {
-  const h = Math.round(H * 0.9);
-  const metas = await Promise.all(c.phones.map((f) => sharp(SRC + f).metadata()));
-  const widths = metas.map((m) => Math.round((h * m.width) / m.height));
   const gap = 56;
+  const metas = await Promise.all(c.phones.map((f) => sharp(SRC + f).metadata()));
+  const aspect = metas.reduce((sum, m) => sum + m.width / m.height, 0);
+  const h = Math.round(Math.min(H * 0.9, (W * 0.92 - gap * (metas.length - 1)) / aspect));
+  const widths = metas.map((m) => Math.round((h * m.width) / m.height));
   let left = Math.round((W - widths.reduce((a, b) => a + b, 0) - gap * (widths.length - 1)) / 2);
   const top = Math.round((H - h) / 2);
   const layers = [];
   for (const [i, f] of c.phones.entries()) {
-    layers.push(...(await framed(f, widths[i], h, Math.round(widths[i] * 0.13), left, top)));
+    layers.push(...(await framed(f, widths[i], h, Math.round(widths[i] * (c.radius ?? 0.13)), left, top)));
     left += widths[i] + gap;
   }
-  return sharp(stage(c.tint, c.glow)).composite(layers);
-}
-
-async function windowCard(c) {
-  const m = await sharp(SRC + c.window).metadata();
-  const scale = Math.min((W * 0.9) / m.width, (H * 0.88) / m.height);
-  const w = Math.round(m.width * scale);
-  const h = Math.round(m.height * scale);
-  const layers = await framed(c.window, w, h, 18, Math.round((W - w) / 2), Math.round((H - h) / 2));
   return sharp(stage(c.tint, c.glow)).composite(layers);
 }
 
@@ -101,7 +94,7 @@ async function stillCard(c) {
 }
 
 async function write(c, file) {
-  const img = c.phones ? await phonesCard(c) : c.window ? await windowCard(c) : await stillCard(c);
+  const img = c.phones ? await phonesCard(c) : await stillCard(c);
   // Flatten in a second pass: composite layers resolve before resize/format options apply.
   const flat = await img.png().toBuffer();
   await sharp(flat).sharpen({ sigma: 0.5 }).jpeg({ quality: 88, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile(file);
