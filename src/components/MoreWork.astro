@@ -21,7 +21,7 @@ const cards = [
   <button class="chip" type="button" data-f="web" aria-pressed="false">Web and desktop</button>
 </div>
 
-<ul class="mw-grid" id="mw-grid">
+<ul class="mw-grid" id="mw-grid" data-collapsed>
   {cards.map(({ flagship: p, more }) => p ? (
     <li data-tags={p.card.kinds.join(' ')}>
       <a class="mw-card" href={`/work/${p.slug}/`}>
@@ -70,6 +70,7 @@ const cards = [
     </li>
   ))(more))}
 </ul>
+<button class="mw-all" id="mw-all" type="button">Show all {cards.length} projects</button>
 
 <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
   <div class="drawer-inner">

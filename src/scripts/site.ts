@@ -279,12 +279,50 @@ if (!reduced() && 'IntersectionObserver' in window) {
   } else watch();
 }
 
-/* ---------- more work: filters and quick view ---------- */
+/* ---------- swiped rows on phones: dots for where you are ---------- */
+$$('[data-swipe]').forEach((row) => {
+  const slides = Array.from(row.children) as HTMLElement[];
+  const nav = document.createElement('div');
+  nav.className = 'swipe-dots';
+  nav.setAttribute('role', 'group');
+  nav.setAttribute('aria-label', row.dataset.swipe ?? '');
+  const dots = slides.map((slide) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', `Show ${slide.dataset.name ?? ''}`);
+    b.addEventListener('click', () => row.scrollTo({ left: slide.offsetLeft - slides[0].offsetLeft, behavior: reduced() ? 'auto' : 'smooth' }));
+    nav.append(b);
+    return b;
+  });
+  row.after(nav);
+  const update = () => {
+    const step = slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : 0;
+    const i = step > 0 ? Math.min(slides.length - 1, Math.round(row.scrollLeft / step)) : 0;
+    dots.forEach((d, j) => (j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+  };
+  row.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+});
+
+/* ---------- more work: filters, show all and quick view ---------- */
+const grid = $('#mw-grid');
+const showAll = $<HTMLButtonElement>('#mw-all');
+// On phones the list starts at its newest four; a filter or the button shows the rest.
+const expand = () => {
+  grid?.removeAttribute('data-collapsed');
+  measure();
+};
+showAll?.addEventListener('click', () => {
+  expand();
+  $<HTMLButtonElement>('#mw-grid > li:nth-child(5) .mw-card')?.focus();
+});
 const chips = $$<HTMLButtonElement>('#mw-filters .chip');
 const items = $$('#mw-grid > li');
 chips.forEach((chip) =>
   chip.addEventListener('click', () => {
     const f = chip.dataset.f;
+    expand();
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
     items.forEach((li) => {
       const show = f === 'all' || (li.dataset.tags ?? '').split(' ').includes(f ?? '');
@@ -319,7 +357,10 @@ drawer?.addEventListener('close', () => {
 });
 $('#drawer-close')?.addEventListener('click', () => drawer?.close());
 const deepLink = location.hash.slice(1);
-if (deepLink && items.some((li) => li.dataset.id === deepLink)) openDrawer(deepLink);
+if (deepLink && items.some((li) => li.dataset.id === deepLink)) {
+  expand();
+  openDrawer(deepLink);
+}
 
 /* ---------- capabilities ---------- */
 const capButtons = $$<HTMLButtonElement>('.cap-btn');

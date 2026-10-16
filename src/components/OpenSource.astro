@@ -29,9 +29,9 @@ async function stats(name: string, fallback: Stats): Promise<Stats> {
 const rows = await Promise.all(packages.map(async (p) => ({ ...p, stats: await stats(p.name, p.fallback) })));
 ---
 
-<div class="pkgs">
+<div class="pkgs" data-swipe="Packages">
   {rows.map((p) => (
-    <article class="pkg">
+    <article class="pkg" data-name={p.name}>
       {p.name === 'draggable_floating_window' && (
         <div class="pkg-visual">
           <Image src={windowsDemo} alt="The draggable_floating_window example app: Tasks, a note, a calculator and the window switcher open at once" widths={[400, 800, 1200, 1600]} sizes="(min-width: 960px) 340px, 90vw" quality={90} />

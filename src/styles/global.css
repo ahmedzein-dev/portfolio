@@ -310,12 +310,11 @@ code { font-size: 0.86em; }
 .winframe .wb { height: 24px; display: flex; align-items: center; gap: 5px; padding: 0 10px; background: #0f1b30; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 .winframe .wb i { width: 7px; height: 7px; border-radius: 50%; background: #3b4a63; }
 .winframe img { width: 100%; height: auto; }
-/* Phones and tablets: short cards down the page, like an App Store feature card. The text on the left, the
+/* Phones and tablets: short cards in a swiped row, like App Store feature cards. The text on the left, the
    screens peeking in on the right and running off the card's edges. Tags stay on the case study. */
 @media (max-width: 899px) {
-  .stack { gap: 12px; padding-bottom: 0; }
   .scard, .scard[data-theme-card='ba3'] {
-    grid-template-columns: minmax(0, 1fr) 38%; min-height: 0; gap: 14px; padding: 18px 0 18px 18px; border-radius: 22px; box-shadow: none;
+    grid-template-columns: minmax(0, 1fr) 36%; min-height: 0; gap: 14px; padding: 18px 0 18px 18px; border-radius: 22px; box-shadow: none;
   }
   .scard-text { gap: 8px; align-content: center; }
   .scard .scard-eyebrow { font-size: 0.58rem; letter-spacing: 0.04em; line-height: 1.5; -webkit-line-clamp: 2; }
@@ -390,6 +389,22 @@ code { font-size: 0.86em; }
 .note { font-size: 0.86rem; color: var(--muted); margin-top: 14px; max-width: 72ch; }
 
 /* ---------- more work ---------- */
+/* ---------- swiped rows on phones and tablets (Selected Work, Open source) ---------- */
+/* Edge to edge, a card at a time, the next one peeking in; site.ts adds the dots. */
+.swipe-dots { display: none; }
+@media (max-width: 899px) {
+  [data-swipe] {
+    --gut: clamp(16px, 4vw, 40px); display: flex; gap: 12px; padding: 0 var(--gut); margin-inline: calc(-1 * var(--gut));
+    overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gut); overscroll-behavior-x: contain; scrollbar-width: none;
+  }
+  [data-swipe]::-webkit-scrollbar { display: none; }
+  [data-swipe] > * { flex: 0 0 min(calc(100% - 28px), 440px); scroll-snap-align: start; }
+  .swipe-dots { display: flex; justify-content: center; gap: 2px; margin-top: 10px; }
+  .swipe-dots button { width: 22px; height: 22px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+  .swipe-dots button::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--line-strong); transition: width 0.25s ease, background 0.25s ease; }
+  .swipe-dots button[aria-current='true']::before { width: 18px; background: var(--text); }
+}
+
 .mw-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .chip { border: 1px solid var(--line-strong); background: transparent; border-radius: 999px; padding: 7px 14px; font-size: 0.86rem; cursor: pointer; color: var(--muted); }
 .chip[aria-pressed='true'] { background: var(--text); color: var(--bg); border-color: var(--text); }
@@ -415,14 +430,17 @@ a.mw-card { text-decoration: none; color: inherit; }
 /* Phones: a list of rows, the thumbnail on the left and the text beside it. */
 @media (max-width: 540px) {
   .mw-grid { grid-template-columns: 1fr; gap: 10px; }
-  .mw-card { grid-template-rows: none; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 14px; padding: 8px; border-radius: 16px; }
+  .mw-card { grid-template-rows: none; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 12px; padding: 6px; border-radius: 14px; }
   .mw-card:hover { transform: none; }
   .mw-card .thumb { border-bottom: 0; border-radius: 10px; }
   .mw-card .body { padding: 0 6px 0 0; gap: 2px; }
   .mw-card h3 { font-size: 1.02rem; }
   .mw-card .sm { font-size: 0.8rem; line-height: 1.38; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
   .mw-card .mw-more { display: none; }
+  .mw-grid[data-collapsed] > li:nth-child(n + 5) { display: none; }
+  .mw-grid[data-collapsed] + .mw-all { display: flex; }
 }
+.mw-all { display: none; width: 100%; justify-content: center; margin-top: 10px; min-height: 44px; align-items: center; border: 1px solid var(--line); border-radius: 14px; background: var(--raised); color: var(--text); font: inherit; font-size: 0.88rem; font-weight: 600; cursor: pointer; }
 dialog.drawer {
   margin: 0 0 0 auto; height: 100%; max-height: 100%; width: min(460px, 100%); max-width: 100%; padding: 0; border: 0;
   border-left: 1px solid var(--line); background: var(--raised); color: var(--text);

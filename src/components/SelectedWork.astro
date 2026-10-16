@@ -3,9 +3,9 @@ import { Image } from 'astro:assets';
 import { flagships } from '../data/site';
 ---
 
-<ol class="stack">
+<ol class="stack" data-swipe="Selected work">
   {flagships.map((p, i) => (
-    <li class="scard" data-theme-card={p.theme} style={`--i:${i}`}>
+    <li class="scard" data-name={p.name} data-theme-card={p.theme} style={`--i:${i}`}>
       <div class="scard-text">
         <p class="scard-eyebrow">{p.eyebrow}</p>
         <h3>{p.headline}</h3>
