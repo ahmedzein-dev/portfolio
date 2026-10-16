@@ -233,6 +233,41 @@ if ('ResizeObserver' in window) {
   }).observe(document.body);
 }
 
+/* ---------- reveal on scroll: once, for what starts below the fold ---------- */
+// Whatever is on screen at load stays as it is, so the first view is complete. The rest fades and rises in
+// the first time it scrolls into view, a beat apart when several arrive together, then drops the classes
+// so its own hover transitions are back.
+if (!reduced() && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries
+        .filter((e) => e.isIntersecting)
+        .forEach((e, i) => {
+          const el = e.target as HTMLElement;
+          io.unobserve(el);
+          el.style.setProperty('--rd', `${Math.min(i, 4) * 70}ms`);
+          el.classList.add('in');
+          el.addEventListener(
+            'transitionend',
+            () => {
+              el.classList.remove('reveal', 'in');
+              el.style.removeProperty('--rd');
+            },
+            { once: true },
+          );
+        });
+    },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+  );
+  $$(
+    '.section-head, .scard, .pkg, .mw-bar, .mw-grid > li:not([hidden]), .timeline > li, .edu, .cap-btns, .cap-tiles, .contact, .case-shots figure',
+  ).forEach((el) => {
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+}
+
 /* ---------- count-up, once, when a number first scrolls into view ---------- */
 // Numbers on screen at load count up too. The inline script after them (Hero.astro) has already set
 // them to their starting value, so the first paint never shows the final one.
