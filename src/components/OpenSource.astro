@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import { packages } from '../data/site';
-import windowsDemo from '../assets/work/dfw_overview.webp';
 
 // Live numbers from pub.dev at build time; the stored values are the fallback.
 type Stats = { points: string; likes?: number; downloads30?: number; version: string };
@@ -34,7 +33,11 @@ const rows = await Promise.all(packages.map(async (p) => ({ ...p, stats: await s
     <article class="pkg" data-name={p.name}>
       {p.name === 'draggable_floating_window' && (
         <div class="pkg-visual">
-          <Image src={windowsDemo} alt="The draggable_floating_window example app: Tasks, a note, a calculator and the window switcher open at once" widths={[400, 800, 1200, 1600]} sizes="(min-width: 960px) 340px, 90vw" quality={90} />
+          {/* The example app, recorded as is (the package's README GIF, cropped to where the windows move).
+              site.ts plays it only while the card is on screen; under reduced motion the poster stays. */}
+          <video class="dfw-demo" muted loop playsinline preload="none" poster="/films/dfw-demo.jpg" aria-label="The draggable_floating_window example app: notes, tasks and a calculator in windows being dragged, resized, stacked and minimized">
+            <source src="/films/dfw-demo.mp4" type="video/mp4" />
+          </video>
         </div>
       )}
       {p.name === 'document_camera_frame' && (

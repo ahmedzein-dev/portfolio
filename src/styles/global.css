@@ -545,9 +545,8 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 @keyframes dcfScan { 0%, 30% { top: -30%; opacity: 0; } 40% { opacity: 1; } 70% { top: 100%; opacity: 0; } 100% { top: 100%; opacity: 0; } }
 /* scroll_highlight_text: the current match (mark.cur) and the count are moved along by site.ts. */
 .sht mark { transition: background-color 0.3s ease, color 0.3s ease; }
-/* draggable_floating_window: the screenshot drifts slowly, as if the windows were being moved about. */
-.pkg.live .pkg-visual img { animation: dfwDrift 9s ease-in-out infinite alternate; }
-@keyframes dfwDrift { from { scale: 1; translate: 0 0; } to { scale: 1.07; translate: -3% 2%; } }
+/* draggable_floating_window: a recording of the example app, played by site.ts. */
+.pkg-visual video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* ---------- desktop hover: devices spread on Selected Work, tiles lift and zoom ---------- */
 @media (hover: hover) and (min-width: 900px) {

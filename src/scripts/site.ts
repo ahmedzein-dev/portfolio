@@ -234,7 +234,8 @@ if ('ResizeObserver' in window) {
 }
 
 /* ---------- package demos: run only while their card is on screen ---------- */
-// The CSS loops run under .live; the highlight demo is stepped here, one match every 1.6 s.
+// The CSS loops run under .live; the highlight demo is stepped here, one match every 1.6 s, and the
+// floating windows recording plays.
 const pkgs = $$('.pkg');
 const sht = $('.sht');
 const marks = sht ? $$<HTMLElement>('mark', sht) : [];
@@ -252,6 +253,11 @@ if (pkgs.length && !reduced() && 'IntersectionObserver' in window) {
       entries.forEach((e) => {
         const card = e.target as HTMLElement;
         card.classList.toggle('live', e.isIntersecting);
+        const video = $<HTMLVideoElement>('video.dfw-demo', card);
+        if (video) {
+          if (e.isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        }
         if (card.contains(sht) && marks.length > 1) {
           window.clearInterval(shtTimer);
           if (e.isIntersecting) shtTimer = window.setInterval(stepHighlight, 1600);
