@@ -47,13 +47,13 @@ export const profile = {
   },
 };
 
-export type Proof = { value: string; count?: number; decimals?: number; prefix?: string; suffix?: string; label: string; href: string };
+export type Proof = { value: string; count?: number; from?: number; decimals?: number; prefix?: string; suffix?: string; label: string; href: string };
 
 export const proof: Proof[] = [
   { value: '3', count: 3, label: 'apps live in UAE stores', href: '#work' },
   { value: '3.5M', count: 3.5, decimals: 1, suffix: 'M', label: 'AED a month through BA3', href: '/work/ba3/' },
   { value: '~829M', count: 829, prefix: '~', suffix: 'M', label: 'Firestore reads saved a year', href: '/work/ba3/' },
-  { value: '12 → 3 s', label: 'app launch, The Events', href: '/work/the-events/' },
+  { value: '12 → 3 s', count: 3, from: 12, prefix: '12 → ', suffix: ' s', label: 'app launch, The Events', href: '/work/the-events/' },
   { value: '3', count: 3, label: 'packages on pub.dev', href: '#open-source' },
 ];
 

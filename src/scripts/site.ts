@@ -234,36 +234,49 @@ if ('ResizeObserver' in window) {
 }
 
 /* ---------- count-up, once, when a number first scrolls into view ---------- */
+// Numbers on screen at load count up too. The inline script after them (Hero.astro) has already set
+// them to their starting value, so the first paint never shows the final one.
 function countUp(el: HTMLElement) {
+  const from = parseFloat(el.dataset.from ?? '0');
   const to = parseFloat(el.dataset.count ?? '0');
   const decimals = Number(el.dataset.decimals ?? 0);
   const prefix = el.dataset.prefix ?? '';
   const suffix = el.dataset.suffix ?? '';
-  const start = performance.now();
   const duration = 1200;
+  let start = 0;
   const step = (now: number) => {
+    start ||= now;
     const k = Math.min(1, (now - start) / duration);
     const eased = 1 - Math.pow(1 - k, 3);
-    el.textContent = `${prefix}${(to * eased).toFixed(decimals)}${suffix}`;
+    el.textContent = `${prefix}${(from + (to - from) * eased).toFixed(decimals)}${suffix}`;
     if (k < 1) requestAnimationFrame(step);
+    else el.dataset.state = 'done';
   };
   requestAnimationFrame(step);
 }
 if (!reduced() && 'IntersectionObserver' in window) {
-  let initial = true;
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         io.unobserve(entry.target);
-        // Numbers already on screen at load stay as they are, so the first frame is complete.
-        if (!initial) countUp(entry.target as HTMLElement);
+        countUp(entry.target as HTMLElement);
       });
-      initial = false;
     },
-    { threshold: 0.8 },
+    { threshold: 0.6 },
   );
-  $$('[data-count]').forEach((el) => io.observe(el));
+  const counters = $$('[data-count]');
+  counters.forEach((el) => (el.dataset.state = 'waiting'));
+  let watching = false;
+  const watch = () => {
+    if (!watching) counters.forEach((el) => io.observe(el));
+    watching = true;
+  };
+  // Opened at a #section, the page scrolls down past the numbers first: start watching once it settles.
+  if (location.hash.length > 1 && document.getElementById(location.hash.slice(1))) {
+    window.setTimeout(watch, 1200);
+    window.addEventListener('scrollend', watch, { once: true });
+  } else watch();
 }
 
 /* ---------- more work: filters and quick view ---------- */

@@ -310,8 +310,24 @@ code { font-size: 0.86em; }
 .winframe .wb { height: 24px; display: flex; align-items: center; gap: 5px; padding: 0 10px; background: #0f1b30; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 .winframe .wb i { width: 7px; height: 7px; border-radius: 50%; background: #3b4a63; }
 .winframe img { width: 100%; height: auto; }
-@media (max-width: 899px) { .scard { grid-template-columns: 1fr; min-height: 0; } .scard-visual { min-height: 340px; } }
-@media (max-width: 480px) { .scard-visual { min-height: 300px; } }
+/* One column: the text, then a shorter strip where the screens rise from the card's bottom edge and run off it. */
+@media (max-width: 899px) {
+  .stack { gap: 16px; }
+  .scard, .scard[data-theme-card='ba3'] { grid-template-columns: 1fr; min-height: 0; gap: 18px; padding: 22px 20px 0; border-radius: 24px; }
+  .scard-text { gap: 12px; }
+  .scard h3 { font-size: clamp(1.45rem, 5.6vw, 2rem); }
+  .scard p { font-size: 0.92rem; line-height: 1.5; }
+  .tags li { font-size: 0.72rem; padding: 2px 9px; }
+  .scard-cta { min-height: 40px; }
+  .scard-visual { --pw: min(38%, 190px); min-height: 0; height: clamp(180px, 44vw, 260px); }
+  .v-two .p1 { width: var(--pw); left: calc(50% - var(--pw) - 2%); top: 12px; }
+  .v-two .p2 { width: var(--pw); left: 52%; top: 30px; }
+  .scard-visual:not(.v-two) .p1 { width: var(--pw); left: calc(50% - var(--pw) / 2); top: 12px; }
+  .v-sq { inset: 0 0 -28px; }
+  .v-badge { top: 0; right: 0; bottom: auto; left: auto; }
+  .scard-visual:has(.winframe) { align-items: start; }
+  .winframe { margin-right: -20px; }
+}
 
 /* ---------- open source ---------- */
 .pkgs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }

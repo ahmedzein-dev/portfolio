@@ -59,9 +59,27 @@ import { profile, proof } from '../data/site';
   {proof.map((p) => (
     <li>
       <a href={p.href}>
-        <b data-count={p.count} data-decimals={p.decimals} data-prefix={p.prefix} data-suffix={p.suffix}>{p.value}</b>
+        <b data-count={p.count} data-from={p.from} data-value={p.value} data-decimals={p.decimals} data-prefix={p.prefix} data-suffix={p.suffix}>{p.value}</b>
         <span>{p.label}</span>
       </a>
     </li>
   ))}
 </ul>
+<script is:inline>
+  // Set the numbers to where they count up from before the first paint, so they never flash their final value.
+  // site.ts runs the count; if it never loads, the final values come back.
+  (function () {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    var els = document.querySelectorAll('.proof [data-count]');
+    els.forEach(function (el) {
+      var d = el.dataset;
+      el.textContent = (d.prefix || '') + Number(d.from || 0).toFixed(Number(d.decimals || 0)) + (d.suffix || '');
+      d.state = 'start';
+    });
+    setTimeout(function () {
+      els.forEach(function (el) {
+        if (el.dataset.state === 'start') el.textContent = el.dataset.value;
+      });
+    }, 4000);
+  })();
+</script>
