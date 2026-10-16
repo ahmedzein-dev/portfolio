@@ -305,46 +305,16 @@ $$('[data-swipe]').forEach((row) => {
   update();
 });
 
-/* ---------- more work: filters, show all and quick view ---------- */
-const grid = $('#mw-grid');
-const showAll = $<HTMLButtonElement>('#mw-all');
-// On phones the list starts at its newest four; a filter or the button shows the rest.
-const expand = () => {
-  grid?.removeAttribute('data-collapsed');
-  measure();
-};
-showAll?.addEventListener('click', () => {
-  expand();
-  $<HTMLButtonElement>('#mw-grid > li:nth-child(5) .mw-card')?.focus();
-});
-// On phones, a grid of screenshots (the default) or a list of rows; the choice is remembered in this browser.
-const viewButtons = $$<HTMLButtonElement>('#mw-view button');
-function setView(view: string) {
-  if (!grid || (view !== 'list' && view !== 'grid')) return;
-  grid.dataset.view = view;
-  viewButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
-  measure();
-}
-try {
-  setView(localStorage.getItem('mw-view') ?? 'grid');
-} catch {}
-viewButtons.forEach((b) =>
-  b.addEventListener('click', () => {
-    setView(b.dataset.view ?? 'list');
-    try {
-      localStorage.setItem('mw-view', b.dataset.view ?? 'list');
-    } catch {}
-  }),
-);
+/* ---------- more work: filters and quick view ---------- */
 const chips = $$<HTMLButtonElement>('#mw-filters .chip');
 const items = $$('#mw-grid > li');
 chips.forEach((chip) =>
   chip.addEventListener('click', () => {
     const f = chip.dataset.f;
-    expand();
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
     items.forEach((li) => {
-      const show = f === 'all' || (li.dataset.tags ?? '').split(' ').includes(f ?? '');
+      // All leaves out the Selected Work case studies (data-featured); a filter shows every match.
+      const show = f === 'all' ? li.dataset.featured === undefined : (li.dataset.tags ?? '').split(' ').includes(f ?? '');
       li.hidden = !show;
       if (show && !reduced()) {
         li.classList.remove('enter');
@@ -376,10 +346,7 @@ drawer?.addEventListener('close', () => {
 });
 $('#drawer-close')?.addEventListener('click', () => drawer?.close());
 const deepLink = location.hash.slice(1);
-if (deepLink && items.some((li) => li.dataset.id === deepLink)) {
-  expand();
-  openDrawer(deepLink);
-}
+if (deepLink && items.some((li) => li.dataset.id === deepLink)) openDrawer(deepLink);
 
 /* ---------- capabilities ---------- */
 const capButtons = $$<HTMLButtonElement>('.cap-btn');

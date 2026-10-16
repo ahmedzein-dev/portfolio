@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { moreWork } from '../data/site';
+import { flagships, moreWork } from '../data/site';
 import StoreLinks from './StoreLinks.astro';
 
 // Newest first: by the year a project ended ("now" counts as latest), then by the year it began.
@@ -9,10 +9,12 @@ const span = (year: string) => {
   return { from: Number(from), to: to === 'now' ? Infinity : Number(to) };
 };
 const newestFirst = (a: string, b: string) => span(b).to - span(a).to || span(b).from - span(a).from;
-// The case studies in Selected Work are not repeated here.
-const cards = [...moreWork].sort((a, b) => newestFirst(a.year, b.year));
-// On phones the list starts at four; more than that gets a Show all button.
-const collapse = cards.length > 4;
+// Every project, newest first. Under All, the case studies already in Selected Work stay out; a filter
+// brings back the ones it matches, so Web and desktop shows every web and desktop app.
+const cards = [
+  ...flagships.map((p) => ({ year: p.card.year, flagship: p, more: undefined })),
+  ...moreWork.map((p) => ({ year: p.year, flagship: undefined, more: p })),
+].sort((a, b) => newestFirst(a.year, b.year));
 ---
 
 <div class="mw-bar">
@@ -21,19 +23,24 @@ const collapse = cards.length > 4;
     <button class="chip" type="button" data-f="mobile" aria-pressed="false">Mobile</button>
     <button class="chip" type="button" data-f="web" aria-pressed="false">Web and desktop</button>
   </div>
-  {/* Phones only: a grid of screenshots, or the list of rows. */}
-  <div class="mw-view" id="mw-view" role="group" aria-label="Layout">
-    <button type="button" data-view="grid" aria-pressed="true" aria-label="Grid">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1.2"></rect><rect x="9" y="1.5" width="5.5" height="5.5" rx="1.2"></rect><rect x="1.5" y="9" width="5.5" height="5.5" rx="1.2"></rect><rect x="9" y="9" width="5.5" height="5.5" rx="1.2"></rect></svg>
-    </button>
-    <button type="button" data-view="list" aria-pressed="false" aria-label="List">
-      <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="4" height="4" rx="1"></rect><rect x="1.5" y="9.5" width="4" height="4" rx="1"></rect><rect x="7.5" y="3.5" width="7" height="2" rx="1"></rect><rect x="7.5" y="10.5" width="7" height="2" rx="1"></rect></svg>
-    </button>
-  </div>
 </div>
 
-<ul class="mw-grid" id="mw-grid" data-view="grid" data-collapsed={collapse ? '' : undefined}>
-  {cards.map((p) => (
+<ul class="mw-grid" id="mw-grid">
+  {cards.map(({ flagship: p, more }) => p ? (
+    <li data-tags={p.card.kinds.join(' ')} data-featured hidden>
+      <a class="mw-card" href={`/work/${p.slug}/`}>
+        <span class="thumb">
+          <Image src={p.card.image} alt="" widths={[360, 540, 720, 1080]} sizes="(min-width: 1100px) 260px, (min-width: 900px) 30vw, (min-width: 540px) 45vw, 90vw" />
+        </span>
+        <span class="body">
+          <span class="yr">{p.card.year} · {p.card.platforms}</span>
+          <h3>{p.name}</h3>
+          <span class="sm">{p.card.summary}</span>
+          <span class="mw-more">Case study →</span>
+        </span>
+      </a>
+    </li>
+  ) : more && ((p) => (
     <li data-id={p.id} data-tags={p.tags.join(' ')} id={p.id}>
       <button class="mw-card" type="button" data-id={p.id} aria-haspopup="dialog">
         <span class="thumb">
@@ -65,9 +72,8 @@ const collapse = cards.length > 4;
         </ul>
       </template>
     </li>
-  ))}
+  ))(more))}
 </ul>
-{collapse && <button class="mw-all" id="mw-all" type="button">Show all {cards.length} projects</button>}
 
 <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
   <div class="drawer-inner">

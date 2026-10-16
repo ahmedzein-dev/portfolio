@@ -413,10 +413,6 @@ code { font-size: 0.86em; }
 
 .mw-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
 .mw-filters { display: flex; flex-wrap: wrap; gap: 8px; }
-.mw-view { display: none; padding: 3px; gap: 2px; border: 1px solid var(--line-strong); border-radius: 999px; }
-.mw-view button { display: grid; place-items: center; width: 34px; height: 28px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; }
-.mw-view button[aria-pressed='true'] { background: var(--text); color: var(--bg); }
-.mw-view svg { width: 15px; height: 15px; fill: currentColor; }
 .chip { border: 1px solid var(--line-strong); background: transparent; border-radius: 999px; padding: 7px 14px; font-size: 0.86rem; cursor: pointer; color: var(--muted); }
 .chip[aria-pressed='true'] { background: var(--text); color: var(--bg); border-color: var(--text); }
 .mw-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
@@ -438,28 +434,17 @@ a.mw-card { text-decoration: none; color: inherit; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (max-width: 1100px) { .mw-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 900px) { .mw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-/* Phones: a list of rows, the thumbnail on the left and the text beside it. */
+/* Phones: two columns of screenshots, each with its name and years. */
 @media (max-width: 540px) {
-  .mw-grid { grid-template-columns: 1fr; gap: 10px; }
-  .mw-card { grid-template-rows: none; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 12px; padding: 6px; border-radius: 14px; }
+  .mw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .mw-card { gap: 8px; padding: 6px; border-radius: 14px; }
   .mw-card:hover { transform: none; }
   .mw-card .thumb { border-bottom: 0; border-radius: 10px; }
-  .mw-card .body { padding: 0 6px 0 0; gap: 2px; }
-  .mw-card h3 { font-size: 1.02rem; }
-  .mw-card .sm { font-size: 0.8rem; line-height: 1.38; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
-  .mw-card .mw-more { display: none; }
-  .mw-view { display: inline-flex; }
-  /* Grid view: two columns of screenshots, each with its name and years. */
-  .mw-grid[data-view='grid'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .mw-grid[data-view='grid'] .mw-card { grid-template-columns: none; grid-template-rows: auto 1fr; align-items: start; gap: 8px; }
-  .mw-grid[data-view='grid'] .mw-card .body { padding: 0 4px 4px; }
-  .mw-grid[data-view='grid'] .mw-card .yr { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .mw-grid[data-view='grid'] .mw-card h3 { font-size: 0.92rem; }
-  .mw-grid[data-view='grid'] .mw-card .sm { display: none; }
-  .mw-grid[data-collapsed] > li:nth-child(n + 5) { display: none; }
-  .mw-grid[data-collapsed] + .mw-all { display: flex; }
+  .mw-card .body { padding: 0 4px 4px; gap: 2px; }
+  .mw-card .yr { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mw-card h3 { font-size: 0.92rem; }
+  .mw-card .sm, .mw-card .mw-more { display: none; }
 }
-.mw-all { display: none; width: 100%; justify-content: center; margin-top: 10px; min-height: 44px; align-items: center; border: 1px solid var(--line); border-radius: 14px; background: var(--raised); color: var(--text); font: inherit; font-size: 0.88rem; font-weight: 600; cursor: pointer; }
 dialog.drawer {
   margin: 0 0 0 auto; height: 100%; max-height: 100%; width: min(460px, 100%); max-width: 100%; padding: 0; border: 0;
   border-left: 1px solid var(--line); background: var(--raised); color: var(--text);
