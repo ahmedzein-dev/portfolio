@@ -290,6 +290,7 @@ code { font-size: 0.86em; }
 .scard-cta svg { transition: transform 0.2s; }
 .scard-cta:hover svg { transform: translateX(3px); }
 .scard-visual { position: relative; min-height: 400px; }
+.v-compact { display: none; }
 .scard-caption { font-size: 0.78rem; opacity: 0.75; max-width: 46ch; }
 .phone { position: absolute; aspect-ratio: 9 / 19.5; border-radius: 28px; background: #0b0d10; padding: 6px; box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.55); }
 .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 22px; }
@@ -329,13 +330,9 @@ code { font-size: 0.86em; }
   .phone { border-radius: 18px; padding: 4px; }
   .phone img { border-radius: 14px; }
   .v-sq { inset: 0; border-radius: 0; box-shadow: none; }
-  /* The window starts where the phones do and runs off the card's right and bottom edges, like they do,
-     showing its right side: the BA3 logo, the menu and the totals. */
-  .scard-visual:has(.winframe) { display: block; }
-  .winframe { position: absolute; top: 26px; bottom: -14px; left: 0; right: 0; margin: 0; display: flex; flex-direction: column; border-radius: 12px 0 0 12px; border-right: 0; }
-  .winframe .wb { flex: none; height: 16px; gap: 4px; padding: 0 8px; }
-  .winframe .wb i { width: 5px; height: 5px; }
-  .winframe img { flex: 1; min-height: 0; width: 100%; object-fit: cover; object-position: right top; }
+  /* A window gets its own picture here (Shot.compact): two tilted windows, like the phones. */
+  .scard-visual:has(.v-compact) .winframe { display: none; }
+  .v-compact { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
 }
 
 /* ---------- open source ---------- */
