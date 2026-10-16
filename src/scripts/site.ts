@@ -309,10 +309,15 @@ $$('[data-swipe]').forEach((row) => {
 const chips = $$<HTMLButtonElement>('#mw-filters .chip');
 const items = $$('#mw-grid > li');
 const showAll = $<HTMLButtonElement>('#mw-all');
-// All leaves out the Selected Work case studies (data-featured) until Show all; a filter shows every match.
-function showProjects(f: string, everything = false) {
+const FIRST = 4;
+let filter = 'all';
+// A filter shows its first four matches, and Show all the rest. Under All, the first four are the projects
+// that aren't in Selected Work (the case studies there carry data-featured).
+function showProjects(everything = false) {
+  const matches = items.filter((li) => filter === 'all' || (li.dataset.tags ?? '').split(' ').includes(filter));
+  const first = filter === 'all' ? matches.filter((li) => li.dataset.featured === undefined).slice(0, FIRST) : matches.slice(0, FIRST);
   items.forEach((li) => {
-    const show = f === 'all' ? everything || li.dataset.featured === undefined : (li.dataset.tags ?? '').split(' ').includes(f);
+    const show = matches.includes(li) && (everything || first.includes(li));
     const appearing = show && li.hidden;
     li.hidden = !show;
     if (appearing && !reduced()) {
@@ -321,19 +326,23 @@ function showProjects(f: string, everything = false) {
       li.classList.add('enter');
     }
   });
-  if (showAll) showAll.hidden = f !== 'all' || everything;
+  if (showAll) {
+    showAll.hidden = everything || matches.length <= first.length;
+    showAll.textContent = `Show all ${matches.length} projects`;
+  }
   measure();
 }
 chips.forEach((chip) =>
   chip.addEventListener('click', () => {
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-    showProjects(chip.dataset.f ?? 'all');
+    filter = chip.dataset.f ?? 'all';
+    showProjects();
   }),
 );
 showAll?.addEventListener('click', () => {
-  const first = items.find((li) => li.hidden);
-  showProjects('all', true);
-  first?.querySelector<HTMLElement>('.mw-card')?.focus({ preventScroll: true });
+  const next = items.find((li) => li.hidden && (filter === 'all' || (li.dataset.tags ?? '').split(' ').includes(filter)));
+  showProjects(true);
+  next?.querySelector<HTMLElement>('.mw-card')?.focus({ preventScroll: true });
 });
 
 const drawer = $<HTMLDialogElement>('#drawer');
