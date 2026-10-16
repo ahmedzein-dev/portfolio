@@ -233,6 +233,27 @@ if ('ResizeObserver' in window) {
   }).observe(document.body);
 }
 
+/* ---------- selected work on phones: a swiped row, with dots for where you are ---------- */
+const stack = $('.stack');
+const dots = $$<HTMLButtonElement>('#stack-dots button');
+if (stack && dots.length) {
+  const at = () => {
+    const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : 1;
+    return Math.min(cards.length - 1, Math.round(stack.scrollLeft / step));
+  };
+  stack.addEventListener(
+    'scroll',
+    () => {
+      const i = at();
+      dots.forEach((d, j) => (j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+    },
+    { passive: true },
+  );
+  dots.forEach((d, i) =>
+    d.addEventListener('click', () => stack.scrollTo({ left: cards[i].offsetLeft - cards[0].offsetLeft, behavior: reduced() ? 'auto' : 'smooth' })),
+  );
+}
+
 /* ---------- count-up, once, when a number first scrolls into view ---------- */
 // Numbers on screen at load count up too. The inline script after them (Hero.astro) has already set
 // them to their starting value, so the first paint never shows the final one.
