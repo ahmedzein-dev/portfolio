@@ -329,10 +329,11 @@ code { font-size: 0.86em; }
   .phone { border-radius: 18px; padding: 4px; }
   .phone img { border-radius: 14px; }
   .v-sq { inset: 0; border-radius: 0; box-shadow: none; }
-  .scard-visual:has(.winframe) { display: block; }
-  /* The window, zoomed in on its right side: the BA3 logo and the menu. */
-  .winframe { position: absolute; top: 26px; left: 0; right: 0; margin: 0; border-radius: 12px 0 0 12px; border-right: 0; }
-  .winframe img { width: 230%; max-width: none; margin-left: -130%; }
+  /* The whole window, scaled down to the column and centred in it. */
+  .scard-visual:has(.winframe) { display: grid; align-items: center; margin-block: 0; padding-right: 14px; }
+  .winframe { position: static; margin: 0; border-radius: 8px; }
+  .winframe .wb { height: 12px; gap: 3px; padding: 0 6px; }
+  .winframe .wb i { width: 4px; height: 4px; }
 }
 
 /* ---------- open source ---------- */
