@@ -329,11 +329,13 @@ code { font-size: 0.86em; }
   .phone { border-radius: 18px; padding: 4px; }
   .phone img { border-radius: 14px; }
   .v-sq { inset: 0; border-radius: 0; box-shadow: none; }
-  /* The whole window, scaled down to the column and centred in it. */
-  .scard-visual:has(.winframe) { display: grid; align-items: center; margin-block: 0; padding-right: 14px; }
-  .winframe { position: static; margin: 0; border-radius: 8px; }
-  .winframe .wb { height: 12px; gap: 3px; padding: 0 6px; }
-  .winframe .wb i { width: 4px; height: 4px; }
+  /* The window starts where the phones do and runs off the card's right and bottom edges, like they do,
+     showing its right side: the BA3 logo, the menu and the totals. */
+  .scard-visual:has(.winframe) { display: block; }
+  .winframe { position: absolute; top: 26px; bottom: -14px; left: 0; right: 0; margin: 0; display: flex; flex-direction: column; border-radius: 12px 0 0 12px; border-right: 0; }
+  .winframe .wb { flex: none; height: 16px; gap: 4px; padding: 0 8px; }
+  .winframe .wb i { width: 5px; height: 5px; }
+  .winframe img { flex: 1; min-height: 0; width: 100%; object-fit: cover; object-position: right top; }
 }
 
 /* ---------- open source ---------- */

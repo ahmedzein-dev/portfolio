@@ -317,7 +317,7 @@ showAll?.addEventListener('click', () => {
   expand();
   $<HTMLButtonElement>('#mw-grid > li:nth-child(5) .mw-card')?.focus();
 });
-// On phones, a list of rows or a grid of screenshots; the choice is remembered in this browser.
+// On phones, a grid of screenshots (the default) or a list of rows; the choice is remembered in this browser.
 const viewButtons = $$<HTMLButtonElement>('#mw-view button');
 function setView(view: string) {
   if (!grid || (view !== 'list' && view !== 'grid')) return;
@@ -326,10 +326,8 @@ function setView(view: string) {
   measure();
 }
 try {
-  setView(localStorage.getItem('mw-view') ?? 'list');
-} catch {
-  setView('list');
-}
+  setView(localStorage.getItem('mw-view') ?? 'grid');
+} catch {}
 viewButtons.forEach((b) =>
   b.addEventListener('click', () => {
     setView(b.dataset.view ?? 'list');
