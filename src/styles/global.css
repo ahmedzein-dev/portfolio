@@ -330,7 +330,9 @@ code { font-size: 0.86em; }
   .phone img { border-radius: 14px; }
   .v-sq { inset: 0; border-radius: 0; box-shadow: none; }
   .scard-visual:has(.winframe) { display: block; }
-  .winframe { position: absolute; top: 30px; left: 0; width: 260%; margin: 0; border-radius: 10px; }
+  /* The window, zoomed in on its right side: the BA3 logo and the menu. */
+  .winframe { position: absolute; top: 26px; left: 0; right: 0; margin: 0; border-radius: 12px 0 0 12px; border-right: 0; }
+  .winframe img { width: 230%; max-width: none; margin-left: -130%; }
 }
 
 /* ---------- open source ---------- */
