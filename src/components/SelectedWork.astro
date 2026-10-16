@@ -44,8 +44,3 @@ import { flagships } from '../data/site';
     </li>
   ))}
 </ol>
-<div class="stack-dots" id="stack-dots" role="group" aria-label="Projects">
-  {flagships.map((p, i) => (
-    <button type="button" aria-label={`Show ${p.name}`} aria-current={i === 0 ? 'true' : undefined}></button>
-  ))}
-</div>

@@ -310,36 +310,28 @@ code { font-size: 0.86em; }
 .winframe .wb { height: 24px; display: flex; align-items: center; gap: 5px; padding: 0 10px; background: #0f1b30; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 .winframe .wb i { width: 7px; height: 7px; border-radius: 50%; background: #3b4a63; }
 .winframe img { width: 100%; height: auto; }
-.stack-dots { display: none; }
-/* A row you swipe through, edge to edge, the next card peeking in. Each card: the text, then a strip where the
-   screens rise from its bottom edge and run off it. */
+/* Phones and tablets: short cards down the page, like an App Store feature card. The text on the left, the
+   screens peeking in on the right and running off the card's edges. Tags stay on the case study. */
 @media (max-width: 899px) {
-  .stack {
-    --gut: clamp(16px, 4vw, 40px); display: flex; gap: 12px; padding: 0 var(--gut); margin-inline: calc(-1 * var(--gut));
-    overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gut); overscroll-behavior-x: contain; scrollbar-width: none;
-  }
-  .stack::-webkit-scrollbar { display: none; }
+  .stack { gap: 12px; padding-bottom: 0; }
   .scard, .scard[data-theme-card='ba3'] {
-    flex: 0 0 min(86%, 440px); scroll-snap-align: start; grid-template-columns: 1fr; grid-template-rows: auto 1fr;
-    min-height: 0; gap: 18px; padding: 22px 20px 0; border-radius: 24px; box-shadow: none;
+    grid-template-columns: minmax(0, 1fr) 38%; min-height: 0; gap: 14px; padding: 18px 0 18px 18px; border-radius: 22px; box-shadow: none;
   }
-  .stack-dots { display: flex; justify-content: center; gap: 4px; margin-top: 14px; }
-  .stack-dots button { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
-  .stack-dots button::before { content: ''; width: 7px; height: 7px; border-radius: 999px; background: var(--line-strong); transition: width 0.25s ease, background 0.25s ease; }
-  .stack-dots button[aria-current='true']::before { width: 20px; background: var(--text); }
-  .scard-text { gap: 12px; }
-  .scard h3 { font-size: clamp(1.45rem, 5.6vw, 2rem); }
-  .scard p { font-size: 0.92rem; line-height: 1.5; }
-  .tags li { font-size: 0.72rem; padding: 2px 9px; }
-  .scard-cta { min-height: 40px; }
-  .scard-visual { --pw: min(38%, 190px); min-height: clamp(180px, 44vw, 260px); }
-  .v-two .p1 { width: var(--pw); left: calc(50% - var(--pw) - 2%); top: 12px; }
-  .v-two .p2 { width: var(--pw); left: 52%; top: 30px; }
-  .scard-visual:not(.v-two) .p1 { width: var(--pw); left: calc(50% - var(--pw) / 2); top: 12px; }
-  .v-sq { inset: 0 0 -28px; }
-  .v-badge { top: 0; right: 0; bottom: auto; left: auto; }
-  .scard-visual:has(.winframe) { align-items: start; }
-  .winframe { margin-right: -20px; }
+  .scard-text { gap: 8px; align-content: center; }
+  .scard .scard-eyebrow { font-size: 0.58rem; letter-spacing: 0.04em; line-height: 1.5; -webkit-line-clamp: 2; }
+  .scard h3 { font-size: clamp(1.12rem, 4.6vw, 1.6rem); line-height: 1.05; }
+  .scard p { font-size: 0.82rem; line-height: 1.42; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+  .scard .tags, .v-badge { display: none; }
+  .scard-cta { min-height: 34px; padding: 0 12px; border-radius: 10px; font-size: 0.8rem; margin-top: 2px; }
+  .scard-visual { min-height: 0; margin-block: -18px; }
+  .v-two .p1 { width: 66%; left: 4%; top: 26px; }
+  .v-two .p2 { width: 66%; left: 46%; top: 44px; }
+  .scard-visual:not(.v-two) .p1 { width: 70%; left: 16%; top: 26px; }
+  .phone { border-radius: 18px; padding: 4px; }
+  .phone img { border-radius: 14px; }
+  .v-sq { inset: 0; border-radius: 0; box-shadow: none; }
+  .scard-visual:has(.winframe) { display: block; }
+  .winframe { position: absolute; top: 30px; left: 0; width: 260%; margin: 0; border-radius: 10px; }
 }
 
 /* ---------- open source ---------- */
@@ -374,6 +366,27 @@ code { font-size: 0.86em; }
 .sht mark.cur { background: var(--accent-fill); color: var(--on-accent); }
 .sht .ar { display: block; direction: rtl; font-family: 'Geeza Pro', 'Noto Naskh Arabic', 'Segoe UI', Tahoma, sans-serif; }
 .sht .cnt { position: absolute; right: 10px; bottom: 10px; font-family: var(--mono); font-stretch: 87.5%; font-size: 0.62rem; padding: 3px 7px; border-radius: 999px; background: var(--raised); border: 1px solid var(--line); }
+/* Phones: a slim banner, then the name, one line of description and the numbers on one row. */
+@media (max-width: 540px) {
+  .pkgs { gap: 10px; }
+  .pkg { padding: 10px; gap: 8px; border-radius: 16px; }
+  .pkg-visual { height: 84px; border-radius: 10px; }
+  .pkg-head { padding: 0 4px; }
+  .pkg h3 { font-size: 0.92rem; }
+  .pkg-gh { width: 30px; height: 30px; border-radius: 9px; }
+  .pkg-gh svg { width: 15px; height: 15px; }
+  .pkg p { padding: 0 4px; font-size: 0.82rem; line-height: 1.4; }
+  .pkg-stats { padding: 0 4px 4px; gap: 4px 16px; }
+  .pkg-stats dd { font-size: 0.82rem; }
+  .dcf .card { width: auto; height: 74%; }
+  .dcf .c { width: 14px; height: 14px; }
+  .dcf .c1, .dcf .c3 { left: 28%; }
+  .dcf .c2, .dcf .c4 { right: 28%; }
+  .dcf .c1, .dcf .c2 { top: 8%; }
+  .dcf .c3, .dcf .c4 { bottom: 8%; }
+  .sht { padding: 9px 12px; font-size: 0.74rem; line-height: 1.55; }
+  .sht .cnt { display: none; }
+}
 .note { font-size: 0.86rem; color: var(--muted); margin-top: 14px; max-width: 72ch; }
 
 /* ---------- more work ---------- */
@@ -399,7 +412,17 @@ a.mw-card { text-decoration: none; color: inherit; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (max-width: 1100px) { .mw-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 900px) { .mw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 540px) { .mw-grid { grid-template-columns: 1fr; } }
+/* Phones: a list of rows, the thumbnail on the left and the text beside it. */
+@media (max-width: 540px) {
+  .mw-grid { grid-template-columns: 1fr; gap: 10px; }
+  .mw-card { grid-template-rows: none; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 14px; padding: 8px; border-radius: 16px; }
+  .mw-card:hover { transform: none; }
+  .mw-card .thumb { border-bottom: 0; border-radius: 10px; }
+  .mw-card .body { padding: 0 6px 0 0; gap: 2px; }
+  .mw-card h3 { font-size: 1.02rem; }
+  .mw-card .sm { font-size: 0.8rem; line-height: 1.38; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  .mw-card .mw-more { display: none; }
+}
 dialog.drawer {
   margin: 0 0 0 auto; height: 100%; max-height: 100%; width: min(460px, 100%); max-width: 100%; padding: 0; border: 0;
   border-left: 1px solid var(--line); background: var(--raised); color: var(--text);
