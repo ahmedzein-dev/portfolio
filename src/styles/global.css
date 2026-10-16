@@ -527,6 +527,38 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 .store-icon svg { width: 15px; height: 15px; fill: currentColor; }
 .next-case { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 
+/* ---------- package demos: each card acts out its package while on screen (site.ts adds .live) ---------- */
+/* document_camera_frame: the corners close in on the card, a scan line passes, the frame locks (turns solid). */
+.dcf .card { overflow: hidden; }
+.dcf .scan { position: absolute; left: 0; right: 0; top: 0; height: 30%; opacity: 0; background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--live) 45%, transparent)); }
+.pkg.live .dcf .c { animation: dcfLock 4.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
+.pkg.live .dcf .c1 { --dx: -10px; --dy: -8px; }
+.pkg.live .dcf .c2 { --dx: 10px; --dy: -8px; }
+.pkg.live .dcf .c3 { --dx: -10px; --dy: 8px; }
+.pkg.live .dcf .c4 { --dx: 10px; --dy: 8px; }
+.pkg.live .dcf .scan { animation: dcfScan 4.2s ease-in-out infinite; }
+@keyframes dcfLock {
+  0%, 12% { translate: var(--dx) var(--dy); opacity: 0.45; }
+  38%, 82% { translate: 0 0; opacity: 1; }
+  100% { translate: var(--dx) var(--dy); opacity: 0.45; }
+}
+@keyframes dcfScan { 0%, 30% { top: -30%; opacity: 0; } 40% { opacity: 1; } 70% { top: 100%; opacity: 0; } 100% { top: 100%; opacity: 0; } }
+/* scroll_highlight_text: the current match (mark.cur) and the count are moved along by site.ts. */
+.sht mark { transition: background-color 0.3s ease, color 0.3s ease; }
+/* draggable_floating_window: the screenshot drifts slowly, as if the windows were being moved about. */
+.pkg.live .pkg-visual img { animation: dfwDrift 9s ease-in-out infinite alternate; }
+@keyframes dfwDrift { from { scale: 1; translate: 0 0; } to { scale: 1.07; translate: -3% 2%; } }
+
+/* ---------- desktop hover: devices spread on Selected Work, tiles lift and zoom ---------- */
+@media (hover: hover) and (min-width: 900px) {
+  .scard .phone, .scard .tablet, .v-sq { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .scard:hover .v-two .p1 { transform: translate(-14px, -6px) rotate(-3deg); }
+  .scard:hover .v-two .p2 { transform: translate(14px, -10px) rotate(2deg); }
+  .scard:hover .v-sq { transform: scale(1.025); }
+  .mw-card .thumb img { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .mw-card:hover .thumb img { transform: scale(1.03); }
+}
+
 /* ---------- reveal on scroll: site.ts adds .reveal to what starts below the fold, then .in once ---------- */
 /* translate, not transform, so it adds to the stacking cards' own scale. */
 .reveal { opacity: 0; translate: 0 14px; transition: opacity 0.6s ease, translate 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: var(--rd, 0ms); }

@@ -38,7 +38,7 @@ const rows = await Promise.all(packages.map(async (p) => ({ ...p, stats: await s
         </div>
       )}
       {p.name === 'document_camera_frame' && (
-        <div class="pkg-visual dcf" aria-hidden="true"><span class="card"></span><i class="c c1"></i><i class="c c2"></i><i class="c c3"></i><i class="c c4"></i></div>
+        <div class="pkg-visual dcf" aria-hidden="true"><span class="card"><i class="scan"></i></span><i class="c c1"></i><i class="c c2"></i><i class="c c3"></i><i class="c c4"></i></div>
       )}
       {p.name === 'scroll_highlight_text' && (
         <div class="pkg-visual sht" aria-hidden="true">

@@ -233,6 +233,35 @@ if ('ResizeObserver' in window) {
   }).observe(document.body);
 }
 
+/* ---------- package demos: run only while their card is on screen ---------- */
+// The CSS loops run under .live; the highlight demo is stepped here, one match every 1.6 s.
+const pkgs = $$('.pkg');
+const sht = $('.sht');
+const marks = sht ? $$<HTMLElement>('mark', sht) : [];
+const shtCount = sht ? $('.cnt', sht) : null;
+let shtAt = 0;
+let shtTimer = 0;
+function stepHighlight() {
+  shtAt = (shtAt + 1) % marks.length;
+  marks.forEach((m, i) => m.classList.toggle('cur', i === shtAt));
+  if (shtCount) shtCount.textContent = `${shtAt + 1} of ${marks.length}`;
+}
+if (pkgs.length && !reduced() && 'IntersectionObserver' in window) {
+  const live = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        const card = e.target as HTMLElement;
+        card.classList.toggle('live', e.isIntersecting);
+        if (card.contains(sht) && marks.length > 1) {
+          window.clearInterval(shtTimer);
+          if (e.isIntersecting) shtTimer = window.setInterval(stepHighlight, 1600);
+        }
+      }),
+    { threshold: 0.4 },
+  );
+  pkgs.forEach((p) => live.observe(p));
+}
+
 /* ---------- reveal on scroll: once, for what starts below the fold ---------- */
 // Whatever is on screen at load stays as it is, so the first view is complete. The rest fades and rises in
 // the first time it scrolls into view, a beat apart when several arrive together, then drops the classes
@@ -247,14 +276,13 @@ if (!reduced() && 'IntersectionObserver' in window) {
           io.unobserve(el);
           el.style.setProperty('--rd', `${Math.min(i, 4) * 70}ms`);
           el.classList.add('in');
-          el.addEventListener(
-            'transitionend',
-            () => {
-              el.classList.remove('reveal', 'in');
-              el.style.removeProperty('--rd');
-            },
-            { once: true },
-          );
+          const done = (ev: TransitionEvent) => {
+            if (ev.target !== el) return; // a child's own transition, not the reveal
+            el.removeEventListener('transitionend', done);
+            el.classList.remove('reveal', 'in');
+            el.style.removeProperty('--rd');
+          };
+          el.addEventListener('transitionend', done);
         });
     },
     { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
