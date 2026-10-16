@@ -476,10 +476,10 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 .timeline.tl-anim::after { scale: 1 0; opacity: 0; }
 .timeline.tl-anim li, .timeline.tl-anim + .edu { opacity: 0; translate: 0 12px; }
 .timeline.tl-anim li::before { scale: 0; }
-.timeline.play::after { scale: 1 1; opacity: 1; transition: scale 2.4s linear 0.3s, opacity 0.4s ease 0.3s; }
-.timeline.play + .edu { opacity: 1; translate: none; transition: opacity 0.6s ease, translate 0.6s ease; }
-.timeline.play li { opacity: 1; translate: none; transition: opacity 0.6s ease, translate 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(0.3s + var(--k, 0) * 0.5s); }
-.timeline.play li::before { scale: 1; transition: scale 0.5s cubic-bezier(0.3, 1.6, 0.5, 1); transition-delay: calc(0.3s + var(--k, 0) * 0.5s); }
+.timeline.play::after { scale: 1 1; opacity: 1; transition: scale 3.2s linear 0.3s, opacity 0.4s ease 0.3s; }
+.timeline.play + .edu { opacity: 1; translate: none; transition: opacity 0.7s ease, translate 0.7s ease; }
+.timeline.play li { opacity: 1; translate: none; transition: opacity 0.7s ease, translate 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(0.4s + var(--k, 0) * 0.7s); }
+.timeline.play li::before { scale: 1; transition: scale 0.55s cubic-bezier(0.3, 1.6, 0.5, 1); transition-delay: calc(0.4s + var(--k, 0) * 0.7s); }
 .tl-when { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .timeline .tl-note { font-size: 0.9rem; color: var(--muted); }
 .edu { font-size: 0.86rem; color: var(--muted); padding-left: 36px; }
