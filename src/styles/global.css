@@ -408,7 +408,12 @@ code { font-size: 0.86em; }
   .swipe-dots button[aria-current='true']::before { width: 18px; background: var(--text); }
 }
 
-.mw-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.mw-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+.mw-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.mw-view { display: none; padding: 3px; gap: 2px; border: 1px solid var(--line-strong); border-radius: 999px; }
+.mw-view button { display: grid; place-items: center; width: 34px; height: 28px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; }
+.mw-view button[aria-pressed='true'] { background: var(--text); color: var(--bg); }
+.mw-view svg { width: 15px; height: 15px; fill: currentColor; }
 .chip { border: 1px solid var(--line-strong); background: transparent; border-radius: 999px; padding: 7px 14px; font-size: 0.86rem; cursor: pointer; color: var(--muted); }
 .chip[aria-pressed='true'] { background: var(--text); color: var(--bg); border-color: var(--text); }
 .mw-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
@@ -440,6 +445,14 @@ a.mw-card { text-decoration: none; color: inherit; }
   .mw-card h3 { font-size: 1.02rem; }
   .mw-card .sm { font-size: 0.8rem; line-height: 1.38; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
   .mw-card .mw-more { display: none; }
+  .mw-view { display: inline-flex; }
+  /* Grid view: two columns of screenshots, each with its name and years. */
+  .mw-grid[data-view='grid'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mw-grid[data-view='grid'] .mw-card { grid-template-columns: none; grid-template-rows: auto 1fr; align-items: start; gap: 8px; }
+  .mw-grid[data-view='grid'] .mw-card .body { padding: 0 4px 4px; }
+  .mw-grid[data-view='grid'] .mw-card .yr { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mw-grid[data-view='grid'] .mw-card h3 { font-size: 0.92rem; }
+  .mw-grid[data-view='grid'] .mw-card .sm { display: none; }
   .mw-grid[data-collapsed] > li:nth-child(n + 5) { display: none; }
   .mw-grid[data-collapsed] + .mw-all { display: flex; }
 }

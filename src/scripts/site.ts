@@ -317,6 +317,27 @@ showAll?.addEventListener('click', () => {
   expand();
   $<HTMLButtonElement>('#mw-grid > li:nth-child(5) .mw-card')?.focus();
 });
+// On phones, a list of rows or a grid of screenshots; the choice is remembered in this browser.
+const viewButtons = $$<HTMLButtonElement>('#mw-view button');
+function setView(view: string) {
+  if (!grid || (view !== 'list' && view !== 'grid')) return;
+  grid.dataset.view = view;
+  viewButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
+  measure();
+}
+try {
+  setView(localStorage.getItem('mw-view') ?? 'list');
+} catch {
+  setView('list');
+}
+viewButtons.forEach((b) =>
+  b.addEventListener('click', () => {
+    setView(b.dataset.view ?? 'list');
+    try {
+      localStorage.setItem('mw-view', b.dataset.view ?? 'list');
+    } catch {}
+  }),
+);
 const chips = $$<HTMLButtonElement>('#mw-filters .chip');
 const items = $$('#mw-grid > li');
 chips.forEach((chip) =>
