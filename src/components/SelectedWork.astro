@@ -31,8 +31,14 @@ import { flagships } from '../data/site';
             <Image src={p.shots[0].src} alt={p.shots[0].alt} widths={[400, 640]} sizes="(min-width: 900px) 460px, 90vw" />
           </div>
         )}
-        {p.shots[0].compact && (
-          <Image class="v-compact" src={p.shots[0].compact} alt={p.shots[0].alt} widths={[240, 480]} sizes="160px" />
+        {p.shots[0].tablets && (
+          <div class="v-tablets">
+            {p.shots[0].tablets.map((t, j) => (
+              <div class={`tablet t${j + 1}`}>
+                <Image src={t.src} alt={t.alt} widths={[320, 640]} sizes="200px" />
+              </div>
+            ))}
+          </div>
         )}
         {p.shots[0].kind === 'window' && (
           <div class="winframe">

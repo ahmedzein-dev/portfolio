@@ -10,7 +10,8 @@ import osta from '../assets/work/osta1.png';
 import alTaher from '../assets/work/altaher_home.png';
 import spark from '../assets/work/spark1.png';
 import ba3ControlPanel from '../assets/work/ba3_control_panel.png';
-import ba3Mobile from '../assets/work/ba3_mobile.png';
+import ba3IpadDashboard from '../assets/work/ba3_ipad_dashboard.png';
+import ba3IpadInvoice from '../assets/work/ba3_ipad_invoice.png';
 // The More projects grid: 4:3 thumbnails made by scripts/card-images.mjs.
 import taggoCard from '../assets/cards/taggo.jpg';
 import theEventsCard from '../assets/cards/the-events.jpg';
@@ -58,8 +59,8 @@ export const proof: Proof[] = [
   { value: '3', count: 3, label: 'packages on pub.dev', href: '#open-source' },
 ];
 
-/** compact: for a window, the picture shown in the narrow column of the card on phones (scripts/ba3-mobile.mjs). */
-export type Shot = { src: ImageMetadata; alt: string; kind: 'phone' | 'square' | 'window'; compact?: ImageMetadata };
+/** tablets: for a window, two iPad screenshots shown instead in the card's narrow column on phones and tablets. */
+export type Shot = { src: ImageMetadata; alt: string; kind: 'phone' | 'square' | 'window'; tablets?: { src: ImageMetadata; alt: string }[] };
 export type StoreLink = { label: string; href: string };
 
 export type Flagship = {
@@ -183,7 +184,10 @@ export const flagships: Flagship[] = [
         src: ba3ControlPanel,
         alt: 'The BA3 Control Panel on an iPad, in Arabic: main account balances, invoice and employee counts, and each seller’s share of sales as a donut chart',
         kind: 'window',
-        compact: ba3Mobile,
+        tablets: [
+          { src: ba3IpadDashboard, alt: 'BA3 on an iPad, in Arabic: the Control Panel with sales per seller' },
+          { src: ba3IpadInvoice, alt: 'BA3 on an iPad: a sales invoice open in a floating window, with its items, VAT and totals' },
+        ],
       },
     ],
     caption: 'Shown: the BA3 Control Panel on sample data, in Arabic, right to left.',

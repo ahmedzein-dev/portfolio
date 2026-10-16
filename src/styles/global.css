@@ -290,7 +290,7 @@ code { font-size: 0.86em; }
 .scard-cta svg { transition: transform 0.2s; }
 .scard-cta:hover svg { transform: translateX(3px); }
 .scard-visual { position: relative; min-height: 400px; }
-.v-compact { display: none; }
+.v-tablets { display: none; }
 .scard-caption { font-size: 0.78rem; opacity: 0.75; max-width: 46ch; }
 .phone { position: absolute; aspect-ratio: 9 / 19.5; border-radius: 28px; background: #0b0d10; padding: 6px; box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.55); }
 .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 22px; }
@@ -330,9 +330,13 @@ code { font-size: 0.86em; }
   .phone { border-radius: 18px; padding: 4px; }
   .phone img { border-radius: 14px; }
   .v-sq { inset: 0; border-radius: 0; box-shadow: none; }
-  /* A window gets its own picture here (Shot.compact): two tilted windows, like the phones. */
-  .scard-visual:has(.v-compact) .winframe { display: none; }
-  .v-compact { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+  /* A window gives way here to two iPad screenshots (Shot.tablets), tilted and overlapping like the phones. */
+  .scard-visual:has(.v-tablets) .winframe { display: none; }
+  .v-tablets { display: block; position: absolute; inset: 0; }
+  .tablet { position: absolute; aspect-ratio: 3 / 4; border-radius: 14px; background: #0b0d10; padding: 4px; box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.6); }
+  .tablet img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 10px; }
+  .tablet.t1 { width: 104%; left: 0; top: 26px; transform: rotate(-6deg); }
+  .tablet.t2 { width: 104%; left: 44%; top: 70px; transform: rotate(5deg); }
 }
 
 /* ---------- open source ---------- */
