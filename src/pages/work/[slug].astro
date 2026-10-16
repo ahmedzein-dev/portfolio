@@ -66,6 +66,8 @@ const { project: p, next } = Astro.props;
             <figure class={s.kind === 'window' ? 'wide' : undefined}>
               {s.kind === 'window' ? (
                 <Image src={s.src} alt={s.alt} widths={[720, 1280, 1960]} sizes="(min-width: 1040px) 980px, 94vw" quality={90} />
+              ) : s.kind === 'tablet' ? (
+                <Image src={s.src} alt={s.alt} widths={[480, 960, 1440]} sizes="(min-width: 1040px) 480px, 90vw" quality={92} />
               ) : (
                 <Image src={s.src} alt={s.alt} widths={[360, 720]} sizes="(min-width: 760px) 360px, 90vw" />
               )}

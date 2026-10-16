@@ -311,8 +311,8 @@ const items = $$('#mw-grid > li');
 const showAll = $<HTMLButtonElement>('#mw-all');
 const FIRST = 4;
 let filter = 'all';
-// A filter shows its first four matches, and Show all the rest. Under All, the first four are the projects
-// that aren't in Selected Work (the case studies there carry data-featured).
+// A filter shows its first four matches; the toggle under the grid shows the rest and hides them again.
+// Under All, the first four are the projects that aren't in Selected Work (those carry data-featured).
 function showProjects(everything = false) {
   const matches = items.filter((li) => filter === 'all' || (li.dataset.tags ?? '').split(' ').includes(filter));
   const first = filter === 'all' ? matches.filter((li) => li.dataset.featured === undefined).slice(0, FIRST) : matches.slice(0, FIRST);
@@ -327,8 +327,10 @@ function showProjects(everything = false) {
     }
   });
   if (showAll) {
-    showAll.hidden = everything || matches.length <= first.length;
-    showAll.textContent = `Show all ${matches.length} projects`;
+    showAll.hidden = matches.length <= first.length;
+    showAll.setAttribute('aria-expanded', String(everything));
+    const label = showAll.querySelector('span');
+    if (label) label.textContent = everything ? 'Show less' : `Show all ${matches.length}`;
   }
   measure();
 }
@@ -340,9 +342,11 @@ chips.forEach((chip) =>
   }),
 );
 showAll?.addEventListener('click', () => {
-  const next = items.find((li) => li.hidden && (filter === 'all' || (li.dataset.tags ?? '').split(' ').includes(filter)));
-  showProjects(true);
-  next?.querySelector<HTMLElement>('.mw-card')?.focus({ preventScroll: true });
+  const expand = showAll.getAttribute('aria-expanded') !== 'true';
+  showProjects(expand);
+  // Hiding them again shortens the page; if that leaves you below the section, bring its top back.
+  const section = $('#more-work');
+  if (!expand && section && section.getBoundingClientRect().top < 0) section.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth' });
 });
 
 const drawer = $<HTMLDialogElement>('#drawer');

@@ -26,7 +26,11 @@ import { flagships } from '../data/site';
             .filter((s) => s.kind === p.shots[0].kind)
             .map((s, j) => (
               <div class={`${s.kind} p${j + 1}`}>
-                <Image src={s.src} alt={s.alt} widths={[280, 440, 660]} sizes="(min-width: 900px) 280px, 40vw" quality={90} />
+                {s.kind === 'tablet' ? (
+                  <Image src={s.src} alt={s.alt} widths={[400, 800, 1200]} sizes="(min-width: 900px) 400px, 150px" quality={92} />
+                ) : (
+                  <Image src={s.src} alt={s.alt} widths={[280, 440, 660]} sizes="(min-width: 900px) 280px, 40vw" quality={90} />
+                )}
               </div>
             ))}
         {p.shots[0].kind === 'square' && (

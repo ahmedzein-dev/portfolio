@@ -74,7 +74,10 @@ const cards = [
     </li>
   ))(more))}
 </ul>
-<button class="mw-all" id="mw-all" type="button">Show all {cards.length} projects</button>
+<button class="mw-all" id="mw-all" type="button" aria-expanded="false" aria-controls="mw-grid">
+  <span>Show all {cards.length}</span>
+  <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
 
 <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
   <div class="drawer-inner">
