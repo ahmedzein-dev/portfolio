@@ -308,23 +308,33 @@ $$('[data-swipe]').forEach((row) => {
 /* ---------- more work: filters and quick view ---------- */
 const chips = $$<HTMLButtonElement>('#mw-filters .chip');
 const items = $$('#mw-grid > li');
+const showAll = $<HTMLButtonElement>('#mw-all');
+// All leaves out the Selected Work case studies (data-featured) until Show all; a filter shows every match.
+function showProjects(f: string, everything = false) {
+  items.forEach((li) => {
+    const show = f === 'all' ? everything || li.dataset.featured === undefined : (li.dataset.tags ?? '').split(' ').includes(f);
+    const appearing = show && li.hidden;
+    li.hidden = !show;
+    if (appearing && !reduced()) {
+      li.classList.remove('enter');
+      void li.offsetWidth;
+      li.classList.add('enter');
+    }
+  });
+  if (showAll) showAll.hidden = f !== 'all' || everything;
+  measure();
+}
 chips.forEach((chip) =>
   chip.addEventListener('click', () => {
-    const f = chip.dataset.f;
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-    items.forEach((li) => {
-      // All leaves out the Selected Work case studies (data-featured); a filter shows every match.
-      const show = f === 'all' ? li.dataset.featured === undefined : (li.dataset.tags ?? '').split(' ').includes(f ?? '');
-      li.hidden = !show;
-      if (show && !reduced()) {
-        li.classList.remove('enter');
-        void li.offsetWidth;
-        li.classList.add('enter');
-      }
-    });
-    measure();
+    showProjects(chip.dataset.f ?? 'all');
   }),
 );
+showAll?.addEventListener('click', () => {
+  const first = items.find((li) => li.hidden);
+  showProjects('all', true);
+  first?.querySelector<HTMLElement>('.mw-card')?.focus({ preventScroll: true });
+});
 
 const drawer = $<HTMLDialogElement>('#drawer');
 function openDrawer(id: string) {
