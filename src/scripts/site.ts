@@ -233,6 +233,23 @@ if ('ResizeObserver' in window) {
   }).observe(document.body);
 }
 
+/* ---------- experience: the career builds up from the first job ---------- */
+// Once, when the timeline comes into view: the line draws upward and each stop lights up in turn,
+// oldest first (CSS, under .play). Left as it is when it is already on screen at load.
+const timeline = $('.timeline');
+if (timeline && !reduced() && 'IntersectionObserver' in window && timeline.getBoundingClientRect().top > window.innerHeight) {
+  timeline.classList.add('tl-anim');
+  const tio = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      tio.disconnect();
+      timeline.classList.add('play');
+    },
+    { threshold: 0.3 },
+  );
+  tio.observe(timeline);
+}
+
 /* ---------- package demos: run only while their card is on screen ---------- */
 // The CSS loops run under .live; the highlight demo is stepped here, one match every 1.6 s, and the
 // floating windows recording plays.
@@ -294,7 +311,7 @@ if (!reduced() && 'IntersectionObserver' in window) {
     { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
   );
   $$(
-    '.section-head, .scard, .pkg, .mw-bar, .mw-grid > li:not([hidden]), .timeline > li, .edu, .cap-btns, .cap-tiles, .contact, .case-shots figure',
+    '.section-head, .scard, .pkg, .mw-bar, .mw-grid > li:not([hidden]), .cap-btns, .cap-tiles, .contact, .case-shots figure',
   ).forEach((el) => {
     if (el.getBoundingClientRect().top < window.innerHeight) return;
     el.classList.add('reveal');

@@ -470,6 +470,16 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 .timeline li { position: relative; padding: 0 0 24px 36px; display: grid; gap: 2px; }
 .timeline li::before { content: ''; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
 .timeline li.now::before { background: var(--live); border-color: var(--live); animation: pulse 2.6s ease-out infinite; }
+/* Played once by site.ts (.tl-anim, then .play): the line draws up from the first job, the education
+   shows, and each stop lights up in turn, oldest first (--k counts from the bottom). */
+.timeline::after { content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: var(--accent); transform-origin: 50% 100%; }
+.timeline.tl-anim::after { scale: 1 0; opacity: 0; }
+.timeline.tl-anim li, .timeline.tl-anim + .edu { opacity: 0; translate: 0 12px; }
+.timeline.tl-anim li::before { scale: 0; }
+.timeline.play::after { scale: 1 1; opacity: 1; transition: scale 2.1s cubic-bezier(0.45, 0, 0.25, 1) 0.2s, opacity 0.3s ease 0.2s; }
+.timeline.play + .edu { opacity: 1; translate: none; transition: opacity 0.5s ease, translate 0.5s ease; }
+.timeline.play li { opacity: 1; translate: none; transition: opacity 0.5s ease, translate 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(0.3s + var(--k, 0) * 0.36s); }
+.timeline.play li::before { scale: 1; transition: scale 0.45s cubic-bezier(0.3, 1.6, 0.5, 1); transition-delay: calc(0.3s + var(--k, 0) * 0.36s); }
 .tl-when { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .timeline .tl-note { font-size: 0.9rem; color: var(--muted); }
 .edu { font-size: 0.86rem; color: var(--muted); padding-left: 36px; }
@@ -530,7 +540,11 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 /* ---------- package demos: each card acts out its package while on screen (site.ts adds .live) ---------- */
 /* document_camera_frame: the corners close in on the card, a scan line passes, the frame locks (turns solid). */
 .dcf .card { overflow: hidden; }
-.dcf .scan { position: absolute; left: 0; right: 0; top: 0; height: 30%; opacity: 0; background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--live) 45%, transparent)); }
+.dcf .scan {
+  position: absolute; left: 0; right: 0; top: 0; height: 34%; opacity: 0;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--live) 40%, transparent) 75%, var(--live));
+  border-bottom: 2px solid var(--live); box-shadow: 0 2px 12px var(--live);
+}
 .pkg.live .dcf .c { animation: dcfLock 4.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
 .pkg.live .dcf .c1 { --dx: -10px; --dy: -8px; }
 .pkg.live .dcf .c2 { --dx: 10px; --dy: -8px; }

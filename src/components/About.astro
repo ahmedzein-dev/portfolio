@@ -9,8 +9,8 @@ import { capabilities, capabilityTiles, education, experience } from '../data/si
       <h2>Five stops so far</h2>
     </div>
     <ol class="timeline">
-      {experience.map((e) => (
-        <li class={e.current ? 'now' : undefined}>
+      {experience.map((e, i) => (
+        <li class={e.current ? 'now' : undefined} style={`--k:${experience.length - 1 - i}`}>
           <p class="tl-when">{e.when} · {e.place}</p>
           <h3 style="font-size:1.05rem">{e.role}, {e.org}</h3>
           <p class="tl-note">{e.note}</p>
