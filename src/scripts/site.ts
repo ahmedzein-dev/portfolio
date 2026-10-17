@@ -314,6 +314,9 @@ if (!reduced() && 'IntersectionObserver' in window) {
     '.section-head, .scard, .pkg, .mw-bar, .mw-grid > li:not([hidden]), .cap-btns, .cap-tiles, .contact, .case-shots figure',
   ).forEach((el) => {
     if (el.getBoundingClientRect().top < window.innerHeight) return;
+    // Cards in a row that swipes stay as they are, so a swipe only moves them sideways.
+    const row = el.parentElement;
+    if (row?.matches('[data-swipe]') && row.scrollWidth > row.clientWidth + 1) return;
     el.classList.add('reveal');
     io.observe(el);
   });
@@ -410,22 +413,6 @@ $$('[data-swipe]').forEach((row) => {
   row.addEventListener('scroll', queue, { passive: true });
   window.addEventListener('resize', queue);
   update();
-
-  // The first time a row that swipes comes into view, it nudges over and back, to show there is more.
-  if (reduced() || !('IntersectionObserver' in window)) return;
-  const hint = new IntersectionObserver(
-    (entries) => {
-      if (!entries.some((e) => e.isIntersecting) || row.scrollWidth <= row.clientWidth + 1) return;
-      hint.disconnect();
-      if (row.scrollLeft > 4) return;
-      window.setTimeout(() => row.classList.add('hint'), 500);
-    },
-    { threshold: 0.7 },
-  );
-  hint.observe(row);
-  const stopHint = () => row.classList.remove('hint');
-  row.addEventListener('animationend', stopHint);
-  row.addEventListener('pointerdown', stopHint);
 });
 
 /* ---------- touch screens: the card and tiles in the middle of the screen act as if hovered ---------- */
