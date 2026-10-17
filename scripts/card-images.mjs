@@ -14,7 +14,16 @@ const SRC = 'src/assets/work/';
 const OUT = 'src/assets/cards/';
 const SHARE = 'public/share/';
 /** Project pages, which get a link preview each: card id -> page slug. */
-const FLAGSHIPS = { taggo: 'taggo', 'the-events': 'the-events', ba3: 'ba3', gainz: 'gainz-ai', 'amber-drive': 'amber-drive' };
+const PAGES = {
+  taggo: 'taggo',
+  'the-events': 'the-events',
+  ba3: 'ba3',
+  gainz: 'gainz-ai',
+  'amber-drive': 'amber-drive',
+  'osta-home': 'osta-home',
+  'al-taher': 'al-taher',
+  'spark-fitness': 'spark-fitness',
+};
 
 const cards = [
   { id: 'taggo', tint: ['#2e2810', '#100e07'], glow: '#f2d23c', phones: ['taggo_rider_home.png', 'taggo_captain_pickup.png'] },
@@ -106,4 +115,4 @@ for (const c of cards) await write(c, `${OUT}${c.id}.jpg`);
 
 [W, H] = [1200, 630];
 await mkdir(SHARE, { recursive: true });
-for (const c of cards.filter((c) => c.id in FLAGSHIPS)) await write(c, `${SHARE}${FLAGSHIPS[c.id]}.jpg`);
+for (const c of cards.filter((c) => c.id in PAGES)) await write(c, `${SHARE}${PAGES[c.id]}.jpg`);
