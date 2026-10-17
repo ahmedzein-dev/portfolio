@@ -6,10 +6,12 @@ import theEvents from '../assets/work/theevents_home.png';
 import theEventsSearch from '../assets/work/theevents_visual_search.png';
 import gainz from '../assets/work/gainz_image.jpg';
 import amberDrive from '../assets/work/amber_drive.jpg';
-import osta from '../assets/work/osta1.png';
-import alTaher from '../assets/work/altaher_home.png';
-import spark from '../assets/work/spark1.png';
-import ba3ControlPanel from '../assets/work/ba3_control_panel.png';
+import ostaWallet from '../assets/work/osta1.png';
+import ostaChat from '../assets/work/osta2.png';
+import alTaherHome from '../assets/work/altaher_home.png';
+import alTaherWelcome from '../assets/work/altaher_welcome.png';
+import sparkHome from '../assets/work/spark1.png';
+import sparkGallery from '../assets/work/spark2.png';
 import ba3IpadDashboard from '../assets/work/ba3_ipad_dashboard.png';
 import ba3IpadInvoice from '../assets/work/ba3_ipad_invoice.png';
 // The More projects grid: 4:3 thumbnails made by scripts/card-images.mjs.
@@ -181,13 +183,7 @@ export const flagships: Flagship[] = [
     shots: [
       { src: ba3IpadDashboard, alt: 'BA3 on an iPad, in Arabic: the Control Panel with sales per seller', kind: 'tablet' },
       { src: ba3IpadInvoice, alt: 'BA3 on an iPad: a sales invoice open in a floating window, with its items, VAT and totals', kind: 'tablet' },
-      {
-        src: ba3ControlPanel,
-        alt: 'The BA3 Control Panel on an iPad, in Arabic: main account balances, invoice and employee counts, and each seller’s share of sales as a donut chart',
-        kind: 'window',
-      },
     ],
-    caption: 'Shown: the BA3 Control Panel on sample data, in Arabic, right to left.',
     highlights: [
       'A Firestore re-architecture that saved about 829M reads a year (about $497) and made invoice creation about 99% faster.',
       'About 3.5M AED a month in transactions through bills, vouchers, cheques and accounts.',
@@ -239,16 +235,21 @@ export const flagships: Flagship[] = [
   },
 ];
 
+/** A smaller project: a tile in More projects, and a case study of its own at /work/<id>/. */
 export type MoreWork = {
   id: string;
   name: string;
   year: string;
   platforms: string;
   tags: Kind[];
+  /** One line on the tile. */
   summary: string;
+  headline: string;
+  /** The case study's opening paragraph. */
   description: string;
-  points: string[];
-  image: ImageMetadata;
+  role?: string;
+  shots: Shot[];
+  highlights: string[];
   /** The 4:3 grid thumbnail. */
   thumb: ImageMetadata;
   links: StoreLink[];
@@ -263,15 +264,25 @@ export const moreWork: MoreWork[] = [
     platforms: 'Mobile and web',
     tags: ['mobile', 'web'],
     summary: 'Car rental with renter and owner flows in one app.',
-    description: 'A car rental marketplace for the UAE. One Flutter app serves renters and car owners with separate flows, switched at login.',
-    points: [
-      'UAE Pass, phone and biometric sign-in',
-      'Licence capture with an on-device OCR camera frame, where document_camera_frame started',
-      'Cars on a custom-styled map with routes, and slide-to-book',
-      'Stripe payments, and Stripe Connect payouts to owners',
-      'Owner fleet board, booking approvals and damage reports with photos',
+    headline: 'Car rental for renters and owners, in one app',
+    description:
+      'A car rental marketplace for the UAE. One Flutter app serves renters and car owners with separate flows, switched at login: renters find a car on a map and book it, owners approve the booking and it updates on the renter’s phone at once. Payments run on Stripe, with Stripe Connect payouts to owners.',
+    role: 'Senior Software Engineer, BA3',
+    shots: [
+      {
+        src: amberDrive,
+        alt: 'Amber Drive, renter and owner side by side: the owner approves a booking and the renter sees it under Approved at once',
+        kind: 'window',
+      },
     ],
-    image: amberDrive,
+    highlights: [
+      'UAE Pass, phone and biometric sign-in.',
+      'Licence capture with an on-device OCR camera frame, built to drop a paid third-party SDK; it became the open-source document_camera_frame.',
+      'Cars on a custom-styled Google Map with routes and live availability, and a slide-to-book gesture.',
+      'Reservations through pending, approved, current, finished and cancelled, synced in real time over Firebase, with push notifications.',
+      'Stripe payments and Stripe Connect payouts to owners, with webhooks that keep a payment right when the app is interrupted mid-transaction.',
+      'An owner fleet board, booking approvals and damage reports with photos.',
+    ],
     thumb: amberDriveCard,
     links: [],
     film: {
@@ -290,24 +301,23 @@ export const moreWork: MoreWork[] = [
     platforms: 'Mobile',
     tags: ['mobile'],
     summary: 'Real-estate and construction services marketplace.',
-    description: 'A marketplace for real-estate, construction and finishing services, in Arabic.',
-    points: ['Direct contact with verified experts', 'Broker IDs and work scheduling', 'Directories of furnishing and supply companies'],
-    image: osta,
+    headline: 'Builders, brokers and finishers, in one marketplace',
+    description:
+      'A marketplace for residential, commercial and construction services, in Arabic. Customers talk directly to verified experts, compare their ratings and prices, negotiate and schedule the work; registered brokers get official IDs.',
+    shots: [
+      { src: ostaChat, alt: 'Osta Home chat, in Arabic: a customer asks if the expert is free, the expert asks when to visit, and they talk price', kind: 'phone' },
+      { src: ostaWallet, alt: 'Osta Home wallet, in Arabic: the balance, a coupon field and top-up details', kind: 'phone' },
+    ],
+    highlights: [
+      'Residential, commercial and construction services in one app, in Arabic, right to left.',
+      'Direct chat with verified experts, to agree the visit and the price.',
+      'Expert profiles with ratings and prices, and work scheduling.',
+      'Official IDs for registered brokers.',
+      'A wallet with coupons and top-ups.',
+      'Directories of furnishing and supply companies.',
+    ],
     thumb: ostaCard,
     links: [{ label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.home_osta.Osta' }],
-  },
-  {
-    id: 'al-taher',
-    name: 'Al-Taher Jewelry',
-    year: '2021',
-    platforms: 'Mobile',
-    tags: ['mobile'],
-    summary: 'Client and manager apps with live gold prices.',
-    description: 'Client and manager apps for a gold jewellery store.',
-    points: ['Client app with live gold prices and search', 'Manager app for stock and price updates'],
-    image: alTaher,
-    thumb: alTaherCard,
-    links: [{ label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=ahmedzein.taher.jewellery.altaher_jewellery' }],
   },
   {
     id: 'spark-fitness',
@@ -316,12 +326,68 @@ export const moreWork: MoreWork[] = [
     platforms: 'Mobile',
     tags: ['mobile'],
     summary: 'Coach-led group training and subscriptions.',
-    description: 'Group training in coach-led sessions.',
-    points: ['Personalised training activities', 'Monitoring by coaches', 'Subscriptions'],
-    image: spark,
+    headline: 'Group training, followed by coaches',
+    description:
+      'The app of Spark Fitness & Healthcare Center: personalised group training in supportive sessions, with activities tailored to each member and closely followed by coaches.',
+    shots: [
+      { src: sparkHome, alt: 'Spark Fitness home: a welcome banner, contact, training activities with their prices, and subscriptions', kind: 'phone' },
+      { src: sparkGallery, alt: 'Spark Fitness gallery: photos of members training at the center', kind: 'phone' },
+    ],
+    highlights: [
+      'Personalised training activities, each with its own price.',
+      'Coaches follow every member’s activities.',
+      'Subscriptions by length, with savings on the longer ones.',
+      'A gallery from the center, and contact in one tap.',
+    ],
     thumb: sparkCard,
     links: [{ label: 'App Store', href: 'https://apps.apple.com/ae/app/spark-fitness/id6450647441' }],
   },
+  {
+    id: 'al-taher',
+    name: 'Al-Taher Jewelry',
+    year: '2021',
+    platforms: 'Mobile',
+    tags: ['mobile'],
+    summary: 'Client and manager apps with live gold prices.',
+    headline: 'Two apps for a jewellery store, priced with the day’s gold',
+    description:
+      'Two apps for a gold jewellery store: a client app for discovering jewellery with real-time prices and search, and a manager app for running the store, from jewellers and products to the daily gold price.',
+    shots: [
+      { src: alTaherWelcome, alt: 'Al-Taher Jewelry welcome screen, in Arabic, with a gold necklace', kind: 'phone' },
+      { src: alTaherHome, alt: 'Al-Taher Jewelry home, in Arabic: featured pieces, then rings and bangles with their prices', kind: 'phone' },
+    ],
+    highlights: [
+      'Client app: jewellery by category, with search, and prices that follow the day’s gold rate.',
+      'Manager app: jewellers, products and the daily gold price, updated by the store.',
+      'Arabic, right to left.',
+    ],
+    thumb: alTaherCard,
+    links: [{ label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=ahmedzein.taher.jewellery.altaher_jewellery' }],
+  },
+];
+
+/** Every case study page at /work/<slug>/, in the order Next case study walks through them. */
+export type CaseStudy = Pick<
+  Flagship,
+  'slug' | 'name' | 'headline' | 'summary' | 'period' | 'platforms' | 'shots' | 'caption' | 'constraint' | 'highlights' | 'numbers' | 'links' | 'film'
+> & { role?: string; back: { href: string; label: string } };
+
+export const caseStudies: CaseStudy[] = [
+  ...flagships.map((p) => ({ ...p, back: { href: '/#work', label: 'Selected work' } })),
+  ...moreWork.map((p) => ({
+    slug: p.id,
+    name: p.name,
+    headline: p.headline,
+    summary: p.description,
+    role: p.role,
+    period: p.year,
+    platforms: p.platforms,
+    shots: p.shots,
+    highlights: p.highlights,
+    links: p.links,
+    film: p.film,
+    back: { href: '/#more-work', label: 'More projects' },
+  })),
 ];
 
 export const experience = [

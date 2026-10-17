@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
-import { flagships, profile } from '../../data/site';
+import { caseStudies, profile } from '../../data/site';
 import StoreLinks from '../../components/StoreLinks.astro';
 
 export function getStaticPaths() {
-  return flagships.map((p, i) => ({
+  return caseStudies.map((p, i) => ({
     params: { slug: p.slug },
-    props: { project: p, next: flagships[(i + 1) % flagships.length] },
+    props: { project: p, next: caseStudies[(i + 1) % caseStudies.length] },
   }));
 }
 
@@ -31,11 +31,11 @@ const { project: p, next } = Astro.props;
 
     <article>
       <div class="case-head">
-        <p class="label"><a href="/#work" style="text-decoration:none">← Selected work</a> · {p.name}</p>
+        <p class="label"><a href={p.back.href} style="text-decoration:none">← {p.back.label}</a> · {p.name}</p>
         <h1 style="font-size:clamp(2.2rem,5.6vw,4.2rem)">{p.headline}</h1>
         <p class="lede">{p.summary}</p>
         <dl class="case-meta">
-          <div><dt>Role</dt><dd>{p.role}</dd></div>
+          {p.role && <div><dt>Role</dt><dd>{p.role}</dd></div>}
           <div><dt>Period</dt><dd>{p.period}</dd></div>
           <div><dt>Platforms</dt><dd>{p.platforms}</dd></div>
         </dl>

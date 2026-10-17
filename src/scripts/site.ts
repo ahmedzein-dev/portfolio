@@ -381,17 +381,64 @@ $$('[data-swipe]').forEach((row) => {
     return b;
   });
   row.after(nav);
+  // Each card also learns how far it is from settling (--sp, -1 to 1), for the depth while swiping (CSS).
+  let queued = false;
   const update = () => {
+    queued = false;
     const step = slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : 0;
     const i = step > 0 ? Math.min(slides.length - 1, Math.round(row.scrollLeft / step)) : 0;
     dots.forEach((d, j) => (j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+    const swiping = step > 0 && row.scrollWidth > row.clientWidth + 1 && !reduced();
+    slides.forEach((slide, j) => {
+      slide.classList.toggle('cur', j === i);
+      if (!swiping) {
+        slide.style.removeProperty('--sp');
+        slide.style.removeProperty('--spa');
+        return;
+      }
+      const sp = Math.max(-1, Math.min(1, (slide.offsetLeft - slides[0].offsetLeft - row.scrollLeft) / step));
+      slide.style.setProperty('--sp', sp.toFixed(3));
+      slide.style.setProperty('--spa', Math.abs(sp).toFixed(3));
+    });
   };
-  row.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
+  const queue = () => {
+    if (!queued) {
+      queued = true;
+      requestAnimationFrame(update);
+    }
+  };
+  row.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
   update();
+
+  // The first time a row that swipes comes into view, it nudges over and back, to show there is more.
+  if (reduced() || !('IntersectionObserver' in window)) return;
+  const hint = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((e) => e.isIntersecting) || row.scrollWidth <= row.clientWidth + 1) return;
+      hint.disconnect();
+      if (row.scrollLeft > 4) return;
+      window.setTimeout(() => row.classList.add('hint'), 500);
+    },
+    { threshold: 0.7 },
+  );
+  hint.observe(row);
+  const stopHint = () => row.classList.remove('hint');
+  row.addEventListener('animationend', stopHint);
+  row.addEventListener('pointerdown', stopHint);
 });
 
-/* ---------- more work: filters and quick view ---------- */
+/* ---------- touch screens: the card and tiles in the middle of the screen act as if hovered ---------- */
+// .on, while they cross the middle of the screen; the CSS uses it only where there is no hover.
+if (!reduced() && 'IntersectionObserver' in window) {
+  const middle = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.target.classList.toggle('on', e.isIntersecting)),
+    { rootMargin: '-38% 0px -38% 0px' },
+  );
+  $$('.scard, .mw-grid > li').forEach((el) => middle.observe(el));
+}
+
+/* ---------- more work: filters ---------- */
 const chips = $$<HTMLButtonElement>('#mw-filters .chip');
 const items = $$('#mw-grid > li');
 const showAll = $<HTMLButtonElement>('#mw-all');
@@ -402,12 +449,14 @@ let filter = 'all';
 function showProjects(everything = false) {
   const matches = items.filter((li) => filter === 'all' || (li.dataset.tags ?? '').split(' ').includes(filter));
   const first = filter === 'all' ? matches.filter((li) => li.dataset.featured === undefined).slice(0, FIRST) : matches.slice(0, FIRST);
+  let n = 0;
   items.forEach((li) => {
     const show = matches.includes(li) && (everything || first.includes(li));
     const appearing = show && li.hidden;
     li.hidden = !show;
     if (appearing && !reduced()) {
       li.classList.remove('enter');
+      li.style.animationDelay = `${Math.min(n++, 5) * 50}ms`;
       void li.offsetWidth;
       li.classList.add('enter');
     }
@@ -435,27 +484,9 @@ showAll?.addEventListener('click', () => {
   if (!expand && section && section.getBoundingClientRect().top < 0) section.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth' });
 });
 
-const drawer = $<HTMLDialogElement>('#drawer');
-function openDrawer(id: string) {
-  const tpl = $<HTMLTemplateElement>(`#mw-${id}`);
-  const body = $('#drawer-body');
-  if (!drawer || !tpl || !body) return;
-  body.replaceChildren(tpl.content.cloneNode(true));
-  drawer.showModal();
-  if (location.hash !== `#${id}`) history.replaceState(null, '', `#${id}`);
-}
-$$<HTMLButtonElement>('button.mw-card').forEach((b) => b.addEventListener('click', () => openDrawer(b.dataset.id ?? '')));
-drawer?.addEventListener('click', (e) => {
-  if (e.target === drawer) drawer.close();
-});
-drawer?.addEventListener('close', () => {
-  // A film playing in the drawer stops with it.
-  drawer.querySelectorAll('video').forEach((v) => v.pause());
-  if (location.hash && items.some((li) => `#${li.dataset.id}` === location.hash)) history.replaceState(null, '', location.pathname);
-});
-$('#drawer-close')?.addEventListener('click', () => drawer?.close());
+// Every project has a case study now; a link to the old quick view (/#osta-home) opens it.
 const deepLink = location.hash.slice(1);
-if (deepLink && items.some((li) => li.dataset.id === deepLink)) openDrawer(deepLink);
+if (deepLink && items.some((li) => li.dataset.id === deepLink)) location.replace(`/work/${deepLink}/`);
 
 /* ---------- capabilities ---------- */
 const capButtons = $$<HTMLButtonElement>('.cap-btn');

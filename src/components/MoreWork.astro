@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import { flagships, moreWork } from '../data/site';
-import StoreLinks from './StoreLinks.astro';
 
 // Newest first: by the year a project ended ("now" counts as latest), then by the year it began.
 const span = (year: string) => {
@@ -9,11 +8,11 @@ const span = (year: string) => {
   return { from: Number(from), to: to === 'now' ? Infinity : Number(to) };
 };
 const newestFirst = (a: string, b: string) => span(b).to - span(a).to || span(b).from - span(a).from;
-// Every project, newest first. Under All, the case studies already in Selected Work stay out; a filter
-// brings back the ones it matches, so Web and desktop shows every web and desktop app.
+// Every project, newest first, each tile opening its case study. Under All, the ones already in Selected
+// Work stay out; a filter brings back the ones it matches, so Web and desktop shows every web and desktop app.
 const cards = [
-  ...flagships.map((p) => ({ year: p.card.year, flagship: p, more: undefined })),
-  ...moreWork.map((p) => ({ year: p.year, flagship: undefined, more: p })),
+  ...flagships.map((p) => ({ slug: p.slug, name: p.name, year: p.card.year, platforms: p.card.platforms, summary: p.card.summary, tags: p.card.kinds, thumb: p.card.image, featured: true })),
+  ...moreWork.map((p) => ({ slug: p.id, name: p.name, year: p.year, platforms: p.platforms, summary: p.summary, tags: p.tags, thumb: p.thumb, featured: false })),
 ].sort((a, b) => newestFirst(a.year, b.year));
 ---
 
@@ -26,67 +25,23 @@ const cards = [
 </div>
 
 <ul class="mw-grid" id="mw-grid">
-  {cards.map(({ flagship: p, more }) => p ? (
-    <li data-tags={p.card.kinds.join(' ')} data-featured hidden>
-      <a class="mw-card" href={`/work/${p.slug}/`}>
+  {cards.map((c) => (
+    <li data-tags={c.tags.join(' ')} data-featured={c.featured ? '' : undefined} data-id={c.featured ? undefined : c.slug} hidden={c.featured}>
+      <a class="mw-card" href={`/work/${c.slug}/`}>
         <span class="thumb">
-          <Image src={p.card.image} alt="" widths={[360, 540, 720, 1080]} sizes="(min-width: 1100px) 260px, (min-width: 900px) 30vw, (min-width: 540px) 45vw, 90vw" />
+          <Image src={c.thumb} alt="" widths={[360, 540, 720, 1080]} sizes="(min-width: 1100px) 260px, (min-width: 900px) 30vw, (min-width: 540px) 45vw, 90vw" />
         </span>
         <span class="body">
-          <span class="yr">{p.card.year} · {p.card.platforms}</span>
-          <h3>{p.name}</h3>
-          <span class="sm">{p.card.summary}</span>
+          <span class="yr">{c.year} · {c.platforms}</span>
+          <h3>{c.name}</h3>
+          <span class="sm">{c.summary}</span>
           <span class="mw-more">Case study →</span>
         </span>
       </a>
     </li>
-  ) : more && ((p) => (
-    <li data-id={p.id} data-tags={p.tags.join(' ')} id={p.id}>
-      <button class="mw-card" type="button" data-id={p.id} aria-haspopup="dialog">
-        <span class="thumb">
-          <Image src={p.thumb} alt="" widths={[360, 540, 720, 1080]} sizes="(min-width: 1100px) 260px, (min-width: 900px) 30vw, (min-width: 540px) 45vw, 90vw" />
-        </span>
-        <span class="body">
-          <span class="yr">{p.year} · {p.platforms}</span>
-          <h3>{p.name}</h3>
-          <span class="sm">{p.summary}</span>
-        </span>
-      </button>
-      <template id={`mw-${p.id}`}>
-        <p class="label">{p.year} · {p.platforms}</p>
-        <h2 id="drawer-title">{p.name}</h2>
-        {p.links.length > 0 && <StoreLinks links={p.links} />}
-        {p.film ? (
-          <figure class="film film-drawer">
-            <video controls playsinline preload="none" poster={p.film.poster} aria-label={p.film.title}>
-              <source src={p.film.src} type="video/mp4" />
-            </video>
-            <figcaption><span class="film-len">{p.film.length}</span> {p.film.caption}</figcaption>
-          </figure>
-        ) : (
-          <Image class="drawer-img" src={p.image} alt={`${p.name} screens`} widths={[460, 920]} sizes="460px" />
-        )}
-        <p>{p.description}</p>
-        <ul>
-          {p.points.map((pt) => <li>{pt}</li>)}
-        </ul>
-      </template>
-    </li>
-  ))(more))}
+  ))}
 </ul>
 <button class="mw-all" id="mw-all" type="button" aria-expanded="false" aria-controls="mw-grid">
   <span>Show all {cards.length}</span>
   <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
 </button>
-
-<dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
-  <div class="drawer-inner">
-    <div class="drawer-top">
-      <span class="label">Project</span>
-      <button class="icon-btn" id="drawer-close" type="button" aria-label="Close">
-        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
-      </button>
-    </div>
-    <div id="drawer-body" class="drawer-inner" style="padding:0"></div>
-  </div>
-</dialog>

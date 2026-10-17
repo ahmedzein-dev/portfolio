@@ -448,19 +448,6 @@ a.mw-card { text-decoration: none; color: inherit; }
   .mw-card h3 { font-size: 0.92rem; }
   .mw-card .sm, .mw-card .mw-more { display: none; }
 }
-dialog.drawer {
-  margin: 0 0 0 auto; height: 100%; max-height: 100%; width: min(460px, 100%); max-width: 100%; padding: 0; border: 0;
-  border-left: 1px solid var(--line); background: var(--raised); color: var(--text);
-}
-dialog.drawer::backdrop { background: var(--scrim); }
-dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); }
-@keyframes drawerIn { from { transform: translateX(100%); } to { transform: none; } }
-.drawer-inner { padding: calc(env(safe-area-inset-top, 0px) + 18px) 22px calc(env(safe-area-inset-bottom, 0px) + 28px); display: grid; gap: 14px; align-content: start; }
-.drawer-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-.drawer-img { border-radius: 14px; background: var(--sunken); border: 1px solid var(--line); max-height: 300px; width: 100%; object-fit: contain; }
-.drawer-inner ul { padding-left: 1.1em; display: grid; gap: 6px; color: var(--muted); font-size: 0.93rem; }
-.drawer-links { display: flex; gap: 8px; flex-wrap: wrap; }
-.icon-btn { width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--line-strong); background: transparent; display: grid; place-items: center; cursor: pointer; color: var(--text); }
 
 /* ---------- experience and capabilities ---------- */
 .two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
@@ -516,7 +503,6 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 .film video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; border: 1px solid var(--line); background: #000; }
 .film figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 10px; max-width: 72ch; }
 .film-len { font-family: var(--mono, monospace); font-size: 0.78rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); margin-right: 6px; }
-.film-drawer video { border-radius: 14px; }
 .case-shots { display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-start; }
 .case-shots figure { flex: 1 1 260px; max-width: 360px; }
 .case-shots figure.wide { flex-basis: 100%; max-width: 980px; }
@@ -535,6 +521,15 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
 .store-icon { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--line); background: var(--raised); color: var(--text); transition: border-color 0.2s ease, transform 0.2s ease; }
 .store-icon:hover { border-color: var(--line-strong); transform: translateY(-2px); }
 .store-icon svg { width: 15px; height: 15px; fill: currentColor; }
+/* Touch screens: fingertip-sized icons with room between them, so a tap lands on the store you meant. */
+@media (hover: none), (max-width: 760px) {
+  .store-links { gap: 14px 26px; }
+  .store-group { gap: 12px; }
+  .store-app { margin-right: 2px; }
+  .store-icon { width: 40px; height: 40px; border-radius: 11px; }
+  .store-icon svg { width: 17px; height: 17px; }
+  .store-icon:active { transform: scale(0.92); border-color: var(--line-strong); }
+}
 .next-case { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 
 /* ---------- package demos: each card acts out its package while on screen (site.ts adds .live) ---------- */
@@ -570,6 +565,41 @@ dialog.drawer[open] { animation: drawerIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1); 
   .scard:hover .v-sq { transform: scale(1.025); }
   .mw-card .thumb img { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .mw-card:hover .thumb img { transform: scale(1.03); }
+}
+
+/* ---------- touch screens: what hover does on desktop, done by scrolling and swiping ---------- */
+/* site.ts gives .on to the Selected Work card and the project tiles crossing the middle of the screen, .cur to
+   the card a swipe row has settled on, and --sp to each card in that row: how far it is from settling (-1 to 1). */
+@media (max-width: 899px) and (prefers-reduced-motion: no-preference) {
+  /* Swiping: the cards beside the current one sit back a little, and the screens drift at two depths. */
+  .stack > .scard { scale: calc(1 - var(--spa, 0) * 0.05); }
+  .stack .phone, .stack .tablet, .stack .v-sq { transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .stack .p1 { translate: calc(var(--sp, 0) * 18px) 0; }
+  .stack .p2 { translate: calc(var(--sp, 0) * 40px) 0; }
+  /* The card you are on, in the middle of the screen: its screens fan out and rise. */
+  .scard.cur.on .v-two .p1 { transform: translate(-4px, -8px) rotate(-10deg); }
+  .scard.cur.on .v-two .p2 { transform: translate(6px, -16px) rotate(9deg); }
+  .scard.cur.on .scard-visual:not(.v-two) .p1 { transform: translateY(-10px) rotate(-1deg); }
+  .scard.cur.on .v-sq { transform: scale(1.06); }
+  .scard-cta:active { scale: 0.95; }
+  /* A swipe row coming into view for the first time nudges over and back, to show there is more. */
+  [data-swipe].hint > * { animation: swipeHint 1.2s cubic-bezier(0.3, 0, 0.2, 1) both; }
+}
+@keyframes swipeHint { 0%, 100% { transform: none; } 35%, 55% { transform: translateX(-48px); } }
+/* Touch screens wide enough for the stacked cards: the desktop spread, from scrolling. */
+@media (hover: none) and (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .scard .phone, .scard .tablet, .v-sq { transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .scard.on .v-two .p1 { transform: translate(-14px, -6px) rotate(-3deg); }
+  .scard.on .v-two .p2 { transform: translate(14px, -10px) rotate(2deg); }
+  .scard.on .v-sq { transform: scale(1.025); }
+}
+/* More projects: the row of tiles in the middle of the screen lifts and its screens zoom in; a press sinks. */
+@media (hover: none) and (prefers-reduced-motion: no-preference), (max-width: 899px) and (prefers-reduced-motion: no-preference) {
+  .mw-card { transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease, box-shadow 0.4s ease; }
+  .mw-card .thumb img { transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .mw-grid > li.on .mw-card { transform: translateY(-4px); border-color: var(--line-strong); box-shadow: var(--shadow); }
+  .mw-grid > li.on .mw-card .thumb img { transform: scale(1.06); }
+  .mw-grid > li .mw-card:active { transform: scale(0.97); transition-duration: 0.12s; }
 }
 
 /* ---------- reveal on scroll: site.ts adds .reveal to what starts below the fold, then .in once ---------- */
