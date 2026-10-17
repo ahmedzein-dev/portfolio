@@ -16,12 +16,13 @@ interface Props {
 
 const { title, description, sections = [], image } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-// Link previews: a 1200px square cut from the original photo (public/photo), metadata stripped.
-const shareUrl = new URL('/photo/ahmed-zein-share.jpg', Astro.site);
-// LinkedIn keeps a preview image by its URL, even when it re-reads the page; a fingerprint of the file
-// in the query makes a changed image a new URL.
+// LinkedIn, WhatsApp and browsers keep a preview image by its URL, even when they re-read the page; a
+// fingerprint of the file in the query makes a changed image a new URL.
 const fingerprint = (path: string) => createHash('sha1').update(readFileSync(`public${path}`)).digest('hex').slice(0, 8);
-const previewUrl = image ? new URL(`${image}?v=${fingerprint(image)}`, Astro.site) : shareUrl;
+const versioned = (path: string) => new URL(`${path}?v=${fingerprint(path)}`, Astro.site);
+// Link previews: a 1200px square cut from the original photo (public/photo), metadata stripped.
+const shareUrl = versioned('/photo/ahmed-zein-share.jpg');
+const previewUrl = image ? versioned(image) : shareUrl;
 
 const person = {
   '@context': 'https://schema.org',
