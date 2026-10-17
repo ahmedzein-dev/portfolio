@@ -304,6 +304,7 @@ export const moreWork: MoreWork[] = [
     headline: 'Builders, brokers and finishers, in one marketplace',
     description:
       'A marketplace for residential, commercial and construction services, in Arabic. Customers talk directly to verified experts, compare their ratings and prices, negotiate and schedule the work; registered brokers get official IDs.',
+    role: 'Freelance Flutter Developer',
     shots: [
       { src: ostaChat, alt: 'Osta Home chat, in Arabic: a customer asks if the expert is free, the expert asks when to visit, and they talk price', kind: 'phone' },
       { src: ostaWallet, alt: 'Osta Home wallet, in Arabic: the balance, a coupon field and top-up details', kind: 'phone' },
@@ -329,6 +330,7 @@ export const moreWork: MoreWork[] = [
     headline: 'Group training, followed by coaches',
     description:
       'The app of Spark Fitness & Healthcare Center: personalised group training in supportive sessions, with activities tailored to each member and closely followed by coaches.',
+    role: 'Freelance Flutter Developer',
     shots: [
       { src: sparkHome, alt: 'Spark Fitness home: a welcome banner, contact, training activities with their prices, and subscriptions', kind: 'phone' },
       { src: sparkGallery, alt: 'Spark Fitness gallery: photos of members training at the center', kind: 'phone' },
@@ -352,6 +354,7 @@ export const moreWork: MoreWork[] = [
     headline: 'Two apps for a jewellery store, priced with the day’s gold',
     description:
       'Two apps for a gold jewellery store: a client app for discovering jewellery with real-time prices and search, and a manager app for running the store, from jewellers and products to the daily gold price.',
+    role: 'Freelance Flutter Developer',
     shots: [
       { src: alTaherWelcome, alt: 'Al-Taher Jewelry welcome screen, in Arabic, with a gold necklace', kind: 'phone' },
       { src: alTaherHome, alt: 'Al-Taher Jewelry home, in Arabic: featured pieces, then rings and bangles with their prices', kind: 'phone' },
