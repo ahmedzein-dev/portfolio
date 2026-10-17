@@ -116,7 +116,7 @@ document.addEventListener('click', (e) => {
   if (statusPanel && !statusPanel.hidden && !statusPanel.contains(e.target as Node)) setStatus(false);
 });
 
-/* ---------- section tracking, route rail and stacking cards ---------- */
+/* ---------- section tracking and route rail ---------- */
 const sections = $$('[data-section]');
 const tocLinks = $$<HTMLAnchorElement>('#island-panel a');
 const rail = $('#rail');
@@ -143,37 +143,12 @@ let tops: number[] = [];
 let stopY: number[] = [];
 let current = -1;
 
-const cards = $$('.scard');
-const stackQuery = window.matchMedia('(min-width: 900px) and (min-height: 680px)');
-let stackOn = false;
-let cardTop: number[] = [];
-let cardHeight: number[] = [];
-
 function measure() {
   const y = window.scrollY;
   tops = sections.map((s) => s.getBoundingClientRect().top + y);
   const h = rail?.clientHeight ?? 1;
   stopY = sections.map((_, i) => (sections.length > 1 ? (i * h) / (sections.length - 1) : 0));
   stops.forEach((b, i) => (b.style.top = `${stopY[i]}px`));
-  stackOn = stackQuery.matches && !reduced();
-  cards.forEach((c, i) => {
-    cardTop[i] = 84 + i * 18;
-    cardHeight[i] = c.offsetHeight;
-    if (!stackOn) {
-      c.style.removeProperty('--s');
-      c.style.removeProperty('--dim');
-    }
-  });
-}
-
-function updateStack() {
-  if (!stackOn) return;
-  for (let i = 0; i < cards.length - 1; i++) {
-    const nextTop = cards[i + 1].getBoundingClientRect().top;
-    const p = Math.min(1, Math.max(0, (cardTop[i] + cardHeight[i] - nextTop) / Math.max(1, cardHeight[i] - 18)));
-    cards[i].style.setProperty('--s', (1 - 0.05 * p).toFixed(4));
-    cards[i].style.setProperty('--dim', (0.3 * p).toFixed(3));
-  }
 }
 
 let ticking = false;
@@ -207,7 +182,6 @@ function frame() {
     if (railPuck) railPuck.style.transform = `translate(-50%, ${py - 7}px)`;
     if (railFill) railFill.style.height = `${py}px`;
   }
-  updateStack();
 }
 function onScroll() {
   if (!ticking) {
@@ -428,8 +402,8 @@ $$('[data-swipe]').forEach((row) => {
   row.addEventListener('pointerdown', stopHint);
 });
 
-/* ---------- touch screens: the card and tiles in the middle of the screen act as if hovered ---------- */
-// .on, while they cross the middle of the screen; the CSS uses it only where there is no hover.
+/* ---------- scrolling: the card and tiles in the middle of the screen act as if hovered ---------- */
+// .on, while they cross the middle of the screen.
 if (!reduced() && 'IntersectionObserver' in window) {
   const middle = new IntersectionObserver(
     (entries) => entries.forEach((e) => e.target.classList.toggle('on', e.isIntersecting)),
