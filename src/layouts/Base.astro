@@ -111,6 +111,11 @@ const person = {
 
     {/* Shown by site.ts once the first screen is scrolled past. */}
     <button class="to-top" id="to-top" type="button" aria-label="Back to top">
+      {/* How far down the page you are, like the island's ring. */}
+      <svg class="to-top-ring" viewBox="0 0 48 48" aria-hidden="true">
+        <circle class="bg" cx="24" cy="24" r="22"></circle>
+        <circle class="fg" id="to-top-ring" cx="24" cy="24" r="22" pathLength="1"></circle>
+      </svg>
       <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m0 0l-6 6m6-6l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
     </button>
 

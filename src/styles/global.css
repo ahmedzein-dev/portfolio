@@ -181,11 +181,15 @@ code { font-size: 0.86em; }
 .to-top {
   position: fixed; z-index: 55; right: calc(env(safe-area-inset-right, 0px) + 18px); bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
   display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.1);
-  background: var(--island); color: var(--island-ink); cursor: pointer; box-shadow: 0 16px 34px -14px rgba(0, 0, 0, 0.6);
+  background: var(--island); color: var(--island-ink); cursor: pointer; box-shadow: 0 16px 34px -14px rgba(0, 0, 0, 0.6); border-color: transparent;
   visibility: hidden; opacity: 0; translate: 0 12px;
   transition: opacity 0.25s ease, translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.25s;
 }
 .to-top.show { visibility: visible; opacity: 1; translate: none; transition: opacity 0.25s ease, translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.to-top-ring { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); transform: rotate(-90deg); pointer-events: none; }
+.to-top-ring circle { fill: none; stroke-width: 2.6; }
+.to-top-ring .bg { stroke: rgba(255, 255, 255, 0.12); }
+.to-top-ring .fg { stroke: var(--island-accent); stroke-dasharray: 1; stroke-dashoffset: 1; stroke-linecap: round; }
 .to-top:hover { translate: 0 -2px; }
 .to-top:active { scale: 0.94; }
 .rail { position: fixed; z-index: 40; left: 30px; top: 120px; bottom: 100px; width: 16px; display: none; }

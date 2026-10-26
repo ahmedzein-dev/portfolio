@@ -178,6 +178,7 @@ function updateStack() {
 
 let ticking = false;
 const toTop = $<HTMLButtonElement>('#to-top');
+const toTopRing = $<SVGCircleElement>('#to-top-ring');
 toTop?.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' });
   $('.brand')?.focus({ preventScroll: true });
@@ -205,6 +206,7 @@ function frame() {
     });
   }
   if (islandRing) islandRing.style.strokeDashoffset = String(50.27 * (1 - progress));
+  if (toTopRing) toTopRing.style.strokeDashoffset = String(1 - progress);
   if (rail && railQuery.matches && tops.length) {
     const i = Math.max(0, idx);
     const n = Math.min(i + 1, tops.length - 1);
