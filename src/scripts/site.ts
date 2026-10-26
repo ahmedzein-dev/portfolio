@@ -103,10 +103,51 @@ applyThemeLabel();
 /* ---------- status pill in the hero ---------- */
 const statusBtn = $<HTMLButtonElement>('#status-btn');
 const statusPanel = $('#status-panel');
+const statusRows = statusPanel ? $$('div', statusPanel) : [];
+let statusTyping = 0;
+// Opening the panel types its rows in, one after another, like a status readout.
+function typeStatus() {
+  window.cancelAnimationFrame(statusTyping);
+  const rows = statusRows.map((row) => ({ row, el: $('.vt', row), text: $('.vg', row)?.textContent ?? '' }));
+  if (reduced()) {
+    rows.forEach(({ row, el, text }) => {
+      row.classList.remove('wait');
+      if (el) el.textContent = text;
+    });
+    return;
+  }
+  rows.forEach(({ row, el }) => {
+    row.classList.add('wait');
+    if (el) el.textContent = '';
+  });
+  const perChar = 22;
+  const gap = 180;
+  let start = 0;
+  const step = (now: number) => {
+    start ||= now;
+    let t = now - start;
+    let running = false;
+    for (const { row, el, text } of rows) {
+      if (t < 0) break;
+      row.classList.remove('wait');
+      const n = Math.min(text.length, Math.floor(t / perChar) + 1);
+      if (el) el.replaceChildren(text.slice(0, n), ...(n < text.length ? [Object.assign(document.createElement('i'), { className: 'caret' })] : []));
+      if (n < text.length) {
+        running = true;
+        break;
+      }
+      t -= text.length * perChar + gap;
+    }
+    if (running || t < 0) statusTyping = requestAnimationFrame(step);
+  };
+  statusTyping = requestAnimationFrame(step);
+}
 function setStatus(open: boolean) {
   if (!statusBtn || !statusPanel) return;
   statusBtn.setAttribute('aria-expanded', String(open));
   statusPanel.hidden = !open;
+  if (open) typeStatus();
+  else window.cancelAnimationFrame(statusTyping);
 }
 statusBtn?.addEventListener('click', (e) => {
   e.stopPropagation();

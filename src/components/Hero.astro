@@ -40,7 +40,11 @@ import { profile, proof } from '../data/site';
       </button>
       <div class="status-panel" id="status-panel" hidden>
         {profile.now.map((row) => (
-          <div><span>{row.label}</span>{row.value}</div>
+          <div>
+            <span>{row.label}</span>
+            {/* site.ts types .vt when the panel opens; .vg holds the size, screen readers get .sr-only. */}
+            <span class="v"><span class="sr-only">{row.value}</span><span class="vg" aria-hidden="true">{row.value}</span><span class="vt" aria-hidden="true">{row.value}</span></span>
+          </div>
         ))}
       </div>
     </div>

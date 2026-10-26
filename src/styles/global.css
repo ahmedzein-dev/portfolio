@@ -257,6 +257,12 @@ code { font-size: 0.86em; }
 }
 .status-panel div { display: grid; gap: 1px; font-size: 0.86rem; }
 .status-panel span { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--island-accent); }
+.status-panel .v, .status-panel .v span { font: inherit; letter-spacing: normal; text-transform: none; color: inherit; }
+.status-panel .v { display: grid; }
+.status-panel .vg, .status-panel .vt { grid-area: 1 / 1; }
+.status-panel .vg { visibility: hidden; }
+.status-panel div.wait { opacity: 0; }
+.status-panel div { transition: opacity 0.2s ease; }
 .eyebrow { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .hero-sub { color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.12rem); max-width: 60ch; }
 .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
