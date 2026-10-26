@@ -407,27 +407,10 @@ if (!reduced() && 'IntersectionObserver' in window) {
 }
 
 /* ---------- count-up, once, when a number first scrolls into view ---------- */
-// Numbers on screen at load count up too. The inline script after them (Hero.astro) has already set
-// them to their starting value, so the first paint never shows the final one.
-function countUp(el: HTMLElement) {
-  const from = parseFloat(el.dataset.from ?? '0');
-  const to = parseFloat(el.dataset.count ?? '0');
-  const decimals = Number(el.dataset.decimals ?? 0);
-  const prefix = el.dataset.prefix ?? '';
-  const suffix = el.dataset.suffix ?? '';
-  const duration = 3000;
-  let start = 0;
-  const step = (now: number) => {
-    start ||= now;
-    const k = Math.min(1, (now - start) / duration);
-    const eased = 1 - Math.pow(1 - k, 3);
-    el.textContent = `${prefix}${(from + (to - from) * eased).toFixed(decimals)}${suffix}`;
-    if (k < 1) requestAnimationFrame(step);
-    else el.dataset.state = 'done';
-  };
-  requestAnimationFrame(step);
-}
-if (!reduced() && 'IntersectionObserver' in window) {
+// The inline script after the numbers (Hero.astro) owns the count (window.azCountUp) and has already
+// started the ones on screen; the rest count here as they scroll into view.
+const countUp = (window as Window & { azCountUp?: (el: HTMLElement) => void }).azCountUp;
+if (countUp && !reduced() && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -438,7 +421,7 @@ if (!reduced() && 'IntersectionObserver' in window) {
     },
     { threshold: 0.6 },
   );
-  const counters = $$('[data-count]');
+  const counters = $$('[data-count]').filter((el) => el.dataset.state === 'start');
   counters.forEach((el) => (el.dataset.state = 'waiting'));
   let watching = false;
   const watch = () => {
