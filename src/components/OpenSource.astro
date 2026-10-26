@@ -45,8 +45,10 @@ const rows = await Promise.all(packages.map(async (p) => ({ ...p, stats: await s
       )}
       {p.name === 'scroll_highlight_text' && (
         <div class="pkg-visual sht" aria-hidden="true">
-          Search, <mark class="cur">highlight</mark> and step through matches. Every <mark>highlight</mark> is counted.
-          <span class="ar">ابحث وحدد كل <mark>نتيجة</mark> في النص</span>
+          Search, <mark class="cur" data-q="highlight">highlight</mark> and step through matches. Every <mark data-q="highlight">highlight</mark> is counted.
+          <span class="ar">ابحث وحدد كل <mark data-q="نتيجة">نتيجة</mark> في النص</span>
+          {/* The search box site.ts types into: highlight (two Latin matches), then نتيجة (one Arabic match). */}
+          <span class="sht-q"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"></circle><path d="M10.5 10.5L14 14"></path></svg><span class="q" dir="auto"></span><i class="caret"></i></span>
           <span class="cnt">1 of 3</span>
         </div>
       )}

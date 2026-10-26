@@ -35,6 +35,12 @@ import { capabilities, capabilityTiles, education, experience } from '../data/si
         <li class="cap-tile" data-id={t.id}>{t.name}<small>{t.note}</small></li>
       ))}
     </ul>
-    <p class="cap-out" id="cap-out" aria-live="polite"></p>
+    {/* site.ts types the proof into .cap-typed; .cap-ghost holds its full size so nothing jumps, and
+        screen readers get the whole sentence at once from the live region. */}
+    <p class="cap-out" id="cap-out">
+      <span class="sr-only" aria-live="polite"></span>
+      <span class="cap-ghost" aria-hidden="true"></span>
+      <span class="cap-typed" aria-hidden="true"></span>
+    </p>
   </div>
 </div>

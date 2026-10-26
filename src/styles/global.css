@@ -493,7 +493,9 @@ a.mw-card { text-decoration: none; color: inherit; }
 .cap-tile.on { opacity: 1; border-color: var(--live); transform: translateY(-2px); }
 .cap-tile small { display: block; font-weight: 400; color: var(--muted); font-size: 0.72rem; }
 @media (max-width: 640px) { .cap-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.cap-out { font-size: 0.92rem; color: var(--muted); min-height: 3em; line-height: 1.5; margin-top: 14px; }
+.cap-out { font-size: 0.92rem; color: var(--muted); min-height: 3em; line-height: 1.5; margin-top: 14px; display: grid; }
+.cap-out > .cap-ghost, .cap-out > .cap-typed { grid-area: 1 / 1; }
+.cap-ghost { visibility: hidden; }
 .cap-out b { color: var(--text); font-weight: 600; }
 
 /* ---------- contact and footer ---------- */
@@ -577,6 +579,22 @@ a.mw-card { text-decoration: none; color: inherit; }
 @keyframes dcfScan { 0%, 30% { top: -30%; opacity: 0; } 40% { opacity: 1; } 70% { top: 100%; opacity: 0; } 100% { top: 100%; opacity: 0; } }
 /* scroll_highlight_text: the current match (mark.cur) and the count are moved along by site.ts. */
 .sht mark { transition: background-color 0.3s ease, color 0.3s ease; }
+/* Under .demo (site.ts) the marks start plain: a query is typed into the search box, its matches light up
+   and the current one steps along, then the next query. */
+.sht-q { display: none; }
+.sht.demo .sht-q {
+  position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 5px; min-width: 96px; padding: 3px 9px 3px 7px;
+  border-radius: 999px; background: var(--raised); border: 1px solid var(--line); font-family: var(--mono); font-stretch: 87.5%; font-size: 0.62rem; color: var(--text);
+}
+.sht-q svg { width: 11px; height: 11px; fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: round; }
+.sht.demo mark { background: transparent; color: inherit; }
+.sht.demo mark.hit { background: color-mix(in srgb, var(--accent-fill) 35%, transparent); color: var(--text); }
+.sht.demo mark.hit.cur { background: var(--accent-fill); color: var(--on-accent); }
+.sht .cnt { transition: opacity 0.2s ease; }
+.sht.demo .cnt.empty { opacity: 0; }
+/* The typing caret, here and in Capabilities. */
+.caret { display: inline-block; width: 1px; height: 1.05em; margin-left: 1px; vertical-align: -0.15em; background: currentColor; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
 /* draggable_floating_window: a recording of the example app, played by site.ts. */
 .pkg-visual video { width: 100%; height: 100%; object-fit: cover; display: block; }
 

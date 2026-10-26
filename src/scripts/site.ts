@@ -260,18 +260,52 @@ if (timeline && !reduced() && 'IntersectionObserver' in window && timeline.getBo
 }
 
 /* ---------- package demos: run only while their card is on screen ---------- */
-// The CSS loops run under .live; the highlight demo is stepped here, one match every 1.6 s, and the
-// floating windows recording plays.
+// The CSS loops run under .live; the highlight demo types its searches here, and the floating windows
+// recording plays.
 const pkgs = $$('.pkg');
 const sht = $('.sht');
 const marks = sht ? $$<HTMLElement>('mark', sht) : [];
 const shtCount = sht ? $('.cnt', sht) : null;
-let shtAt = 0;
-let shtTimer = 0;
-function stepHighlight() {
-  shtAt = (shtAt + 1) % marks.length;
-  marks.forEach((m, i) => m.classList.toggle('cur', i === shtAt));
-  if (shtCount) shtCount.textContent = `${shtAt + 1} of ${marks.length}`;
+const shtQuery = sht ? $('.sht-q .q', sht) : null;
+let shtRun = 0; // bumped to stop the running loop
+const shtWait = (ms: number, run: number) =>
+  new Promise<void>((done, stop) => window.setTimeout(() => (run === shtRun ? done() : stop()), ms));
+function shtShow(query: string, at: number) {
+  const hits = marks.filter((m) => m.dataset.q === query);
+  marks.forEach((m) => {
+    m.classList.toggle('hit', hits.includes(m));
+    m.classList.toggle('cur', hits[at] === m);
+  });
+  if (shtCount) {
+    shtCount.classList.toggle('empty', hits.length === 0);
+    if (hits.length) shtCount.textContent = `${at + 1} of ${hits.length}`;
+  }
+}
+// highlight finds the two Latin matches, نتيجة the Arabic one: typed, lit, stepped through, erased.
+async function runHighlight(run: number) {
+  if (!sht || !shtQuery) return;
+  sht.classList.add('demo');
+  for (;;) {
+    for (const q of ['highlight', 'نتيجة']) {
+      shtShow('', 0);
+      await shtWait(500, run);
+      for (let i = 1; i <= q.length; i++) {
+        shtQuery.textContent = q.slice(0, i);
+        await shtWait(110, run);
+      }
+      await shtWait(250, run);
+      const n = marks.filter((m) => m.dataset.q === q).length;
+      for (let at = 0; at < n; at++) {
+        shtShow(q, at);
+        await shtWait(1300, run);
+      }
+      await shtWait(500, run);
+      while (shtQuery.textContent) {
+        shtQuery.textContent = shtQuery.textContent.slice(0, -1);
+        await shtWait(45, run);
+      }
+    }
+  }
 }
 if (pkgs.length && !reduced() && 'IntersectionObserver' in window) {
   const live = new IntersectionObserver(
@@ -284,9 +318,9 @@ if (pkgs.length && !reduced() && 'IntersectionObserver' in window) {
           if (e.isIntersecting) video.play().catch(() => {});
           else video.pause();
         }
-        if (card.contains(sht) && marks.length > 1) {
-          window.clearInterval(shtTimer);
-          if (e.isIntersecting) shtTimer = window.setInterval(stepHighlight, 1600);
+        if (sht && card.contains(sht)) {
+          shtRun++;
+          if (e.isIntersecting) runHighlight(shtRun).catch(() => {});
         }
       }),
     { threshold: 0.4 },
@@ -488,22 +522,56 @@ if (deepLink && items.some((li) => li.dataset.id === deepLink)) location.replace
 const capButtons = $$<HTMLButtonElement>('.cap-btn');
 const capTiles = $$('.cap-tile');
 const capOut = $('#cap-out');
-function selectCapability(b: HTMLButtonElement) {
+const capSr = capOut ? $('.sr-only', capOut) : null;
+const capGhost = capOut ? $('.cap-ghost', capOut) : null;
+const capTyped = capOut ? $('.cap-typed', capOut) : null;
+let capCurrent: HTMLButtonElement | null = null;
+let capFrame = 0;
+// The proof types out as the answer to a tap, about a second for any sentence. The ghost copy keeps its
+// full size, and screen readers get the whole sentence from the live region at once. Tapping the same
+// capability again, or reduced motion, shows it all.
+function writeProof(el: HTMLElement, name: string, proof: string, n: number, caret: boolean) {
+  const strong = document.createElement('b');
+  strong.textContent = name.slice(0, n);
+  const parts: Node[] = [strong, document.createTextNode(proof.slice(0, Math.max(0, n - name.length)))];
+  if (caret) parts.push(Object.assign(document.createElement('i'), { className: 'caret' }));
+  el.replaceChildren(...parts);
+}
+function selectCapability(b: HTMLButtonElement, typeIt = true) {
+  const again = b === capCurrent;
+  capCurrent = b;
   capButtons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
   const ids = (b.dataset.ids ?? '').split(' ');
   capTiles.forEach((t) => t.classList.toggle('on', ids.includes(t.dataset.id ?? '')));
-  if (capOut) {
-    const strong = document.createElement('b');
-    strong.textContent = `${b.textContent?.trim()}. `;
-    capOut.replaceChildren(strong, document.createTextNode(b.dataset.proof ?? ''));
+  if (!capTyped || !capGhost || !capSr) return;
+  const name = `${b.textContent?.trim()}. `;
+  const proof = b.dataset.proof ?? '';
+  const total = name.length + proof.length;
+  window.cancelAnimationFrame(capFrame);
+  if (!again) {
+    capSr.textContent = name + proof;
+    writeProof(capGhost, name, proof, total, false);
   }
+  if (again || !typeIt || reduced()) {
+    writeProof(capTyped, name, proof, total, false);
+    return;
+  }
+  const perChar = Math.min(28, 1100 / total);
+  let start = 0;
+  const step = (now: number) => {
+    start ||= now;
+    const n = Math.min(total, Math.floor((now - start) / perChar) + 1);
+    writeProof(capTyped, name, proof, n, n < total);
+    if (n < total) capFrame = requestAnimationFrame(step);
+  };
+  capFrame = requestAnimationFrame(step);
 }
 capButtons.forEach((b) => {
   b.addEventListener('click', () => selectCapability(b));
   b.addEventListener('mouseenter', () => selectCapability(b));
   b.addEventListener('focus', () => selectCapability(b));
 });
-if (capButtons[0]) selectCapability(capButtons[0]);
+if (capButtons[0]) selectCapability(capButtons[0], false);
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
