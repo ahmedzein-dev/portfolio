@@ -30,6 +30,10 @@ export const profile = {
   title: 'Senior Mobile Engineer',
   location: 'Abu Dhabi',
   email: 'ahmed.zein1896@gmail.com',
+  phone: '+971544626234',
+  phoneLabel: '+971 54 462 6234',
+  /** The CV from FlowCV (public/cv); replace the file to update it. */
+  cv: '/cv/Ahmed-Zein-CV.pdf',
   availability: {
     long: 'Open to full-time roles and freelance work',
     short: 'Open to work',
@@ -46,6 +50,7 @@ export const profile = {
   ],
   links: {
     linkedin: 'https://www.linkedin.com/in/ahmed-zein-294230270',
+    whatsapp: 'https://wa.me/971544626234',
     github: 'https://github.com/ahmedzein-dev',
     pubdev: 'https://pub.dev/publishers/ahmedzein.dev/packages',
   },

@@ -53,17 +53,37 @@ const year = new Date().getFullYear();
       <div class="contact">
         <p class="label" style="color:rgba(242,237,229,.7)"><span class="n">5</span> Contact</p>
         <h2 id="contact-title">Have a mobile app that needs to stay live?</h2>
-        <p>{profile.availability.long}. Email is the fastest way to reach me.</p>
+        <p>{profile.availability.long}. Email or WhatsApp is the fastest way to reach me.</p>
         <div class="mail">
           <span id="mail-text">{profile.email}</span>
           <button class="btn btn-sm" type="button" data-copy={profile.email} data-copy-msg="Email copied" data-copy-target="#mail-text">Copy email</button>
         </div>
-        <div class="contact-links">
-          <a href={profile.links.linkedin}>LinkedIn</a>
-          <a href={profile.links.github}>GitHub</a>
-          <a href={profile.links.pubdev}>pub.dev</a>
-          <a href={`mailto:${profile.email}`}>Send an email</a>
-        </div>
+        <ul class="contact-links" aria-label="Other ways to reach me">
+          <li><a href={`tel:${profile.phone}`} aria-label={`Phone, ${profile.phoneLabel}`}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ln" d="M6.6 3.5h2.6l1.5 4-2 1.4a11 11 0 0 0 6.4 6.4l1.4-2 4 1.5v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"></path></svg>
+            Phone
+          </a></li>
+          <li><a href={profile.links.whatsapp} rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ln" d="M4 20l1.3-3.9A8.6 8.6 0 1 1 8.2 19z"></path><path class="ln" d="M9.2 8.6c.3 2.6 2.3 4.9 5 5.6l1.1-1.2 1.6.8-.4 1.5c-3.8.2-7.5-3.3-7.5-7.2l1.5-.4.8 1.6z"></path></svg>
+            WhatsApp
+          </a></li>
+          <li><a href={`mailto:${profile.email}`}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ln" x="3.5" y="5.5" width="17" height="13" rx="2.5"></rect><path class="ln" d="M4 7l8 6 8-6"></path></svg>
+            Email
+          </a></li>
+          <li><a href={profile.links.linkedin} rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect class="ln" x="3.5" y="3.5" width="17" height="17" rx="3"></rect><path class="ln" d="M8 10.5v6M8 7.6v.1M11.5 16.5v-6m0 2.6c0-1.6 1-2.8 2.4-2.8s2.1.9 2.1 2.6v3.6"></path></svg>
+            LinkedIn
+          </a></li>
+          <li><a href={profile.links.github} rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="fl" d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"></path></svg>
+            GitHub
+          </a></li>
+          <li><a href={profile.links.pubdev} rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path class="ln" d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"></path><path class="ln" d="M4 7.5l8 4.5 8-4.5M12 12v9"></path></svg>
+            pub.dev
+          </a></li>
+        </ul>
       </div>
     </section>
 

@@ -33,6 +33,7 @@ const person = {
   url: Astro.site?.toString(),
   image: shareUrl.toString(),
   email: `mailto:${profile.email}`,
+  telephone: profile.phone,
   address: { '@type': 'PostalAddress', addressLocality: profile.location, addressCountry: 'AE' },
   worksFor: { '@type': 'Organization', name: 'Kief Consultancy & Technology' },
   sameAs: [profile.links.linkedin, profile.links.github, profile.links.pubdev],

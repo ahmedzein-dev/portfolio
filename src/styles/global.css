@@ -488,8 +488,16 @@ a.mw-card { text-decoration: none; color: inherit; }
 .mail { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 14px; padding: 8px 8px 8px 14px; max-width: 560px; }
 .mail span { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.92rem; flex: 1; min-width: 0; overflow-wrap: anywhere; }
 .mail .btn { background: #d4aa7d; color: #1b1309; }
-.contact-links { display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.95rem; }
-.contact-links a { color: #f2ede5; }
+.contact-links { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; max-width: 640px; }
+.contact-links a {
+  display: grid; justify-items: center; gap: 8px; padding: 14px 6px 12px; border: 1px solid rgba(242, 237, 229, 0.16); border-radius: 14px;
+  color: #f2ede5; font-size: 0.84rem; text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+.contact-links a:hover { border-color: #d4aa7d; background: rgba(212, 170, 125, 0.08); transform: translateY(-2px); }
+.contact-links svg { width: 22px; height: 22px; }
+.contact-links .ln { fill: none; stroke: #d4aa7d; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.contact-links .fl { fill: #d4aa7d; }
+@media (max-width: 640px) { .contact-links { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; font-size: 0.84rem; color: var(--muted); }
 
 /* ---------- case study ---------- */
