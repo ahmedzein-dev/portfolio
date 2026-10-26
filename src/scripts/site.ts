@@ -527,7 +527,7 @@ const capGhost = capOut ? $('.cap-ghost', capOut) : null;
 const capTyped = capOut ? $('.cap-typed', capOut) : null;
 let capCurrent: HTMLButtonElement | null = null;
 let capFrame = 0;
-// The proof types out as the answer to a tap, about a second for any sentence. The ghost copy keeps its
+// The proof types out as the answer to a tap, 28 ms a character. The ghost copy keeps its
 // full size, and screen readers get the whole sentence from the live region at once. Tapping the same
 // capability again, or reduced motion, shows it all.
 function writeProof(el: HTMLElement, name: string, proof: string, n: number, caret: boolean) {
@@ -556,7 +556,7 @@ function selectCapability(b: HTMLButtonElement, typeIt = true) {
     writeProof(capTyped, name, proof, total, false);
     return;
   }
-  const perChar = Math.min(28, 1100 / total);
+  const perChar = 28;
   let start = 0;
   const step = (now: number) => {
     start ||= now;
