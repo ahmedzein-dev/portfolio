@@ -571,11 +571,7 @@ a.mw-card { text-decoration: none; color: inherit; }
 /* ---------- package demos: each card acts out its package while on screen (site.ts adds .live) ---------- */
 /* document_camera_frame, one 5 s capture: the card comes in tilted while the frame searches (wide and
    faint), settles, the frame locks onto it and turns solid, a scan passes, a flash, Captured, then again. */
-.dcf .scan {
-  position: absolute; left: 0; right: 0; top: -34%; height: 34%; opacity: 0;
-  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--live) 40%, transparent) 75%, var(--live));
-  border-bottom: 2px solid var(--live); box-shadow: 0 2px 12px var(--live);
-}
+.dcf .scan { position: absolute; left: 0; right: 0; top: 0; height: 2px; opacity: 0; background: var(--live); box-shadow: 0 0 10px 1px var(--live); }
 .pkg.live .dcf .card { animation: dcfCard 5s cubic-bezier(0.3, 0.7, 0.2, 1) infinite; }
 .pkg.live .dcf .frame { animation: dcfFrame 5s cubic-bezier(0.3, 0.7, 0.2, 1) infinite; }
 .pkg.live .dcf .c { animation: dcfCorner 5s linear infinite; }
@@ -595,7 +591,7 @@ a.mw-card { text-decoration: none; color: inherit; }
   36%, 92% { border-color: var(--live); }
   100% { border-color: rgba(255, 255, 255, 0.45); }
 }
-@keyframes dcfScan { 0%, 38% { top: -34%; opacity: 0; } 42% { opacity: 1; } 58% { top: 100%; opacity: 1; } 60%, 100% { top: 100%; opacity: 0; } }
+@keyframes dcfScan { 0%, 38% { top: 0; opacity: 0; } 41% { opacity: 1; } 57% { top: calc(100% - 2px); opacity: 1; } 60%, 100% { top: calc(100% - 2px); opacity: 0; } }
 @keyframes dcfFlash { 0%, 60% { opacity: 0; } 62% { opacity: 0.28; } 70%, 100% { opacity: 0; } }
 @keyframes dcfOk { 0%, 64% { opacity: 0; scale: 0.6; } 70%, 88% { opacity: 1; scale: 1; } 94%, 100% { opacity: 0; scale: 1; } }
 /* scroll_highlight_text: the current match (mark.cur) and the count are moved along by site.ts. */
