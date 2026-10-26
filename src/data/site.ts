@@ -32,8 +32,8 @@ export const profile = {
   email: 'ahmed.zein1896@gmail.com',
   phone: '+971544626234',
   phoneLabel: '+971 54 462 6234',
-  /** The CV from FlowCV (public/cv); replace the file to update it. */
-  cv: '/cv/Ahmed-Zein-CV.pdf',
+  /** The CV's FlowCV share page (it has its own download button), so edits in FlowCV show here at once. */
+  cv: 'https://flowcv.com/resume/bv5wspp0nm',
   availability: {
     long: 'Open to full-time roles and freelance work',
     short: 'Open to work',
