@@ -374,14 +374,23 @@ code { font-size: 0.86em; }
 .pkg-gh:hover { border-color: var(--line-strong); transform: translateY(-2px); }
 .pkg-gh svg { width: 17px; height: 17px; fill: currentColor; }
 .dcf { display: grid; place-items: center; }
-.dcf .card { position: relative; width: 62%; aspect-ratio: 1.586; border-radius: 8px; background: linear-gradient(135deg, #c9d3df, #9fb0c4); box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5); }
+/* The card and the frame share one box, sized by height so the card fits the strip; the corners sit just
+   outside it. At rest (and under reduced motion) the frame is locked on the card. */
+.dcf .card, .dcf .frame { grid-area: 1 / 1; height: 68%; aspect-ratio: 1.586; }
+.dcf .card { position: relative; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, #c9d3df, #9fb0c4); box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5); }
 .dcf .card::before { content: ''; position: absolute; left: 8%; top: 22%; width: 22%; height: 46%; border-radius: 4px; background: rgba(20, 30, 45, 0.35); }
-.dcf .card::after { content: ''; position: absolute; left: 36%; top: 26%; width: 52%; height: 6px; border-radius: 3px; background: rgba(20, 30, 45, 0.35); box-shadow: 0 12px 0 rgba(20, 30, 45, 0.25), 0 24px 0 rgba(20, 30, 45, 0.25); }
-.dcf .c { position: absolute; width: 18px; height: 18px; border-color: var(--live); border-style: solid; border-width: 0; }
-.dcf .c1 { left: 16%; top: 14%; border-left-width: 3px; border-top-width: 3px; border-top-left-radius: 6px; }
-.dcf .c2 { right: 16%; top: 14%; border-right-width: 3px; border-top-width: 3px; border-top-right-radius: 6px; }
-.dcf .c3 { left: 16%; bottom: 14%; border-left-width: 3px; border-bottom-width: 3px; border-bottom-left-radius: 6px; }
-.dcf .c4 { right: 16%; bottom: 14%; border-right-width: 3px; border-bottom-width: 3px; border-bottom-right-radius: 6px; }
+.dcf .card::after { content: ''; position: absolute; left: 36%; top: 26%; width: 52%; height: 6%; border-radius: 3px; background: rgba(20, 30, 45, 0.35); box-shadow: 0 0.9em 0 rgba(20, 30, 45, 0.25), 0 1.8em 0 rgba(20, 30, 45, 0.25); }
+.dcf .frame { position: relative; }
+.dcf .c { position: absolute; width: 16px; height: 16px; border-color: var(--live); border-style: solid; border-width: 0; }
+.dcf .c1 { left: -7px; top: -7px; border-left-width: 3px; border-top-width: 3px; border-top-left-radius: 6px; }
+.dcf .c2 { right: -7px; top: -7px; border-right-width: 3px; border-top-width: 3px; border-top-right-radius: 6px; }
+.dcf .c3 { left: -7px; bottom: -7px; border-left-width: 3px; border-bottom-width: 3px; border-bottom-left-radius: 6px; }
+.dcf .c4 { right: -7px; bottom: -7px; border-right-width: 3px; border-bottom-width: 3px; border-bottom-right-radius: 6px; }
+.dcf .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.dcf .ok {
+  position: absolute; left: 50%; bottom: 7px; translate: -50% 0; padding: 2px 8px; border-radius: 999px; opacity: 0;
+  background: var(--live); color: #062b25; font-family: var(--mono); font-stretch: 87.5%; font-size: 0.58rem; font-weight: 600; letter-spacing: 0.04em;
+}
 .sht { padding: 16px 18px; font-size: 0.86rem; line-height: 1.7; color: var(--muted); }
 .sht mark { background: color-mix(in srgb, var(--accent-fill) 35%, transparent); color: var(--text); border-radius: 3px; padding: 0 2px; }
 .sht mark.cur { background: var(--accent-fill); color: var(--on-accent); }
@@ -399,12 +408,8 @@ code { font-size: 0.86em; }
   .pkg p { padding: 0 4px; font-size: 0.82rem; line-height: 1.4; }
   .pkg-stats { padding: 0 4px 4px; gap: 4px 16px; }
   .pkg-stats dd { font-size: 0.82rem; }
-  .dcf .card { width: auto; height: 74%; }
-  .dcf .c { width: 14px; height: 14px; }
-  .dcf .c1, .dcf .c3 { left: 28%; }
-  .dcf .c2, .dcf .c4 { right: 28%; }
-  .dcf .c1, .dcf .c2 { top: 8%; }
-  .dcf .c3, .dcf .c4 { bottom: 8%; }
+  .dcf .c { width: 12px; height: 12px; }
+  .dcf .ok { bottom: 4px; padding: 1px 6px; font-size: 0.5rem; }
   .sht { padding: 9px 12px; font-size: 0.74rem; line-height: 1.55; }
   .sht .cnt { display: none; }
 }
@@ -564,25 +569,35 @@ a.mw-card { text-decoration: none; color: inherit; }
 .next-case { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 
 /* ---------- package demos: each card acts out its package while on screen (site.ts adds .live) ---------- */
-/* document_camera_frame: the corners close in on the card, a scan line passes, the frame locks (turns solid). */
-.dcf .card { overflow: hidden; }
+/* document_camera_frame, one 5 s capture: the card comes in tilted while the frame searches (wide and
+   faint), settles, the frame locks onto it and turns solid, a scan passes, a flash, Captured, then again. */
 .dcf .scan {
-  position: absolute; left: 0; right: 0; top: 0; height: 34%; opacity: 0;
+  position: absolute; left: 0; right: 0; top: -34%; height: 34%; opacity: 0;
   background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--live) 40%, transparent) 75%, var(--live));
   border-bottom: 2px solid var(--live); box-shadow: 0 2px 12px var(--live);
 }
-.pkg.live .dcf .c { animation: dcfLock 4.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
-.pkg.live .dcf .c1 { --dx: -10px; --dy: -8px; }
-.pkg.live .dcf .c2 { --dx: 10px; --dy: -8px; }
-.pkg.live .dcf .c3 { --dx: -10px; --dy: 8px; }
-.pkg.live .dcf .c4 { --dx: 10px; --dy: 8px; }
-.pkg.live .dcf .scan { animation: dcfScan 4.2s ease-in-out infinite; }
-@keyframes dcfLock {
-  0%, 12% { translate: var(--dx) var(--dy); opacity: 0.45; }
-  38%, 82% { translate: 0 0; opacity: 1; }
-  100% { translate: var(--dx) var(--dy); opacity: 0.45; }
+.pkg.live .dcf .card { animation: dcfCard 5s cubic-bezier(0.3, 0.7, 0.2, 1) infinite; }
+.pkg.live .dcf .frame { animation: dcfFrame 5s cubic-bezier(0.3, 0.7, 0.2, 1) infinite; }
+.pkg.live .dcf .c { animation: dcfCorner 5s linear infinite; }
+.pkg.live .dcf .scan { animation: dcfScan 5s ease-in-out infinite; }
+.pkg.live .dcf .flash { animation: dcfFlash 5s ease-out infinite; }
+.pkg.live .dcf .ok { animation: dcfOk 5s cubic-bezier(0.3, 1.5, 0.5, 1) infinite; }
+@keyframes dcfCard {
+  0% { opacity: 0; translate: 26px 10px; rotate: -8deg; scale: 0.9; }
+  8% { opacity: 1; }
+  28%, 56% { translate: 0 0; rotate: 0deg; scale: 1; }
+  64%, 90% { scale: 0.95; opacity: 1; }
+  100% { scale: 0.95; opacity: 0; }
 }
-@keyframes dcfScan { 0%, 30% { top: -30%; opacity: 0; } 40% { opacity: 1; } 70% { top: 100%; opacity: 0; } 100% { top: 100%; opacity: 0; } }
+@keyframes dcfFrame { 0%, 26% { scale: 1.12; } 36%, 92% { scale: 1; } 100% { scale: 1.12; } }
+@keyframes dcfCorner {
+  0%, 30% { border-color: rgba(255, 255, 255, 0.45); }
+  36%, 92% { border-color: var(--live); }
+  100% { border-color: rgba(255, 255, 255, 0.45); }
+}
+@keyframes dcfScan { 0%, 38% { top: -34%; opacity: 0; } 42% { opacity: 1; } 58% { top: 100%; opacity: 1; } 60%, 100% { top: 100%; opacity: 0; } }
+@keyframes dcfFlash { 0%, 60% { opacity: 0; } 62% { opacity: 0.28; } 70%, 100% { opacity: 0; } }
+@keyframes dcfOk { 0%, 64% { opacity: 0; scale: 0.6; } 70%, 88% { opacity: 1; scale: 1; } 94%, 100% { opacity: 0; scale: 1; } }
 /* scroll_highlight_text: the current match (mark.cur) and the count are moved along by site.ts. */
 .sht mark { transition: background-color 0.3s ease, color 0.3s ease; }
 /* Under .demo (site.ts) the marks start plain: a query is typed into the search box, its matches light up
