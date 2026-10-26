@@ -340,7 +340,7 @@ function countUp(el: HTMLElement) {
   const decimals = Number(el.dataset.decimals ?? 0);
   const prefix = el.dataset.prefix ?? '';
   const suffix = el.dataset.suffix ?? '';
-  const duration = 2400;
+  const duration = 3000;
   let start = 0;
   const step = (now: number) => {
     start ||= now;
