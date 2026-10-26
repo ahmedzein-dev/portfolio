@@ -177,6 +177,17 @@ code { font-size: 0.86em; }
 }
 
 /* ---------- route rail ---------- */
+/* ---------- back to top ---------- */
+.to-top {
+  position: fixed; z-index: 55; right: calc(env(safe-area-inset-right, 0px) + 18px); bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+  display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--island); color: var(--island-ink); cursor: pointer; box-shadow: 0 16px 34px -14px rgba(0, 0, 0, 0.6);
+  visibility: hidden; opacity: 0; translate: 0 12px;
+  transition: opacity 0.25s ease, translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.25s;
+}
+.to-top.show { visibility: visible; opacity: 1; translate: none; transition: opacity 0.25s ease, translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.to-top:hover { translate: 0 -2px; }
+.to-top:active { scale: 0.94; }
 .rail { position: fixed; z-index: 40; left: 30px; top: 120px; bottom: 100px; width: 16px; display: none; }
 @media (min-width: 1320px) { .rail { display: block; } }
 .rail-track, .rail-fill { position: absolute; left: 7px; width: 2px; border-radius: 2px; }

@@ -177,10 +177,17 @@ function updateStack() {
 }
 
 let ticking = false;
+const toTop = $<HTMLButtonElement>('#to-top');
+toTop?.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' });
+  $('.brand')?.focus({ preventScroll: true });
+});
+
 function frame() {
   ticking = false;
   const y = window.scrollY;
   const vh = window.innerHeight;
+  toTop?.classList.toggle('show', y > vh * 0.9);
   const line = y + vh * 0.35;
   let idx = -1;
   for (let i = 0; i < tops.length; i++) if (tops[i] <= line) idx = i;
