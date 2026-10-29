@@ -40,11 +40,11 @@ const page = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" h
     <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0b0f15"/><stop offset="1" stop-color="#121925"/></linearGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#fade)"/><rect width="${W}" height="${H}" fill="url(#glow)"/>
-  <text x="${tx}" y="104" font-family="Menlo" font-size="19" letter-spacing="3" fill="#d4aa7d">SENIOR MOBILE ENGINEER · FLUTTER · ABU DHABI</text>
+  <text x="${tx}" y="104" font-family="Menlo" font-size="19" letter-spacing="3" fill="#d4aa7d">SENIOR MOBILE ENGINEER · FLUTTER</text>
   <text x="${tx}" y="178" font-family="Helvetica Neue" font-weight="700" font-size="60" fill="#f2ede5">I build mobile apps</text>
   <text x="${tx}" y="244" font-family="Helvetica Neue" font-weight="700" font-size="60" fill="#f2ede5">that stay live.</text>
   <text x="${tx}" y="300" font-family="Helvetica Neue" font-size="21" fill="#a3a9b5">Real-time tracking · Background execution · iOS Live Activities · Payments</text>
-  <text x="${tx}" y="346" font-family="Menlo" font-size="18" fill="#a3a9b5"><tspan fill="#f2ede5">3</tspan> apps live in UAE stores <tspan fill="#d4aa7d">·</tspan> <tspan fill="#f2ede5">3.5M</tspan> AED a month <tspan fill="#d4aa7d">·</tspan> <tspan fill="#f2ede5">3</tspan> packages on pub.dev</text>
+  <text x="${tx}" y="346" font-family="Menlo" font-size="18" fill="#a3a9b5"><tspan fill="#f2ede5">3</tspan> apps live in UAE stores <tspan fill="#d4aa7d">·</tspan> <tspan fill="#f2ede5">3</tspan> open-source packages on pub.dev</text>
   <text x="${W - 40}" y="56" text-anchor="end" font-family="Menlo" font-size="20" fill="#d4aa7d">ahmedzein.dev</text>
 </svg>`);
 
