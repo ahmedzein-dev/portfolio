@@ -53,30 +53,30 @@ await png(180, 'public/apple-touch-icon.png');
 // name, title and headline on the right. Link cards (LinkedIn's among them) are wide, so a square would
 // be cropped to a strip through the face. System fonts stand in for the site's web fonts.
 {
-  const [W, H, pw, ph, px, py] = [1200, 630, 360, 450, 96, 90];
+  // Shown as small as ~230 px wide (LinkedIn's Featured cards), so only big type and a big photo.
+  const [W, H, pw, ph, px, py] = [1200, 630, 420, 525, 64, 52];
   const portrait = await sharp(hero)
     .resize(pw, ph, { kernel: 'lanczos3' })
     .sharpen({ sigma: 0.7, m1: 1.4, m2: 2.4, x1: 2 })
-    .composite([{ input: Buffer.from(`<svg width="${pw}" height="${ph}"><rect width="${pw}" height="${ph}" rx="30" fill="#fff"/></svg>`), blend: 'dest-in' }])
+    .composite([{ input: Buffer.from(`<svg width="${pw}" height="${ph}"><rect width="${pw}" height="${ph}" rx="34" fill="#fff"/></svg>`), blend: 'dest-in' }])
     .png()
     .toBuffer();
-  const tx = px + pw + 70;
+  const tx = px + pw + 64;
   const page = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
     <defs>
-      <radialGradient id="glow" cx="0.22" cy="0.5" r="0.6"><stop offset="0" stop-color="#d4aa7d" stop-opacity="0.16"/><stop offset="1" stop-color="#d4aa7d" stop-opacity="0"/></radialGradient>
-      <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4aa7d"/><stop offset="0.55" stop-color="#d4aa7d" stop-opacity="0.15"/><stop offset="1" stop-color="#d4aa7d"/></linearGradient>
+      <radialGradient id="glow" cx="0.25" cy="0.5" r="0.6"><stop offset="0" stop-color="#d4aa7d" stop-opacity="0.18"/><stop offset="1" stop-color="#d4aa7d" stop-opacity="0"/></radialGradient>
+      <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4aa7d"/><stop offset="0.55" stop-color="#d4aa7d" stop-opacity="0.2"/><stop offset="1" stop-color="#d4aa7d"/></linearGradient>
     </defs>
     <rect width="${W}" height="${H}" fill="#0e1219"/><rect width="${W}" height="${H}" fill="url(#glow)"/>
-    <rect x="${px - 7}" y="${py - 7}" width="${pw + 14}" height="${ph + 14}" rx="36" fill="url(#ring)"/>
-    <rect x="${px - 3}" y="${py - 3}" width="${pw + 6}" height="${ph + 6}" rx="32" fill="#0e1219"/>
-    <text x="${tx}" y="236" font-family="Helvetica Neue" font-weight="700" font-size="66" fill="#f2ede5">Ahmed Zein</text>
-    <text x="${tx}" y="286" font-family="Menlo" font-size="20" letter-spacing="2" fill="#a3a9b5">SENIOR MOBILE ENGINEER · ABU DHABI</text>
-    <text x="${tx}" y="372" font-family="Helvetica Neue" font-weight="700" font-size="38" fill="#f2ede5">I build mobile apps</text>
-    <text x="${tx}" y="420" font-family="Helvetica Neue" font-weight="700" font-size="38" fill="#f2ede5">that stay live.</text>
-    <text x="${tx}" y="500" font-family="Menlo" font-size="22" fill="#d4aa7d">ahmedzein.dev</text>
+    <rect x="${px - 8}" y="${py - 8}" width="${pw + 16}" height="${ph + 16}" rx="41" fill="url(#ring)"/>
+    <rect x="${px - 4}" y="${py - 4}" width="${pw + 8}" height="${ph + 8}" rx="37" fill="#0e1219"/>
+    <text x="${tx}" y="232" font-family="Helvetica Neue" font-weight="700" font-size="88" fill="#f2ede5">Ahmed Zein</text>
+    <text x="${tx}" y="300" font-family="Helvetica Neue" font-weight="500" font-size="40" fill="#d4aa7d">Senior Mobile Engineer</text>
+    <text x="${tx}" y="400" font-family="Helvetica Neue" font-weight="700" font-size="46" fill="#f2ede5">I build mobile apps</text>
+    <text x="${tx}" y="458" font-family="Helvetica Neue" font-weight="700" font-size="46" fill="#f2ede5">that stay live.</text>
   </svg>`);
   const card = await sharp(page).composite([{ input: portrait, left: px, top: py }]).png().toBuffer();
-  await sharp(card).jpeg({ quality: 90, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile('public/share/home.jpg');
+  await sharp(card).jpeg({ quality: 95, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile('public/share/home.jpg');
 }
 
 // An ICO holding one 32 × 32 PNG: a 6-byte header, one 16-byte entry, then the PNG.
