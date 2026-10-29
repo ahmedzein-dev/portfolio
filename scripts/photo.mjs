@@ -4,7 +4,7 @@
 //
 // The hero shows a 4:5 portrait cut from the photo: its full width (or as wide as 4:5 allows), from
 // `top` px down (default 0): space above the head, the suit showing. The link preview and the icons
-// use a square, the photo's full width from 2% of its height down. Writes, metadata-free and sRGB:
+// use a tighter square around the head (see `square` below). Writes, metadata-free and sRGB:
 //   public/photo/ahmed-zein-{120,240,360,480}.jpg   the hero portrait, that many px wide (1x to 4x), lightly sharpened
 //   public/photo/ahmed-zein-share.jpg               a 1200 px square (the person in the page's structured data)
 //   public/share/home.jpg                           the home page's 1200 × 630 link preview: photo, name, title
@@ -20,14 +20,19 @@ const cut = (width, height, top) =>
   sharp(src)
     .rotate()
     .flatten({ background: '#ffffff' })
+    // Lifts the near-white background (253-254) to pure white, hiding a faint seam an edit left in it;
+    // about 1% brighter overall, which faces and fabric do not show.
+    .linear(1.012, 0)
     .extract({ left: Math.round((meta.width - width) / 2), top: Math.min(top, meta.height - height), width, height })
     .toColourspace('srgb')
     .png()
     .toBuffer();
 const heroW = Math.min(meta.width, Math.floor((meta.height * 4) / 5));
 const hero = await cut(heroW, Math.round((heroW * 5) / 4), Number(topArg ?? 0));
-const inner = Math.min(meta.width, meta.height);
-const square = await cut(inner, inner, Math.round(meta.height * 0.02));
+// Icons are tiny, so their square is tighter: 81% of the width, from 9.5% of the height (head and collar
+// in this photo's framing; adjust if a new photo is framed differently).
+const inner = Math.round(Math.min(meta.width, meta.height) * 0.81);
+const square = await cut(inner, inner, Math.round(meta.height * 0.095));
 
 const sized = (px, from = square, h = px) => sharp(from).resize(px, h, { kernel: 'lanczos3' });
 // The hero is small, so it gets a firmer unsharp mask and a higher quality, which keep hair, brows
