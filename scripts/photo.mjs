@@ -6,7 +6,8 @@
 // `top` px down (default 0): space above the head, the suit showing. The link preview and the icons
 // use a square, the photo's full width from 2% of its height down. Writes, metadata-free and sRGB:
 //   public/photo/ahmed-zein-{120,240,360,480}.jpg   the hero portrait, that many px wide (1x to 4x), lightly sharpened
-//   public/photo/ahmed-zein-share.jpg               the 1200 px link preview of the home page
+//   public/photo/ahmed-zein-share.jpg               a 1200 px square (the person in the page's structured data)
+//   public/share/home.jpg                           the home page's 1200 × 630 link preview: photo, name, title
 //   public/icon-{192,512}.png, apple-touch-icon.png  the home-screen and shortcut icons
 //   public/favicon.ico                               32 px, a PNG inside an ICO
 import sharp from 'sharp';
@@ -42,6 +43,36 @@ await jpg(1200, 'public/photo/ahmed-zein-share.jpg', false);
 await png(512, 'public/icon-512.png');
 await png(192, 'public/icon-192.png');
 await png(180, 'public/apple-touch-icon.png');
+
+// The home page's link preview, in the site's dark style: the portrait in its accent ring on the left,
+// name, title and headline on the right. Link cards (LinkedIn's among them) are wide, so a square would
+// be cropped to a strip through the face. System fonts stand in for the site's web fonts.
+{
+  const [W, H, pw, ph, px, py] = [1200, 630, 360, 450, 96, 90];
+  const portrait = await sharp(hero)
+    .resize(pw, ph, { kernel: 'lanczos3' })
+    .sharpen({ sigma: 0.7, m1: 1.4, m2: 2.4, x1: 2 })
+    .composite([{ input: Buffer.from(`<svg width="${pw}" height="${ph}"><rect width="${pw}" height="${ph}" rx="30" fill="#fff"/></svg>`), blend: 'dest-in' }])
+    .png()
+    .toBuffer();
+  const tx = px + pw + 70;
+  const page = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+    <defs>
+      <radialGradient id="glow" cx="0.22" cy="0.5" r="0.6"><stop offset="0" stop-color="#d4aa7d" stop-opacity="0.16"/><stop offset="1" stop-color="#d4aa7d" stop-opacity="0"/></radialGradient>
+      <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4aa7d"/><stop offset="0.55" stop-color="#d4aa7d" stop-opacity="0.15"/><stop offset="1" stop-color="#d4aa7d"/></linearGradient>
+    </defs>
+    <rect width="${W}" height="${H}" fill="#0e1219"/><rect width="${W}" height="${H}" fill="url(#glow)"/>
+    <rect x="${px - 7}" y="${py - 7}" width="${pw + 14}" height="${ph + 14}" rx="36" fill="url(#ring)"/>
+    <rect x="${px - 3}" y="${py - 3}" width="${pw + 6}" height="${ph + 6}" rx="32" fill="#0e1219"/>
+    <text x="${tx}" y="236" font-family="Helvetica Neue" font-weight="700" font-size="66" fill="#f2ede5">Ahmed Zein</text>
+    <text x="${tx}" y="286" font-family="Menlo" font-size="20" letter-spacing="2" fill="#a3a9b5">SENIOR MOBILE ENGINEER · ABU DHABI</text>
+    <text x="${tx}" y="372" font-family="Helvetica Neue" font-weight="700" font-size="38" fill="#f2ede5">I build mobile apps</text>
+    <text x="${tx}" y="420" font-family="Helvetica Neue" font-weight="700" font-size="38" fill="#f2ede5">that stay live.</text>
+    <text x="${tx}" y="500" font-family="Menlo" font-size="22" fill="#d4aa7d">ahmedzein.dev</text>
+  </svg>`);
+  const card = await sharp(page).composite([{ input: portrait, left: px, top: py }]).png().toBuffer();
+  await sharp(card).jpeg({ quality: 90, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile('public/share/home.jpg');
+}
 
 // An ICO holding one 32 × 32 PNG: a 6-byte header, one 16-byte entry, then the PNG.
 const ico32 = await sized(32).png().toBuffer();
