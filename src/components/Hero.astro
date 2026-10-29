@@ -1,5 +1,8 @@
 ---
 import { profile, proof } from '../data/site';
+import { fingerprinted } from '../lib/fingerprint';
+
+const photo = (px: number) => fingerprinted(`/photo/ahmed-zein-${px}.jpg`);
 ---
 
 <header class="topbar">
@@ -20,8 +23,8 @@ import { profile, proof } from '../data/site';
     <figure class="hero-avatar">
       {/* Pre-sized and lightly sharpened from the original photo (public/photo), so no second compression softens it. */}
       <img
-        src="/photo/ahmed-zein-240.jpg"
-        srcset="/photo/ahmed-zein-120.jpg 1x, /photo/ahmed-zein-240.jpg 2x, /photo/ahmed-zein-360.jpg 3x, /photo/ahmed-zein-480.jpg 4x"
+        src={photo(240)}
+        srcset={`${photo(120)} 1x, ${photo(240)} 2x, ${photo(360)} 3x, ${photo(480)} 4x`}
         width="120"
         height="150"
         alt={profile.name}

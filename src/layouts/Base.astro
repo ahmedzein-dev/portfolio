@@ -1,7 +1,6 @@
 ---
 import { Font } from 'astro:assets';
-import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { fingerprinted } from '../lib/fingerprint';
 import '../styles/global.css';
 import { profile } from '../data/site';
 
@@ -18,8 +17,7 @@ const { title, description, sections = [], image } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 // LinkedIn, WhatsApp and browsers keep a preview image by its URL, even when they re-read the page; a
 // fingerprint of the file in the query makes a changed image a new URL.
-const fingerprint = (path: string) => createHash('sha1').update(readFileSync(`public${path}`)).digest('hex').slice(0, 8);
-const versioned = (path: string) => new URL(`${path}?v=${fingerprint(path)}`, Astro.site);
+const versioned = (path: string) => new URL(fingerprinted(path), Astro.site);
 // Link previews: a 1200px square cut from the original photo (public/photo), metadata stripped.
 const shareUrl = versioned('/photo/ahmed-zein-share.jpg');
 const previewUrl = image ? versioned(image) : shareUrl;
@@ -48,10 +46,10 @@ const person = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href={`/favicon.ico?v=${fingerprint('/favicon.ico')}`} sizes="32x32" />
+    <link rel="icon" href={fingerprinted('/favicon.ico')} sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <!-- Home-screen and Chrome shortcut tiles: the photo; the fingerprint replaces an icon a browser saved before. -->
-    <link rel="apple-touch-icon" href={`/apple-touch-icon.png?v=${fingerprint('/apple-touch-icon.png')}`} />
+    <link rel="apple-touch-icon" href={fingerprinted('/apple-touch-icon.png')} />
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#0e1219" />
     <meta property="og:type" content="website" />
