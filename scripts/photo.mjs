@@ -28,8 +28,12 @@ const inner = Math.min(meta.width, meta.height);
 const square = await cut(inner, inner, 40);
 
 const sized = (px, from = square, h = px) => sharp(from).resize(px, h, { kernel: 'lanczos3' });
+// The hero is small, so it gets a firmer unsharp mask and a higher quality, which keep hair, brows
+// and eyes crisp without halos.
 const jpg = (px, file, sharpen, from, h) =>
-  (sharpen ? sized(px, from, h).sharpen({ sigma: 0.6 }) : sized(px, from, h)).jpeg({ quality: 88, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile(file);
+  (sharpen ? sized(px, from, h).sharpen({ sigma: 0.7, m1: 1.4, m2: 2.4, x1: 2 }) : sized(px, from, h))
+    .jpeg({ quality: sharpen ? 94 : 88, mozjpeg: true, chromaSubsampling: '4:4:4' })
+    .toFile(file);
 const png = (px, file) => sized(px).png({ compressionLevel: 9, palette: true, quality: 92, effort: 10 }).toFile(file);
 
 for (const px of [120, 240, 360, 480]) await jpg(px, `public/photo/ahmed-zein-${px}.jpg`, true, hero, Math.round((px * 5) / 4));
