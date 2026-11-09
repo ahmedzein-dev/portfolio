@@ -7,7 +7,7 @@ import theEventsSearch from '../assets/work/theevents_visual_search.png';
 import gainz from '../assets/work/gainz_image.jpg';
 import amberDrive from '../assets/work/amber_drive.jpg';
 import amberResults from '../assets/work/amber_results.png';
-import amberBook from '../assets/work/amber_book.png';
+import amberFleet from '../assets/work/amber_fleet.png';
 import ostaWallet from '../assets/work/osta1.png';
 import ostaChat from '../assets/work/osta2.png';
 import alTaherHome from '../assets/work/altaher_home.png';
@@ -311,10 +311,10 @@ export const moreWork: MoreWork[] = [
       'An owner fleet board, booking approvals and damage reports with photos.',
     ],
     thumb: amberDriveCard,
-    // Frames of the film's screen recordings, on sample data: the search results, then booking a car.
+    // Frames of the film's screen recordings, on sample data: the renter's search results, the owner's fleet.
     tile: [
       { src: amberResults, alt: 'Amber Drive search results: cars with their seats, gearbox, year and price per day', kind: 'phone' },
-      { src: amberBook, alt: 'Amber Drive booking: the car’s features, insurance and fees, and Slide to rent this car', kind: 'phone' },
+      { src: amberFleet, alt: 'Amber Drive owner app: the fleet, with each car’s model and plate, by reserved, available and maintenance', kind: 'phone' },
     ],
     links: [],
     film: {
