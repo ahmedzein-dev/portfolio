@@ -19,6 +19,8 @@
   --island-ink: #f2ede5;
   --island-accent: #d4aa7d;
   --island-live: #57d0be;
+  /* The contact card: in dark, the raised surface with a warm glow; in light, the island's dark (set below). */
+  --contact-bg: radial-gradient(120% 90% at 100% 0%, rgba(212, 170, 125, 0.13), transparent 62%), var(--raised);
   --scrim: rgba(4, 6, 10, 0.6);
   --shadow: 0 28px 56px -30px rgba(0, 0, 0, 0.75);
   --taggo: #f4c430;
@@ -51,6 +53,7 @@
     --live: #087466;
     --flag: #a3461f;
     --scrim: rgba(18, 24, 33, 0.35);
+    --contact-bg: var(--island);
     --shadow: 0 2px 4px rgba(16, 24, 40, 0.05), 0 26px 50px -30px rgba(16, 24, 40, 0.35);
   }
 }
@@ -70,6 +73,7 @@
   --live: #087466;
   --flag: #a3461f;
   --scrim: rgba(18, 24, 33, 0.35);
+  --contact-bg: var(--island);
   --shadow: 0 2px 4px rgba(16, 24, 40, 0.05), 0 26px 50px -30px rgba(16, 24, 40, 0.35);
 }
 
@@ -283,6 +287,7 @@ code { font-size: 0.86em; }
   .hero-id { gap: 16px; }
   .long { display: none; }
   .short { display: inline; }
+  .hero-ctas { justify-self: stretch; }
   .hero-ctas .btn { flex: 1; }
 }
 
@@ -521,11 +526,15 @@ a.mw-card { text-decoration: none; color: inherit; }
 .cap-out b { color: var(--text); font-weight: 600; }
 
 /* ---------- contact and footer ---------- */
-.contact { border-radius: 26px; padding: clamp(24px, 4vw, 44px); background: var(--island); color: var(--island-ink); display: grid; gap: 18px; }
+.contact {
+  border-radius: 26px; padding: clamp(24px, 4vw, 44px); background: var(--contact-bg); color: var(--island-ink); display: grid; gap: 18px;
+  border: 1px solid rgba(212, 170, 125, 0.22);
+}
 .contact h2 { color: var(--island-ink); }
 .contact p { color: rgba(242, 237, 229, 0.72); max-width: 60ch; }
 .mail { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 14px; padding: 8px 8px 8px 14px; max-width: 560px; }
-.mail span { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.92rem; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+/* The address keeps to one line; when it and the button do not fit together, the button drops below it. */
+.mail span { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.92rem; flex: 1 0 auto; max-width: 100%; overflow-wrap: anywhere; }
 .mail .btn { background: #d4aa7d; color: #1b1309; }
 .contact-links { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; max-width: 640px; }
 .contact-links a {
