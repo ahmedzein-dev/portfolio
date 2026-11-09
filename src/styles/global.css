@@ -531,19 +531,22 @@ code { font-size: 0.86em; }
 .tablets .mw-dev img { border-radius: 1.9cqi; }
 .tablets .p1 { inset-inline-start: 6%; top: 10%; }
 .tablets .p2 { inset-inline-start: 44%; top: 20%; }
-/* Hover, or the row in the middle of the screen on touch (.on): the devices move apart and lift, as on Selected Work. */
+/* Hover, or the row in the middle of the screen on touch (.on): the devices move apart and lift by as much as
+   on a Selected Work card, measured against the device (14px on a 207px phone is 2.2cqi on a 33cqi one). */
 @media (hover: hover) {
-  .mw-card:hover .phones .p1 { transform: translate(calc(-7cqi * var(--x)), -3cqi) rotate(calc(-11deg * var(--x))); }
-  .mw-card:hover .phones .p2 { transform: translate(calc(7cqi * var(--x)), -4cqi) rotate(calc(10deg * var(--x))); }
-  .mw-card:hover .tablets .p1 { transform: translate(calc(-4cqi * var(--x)), -2cqi); }
-  .mw-card:hover .tablets .p2 { transform: translate(calc(4cqi * var(--x)), -5cqi); }
+  .mw-card:hover .phones .p1 { transform: translate(calc(-2.2cqi * var(--x)), -1cqi) rotate(calc(-3deg * var(--x))); }
+  .mw-card:hover .phones .p2 { transform: translate(calc(2.2cqi * var(--x)), -1.6cqi) rotate(calc(2deg * var(--x))); }
+  .mw-card:hover .tablets .p1 { transform: translate(calc(-2.5cqi * var(--x)), -1.1cqi) rotate(calc(-3deg * var(--x))); }
+  .mw-card:hover .tablets .p2 { transform: translate(calc(2.5cqi * var(--x)), -1.8cqi) rotate(calc(2deg * var(--x))); }
 }
+/* Touch, as Selected Work's swiped cards on phones: the screens fan out and rise. */
 @media (hover: none), (max-width: 899px) {
-  .mw-grid > li.on .phones .p1 { transform: translate(calc(-7cqi * var(--x)), -3cqi) rotate(calc(-11deg * var(--x))); }
-  .mw-grid > li.on .phones .p2 { transform: translate(calc(7cqi * var(--x)), -4cqi) rotate(calc(10deg * var(--x))); }
-  .mw-grid > li.on .tablets .p1 { transform: translate(calc(-4cqi * var(--x)), -2cqi); }
-  .mw-grid > li.on .tablets .p2 { transform: translate(calc(4cqi * var(--x)), -5cqi); }
+  .mw-grid > li.on .phones .p1 { transform: translate(calc(-1.6cqi * var(--x)), -3.3cqi) rotate(calc(-10deg * var(--x))); }
+  .mw-grid > li.on .phones .p2 { transform: translate(calc(2.4cqi * var(--x)), -6.5cqi) rotate(calc(9deg * var(--x))); }
+  .mw-grid > li.on .tablets .p1 { transform: translate(calc(-2.5cqi * var(--x)), -1.1cqi) rotate(calc(-3deg * var(--x))); }
+  .mw-grid > li.on .tablets .p2 { transform: translate(calc(2.5cqi * var(--x)), -1.8cqi) rotate(calc(2deg * var(--x))); }
 }
+
 .mw-card .body { padding: 14px 16px 16px; display: grid; gap: 4px; align-content: start; }
 .mw-card .yr { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
 .mw-card .sm { font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
