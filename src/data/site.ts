@@ -105,15 +105,15 @@ export const flagships: Flagship[] = [
     slug: 'taggo',
     name: 'Taggo',
     eyebrow: 'Taggo · Rider and driver apps · 2025 to now',
-    headline: 'Both sides of a ride-hailing platform',
-    pitch: 'Ride-hailing and cargo for the UAE, with live tracking and Live Activities.',
+    headline: 'Rides, cargo and recovery, live from booking to drop-off',
+    pitch: 'Ride-hailing, cargo and vehicle recovery for the UAE, with live tracking and Live Activities.',
     summary:
-      'Ride-hailing and cargo for the UAE, live on the App Store and Google Play. Real-time dispatch and tracking over Socket.IO, background location, Live Activities, Stripe with 3D Secure, and Taggo Buddy, a push-to-talk voice assistant on Gemini Live.',
+      'Ride-hailing, cargo and vehicle recovery for the UAE, live on the App Store and Google Play. Real-time dispatch and tracking over Socket.IO, background location, Live Activities, Stripe with 3D Secure, and Taggo Buddy, a push-to-talk voice assistant on Gemini Live.',
     role: 'Lead mobile engineer, Kief Consultancy & Technology',
     period: '2025 to now',
     platforms: 'iOS and Android',
     tags: ['Socket.IO', 'Background isolates', 'Live Activities', 'Stripe 3DS', 'Gemini Live'],
-    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Ride-hailing and cargo, rider and driver apps.', kinds: ['mobile'], image: taggoCard },
+    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Rides, cargo and recovery, rider and driver apps.', kinds: ['mobile'], image: taggoCard },
     theme: 'taggo',
     shots: [
       { src: taggoRider, alt: 'Taggo rider app home: live ride, cargo delivery, VIP service and airport travel', kind: 'phone' },
@@ -134,7 +134,7 @@ export const flagships: Flagship[] = [
       'Hardened clients: freeRASP integrity checks, screenshot blocking on sensitive screens, and release guards on every build path.',
       'Firebase Crashlytics and Analytics in both apps: fatal and async errors reported with the signed-in user, screen views logged, and collection off in debug builds.',
       'Dev and prod flavors in both apps, installable side by side, each with its own backend, app ID and Firebase app.',
-      'Ride and cargo are live; rental and recovery are built behind launch flags.',
+      'Rides, cargo and vehicle recovery are live; rental is built behind a launch flag.',
     ],
     links: [
       { label: 'Taggo on the App Store', href: 'https://apps.apple.com/ae/app/taggo-ride-cargo/id6756260610' },
@@ -147,7 +147,7 @@ export const flagships: Flagship[] = [
     slug: 'the-events',
     name: 'The Events',
     eyebrow: 'The Events · Gifting e-commerce · 2025 to now',
-    headline: 'A 12-second launch, down to 3',
+    headline: 'A gifting app that opens 4× faster',
     pitch: 'Flowers and gifts across nine Gulf countries, on Telr, Apple Pay and Google Pay.',
     summary:
       'Flowers and gifts across nine Gulf countries. App launch went from about 12 s to about 3 s on the same phone, through lazy home sections, de-duplicated requests, a native splash and skeleton loading. Checkout runs on Telr, Apple Pay and Google Pay.',
@@ -185,7 +185,7 @@ export const flagships: Flagship[] = [
     slug: 'ba3',
     name: 'BA3 Business Solutions',
     eyebrow: 'BA3 Business Solutions · Accounting · 2024 to 2025',
-    headline: 'Five platforms, one codebase, 3.5M AED a month',
+    headline: 'Accounting for 3.5M AED a month, on five platforms',
     pitch: 'Accounting on Android, iOS, Windows, macOS and the web, in floating windows.',
     summary:
       'Accounting and business management on Android, iOS, Windows, macOS and the web. A Firestore re-architecture saved about 829M reads a year and made invoice creation about 99% faster. Desktop users work in floating windows, now open source as draggable_floating_window.',
@@ -230,7 +230,7 @@ export const flagships: Flagship[] = [
     slug: 'gainz-ai',
     name: 'Gainz AI',
     eyebrow: 'Gainz AI · AI fitness · 2024 · Contract',
-    headline: 'Notes you can search, summarise and translate',
+    headline: 'The search I built, now an open-source package',
     pitch: 'AI fitness coaching, with note search published as scroll_highlight_text.',
     summary:
       'A fitness app with AI athlete avatars and adaptive plans. I built note search with match highlighting, later published as scroll_highlight_text, plus on-device summarisation and translation.',
