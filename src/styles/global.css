@@ -606,7 +606,7 @@ a.mw-card { text-decoration: none; color: inherit; }
 .timeline.play li::before { scale: 1; transition: scale 0.55s cubic-bezier(0.3, 1.6, 0.5, 1); transition-delay: calc(0.4s + var(--k, 0) * 0.7s); }
 .tl-when { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .timeline .tl-note { font-size: 0.9rem; color: var(--muted); }
-.edu { font-size: 0.86rem; color: var(--muted); padding-inline-start: 36px; }
+.edu { font-size: 0.92rem; color: var(--muted); padding-inline-start: 36px; }
 .cap-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
 .cap-btn { border: 1px solid var(--line-strong); background: transparent; border-radius: 999px; padding: 6px 13px; font-size: 0.84rem; cursor: pointer; color: var(--muted); }
 .cap-btn[aria-pressed='true'] { border-color: var(--live); color: var(--text); background: color-mix(in srgb, var(--live) 14%, transparent); }
@@ -830,7 +830,7 @@ a.mw-card { text-decoration: none; color: inherit; }
 /* Experience in Arabic: the dates and places in the text font, and the notes and degree a step up. */
 :root:lang(ar) .tl-when { font-family: var(--body); font-stretch: normal; letter-spacing: normal; text-transform: none; font-size: 0.86rem; }
 :root:lang(ar) .timeline .tl-note { font-size: 1rem; }
-:root:lang(ar) .edu { font-size: 0.95rem; }
+:root:lang(ar) .edu { font-size: 1.02rem; }
 @media (max-width: 560px) { :root:lang(ar) .status-panel div { font-size: 0.86rem; } }
 /* Arrows point the way you read. */
 :root:lang(ar) .scard-cta svg { scale: -1 1; }

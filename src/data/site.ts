@@ -111,7 +111,7 @@ export const flagships: Flagship[] = [
     pitch: 'Ride-hailing, cargo and vehicle recovery for the UAE, with live tracking and Live Activities.',
     summary:
       'Ride-hailing, cargo and vehicle recovery for the UAE, live on the App Store and Google Play. Real-time dispatch and tracking over Socket.IO, background location, Live Activities, Stripe with 3D Secure, and Taggo Buddy, a push-to-talk voice assistant on Gemini Live.',
-    role: 'Lead mobile engineer, Kief Consultancy & Technology',
+    role: 'Mobile Team Lead, Kief Consultancy & Technology',
     period: '2025 to now',
     platforms: 'iOS and Android',
     tags: ['Socket.IO', 'Background isolates', 'Live Activities', 'Stripe 3DS', 'Gemini Live'],
@@ -153,7 +153,7 @@ export const flagships: Flagship[] = [
     pitch: 'Gifts, events and shopping in nine Gulf countries, on Telr, Apple Pay and Google Pay.',
     summary:
       'A multi-vendor marketplace for gifts, events and shopping in nine Gulf countries. App launch went from about 12 s to about 3 s on the same phone, through lazy home sections, de-duplicated requests, a native splash and skeleton loading. Checkout runs on Telr, Apple Pay and Google Pay.',
-    role: 'Lead mobile engineer, Kief Consultancy & Technology',
+    role: 'Mobile Team Lead, Kief Consultancy & Technology',
     period: 'April 2025 to now',
     platforms: 'iOS and Android',
     tags: ['Launch performance', 'Telr', 'Apple Pay', 'Google Pay', 'Forced updates'],
@@ -414,7 +414,7 @@ export const experience = [
     place: 'Abu Dhabi, UAE',
     role: 'Senior Software Engineer',
     org: 'Kief Consultancy & Technology',
-    note: 'Lead mobile engineer on Taggo, Taggo Captain and The Events.',
+    note: 'Mobile Team Lead on Taggo, Taggo Captain and The Events.',
     current: true,
   },
   {
