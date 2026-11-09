@@ -6,6 +6,8 @@ import theEvents from '../assets/work/theevents_home.png';
 import theEventsSearch from '../assets/work/theevents_visual_search.png';
 import gainz from '../assets/work/gainz_image.jpg';
 import amberDrive from '../assets/work/amber_drive.jpg';
+import amberRenter from '../assets/work/amber_renter.png';
+import amberOwner from '../assets/work/amber_owner.png';
 import ostaWallet from '../assets/work/osta1.png';
 import ostaChat from '../assets/work/osta2.png';
 import alTaherHome from '../assets/work/altaher_home.png';
@@ -273,8 +275,10 @@ export type MoreWork = {
   role?: string;
   shots: Shot[];
   highlights: string[];
-  /** The 4:3 grid thumbnail. */
+  /** The 4:3 grid thumbnail, shown when the project has no phone or tablet screens to draw. */
   thumb: ImageMetadata;
+  /** Screens for the grid tile when the case study's own are not phones or tablets. */
+  tile?: Shot[];
   links: StoreLink[];
   film?: Film;
 };
@@ -307,6 +311,11 @@ export const moreWork: MoreWork[] = [
       'An owner fleet board, booking approvals and damage reports with photos.',
     ],
     thumb: amberDriveCard,
+    // Frames of the film's screen recordings, on sample data: the renter's car, the owner's approval.
+    tile: [
+      { src: amberRenter, alt: 'Amber Drive renter app: a Kia Rio, with its rating and delivery on demand', kind: 'phone' },
+      { src: amberOwner, alt: 'Amber Drive owner app: a booking request with the renter, the dates and the price, to approve or cancel', kind: 'phone' },
+    ],
     links: [],
     film: {
       src: '/films/amber-drive.mp4',

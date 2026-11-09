@@ -32,7 +32,20 @@ export type CaseStudy = Pick<
 > & { role?: string; back: { href: string; label: string } };
 
 /** A tile in More projects. */
-export type ProjectCard = { slug: string; name: string; year: string; platforms: string; summary: string; tags: en.Kind[]; thumb: ImageMetadata; featured: boolean };
+export type ProjectCard = {
+  slug: string;
+  name: string;
+  year: string;
+  platforms: string;
+  summary: string;
+  tags: en.Kind[];
+  thumb: ImageMetadata;
+  /** Phone or tablet screens the tile draws in device bodies; none, and it shows the thumbnail. */
+  screens: en.Shot[];
+  featured: boolean;
+};
+
+const devices = (shots: en.Shot[]) => shots.filter((s) => s.kind === 'phone' || s.kind === 'tablet').slice(0, 2);
 
 // Newest first: by the year a project ended ("now" counts as latest), then by the year it began. Read from
 // the English years, so both languages list the projects in the same order.
@@ -86,8 +99,8 @@ export function getContent(lang: Lang) {
 
   // Every project, newest first, each tile opening its case study.
   const projectCards: ProjectCard[] = [
-    ...flagships.map((p) => ({ slug: p.slug, name: p.name, year: p.card.year, platforms: p.card.platforms, summary: p.card.summary, tags: p.card.kinds, thumb: p.card.image, featured: true })),
-    ...moreWork.map((p) => ({ slug: p.id, name: p.name, year: p.year, platforms: p.platforms, summary: p.summary, tags: p.tags, thumb: p.thumb, featured: false })),
+    ...flagships.map((p) => ({ slug: p.slug, name: p.name, year: p.card.year, platforms: p.card.platforms, summary: p.card.summary, tags: p.card.kinds, thumb: p.card.image, screens: devices(p.shots), featured: true })),
+    ...moreWork.map((p) => ({ slug: p.id, name: p.name, year: p.year, platforms: p.platforms, summary: p.summary, tags: p.tags, thumb: p.thumb, screens: devices(p.tile ?? p.shots), featured: false })),
   ].sort((a, b) => newestFirst(enYear.get(a.slug) ?? '', enYear.get(b.slug) ?? ''));
 
   return {
