@@ -45,7 +45,7 @@ const page = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W * K
   </defs>
   <rect width="${W}" height="${H}" fill="url(#fade)"/><rect width="${W}" height="${H}" fill="url(#glow)"/>
   <text x="${tx}" y="62" font-family="Menlo" font-size="19" fill="#d4aa7d">ahmedzein.dev</text>
-  <text x="${tx}" y="106" font-family="Menlo" font-weight="700" font-size="18" letter-spacing="1.5" fill="#d4aa7d">SENIOR SOFTWARE ENGINEER · MOBILE (FLUTTER, iOS &amp; ANDROID)</text>
+  <text x="${tx}" y="106" font-family="Menlo" font-weight="700" font-size="18" letter-spacing="1.5" fill="#d4aa7d">SENIOR SOFTWARE ENGINEER · FLUTTER (iOS, ANDROID &amp; DESKTOP)</text>
   <text x="${tx}" y="180" font-family="Helvetica Neue" font-weight="700" font-size="60" fill="#f2ede5">I build mobile apps</text>
   <text x="${tx}" y="246" font-family="Helvetica Neue" font-weight="700" font-size="60" fill="#f2ede5">that stay live.</text>
   <text x="${tx}" y="302" font-family="Helvetica Neue" font-weight="500" font-size="21" fill="#b8bdc8">Real-time tracking · Background execution · iOS Live Activities · Payments</text>
