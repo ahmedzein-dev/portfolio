@@ -19,11 +19,19 @@
   --island-ink: #f2ede5;
   --island-accent: #d4aa7d;
   --island-live: #57d0be;
-  /* The contact card: in dark, the raised surface with a warm glow; in light, the island's dark (set below). */
+  /* The surfaces that open over the page (the island's menu, the status panel) and the contact card:
+     the raised card surface in both themes, with their own ink, so none is a black block. */
   --contact-bg: radial-gradient(120% 90% at 100% 0%, rgba(212, 170, 125, 0.13), transparent 62%), var(--raised);
-  /* The island's menu and the status panel: in dark, the raised surface like the cards; in light, the island's dark. */
+  --contact-line: rgba(212, 170, 125, 0.22);
   --pop-bg: var(--raised);
   --pop-line: var(--line-strong);
+  --pop-ink: var(--island-ink);
+  --pop-muted: rgba(242, 237, 229, 0.72);
+  --pop-accent: var(--island-accent);
+  --pop-soft: rgba(242, 237, 229, 0.16);
+  --pop-hover: rgba(255, 255, 255, 0.08);
+  --pop-current: rgba(255, 255, 255, 0.11);
+  --pop-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
   --scrim: rgba(4, 6, 10, 0.6);
   --shadow: 0 28px 56px -30px rgba(0, 0, 0, 0.75);
   --taggo: #f4c430;
@@ -56,9 +64,17 @@
     --live: #087466;
     --flag: #a3461f;
     --scrim: rgba(18, 24, 33, 0.35);
-    --contact-bg: var(--island);
-    --pop-bg: var(--island);
-    --pop-line: rgba(255, 255, 255, 0.09);
+    --contact-bg: radial-gradient(120% 90% at 100% 0%, rgba(217, 178, 134, 0.22), transparent 62%), var(--raised);
+    --contact-line: rgba(138, 92, 39, 0.22);
+    --pop-bg: var(--raised);
+    --pop-line: var(--line);
+    --pop-ink: var(--text);
+    --pop-muted: var(--muted);
+    --pop-accent: var(--accent);
+    --pop-soft: var(--line-strong);
+    --pop-hover: rgba(18, 24, 33, 0.05);
+    --pop-current: rgba(18, 24, 33, 0.08);
+    --pop-shadow: 0 24px 48px -20px rgba(16, 24, 40, 0.28);
     --shadow: 0 2px 4px rgba(16, 24, 40, 0.05), 0 26px 50px -30px rgba(16, 24, 40, 0.35);
   }
 }
@@ -78,9 +94,17 @@
   --live: #087466;
   --flag: #a3461f;
   --scrim: rgba(18, 24, 33, 0.35);
-  --contact-bg: var(--island);
-  --pop-bg: var(--island);
-  --pop-line: rgba(255, 255, 255, 0.09);
+  --contact-bg: radial-gradient(120% 90% at 100% 0%, rgba(217, 178, 134, 0.22), transparent 62%), var(--raised);
+  --contact-line: rgba(138, 92, 39, 0.22);
+  --pop-bg: var(--raised);
+  --pop-line: var(--line);
+  --pop-ink: var(--text);
+  --pop-muted: var(--muted);
+  --pop-accent: var(--accent);
+  --pop-soft: var(--line-strong);
+  --pop-hover: rgba(18, 24, 33, 0.05);
+  --pop-current: rgba(18, 24, 33, 0.08);
+  --pop-shadow: 0 24px 48px -20px rgba(16, 24, 40, 0.28);
   --shadow: 0 2px 4px rgba(16, 24, 40, 0.05), 0 26px 50px -30px rgba(16, 24, 40, 0.35);
 }
 
@@ -171,15 +195,15 @@ code { font-size: 0.86em; }
 .island.toasting .island-toast { display: flex; animation: islandIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .island.info .island-toast svg { display: none; }
 .island-panel {
-  margin-top: 8px; width: min(360px, calc(100vw - 24px)); background: var(--pop-bg); color: var(--island-ink);
+  margin-top: 8px; width: min(360px, calc(100vw - 24px)); background: var(--pop-bg); color: var(--pop-ink);
   border-radius: 24px; padding: 8px; border: 1px solid var(--pop-line);
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); transform-origin: 50% 0; animation: islandIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: var(--pop-shadow); transform-origin: 50% 0; animation: islandIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .island-panel ol { list-style: none; padding: 0; display: grid; gap: 2px; }
 .island-panel a { display: flex; gap: 12px; align-items: baseline; padding: 9px 12px; border-radius: 14px; text-decoration: none; font-size: 14px; }
-.island-panel a:hover, .island-panel a:focus-visible { background: rgba(255, 255, 255, 0.08); outline: none; }
-.island-panel a[aria-current='true'] { background: rgba(255, 255, 255, 0.11); }
-.island-panel a span { font-family: var(--mono); font-stretch: 87.5%; font-size: 11px; color: var(--island-accent); min-width: 2ch; }
+.island-panel a:hover, .island-panel a:focus-visible { background: var(--pop-hover); outline: none; }
+.island-panel a[aria-current='true'] { background: var(--pop-current); }
+.island-panel a span { font-family: var(--mono); font-stretch: 87.5%; font-size: 11px; color: var(--pop-accent); min-width: 2ch; }
 @keyframes islandIn { from { opacity: 0; transform: scale(0.94) translateY(-4px); } to { opacity: 1; transform: none; } }
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(87, 208, 190, 0.55); }
@@ -272,12 +296,12 @@ code { font-size: 0.86em; }
 .status[aria-expanded='true'] .chev { transform: rotate(180deg); }
 .status-panel {
   position: absolute; z-index: 5; left: 0; top: calc(100% + 8px); width: min(340px, 86vw);
-  background: var(--pop-bg); color: var(--island-ink); border-radius: 22px; padding: 14px 16px; display: grid; gap: 10px;
-  border: 1px solid var(--pop-line); box-shadow: 0 26px 50px -20px rgba(0, 0, 0, 0.7);
+  background: var(--pop-bg); color: var(--pop-ink); border-radius: 22px; padding: 14px 16px; display: grid; gap: 10px;
+  border: 1px solid var(--pop-line); box-shadow: var(--pop-shadow);
   transform-origin: 20% 0; animation: islandIn 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .status-panel div { display: grid; gap: 1px; font-size: 0.86rem; }
-.status-panel span { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--island-accent); }
+.status-panel span { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pop-accent); }
 .status-panel .v, .status-panel .v span { font: inherit; letter-spacing: normal; text-transform: none; color: inherit; }
 .status-panel .v { display: grid; }
 .status-panel .vg, .status-panel .vt { grid-area: 1 / 1; }
@@ -534,24 +558,24 @@ a.mw-card { text-decoration: none; color: inherit; }
 
 /* ---------- contact and footer ---------- */
 .contact {
-  border-radius: 26px; padding: clamp(24px, 4vw, 44px); background: var(--contact-bg); color: var(--island-ink); display: grid; gap: 18px;
-  border: 1px solid rgba(212, 170, 125, 0.22);
+  border-radius: 26px; padding: clamp(24px, 4vw, 44px); background: var(--contact-bg); color: var(--pop-ink); display: grid; gap: 18px;
+  border: 1px solid var(--contact-line);
 }
-.contact h2 { color: var(--island-ink); }
-.contact p { color: rgba(242, 237, 229, 0.72); max-width: 60ch; }
-.mail { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 14px; padding: 8px 8px 8px 14px; max-width: 560px; }
+.contact h2 { color: var(--pop-ink); }
+.contact p { color: var(--pop-muted); max-width: 60ch; }
+.mail { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; border: 1px solid var(--pop-soft); border-radius: 14px; padding: 8px 8px 8px 14px; max-width: 560px; }
 /* The address keeps to one line; when it and the button do not fit together, the button drops below it. */
 .mail span { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.92rem; flex: 1 0 auto; max-width: 100%; overflow-wrap: anywhere; }
-.mail .btn { background: #d4aa7d; color: #1b1309; }
+.mail .btn { background: var(--accent-fill); color: var(--on-accent); }
 .contact-links { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; max-width: 640px; }
 .contact-links a {
-  display: grid; justify-items: center; gap: 8px; padding: 14px 6px 12px; border: 1px solid rgba(242, 237, 229, 0.16); border-radius: 14px;
-  color: #f2ede5; font-size: 0.84rem; text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+  display: grid; justify-items: center; gap: 8px; padding: 14px 6px 12px; border: 1px solid var(--pop-soft); border-radius: 14px;
+  color: var(--pop-ink); font-size: 0.84rem; text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
 }
-.contact-links a:hover { border-color: #d4aa7d; background: rgba(212, 170, 125, 0.08); transform: translateY(-2px); }
+.contact-links a:hover { border-color: var(--pop-accent); background: rgba(212, 170, 125, 0.08); transform: translateY(-2px); }
 .contact-links svg { width: 22px; height: 22px; }
-.contact-links .ln { fill: none; stroke: #d4aa7d; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.contact-links .fl { fill: #d4aa7d; }
+.contact-links .ln { fill: none; stroke: var(--pop-accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.contact-links .fl { fill: var(--pop-accent); }
 @media (max-width: 640px) { .contact-links { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .footer { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; font-size: 0.84rem; color: var(--muted); }
 
