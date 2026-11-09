@@ -14,7 +14,7 @@ export const ar = {
       long: 'متاح لوظائف بدوام كامل ولأعمال حرة',
       short: 'متاح للعمل',
     },
-    headline: 'أبني تطبيقات جوّال تبقى حيّة.',
+    headline: 'أبني تطبيقات جوّال لا تتوقف.',
     intro:
       'تتبّع لحظي، وتشغيل في الخلفية، وLive Activities على iOS، ومدفوعات إلكترونية، في تطبيقات منشورة: Taggo وTaggo Captain وThe Events. ومؤلف ثلاث حزم Flutter مفتوحة المصدر.',
     description:
