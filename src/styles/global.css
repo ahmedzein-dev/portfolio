@@ -19,7 +19,7 @@
   --island-ink: #f2ede5;
   --island-accent: #d4aa7d;
   --island-live: #57d0be;
-  /* The surfaces that open over the page (the island's menu, the status panel) and the contact card:
+  /* The island and its menu, the status pill and panel, the back-to-top button and the contact card:
      the raised card surface in both themes, with their own ink, so none is a black block. */
   --contact-bg: radial-gradient(120% 90% at 100% 0%, rgba(212, 170, 125, 0.13), transparent 62%), var(--raised);
   --contact-line: rgba(212, 170, 125, 0.22);
@@ -32,6 +32,10 @@
   --pop-hover: rgba(255, 255, 255, 0.08);
   --pop-current: rgba(255, 255, 255, 0.11);
   --pop-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  /* The island, the status pill and the back-to-top button use the same surface, smaller shadow. */
+  --pop-live: var(--island-live);
+  --pop-track: rgba(255, 255, 255, 0.16);
+  --pill-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.7);
   --scrim: rgba(4, 6, 10, 0.6);
   --shadow: 0 28px 56px -30px rgba(0, 0, 0, 0.75);
   --taggo: #f4c430;
@@ -75,6 +79,9 @@
     --pop-hover: rgba(18, 24, 33, 0.05);
     --pop-current: rgba(18, 24, 33, 0.08);
     --pop-shadow: 0 24px 48px -20px rgba(16, 24, 40, 0.28);
+    --pop-live: var(--live);
+    --pop-track: rgba(18, 24, 33, 0.12);
+    --pill-shadow: 0 10px 24px -12px rgba(16, 24, 40, 0.3);
     --shadow: 0 2px 4px rgba(16, 24, 40, 0.05), 0 26px 50px -30px rgba(16, 24, 40, 0.35);
   }
 }
@@ -105,6 +112,9 @@
   --pop-hover: rgba(18, 24, 33, 0.05);
   --pop-current: rgba(18, 24, 33, 0.08);
   --pop-shadow: 0 24px 48px -20px rgba(16, 24, 40, 0.28);
+  --pop-live: var(--live);
+  --pop-track: rgba(18, 24, 33, 0.12);
+  --pill-shadow: 0 10px 24px -12px rgba(16, 24, 40, 0.3);
   --shadow: 0 2px 4px rgba(16, 24, 40, 0.05), 0 26px 50px -30px rgba(16, 24, 40, 0.35);
 }
 
@@ -179,18 +189,18 @@ code { font-size: 0.86em; }
 }
 .island-btn {
   display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 12px 0 14px; border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.09); background: var(--island); color: var(--island-ink);
-  font-size: 13px; font-weight: 500; cursor: pointer; box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.7); max-width: 100%;
+  border: 1px solid var(--pop-line); background: var(--pop-bg); color: var(--pop-ink);
+  font-size: 13px; font-weight: 500; cursor: pointer; box-shadow: var(--pill-shadow); max-width: 100%;
 }
 .island-now { display: flex; align-items: center; gap: 9px; min-width: 0; }
 .island-now .t { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: min(52vw, 320px); }
-.island-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--island-live); animation: pulse 2.6s ease-out infinite; }
+.island-dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--pop-live); animation: pulse 2.6s ease-out infinite; }
 .island-ring { flex: none; width: 18px; height: 18px; transform: rotate(-90deg); }
 .island-ring circle { fill: none; stroke-width: 2.6; }
-.island-ring .bg { stroke: rgba(255, 255, 255, 0.16); }
-.island-ring .fg { stroke: var(--island-accent); stroke-dasharray: 50.27; stroke-dashoffset: 50.27; stroke-linecap: round; }
+.island-ring .bg { stroke: var(--pop-track); }
+.island-ring .fg { stroke: var(--pop-accent); stroke-dasharray: 50.27; stroke-dashoffset: 50.27; stroke-linecap: round; }
 .island-toast { display: none; align-items: center; gap: 8px; white-space: nowrap; }
-.island-toast svg { color: var(--island-live); }
+.island-toast svg { color: var(--pop-live); }
 .island.toasting .island-now, .island.toasting .island-ring { display: none; }
 .island.toasting .island-toast { display: flex; animation: islandIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .island.info .island-toast svg { display: none; }
@@ -216,15 +226,15 @@ code { font-size: 0.86em; }
 .to-top {
   position: fixed; z-index: 55; right: calc(env(safe-area-inset-right, 0px) + 18px); bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
   display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.1);
-  background: var(--island); color: var(--island-ink); cursor: pointer; box-shadow: 0 16px 34px -14px rgba(0, 0, 0, 0.6); border-color: transparent;
+  background: var(--pop-bg); color: var(--pop-ink); cursor: pointer; box-shadow: var(--pill-shadow); border-color: transparent;
   visibility: hidden; opacity: 0; translate: 0 12px;
   transition: opacity 0.25s ease, translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.25s;
 }
 .to-top.show { visibility: visible; opacity: 1; translate: none; transition: opacity 0.25s ease, translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .to-top-ring { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); transform: rotate(-90deg); pointer-events: none; }
 .to-top-ring circle { fill: none; stroke-width: 2.6; }
-.to-top-ring .bg { stroke: rgba(255, 255, 255, 0.12); }
-.to-top-ring .fg { stroke: var(--island-accent); stroke-dasharray: 1; stroke-dashoffset: 1; stroke-linecap: round; }
+.to-top-ring .bg { stroke: var(--pop-track); }
+.to-top-ring .fg { stroke: var(--pop-accent); stroke-dasharray: 1; stroke-dashoffset: 1; stroke-linecap: round; }
 .to-top:hover { translate: 0 -2px; }
 .to-top:active { scale: 0.94; }
 .rail { position: fixed; z-index: 40; left: 30px; top: 120px; bottom: 100px; width: 16px; display: none; }
@@ -288,10 +298,10 @@ code { font-size: 0.86em; }
 .hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.5rem); line-height: 1.02; }
 .status {
   display: inline-flex; align-items: center; gap: 9px; min-height: 30px; padding: 3px 12px 3px 10px; border-radius: 999px; margin-top: 2px;
-  background: var(--island); color: var(--island-ink); border: 1px solid rgba(255, 255, 255, 0.09);
+  background: var(--pop-bg); color: var(--pop-ink); border: 1px solid var(--pop-line);
   font-size: 0.78rem; font-weight: 500; cursor: pointer; text-align: left;
 }
-.status i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--island-live); animation: pulse 2.6s ease-out infinite; }
+.status i { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--pop-live); animation: pulse 2.6s ease-out infinite; }
 .status .chev { opacity: 0.6; transition: transform 0.2s; }
 .status[aria-expanded='true'] .chev { transform: rotate(180deg); }
 .status-panel {
