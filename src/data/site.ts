@@ -6,8 +6,8 @@ import theEvents from '../assets/work/theevents_home.png';
 import theEventsSearch from '../assets/work/theevents_visual_search.png';
 import gainz from '../assets/work/gainz_image.jpg';
 import amberDrive from '../assets/work/amber_drive.jpg';
-import amberRenter from '../assets/work/amber_renter.png';
-import amberOwner from '../assets/work/amber_owner.png';
+import amberResults from '../assets/work/amber_results.png';
+import amberBook from '../assets/work/amber_book.png';
 import ostaWallet from '../assets/work/osta1.png';
 import ostaChat from '../assets/work/osta2.png';
 import alTaherHome from '../assets/work/altaher_home.png';
@@ -311,10 +311,10 @@ export const moreWork: MoreWork[] = [
       'An owner fleet board, booking approvals and damage reports with photos.',
     ],
     thumb: amberDriveCard,
-    // Frames of the film's screen recordings, on sample data: the renter's car, the owner's approval.
+    // Frames of the film's screen recordings, on sample data: the search results, then booking a car.
     tile: [
-      { src: amberRenter, alt: 'Amber Drive renter app: a Kia Rio, with its rating and delivery on demand', kind: 'phone' },
-      { src: amberOwner, alt: 'Amber Drive owner app: a booking request with the renter, the dates and the price, to approve or cancel', kind: 'phone' },
+      { src: amberResults, alt: 'Amber Drive search results: cars with their seats, gearbox, year and price per day', kind: 'phone' },
+      { src: amberBook, alt: 'Amber Drive booking: the car’s features, insurance and fees, and Slide to rent this car', kind: 'phone' },
     ],
     links: [],
     film: {
