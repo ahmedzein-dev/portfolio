@@ -263,11 +263,11 @@ export const ar = {
 
   // Job titles stay in English, as on the CV and LinkedIn, so they match when checked.
   experience: [
-    { when: `أبريل 2025 ${now}`, place: 'أبوظبي', note: 'المهندس الرئيسي لتطبيقات الجوّال في Taggo وTaggo Captain وThe Events.' },
-    { when: 'مايو 2024 حتى أبريل 2025', place: 'رأس الخيمة', note: 'BA3 Business Solutions وAmber Drive. ومن هنا بدأت document_camera_frame.' },
-    { when: 'فبراير حتى مايو 2024', place: 'عن بُعد، لندن', note: 'بحث في الملاحظات مع التمييز، وتلخيص وترجمة على الجهاز.' },
-    { when: 'يناير 2022 حتى يناير 2024', place: 'القاهرة', note: 'تطبيقات جوّال من الفكرة حتى النشر.' },
-    { when: 'يوليو حتى ديسمبر 2021', place: 'عن بُعد، ستوكهولم', note: 'عقد عن بُعد.' },
+    { when: `أبريل 2025 ${now}`, place: 'أبوظبي، الإمارات', note: 'المهندس الرئيسي لتطبيقات الجوّال في Taggo وTaggo Captain وThe Events.' },
+    { when: 'مايو 2024 حتى أبريل 2025', place: 'رأس الخيمة، الإمارات', note: 'BA3 Business Solutions وAmber Drive. ومن هنا بدأت document_camera_frame.' },
+    { when: 'فبراير حتى مايو 2024', place: 'عن بُعد، لندن، المملكة المتحدة · عقد بالمشروع', note: 'بحث في الملاحظات مع التمييز، وتلخيص وترجمة على الجهاز.' },
+    { when: 'يناير 2022 حتى يناير 2024', place: 'القاهرة، مصر', note: 'تطبيقات جوّال من الفكرة حتى النشر.' },
+    { when: 'يوليو حتى ديسمبر 2021', place: 'عن بُعد، ستوكهولم، السويد · عقد بالمشروع', note: 'تطبيق LinnStäd Cleaning Services، من الفكرة حتى النشر على App Store.' },
   ],
 
   education: 'بكالوريوس هندسة الاتصالات والحاسبات، جامعة الدلتا للعلوم والتكنولوجيا، 2017 حتى 2021',

@@ -411,7 +411,7 @@ export const moreWork: MoreWork[] = [
 export const experience = [
   {
     when: 'April 2025 to now',
-    place: 'Abu Dhabi',
+    place: 'Abu Dhabi, UAE',
     role: 'Senior Mobile Engineer',
     org: 'Kief Consultancy & Technology',
     note: 'Lead mobile engineer on Taggo, Taggo Captain and The Events.',
@@ -419,31 +419,31 @@ export const experience = [
   },
   {
     when: 'May 2024 to April 2025',
-    place: 'Ras Al Khaimah',
+    place: 'Ras Al Khaimah, UAE',
     role: 'Senior Software Engineer',
     org: 'BA3',
     note: 'BA3 Business Solutions and Amber Drive. document_camera_frame started here.',
   },
   {
     when: 'February to May 2024',
-    place: 'Remote, London',
+    place: 'Remote, London, UK · Project-based contract',
     role: 'Mid-Senior Mobile App Developer',
     org: 'Gainz.ai',
     note: 'Note search with highlighting, on-device summarisation and translation.',
   },
   {
     when: 'January 2022 to January 2024',
-    place: 'Cairo',
+    place: 'Cairo, Egypt',
     role: 'Junior Mobile App Developer',
     org: 'Xtreme Digital',
     note: 'Mobile apps from concept to release.',
   },
   {
     when: 'July to December 2021',
-    place: 'Remote, Stockholm',
+    place: 'Remote, Stockholm, Sweden · Project-based contract',
     role: 'Junior Mobile App Developer',
     org: 'LinnStäd',
-    note: 'Remote contract.',
+    note: 'The LinnStäd Cleaning Services app, from concept to App Store launch.',
   },
 ];
 
