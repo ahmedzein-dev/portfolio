@@ -3,6 +3,8 @@ import { getContent } from '../data/content';
 import { langOf } from '../i18n';
 
 const { capabilities, capabilityTiles, education, experience, t } = getContent(langOf(Astro.url));
+// An English title and company read as one Latin phrase, so they take an English comma even on /ar/.
+const comma = (role: string) => (/[\u0600-\u06FF]/.test(role) ? t.comma : ', ');
 ---
 
 <div class="two">
@@ -15,7 +17,7 @@ const { capabilities, capabilityTiles, education, experience, t } = getContent(l
       {experience.map((e, i) => (
         <li class={e.current ? 'now' : undefined} style={`--k:${experience.length - 1 - i}`}>
           <p class="tl-when">{e.when} · {e.place}</p>
-          <h3 style="font-size:1.05rem">{e.role}{t.comma}{e.org}</h3>
+          <h3 style="font-size:1.05rem">{e.role}{comma(e.role)}{e.org}</h3>
           <p class="tl-note">{e.note}</p>
         </li>
       ))}
