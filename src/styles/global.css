@@ -229,7 +229,17 @@ code { font-size: 0.86em; }
   display: grid; place-items: center; cursor: pointer; color: var(--text);
 }
 .theme-btn svg { width: 16px; height: 16px; }
-@media (max-width: 760px) { .toplinks { display: none; } .topbar .theme-btn { margin-left: auto; } }
+/* Phones: the links drop to a second row under the brand, the island and the theme button. */
+@media (max-width: 760px) {
+  .topbar { flex-wrap: wrap; height: auto; column-gap: 14px; row-gap: 0; }
+  .topbar .brand { height: 72px; }
+  .topbar .theme-btn { margin-left: auto; }
+  .toplinks {
+    order: 3; width: 100%; margin: 0; justify-content: space-between; gap: 8px;
+    padding: 10px 0 14px; font-size: 0.88rem; border-top: 1px solid var(--line);
+  }
+  .toplinks a { padding: 4px 0; }
+}
 @media (max-width: 560px) { .brand .nm { display: none; } }
 
 /* ---------- hero ---------- */
@@ -568,6 +578,8 @@ a.mw-card { text-decoration: none; color: inherit; }
   .store-icon:active { transform: scale(0.92); border-color: var(--line-strong); }
 }
 .next-case { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
+/* The next case title is long; on a phone it wraps inside the button instead of running off the screen. */
+.next-case .btn { white-space: normal; text-align: center; padding-block: 10px; max-width: 100%; }
 
 /* ---------- package demos: each card acts out its package while on screen (site.ts adds .live) ---------- */
 /* document_camera_frame, one 5 s capture: the card comes in tilted while the frame searches (wide and
