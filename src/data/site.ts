@@ -147,8 +147,8 @@ export const flagships: Flagship[] = [
     slug: 'the-events',
     name: 'The Events',
     eyebrow: 'The Events · Multi-vendor e-commerce · 2025 to now',
-    headline: 'A Gulf marketplace that opens 4× faster',
-    pitch: 'A multi-vendor marketplace for gifts, events and shopping in nine Gulf countries, on Telr, Apple Pay and Google Pay.',
+    headline: 'A multi-vendor marketplace for the Gulf',
+    pitch: 'Gifts, events and shopping in nine Gulf countries, on Telr, Apple Pay and Google Pay.',
     summary:
       'A multi-vendor marketplace for gifts, events and shopping in nine Gulf countries. App launch went from about 12 s to about 3 s on the same phone, through lazy home sections, de-duplicated requests, a native splash and skeleton loading. Checkout runs on Telr, Apple Pay and Google Pay.',
     role: 'Lead mobile engineer, Kief Consultancy & Technology',
