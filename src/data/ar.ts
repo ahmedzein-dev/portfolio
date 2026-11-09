@@ -20,9 +20,11 @@ export const ar = {
     description:
       'أحمد زين، Senior Mobile Engineer في أبوظبي. تتبّع لحظي وتشغيل في الخلفية وLive Activities على iOS ومدفوعات، في تطبيقات Flutter منشورة على متاجر الإمارات.',
     now: [
-      { label: 'الآن', value: 'Senior Mobile Engineer في Kief، أبوظبي' },
-      { label: 'أعمل على', value: 'Taggo وTaggo Captain وThe Events' },
-      { label: 'أحدث إصدار', value: 'draggable_floating_window 0.0.1 · 8 أكتوبر 2026' },
+      { label: 'الآن', value: 'Senior\u00a0Mobile\u00a0Engineer في Kief، أبوظبي' },
+      // Non-breaking spaces (\u00a0) keep each product name on one line when the row wraps.
+      { label: 'أعمل على', value: 'Taggo وTaggo\u00a0Captain وThe\u00a0Events' },
+      // \u2066…\u2069 keeps the package name and version together, left to right, before the Arabic date.
+      { label: 'أحدث إصدار', value: '\u2066draggable_floating_window 0.0.1\u2069 · 8 أكتوبر 2026' },
       { label: 'أتعلّم', value: 'Node.js وتصميم الأنظمة' },
     ],
   },

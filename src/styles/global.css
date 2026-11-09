@@ -822,7 +822,10 @@ a.mw-card { text-decoration: none; color: inherit; }
 :root:lang(ar) h2 { font-weight: 720; }
 /* The small mono labels are sized for Latin capitals; Arabic at that size is too small to read. */
 :root:lang(ar) :is(.label, .eyebrow) { font-size: 0.8rem; }
-:root:lang(ar) :is(.scard-eyebrow, .tl-when, .case-meta dt, .pkg-stats dt, .status-panel span, .mw-card .yr) { font-size: 0.72rem; }
+:root:lang(ar) :is(.scard-eyebrow, .tl-when, .case-meta dt, .pkg-stats dt, .status-panel div > span:first-child, .mw-card .yr) { font-size: 0.72rem; }
+/* Arabic letters read smaller than Latin at the same size, so the status values go up a step. */
+:root:lang(ar) .status-panel div { font-size: 0.92rem; }
+@media (max-width: 560px) { :root:lang(ar) .status-panel div { font-size: 0.86rem; } }
 /* Arrows point the way you read. */
 :root:lang(ar) .scard-cta svg { scale: -1 1; }
 :root:lang(ar) .status-panel { transform-origin: 80% 0; }
