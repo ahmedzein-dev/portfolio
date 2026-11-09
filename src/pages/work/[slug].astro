@@ -1,109 +1,14 @@
 ---
-import { Image } from 'astro:assets';
-import Base from '../../layouts/Base.astro';
-import { caseStudies, profile } from '../../data/site';
-import StoreLinks from '../../components/StoreLinks.astro';
+import CasePage from '../../components/CasePage.astro';
+import { getContent } from '../../data/content';
 
 export function getStaticPaths() {
+  const { caseStudies } = getContent('en');
   return caseStudies.map((p, i) => ({
     params: { slug: p.slug },
     props: { project: p, next: caseStudies[(i + 1) % caseStudies.length] },
   }));
 }
-
-const { project: p, next } = Astro.props;
 ---
 
-<Base title={`${p.name}: ${p.headline} · ${profile.name}`} description={p.summary} image={`/share/${p.slug}.jpg`}>
-  <main class="page" id="main">
-    <header class="topbar">
-      <a class="brand" href="/"><span class="az" aria-hidden="true">AZ</span><span class="nm">{profile.name}</span></a>
-      <nav class="toplinks" aria-label="Main">
-        <a href="/#work">Work</a>
-        <a href="/#open-source">Open source</a>
-        <a href="/#experience">Experience</a>
-        <a href="/#contact">Contact</a>
-      </nav>
-      <button class="theme-btn" id="theme-btn" type="button" aria-label="Change theme">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13z" fill="currentColor"></path><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"></circle></svg>
-      </button>
-    </header>
-
-    <article>
-      <div class="case-head">
-        <p class="label"><a href={p.back.href} style="text-decoration:none">← {p.back.label}</a> · {p.name}</p>
-        <h1 style="font-size:clamp(2.2rem,5.6vw,4.2rem)">{p.headline}</h1>
-        <p class="lede">{p.summary}</p>
-        <dl class="case-meta">
-          {p.role && <div><dt>Role</dt><dd>{p.role}</dd></div>}
-          <div><dt>Period</dt><dd>{p.period}</dd></div>
-          <div><dt>Platforms</dt><dd>{p.platforms}</dd></div>
-        </dl>
-        {p.links.length > 0 && <StoreLinks links={p.links} />}
-      </div>
-
-      {p.constraint && (
-        <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label="The constraint">
-          <p class="label">The constraint</p>
-          <p class="constraint" style="margin-top:12px">{p.constraint}</p>
-        </section>
-      )}
-
-      {p.film && (
-        <section class="section" id="film" style="padding-top:clamp(48px,7vw,80px);scroll-margin-top:80px" aria-label="Product film">
-          <figure class="film">
-            <video controls playsinline preload="none" poster={p.film.poster} aria-label={p.film.title}>
-              <source src={p.film.src} type="video/mp4" />
-            </video>
-            <figcaption><span class="film-len">{p.film.length}</span> {p.film.caption}</figcaption>
-          </figure>
-        </section>
-      )}
-
-      <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label="Screens">
-        <div class="case-shots">
-          {p.shots.map((s) => (
-            <figure class={s.kind === 'window' ? 'wide' : undefined}>
-              {s.kind === 'window' ? (
-                <Image src={s.src} alt={s.alt} widths={[720, 1280, 1960]} sizes="(min-width: 1040px) 980px, 94vw" quality={90} />
-              ) : s.kind === 'tablet' ? (
-                <Image src={s.src} alt={s.alt} widths={[480, 960, 1440]} sizes="(min-width: 1040px) 480px, 90vw" quality={92} />
-              ) : (
-                <Image src={s.src} alt={s.alt} widths={[360, 720]} sizes="(min-width: 760px) 360px, 90vw" />
-              )}
-              {s.kind === 'window' && p.caption && <figcaption>{p.caption}</figcaption>}
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-labelledby="built-title">
-        <div class="section-head">
-          <p class="label">What I built</p>
-          <h2 id="built-title">The engineering</h2>
-        </div>
-        <ul class="highlights">
-          {p.highlights.map((h) => <li>{h}</li>)}
-        </ul>
-      </section>
-
-      {p.numbers && (
-        <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label="Results">
-          <ul class="numbers">
-            {p.numbers.map((n) => <li><b>{n.value}</b><span>{n.label}</span></li>)}
-          </ul>
-        </section>
-      )}
-
-      <nav class="next-case section" style="padding-top:22px;margin-top:clamp(56px,8vw,96px)" aria-label="Next case study">
-        <span class="label">Next case study</span>
-        <a class="btn btn-ghost" href={`/work/${next.slug}/`}>{next.name}: {next.headline} →</a>
-      </nav>
-    </article>
-
-    <footer class="footer">
-      <span>© {new Date().getFullYear()} {profile.fullName}</span>
-      <a href="/#contact">Contact</a>
-    </footer>
-  </main>
-</Base>
+<CasePage {...Astro.props} />

@@ -1,0 +1,14 @@
+---
+import CasePage from '../../../components/CasePage.astro';
+import { getContent } from '../../../data/content';
+
+export function getStaticPaths() {
+  const { caseStudies } = getContent('ar');
+  return caseStudies.map((p, i) => ({
+    params: { slug: p.slug },
+    props: { project: p, next: caseStudies[(i + 1) % caseStudies.length] },
+  }));
+}
+---
+
+<CasePage {...Astro.props} />

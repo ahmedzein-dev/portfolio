@@ -5,6 +5,29 @@ const $$ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const reduced = () => reduceMotion.matches;
 
+// The page's language (/ar/ is Arabic, right to left) and this script's own words in it.
+const isAr = document.documentElement.lang === 'ar';
+const rtl = document.documentElement.dir === 'rtl';
+const words = isAr
+  ? {
+      copied: 'تم النسخ',
+      selectToCopy: 'تم التحديد. اضغط Ctrl+C أو ⌘C للنسخ',
+      switchTo: (theme: 'light' | 'dark') => (theme === 'light' ? 'التبديل إلى المظهر الفاتح' : 'التبديل إلى المظهر الداكن'),
+      themeOn: (theme: 'light' | 'dark') => (theme === 'light' ? 'المظهر الفاتح' : 'المظهر الداكن'),
+      showAll: (n: number) => `عرض الكل (${n})`,
+      showLess: 'عرض أقل',
+      show: (name: string) => `عرض ${name}`,
+    }
+  : {
+      copied: 'Copied',
+      selectToCopy: 'Selected. Press Ctrl+C or ⌘C to copy',
+      switchTo: (theme: 'light' | 'dark') => `Switch to ${theme} theme`,
+      themeOn: (theme: 'light' | 'dark') => (theme === 'light' ? 'Light theme' : 'Dark theme'),
+      showAll: (n: number) => `Show all ${n}`,
+      showLess: 'Show less',
+      show: (name: string) => `Show ${name}`,
+    };
+
 /* ---------- island: where you are, contents, confirmations ---------- */
 const island = $('#island');
 const islandBtn = $<HTMLButtonElement>('#island-btn');
@@ -60,12 +83,12 @@ document.addEventListener('click', (e) => {
   const btn = (e.target as Element).closest<HTMLElement>('[data-copy]');
   if (!btn) return;
   const text = btn.dataset.copy ?? '';
-  const message = btn.dataset.copyMsg ?? 'Copied';
+  const message = btn.dataset.copyMsg ?? words.copied;
   const target = btn.dataset.copyTarget ? $(btn.dataset.copyTarget) : null;
   const fail = () => {
     if (target) {
       selectText(target);
-      toast('Selected. Press Ctrl+C or ⌘C to copy', 'info');
+      toast(words.selectToCopy, 'info');
     } else toast(text, 'info');
   };
   try {
@@ -86,8 +109,8 @@ function applyThemeLabel() {
   if (!themeBtn) return;
   const other = shownTheme() === 'dark' ? 'light' : 'dark';
   themeBtn.dataset.mode = shownTheme();
-  themeBtn.setAttribute('aria-label', `Switch to ${other} theme`);
-  themeBtn.title = `Switch to ${other} theme`;
+  themeBtn.setAttribute('aria-label', words.switchTo(other));
+  themeBtn.title = words.switchTo(other);
 }
 themeBtn?.addEventListener('click', () => {
   const next = shownTheme() === 'dark' ? 'light' : 'dark';
@@ -99,7 +122,7 @@ themeBtn?.addEventListener('click', () => {
     else localStorage.setItem('theme', next);
   } catch {}
   applyThemeLabel();
-  toast(next === 'dark' ? 'Dark theme' : 'Light theme');
+  toast(words.themeOn(next));
 });
 systemDark.addEventListener('change', applyThemeLabel);
 applyThemeLabel();
@@ -449,18 +472,20 @@ $$('[data-swipe]').forEach((row) => {
   const dots = slides.map((slide) => {
     const b = document.createElement('button');
     b.type = 'button';
-    b.setAttribute('aria-label', `Show ${slide.dataset.name ?? ''}`);
+    b.setAttribute('aria-label', words.show(slide.dataset.name ?? ''));
     b.addEventListener('click', () => row.scrollTo({ left: slide.offsetLeft - slides[0].offsetLeft, behavior: reduced() ? 'auto' : 'smooth' }));
     nav.append(b);
     return b;
   });
   row.after(nav);
   // Each card also learns how far it is from settling (--sp, -1 to 1), for the depth while swiping (CSS).
+  // Measured along the reading direction: right to left in Arabic, where scrollLeft runs from 0 down.
+  const along = (x: number) => (rtl ? -x : x);
   let queued = false;
   const update = () => {
     queued = false;
-    const step = slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : 0;
-    const i = step > 0 ? Math.min(slides.length - 1, Math.round(row.scrollLeft / step)) : 0;
+    const step = slides.length > 1 ? along(slides[1].offsetLeft - slides[0].offsetLeft) : 0;
+    const i = step > 0 ? Math.min(slides.length - 1, Math.max(0, Math.round(along(row.scrollLeft) / step))) : 0;
     dots.forEach((d, j) => (j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
     const swiping = step > 0 && row.scrollWidth > row.clientWidth + 1 && !reduced();
     slides.forEach((slide, j) => {
@@ -470,7 +495,7 @@ $$('[data-swipe]').forEach((row) => {
         slide.style.removeProperty('--spa');
         return;
       }
-      const sp = Math.max(-1, Math.min(1, (slide.offsetLeft - slides[0].offsetLeft - row.scrollLeft) / step));
+      const sp = Math.max(-1, Math.min(1, along(slide.offsetLeft - slides[0].offsetLeft - row.scrollLeft) / step));
       slide.style.setProperty('--sp', sp.toFixed(3));
       slide.style.setProperty('--spa', Math.abs(sp).toFixed(3));
     });
@@ -523,7 +548,7 @@ function showProjects(everything = false) {
     showAll.hidden = matches.length <= first.length;
     showAll.setAttribute('aria-expanded', String(everything));
     const label = showAll.querySelector('span');
-    if (label) label.textContent = everything ? 'Show less' : `Show all ${matches.length}`;
+    if (label) label.textContent = everything ? words.showLess : words.showAll(matches.length);
   }
   measure();
 }
@@ -544,7 +569,7 @@ showAll?.addEventListener('click', () => {
 
 // Every project has a case study now; a link to the old quick view (/#osta-home) opens it.
 const deepLink = location.hash.slice(1);
-if (deepLink && items.some((li) => li.dataset.id === deepLink)) location.replace(`/work/${deepLink}/`);
+if (deepLink && items.some((li) => li.dataset.id === deepLink)) location.replace(`${isAr ? '/ar' : ''}/work/${deepLink}/`);
 
 /* ---------- capabilities ---------- */
 const capButtons = $$<HTMLButtonElement>('.cap-btn');

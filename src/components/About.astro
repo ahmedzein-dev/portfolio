@@ -1,18 +1,21 @@
 ---
-import { capabilities, capabilityTiles, education, experience } from '../data/site';
+import { getContent } from '../data/content';
+import { langOf } from '../i18n';
+
+const { capabilities, capabilityTiles, education, experience, t } = getContent(langOf(Astro.url));
 ---
 
 <div class="two">
-  <div id="experience" data-section="Experience" data-num="4" class="section" style="padding-top:0">
+  <div id="experience" data-section={t.sections.experience.label} data-num="4" class="section" style="padding-top:0">
     <div class="section-head">
-      <p class="label"><span class="n">4</span> Experience</p>
-      <h2>Five stops so far</h2>
+      <p class="label"><span class="n">4</span> {t.sections.experience.label}</p>
+      <h2>{t.sections.experience.title}</h2>
     </div>
     <ol class="timeline">
       {experience.map((e, i) => (
         <li class={e.current ? 'now' : undefined} style={`--k:${experience.length - 1 - i}`}>
           <p class="tl-when">{e.when} · {e.place}</p>
-          <h3 style="font-size:1.05rem">{e.role}, {e.org}</h3>
+          <h3 style="font-size:1.05rem">{e.role}{t.comma}{e.org}</h3>
           <p class="tl-note">{e.note}</p>
         </li>
       ))}
@@ -21,11 +24,11 @@ import { capabilities, capabilityTiles, education, experience } from '../data/si
   </div>
   <div>
     <div class="section-head">
-      <p class="label">Capabilities</p>
-      <h2>Skills, with proof attached</h2>
-      <p class="lede">Pick a capability to see which projects prove it.</p>
+      <p class="label">{t.sections.capabilities.label}</p>
+      <h2>{t.sections.capabilities.title}</h2>
+      <p class="lede">{t.sections.capabilities.lede}</p>
     </div>
-    <div class="cap-btns" role="group" aria-label="Capabilities">
+    <div class="cap-btns" role="group" aria-label={t.sections.capabilities.label}>
       {capabilities.map((c) => (
         <button class="cap-btn" type="button" data-ids={c.ids.join(' ')} data-proof={c.proof} aria-pressed="false">{c.name}</button>
       ))}

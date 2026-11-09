@@ -1,19 +1,22 @@
 ---
 import type { StoreLink } from '../data/site';
+import { langOf, ui } from '../i18n';
 
 /**
  * Store links as icons: App Store and Google Play links are grouped per app ("Taggo on the App Store" and
- * "Taggo on Google Play" become "Taggo" with two icon buttons). A project with one app reads "Get the app".
+ * "Taggo on Google Play" become "Taggo" with two icon buttons; in Arabic, "Taggo على App Store"). A project
+ * with one app reads "Get the app".
  * Any other link stays a text button.
  */
 interface Props {
   links: StoreLink[];
 }
 const { links } = Astro.props;
+const t = ui[langOf(Astro.url)];
 
 const storeOf = (href: string) =>
   href.includes('apps.apple.com') ? 'apple' : href.includes('play.google.com') ? 'play' : null;
-const appOf = (label: string) => label.replace(/\s+on (the )?(App Store|Google Play)$/i, '').replace(/^(App Store|Google Play)$/i, '');
+const appOf = (label: string) => label.replace(/\s+(on (the )?|على )(App Store|Google Play)$/i, '').replace(/^(App Store|Google Play)$/i, '');
 
 const groups: { app: string; links: (StoreLink & { store: 'apple' | 'play' })[] }[] = [];
 const others: StoreLink[] = [];
@@ -32,7 +35,7 @@ for (const l of links) {
 <div class="store-links">
   {groups.map((g) => (
     <div class="store-group">
-      <span class="store-app">{groups.length > 1 && g.app ? g.app : 'Get the app'}</span>
+      <span class="store-app">{groups.length > 1 && g.app ? g.app : t.case.getApp}</span>
       {g.links.map((l) => (
         <a class="store-icon" href={l.href} aria-label={l.label} title={l.label} rel="noopener">
           {l.store === 'apple' ? (

@@ -1,22 +1,15 @@
 ---
-import { profile, proof } from '../data/site';
+import TopBar from './TopBar.astro';
+import { getContent } from '../data/content';
+import { langOf } from '../i18n';
 import { fingerprinted } from '../lib/fingerprint';
+
+const { profile, proof, t } = getContent(langOf(Astro.url));
 
 const photo = (px: number) => fingerprinted(`/photo/ahmed-zein-${px}.jpg`);
 ---
 
-<header class="topbar">
-  <a class="brand" href="/" aria-label={`${profile.name}, home`}><span class="az" aria-hidden="true">AZ</span><span class="nm">{profile.name}</span></a>
-  <nav class="toplinks" aria-label="Main">
-    <a href="#work">Work</a>
-    <a href="#open-source">Open source</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <button class="theme-btn" id="theme-btn" type="button" aria-label="Change theme">
-    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13z" fill="currentColor"></path><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"></circle></svg>
-  </button>
-</header>
+<TopBar />
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-id">
@@ -56,16 +49,16 @@ const photo = (px: number) => fingerprinted(`/photo/ahmed-zein-${px}.jpg`);
     <h1 id="hero-title">{profile.headline}</h1>
     <p class="hero-sub">{profile.intro}</p>
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="#work">See the work</a>
+      <a class="btn btn-primary" href="#work">{t.hero.seeWork}</a>
       <a class="btn btn-ghost" href={profile.cv} target="_blank" rel="noopener">
         <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        Download CV
+        {t.hero.cv}
       </a>
     </div>
   </div>
 </section>
 
-<ul class="proof" aria-label="In numbers">
+<ul class="proof" aria-label={t.hero.numbers}>
   {proof.map((p) => (
     <li>
       <a href={p.href}>

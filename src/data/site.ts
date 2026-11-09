@@ -397,30 +397,6 @@ export const moreWork: MoreWork[] = [
   },
 ];
 
-/** Every case study page at /work/<slug>/, in the order Next case study walks through them. */
-export type CaseStudy = Pick<
-  Flagship,
-  'slug' | 'name' | 'headline' | 'summary' | 'period' | 'platforms' | 'shots' | 'caption' | 'constraint' | 'highlights' | 'numbers' | 'links' | 'film'
-> & { role?: string; back: { href: string; label: string } };
-
-export const caseStudies: CaseStudy[] = [
-  ...flagships.map((p) => ({ ...p, back: { href: '/#work', label: 'Selected work' } })),
-  ...moreWork.map((p) => ({
-    slug: p.id,
-    name: p.name,
-    headline: p.headline,
-    summary: p.description,
-    role: p.role,
-    period: p.year,
-    platforms: p.platforms,
-    shots: p.shots,
-    highlights: p.highlights,
-    links: p.links,
-    film: p.film,
-    back: { href: '/#more-work', label: 'More projects' },
-  })),
-];
-
 export const experience = [
   {
     when: 'April 2025 to now',

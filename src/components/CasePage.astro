@@ -1,0 +1,100 @@
+---
+// A case study, in the language of its URL: src/pages/work/[slug].astro and src/pages/ar/work/[slug].astro.
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import TopBar from './TopBar.astro';
+import StoreLinks from './StoreLinks.astro';
+import { getContent, type CaseStudy } from '../data/content';
+import { langOf } from '../i18n';
+
+interface Props {
+  project: CaseStudy;
+  next: CaseStudy;
+}
+
+const { project: p, next } = Astro.props;
+const { profile, t, link } = getContent(langOf(Astro.url));
+---
+
+<Base title={`${p.name}: ${p.headline} · ${profile.name}`} description={p.summary} image={`/share/${p.slug}.jpg`}>
+  <main class="page" id="main">
+    <TopBar />
+
+    <article>
+      <div class="case-head">
+        <p class="label"><a href={p.back.href} style="text-decoration:none">{t.case.backArrow} {p.back.label}</a> · {p.name}</p>
+        <h1 style="font-size:clamp(2.2rem,5.6vw,4.2rem)">{p.headline}</h1>
+        <p class="lede">{p.summary}</p>
+        <dl class="case-meta">
+          {p.role && <div><dt>{t.case.role}</dt><dd>{p.role}</dd></div>}
+          <div><dt>{t.case.period}</dt><dd>{p.period}</dd></div>
+          <div><dt>{t.case.platforms}</dt><dd>{p.platforms}</dd></div>
+        </dl>
+        {p.links.length > 0 && <StoreLinks links={p.links} />}
+      </div>
+
+      {p.constraint && (
+        <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label={t.case.constraint}>
+          <p class="label">{t.case.constraint}</p>
+          <p class="constraint" style="margin-top:12px">{p.constraint}</p>
+        </section>
+      )}
+
+      {p.film && (
+        <section class="section" id="film" style="padding-top:clamp(48px,7vw,80px);scroll-margin-top:80px" aria-label={t.case.film}>
+          <figure class="film">
+            <video controls playsinline preload="none" poster={p.film.poster} aria-label={p.film.title}>
+              <source src={p.film.src} type="video/mp4" />
+            </video>
+            <figcaption><span class="film-len">{p.film.length}</span> {p.film.caption}</figcaption>
+          </figure>
+        </section>
+      )}
+
+      <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label={t.case.screens}>
+        <div class="case-shots">
+          {p.shots.map((s) => (
+            <figure class={s.kind === 'window' ? 'wide' : undefined}>
+              {s.kind === 'window' ? (
+                <Image src={s.src} alt={s.alt} widths={[720, 1280, 1960]} sizes="(min-width: 1040px) 980px, 94vw" quality={90} />
+              ) : s.kind === 'tablet' ? (
+                <Image src={s.src} alt={s.alt} widths={[480, 960, 1440]} sizes="(min-width: 1040px) 480px, 90vw" quality={92} />
+              ) : (
+                <Image src={s.src} alt={s.alt} widths={[360, 720]} sizes="(min-width: 760px) 360px, 90vw" />
+              )}
+              {s.kind === 'window' && p.caption && <figcaption>{p.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-labelledby="built-title">
+        <div class="section-head">
+          <p class="label">{t.case.built}</p>
+          <h2 id="built-title">{t.case.engineering}</h2>
+        </div>
+        <ul class="highlights">
+          {p.highlights.map((h) => <li>{h}</li>)}
+        </ul>
+      </section>
+
+      {p.numbers && (
+        <section class="section" style="padding-top:clamp(48px,7vw,80px)" aria-label={t.case.results}>
+          <ul class="numbers">
+            {p.numbers.map((n) => <li><b>{n.value}</b><span>{n.label}</span></li>)}
+          </ul>
+        </section>
+      )}
+
+      <nav class="next-case section" style="padding-top:22px;margin-top:clamp(56px,8vw,96px)" aria-label={t.case.next}>
+        <span class="label">{t.case.next}</span>
+        <a class="btn btn-ghost" href={link(`/work/${next.slug}/`)}>{next.name}: {next.headline} {t.case.nextArrow}</a>
+      </nav>
+    </article>
+
+    <footer class="footer">
+      <span>© {new Date().getFullYear()} {profile.fullName}</span>
+      <a href={link('/#contact')}>{t.nav.contact}</a>
+    </footer>
+  </main>
+</Base>

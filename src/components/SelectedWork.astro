@@ -1,9 +1,12 @@
 ---
 import { Image } from 'astro:assets';
-import { flagships } from '../data/site';
+import { getContent } from '../data/content';
+import { langOf } from '../i18n';
+
+const { flagships, t, link } = getContent(langOf(Astro.url));
 ---
 
-<ol class="stack" data-swipe="Selected work">
+<ol class="stack" data-swipe={t.work.swipe}>
   {flagships.map((p, i) => (
     <li class="scard" data-name={p.name} data-theme-card={p.theme} style={`--i:${i}`}>
       <div class="scard-text">
@@ -13,8 +16,8 @@ import { flagships } from '../data/site';
         <ul class="tags">
           {p.tags.map((t) => <li>{t}</li>)}
         </ul>
-        <a class="scard-cta" href={`/work/${p.slug}/`}>
-          Read the case study
+        <a class="scard-cta" href={link(`/work/${p.slug}/`)}>
+          {t.work.cta}
           <span class="sr-only">: {p.name}</span>
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h9M7.5 3.5 11 7l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
         </a>

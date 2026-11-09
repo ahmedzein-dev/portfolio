@@ -50,5 +50,28 @@ export default defineConfig({
         ],
       },
     },
+    // The Arabic pages (/ar/). Arabic letters only (subset and unicode range), and no fallbacks of their
+    // own: global.css lists them before the Latin fonts, so Arabic takes these and Latin words (Flutter,
+    // Taggo) still take Hubot Sans and Mona Sans. Fetched from Google Fonts at build and served from here.
+    {
+      provider: fontProviders.google(),
+      name: 'Noto Kufi Arabic',
+      cssVariable: '--font-ar-display',
+      weights: ['500 800'],
+      styles: ['normal'],
+      subsets: ['arabic'],
+      fallbacks: [],
+      optimizedFallbacks: false,
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'IBM Plex Sans Arabic',
+      cssVariable: '--font-ar-body',
+      weights: [400, 500, 600],
+      styles: ['normal'],
+      subsets: ['arabic'],
+      fallbacks: [],
+      optimizedFallbacks: false,
+    },
   ],
 });

@@ -1,0 +1,25 @@
+---
+import { getContent } from '../data/content';
+import { langOf, otherPath } from '../i18n';
+
+// The bar at the top of every page. On the home page the links jump within it; elsewhere they lead back
+// to its sections. The last link opens this same page in the other language.
+const { t, profile, link } = getContent(langOf(Astro.url));
+const onHome = Astro.url.pathname === link('/');
+const to = (hash: string) => (onHome ? hash : link(`/${hash}`));
+const other = otherPath(Astro.url);
+---
+
+<header class="topbar">
+  <a class="brand" href={link('/')} aria-label={t.home(profile.name)}><span class="az" aria-hidden="true">AZ</span><span class="nm">{profile.name}</span></a>
+  <nav class="toplinks" aria-label={t.nav.label}>
+    <a href={to('#work')}>{t.nav.work}</a>
+    <a href={to('#open-source')}>{t.nav.openSource}</a>
+    <a href={to('#experience')}>{t.nav.experience}</a>
+    <a href={to('#contact')}>{t.nav.contact}</a>
+    <a class="lang-link" href={other.path} lang={t.switchTo.lang} hreflang={t.switchTo.lang} title={t.switchTo.title}>{t.switchTo.label}</a>
+  </nav>
+  <button class="theme-btn" id="theme-btn" type="button" aria-label={t.theme}>
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13z" fill="currentColor"></path><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"></circle></svg>
+  </button>
+</header>

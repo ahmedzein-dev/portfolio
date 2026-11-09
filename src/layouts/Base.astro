@@ -2,7 +2,10 @@
 import { Font } from 'astro:assets';
 import { fingerprinted } from '../lib/fingerprint';
 import '../styles/global.css';
-import { profile } from '../data/site';
+import { profile as enProfile } from '../data/site';
+import { ar } from '../data/ar';
+import { getContent } from '../data/content';
+import { langOf, localPath, ui } from '../i18n';
 
 interface Props {
   title: string;
@@ -14,7 +17,13 @@ interface Props {
 }
 
 const { title, description, sections = [], image } = Astro.props;
+const lang = langOf(Astro.url);
+const t = ui[lang];
+const { profile } = getContent(lang);
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Each page names its other-language version, so search engines show people the one in their language.
+const enPath = lang === 'ar' ? Astro.url.pathname.replace(/^\/ar(?=\/|$)/, '') || '/' : Astro.url.pathname;
+const alternates = { en: new URL(enPath, Astro.site), ar: new URL(localPath('ar', enPath), Astro.site) };
 // LinkedIn, WhatsApp and browsers keep a preview image by its URL, even when they re-read the page; a
 // fingerprint of the file in the query makes a changed image a new URL.
 const versioned = (path: string) => new URL(fingerprinted(path), Astro.site);
@@ -25,27 +34,30 @@ const previewUrl = image ? versioned(image) : shareUrl;
 const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: profile.fullName,
-  alternateName: profile.name,
-  jobTitle: profile.title,
+  name: enProfile.fullName,
+  alternateName: [enProfile.name, ar.profile.fullName, ar.profile.name],
+  jobTitle: enProfile.title,
   url: Astro.site?.toString(),
   image: shareUrl.toString(),
-  email: `mailto:${profile.email}`,
-  telephone: profile.phone,
-  address: { '@type': 'PostalAddress', addressLocality: profile.location, addressCountry: 'AE' },
+  email: `mailto:${enProfile.email}`,
+  telephone: enProfile.phone,
+  address: { '@type': 'PostalAddress', addressLocality: enProfile.location, addressCountry: 'AE' },
   worksFor: { '@type': 'Organization', name: 'Kief Consultancy & Technology' },
-  sameAs: [profile.links.linkedin, profile.links.github, profile.links.pubdev],
+  sameAs: [enProfile.links.linkedin, enProfile.links.github, enProfile.links.pubdev],
 };
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir={t.dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={alternates.en} />
+    <link rel="alternate" hreflang="ar" href={alternates.ar} />
+    <link rel="alternate" hreflang="x-default" href={alternates.en} />
     <link rel="icon" href={fingerprinted('/favicon.ico')} sizes="32x32" />
     {/* Google Search wants a square favicon a multiple of 48 px; 192 is, so results show it sharp. */}
     <link rel="icon" href={fingerprinted('/icon-192.png')} sizes="192x192" type="image/png" />
@@ -55,6 +67,8 @@ const person = {
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#0e1219" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'ar' ? 'ar_AE' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'ar' ? 'en_US' : 'ar_AE'} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -65,6 +79,8 @@ const person = {
     <Font cssVariable="--font-display" preload />
     <Font cssVariable="--font-body" preload />
     <Font cssVariable="--font-mono" />
+    {lang === 'ar' && <Font cssVariable="--font-ar-display" preload />}
+    {lang === 'ar' && <Font cssVariable="--font-ar-body" preload />}
     <script is:inline>
       try {
         const t = localStorage.getItem('theme');
@@ -74,7 +90,7 @@ const person = {
     <script type="application/ld+json" set:html={JSON.stringify(person)} />
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip" href="#main">{t.skip}</a>
 
     <div class="island" id="island" data-open="false">
       <button class="island-btn" id="island-btn" type="button" aria-expanded="false" aria-controls="island-panel">
@@ -91,7 +107,7 @@ const person = {
           <span id="island-toast"></span>
         </span>
       </button>
-      <nav class="island-panel" id="island-panel" aria-label="Sections" hidden>
+      <nav class="island-panel" id="island-panel" aria-label={t.sectionsNav} hidden>
         <ol>
           {sections.map((s) => (
             <li><a href={`#${s.id}`}><span>{s.num ?? '·'}</span>{s.title}</a></li>
@@ -102,7 +118,7 @@ const person = {
     <div class="sr-only" aria-live="polite" id="live-region"></div>
 
     {sections.length > 0 && (
-      <nav class="rail" id="rail" aria-label="Route through the page">
+      <nav class="rail" id="rail" aria-label={t.rail}>
         <span class="rail-track"></span><span class="rail-fill" id="rail-fill"></span><span class="rail-puck" id="rail-puck"></span>
       </nav>
     )}
@@ -110,7 +126,7 @@ const person = {
     <slot />
 
     {/* Shown by site.ts once the first screen is scrolled past. */}
-    <button class="to-top" id="to-top" type="button" aria-label="Back to top">
+    <button class="to-top" id="to-top" type="button" aria-label={t.toTop}>
       {/* How far down the page you are, like the island's ring. */}
       <svg class="to-top-ring" viewBox="0 0 48 48" aria-hidden="true">
         <circle class="bg" cx="24" cy="24" r="22"></circle>
