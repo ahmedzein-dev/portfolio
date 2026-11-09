@@ -8,7 +8,7 @@ export const ar = {
   profile: {
     name: 'أحمد زين',
     fullName: 'أحمد زين العابدين',
-    title: 'Senior Software Engineer · Mobile (Flutter, iOS & Android)',
+    title: 'Senior Software Engineer · Flutter (iOS, Android & Desktop)',
     location: 'أبوظبي',
     availability: {
       long: 'متاح لوظائف بدوام كامل ولأعمال حرة',
