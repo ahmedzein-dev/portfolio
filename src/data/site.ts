@@ -47,6 +47,7 @@ export const profile = {
     { label: 'Now', value: 'Senior Mobile Engineer at Kief, Abu Dhabi' },
     { label: 'Shipping', value: 'Taggo, Taggo Captain and The Events' },
     { label: 'Latest release', value: 'draggable_floating_window 0.0.1 · 8 Oct 2026' },
+    { label: 'Learning', value: 'Node.js and system design' },
   ],
   links: {
     linkedin: 'https://www.linkedin.com/in/ahmed-zein-294230270',
@@ -131,6 +132,7 @@ export const flagships: Flagship[] = [
       'Payment reliability across the wallet, driver cash-out and cash deposits: idempotency keys, settlement reconciliation and recovery from ambiguous failures.',
       'Taggo Buddy: push-to-talk voice booking on the Gemini Live API through a backend relay, confirmed with biometrics.',
       'Hardened clients: freeRASP integrity checks, screenshot blocking on sensitive screens, and release guards on every build path.',
+      'Firebase Crashlytics and Analytics in both apps: fatal and async errors reported with the signed-in user, screen views logged, and collection off in debug builds.',
       'Dev and prod flavors in both apps, installable side by side, each with its own backend, app ID and Firebase app.',
       'Ride and cargo are live; rental and recovery are built behind launch flags.',
     ],
@@ -458,6 +460,11 @@ export const capabilities = [
     name: 'Performance',
     ids: ['events', 'ba3'],
     proof: 'The Events: app launch from about 12 s to about 3 s. BA3: about 829M Firestore reads a year saved, invoices about 99% faster.',
+  },
+  {
+    name: 'Crashes and analytics',
+    ids: ['taggo', 'captain'],
+    proof: 'Taggo and Taggo Captain: Firebase Crashlytics reports fatal and async errors with the signed-in user, and Firebase Analytics logs screen views; collection is off in debug builds.',
   },
   {
     name: 'Security and release',
