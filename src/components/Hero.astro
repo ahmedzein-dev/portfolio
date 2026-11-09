@@ -80,7 +80,7 @@ const photo = (px: number) => fingerprinted(`/photo/ahmed-zein-${px}.jpg`);
       d.state = 'counting';
       function step(now) {
         start = start || now;
-        var k = Math.min(1, (now - start) / 2200), eased = 1 - Math.pow(1 - k, 3);
+        var k = Math.min(1, (now - start) / 1500), eased = 1 - Math.pow(1 - k, 3);
         el.textContent = (d.prefix || '') + (from + (to - from) * eased).toFixed(decimals) + (d.suffix || '');
         if (k < 1) requestAnimationFrame(step);
         else d.state = 'done';
