@@ -146,16 +146,16 @@ export const flagships: Flagship[] = [
   {
     slug: 'the-events',
     name: 'The Events',
-    eyebrow: 'The Events · Gifting e-commerce · 2025 to now',
-    headline: 'A gifting app that opens 4× faster',
-    pitch: 'Flowers and gifts across nine Gulf countries, on Telr, Apple Pay and Google Pay.',
+    eyebrow: 'The Events · Multi-vendor e-commerce · 2025 to now',
+    headline: 'A Gulf marketplace that opens 4× faster',
+    pitch: 'A multi-vendor marketplace for gifts, events and shopping in nine Gulf countries, on Telr, Apple Pay and Google Pay.',
     summary:
-      'Flowers and gifts across nine Gulf countries. App launch went from about 12 s to about 3 s on the same phone, through lazy home sections, de-duplicated requests, a native splash and skeleton loading. Checkout runs on Telr, Apple Pay and Google Pay.',
+      'A multi-vendor marketplace for gifts, events and shopping in nine Gulf countries. App launch went from about 12 s to about 3 s on the same phone, through lazy home sections, de-duplicated requests, a native splash and skeleton loading. Checkout runs on Telr, Apple Pay and Google Pay.',
     role: 'Lead mobile engineer, Kief Consultancy & Technology',
     period: 'April 2025 to now',
     platforms: 'iOS and Android',
     tags: ['Launch performance', 'Telr', 'Apple Pay', 'Google Pay', 'Forced updates'],
-    card: { year: '2025 to now', platforms: 'Mobile', summary: 'Flowers and gifts across nine Gulf countries.', kinds: ['mobile'], image: theEventsCard },
+    card: { year: '2025 to now', platforms: 'Mobile', summary: 'A multi-vendor marketplace in nine Gulf countries.', kinds: ['mobile'], image: theEventsCard },
     theme: 'events',
     shots: [
       { src: theEvents, alt: 'The Events app home: occasion picks, Celebrate Occasions and Curated For You', kind: 'phone' },
@@ -230,7 +230,7 @@ export const flagships: Flagship[] = [
     slug: 'gainz-ai',
     name: 'Gainz AI',
     eyebrow: 'Gainz AI · AI fitness · 2024 · Contract',
-    headline: 'The search I built, now an open-source package',
+    headline: 'An AI fitness coach, with smart training notes',
     pitch: 'AI fitness coaching, with note search published as scroll_highlight_text.',
     summary:
       'A fitness app with AI athlete avatars and adaptive plans. I built note search with match highlighting, later published as scroll_highlight_text, plus on-device summarisation and translation.',
