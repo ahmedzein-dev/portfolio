@@ -72,8 +72,9 @@ await png(180, 'public/apple-touch-icon.png');
     <rect x="${px - 4}" y="${py - 4}" width="${pw + 8}" height="${ph + 8}" rx="37" fill="#0e1219"/>
     <text x="${tx}" y="232" font-family="Helvetica Neue" font-weight="700" font-size="88" fill="#f2ede5">Ahmed Zein</text>
     <text x="${tx}" y="300" font-family="Helvetica Neue" font-weight="500" font-size="40" fill="#d4aa7d">Senior Software Engineer</text>
-    <text x="${tx}" y="400" font-family="Helvetica Neue" font-weight="700" font-size="46" fill="#f2ede5">I build mobile apps</text>
-    <text x="${tx}" y="458" font-family="Helvetica Neue" font-weight="700" font-size="46" fill="#f2ede5">that stay live.</text>
+    <text x="${tx}" y="346" font-family="Helvetica Neue" font-weight="500" font-size="34" fill="#d4aa7d" fill-opacity="0.8">Mobile (Flutter)</text>
+    <text x="${tx}" y="430" font-family="Helvetica Neue" font-weight="700" font-size="46" fill="#f2ede5">I build mobile apps</text>
+    <text x="${tx}" y="488" font-family="Helvetica Neue" font-weight="700" font-size="46" fill="#f2ede5">that stay live.</text>
   </svg>`);
   const card = await sharp(page).composite([{ input: portrait, left: px, top: py }]).png().toBuffer();
   await sharp(card).jpeg({ quality: 95, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile('public/share/home.jpg');
