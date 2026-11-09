@@ -20,7 +20,7 @@ export const ar = {
     description:
       'أحمد زين، Senior Mobile Engineer في أبوظبي. تتبّع لحظي وتشغيل في الخلفية وLive Activities على iOS ومدفوعات، في تطبيقات Flutter منشورة على متاجر الإمارات.',
     now: [
-      { label: 'الآن', value: 'Senior\u00a0Mobile\u00a0Engineer في Kief، أبوظبي' },
+      { label: 'الآن', value: 'Senior\u00a0Software\u00a0Engineer في Kief، أبوظبي' },
       // Non-breaking spaces (\u00a0) keep each product name on one line when the row wraps.
       { label: 'أعمل على', value: 'Taggo وTaggo\u00a0Captain وThe\u00a0Events' },
       // \u2066…\u2069 keeps the package name and version together, left to right, before the Arabic date.
@@ -111,7 +111,7 @@ export const ar = {
       pitch: 'محاسبة على Android وiOS وWindows وmacOS والويب، في نوافذ عائمة.',
       summary:
         'محاسبة وإدارة أعمال على Android وiOS وWindows وmacOS والويب. أعدتُ بناء طبقة Firestore فوفّرت نحو 829 مليون قراءة سنوياً وصار إنشاء الفاتورة أسرع بنحو 99%. يعمل مستخدمو سطح المكتب في نوافذ عائمة، صارت الآن مفتوحة المصدر باسم draggable_floating_window.',
-      role: 'مهندس برمجيات أول، BA3',
+      role: 'Mid-Senior Software Engineer, BA3',
       period: 'مايو 2024 حتى أبريل 2025',
       platforms: 'Android وiOS وWindows وmacOS والويب',
       tags: ['Firestore', 'نوافذ سطح المكتب', 'ست لغات', 'PDF والفواتير الإلكترونية'],
@@ -178,7 +178,7 @@ export const ar = {
       headline: 'تأجير سيارات للمستأجرين والملّاك، في تطبيق واحد',
       description:
         'سوق لتأجير السيارات في الإمارات. تطبيق Flutter واحد يخدم المستأجرين وملّاك السيارات بمسارين منفصلين يُحدَّدان عند تسجيل الدخول: يجد المستأجر سيارة على الخريطة ويحجزها، ويوافق المالك على الحجز فيتحدّث على هاتف المستأجر فوراً. المدفوعات عبر Stripe، مع تحويل المستحقات إلى الملّاك عبر Stripe Connect.',
-      role: 'مهندس برمجيات أول، BA3',
+      role: 'Mid-Senior Software Engineer, BA3',
       shots: [{ alt: 'Amber Drive، المستأجر والمالك جنباً إلى جنب: يوافق المالك على حجز فيراه المستأجر فوراً ضمن الحجوزات الموافق عليها' }],
       tile: [
         { alt: 'الرئيسية في Amber Drive: خريطة للبحث عن موقع، وفلاتر لنوع السيارة والمقاعد وناقل الحركة، وزر البدء' },

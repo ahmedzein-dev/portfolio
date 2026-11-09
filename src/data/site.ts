@@ -46,7 +46,7 @@ export const profile = {
   description:
     'Ahmed Zein, Senior Mobile Engineer in Abu Dhabi. Real-time tracking, background execution, iOS Live Activities and payments in Flutter apps live in the UAE stores.',
   now: [
-    { label: 'Now', value: 'Senior Mobile Engineer at Kief, Abu Dhabi' },
+    { label: 'Now', value: 'Senior Software Engineer at Kief, Abu Dhabi' },
     { label: 'Shipping', value: 'Taggo, Taggo Captain and The Events' },
     { label: 'Latest release', value: 'draggable_floating_window 0.0.1 · 8 Oct 2026' },
     { label: 'Learning', value: 'Node.js and system design' },
@@ -191,7 +191,7 @@ export const flagships: Flagship[] = [
     pitch: 'Accounting on Android, iOS, Windows, macOS and the web, in floating windows.',
     summary:
       'Accounting and business management on Android, iOS, Windows, macOS and the web. A Firestore re-architecture saved about 829M reads a year and made invoice creation about 99% faster. Desktop users work in floating windows, now open source as draggable_floating_window.',
-    role: 'Senior Software Engineer, BA3',
+    role: 'Mid-Senior Software Engineer, BA3',
     period: 'May 2024 to April 2025',
     platforms: 'Android, iOS, Windows, macOS and web',
     tags: ['Firestore', 'Desktop windowing', 'Six languages', 'PDF and e-invoices'],
@@ -294,7 +294,7 @@ export const moreWork: MoreWork[] = [
     headline: 'Car rental for renters and owners, in one app',
     description:
       'A car rental marketplace for the UAE. One Flutter app serves renters and car owners with separate flows, switched at login: renters find a car on a map and book it, owners approve the booking and it updates on the renter’s phone at once. Payments run on Stripe, with Stripe Connect payouts to owners.',
-    role: 'Senior Software Engineer, BA3',
+    role: 'Mid-Senior Software Engineer, BA3',
     shots: [
       {
         src: amberDrive,
@@ -412,7 +412,7 @@ export const experience = [
   {
     when: 'April 2025 to now',
     place: 'Abu Dhabi, UAE',
-    role: 'Senior Mobile Engineer',
+    role: 'Senior Software Engineer',
     org: 'Kief Consultancy & Technology',
     note: 'Lead mobile engineer on Taggo, Taggo Captain and The Events.',
     current: true,
@@ -420,7 +420,7 @@ export const experience = [
   {
     when: 'May 2024 to April 2025',
     place: 'Ras Al Khaimah, UAE',
-    role: 'Senior Software Engineer',
+    role: 'Mid-Senior Software Engineer',
     org: 'BA3',
     note: 'BA3 Business Solutions and Amber Drive. document_camera_frame started here.',
   },
