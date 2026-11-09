@@ -8,7 +8,7 @@ export const ar = {
   profile: {
     name: 'أحمد زين',
     fullName: 'أحمد زين العابدين',
-    title: 'مهندس تطبيقات جوّال أول',
+    title: 'Senior Mobile Engineer',
     location: 'أبوظبي',
     availability: {
       long: 'متاح لوظائف بدوام كامل ولأعمال حرة',
@@ -18,9 +18,9 @@ export const ar = {
     intro:
       'تتبّع لحظي، وتشغيل في الخلفية، وLive Activities على iOS، ومدفوعات إلكترونية، ورصد الأعطال، في تطبيقات منشورة: Taggo وTaggo Captain وThe Events. ومؤلف ثلاث حزم Flutter مفتوحة المصدر.',
     description:
-      'أحمد زين، مهندس تطبيقات جوّال أول في أبوظبي. تتبّع لحظي وتشغيل في الخلفية وLive Activities على iOS ومدفوعات، في تطبيقات Flutter منشورة على متاجر الإمارات.',
+      'أحمد زين، Senior Mobile Engineer في أبوظبي. تتبّع لحظي وتشغيل في الخلفية وLive Activities على iOS ومدفوعات، في تطبيقات Flutter منشورة على متاجر الإمارات.',
     now: [
-      { label: 'الآن', value: 'مهندس تطبيقات جوّال أول في Kief، أبوظبي' },
+      { label: 'الآن', value: 'Senior Mobile Engineer في Kief، أبوظبي' },
       { label: 'أعمل على', value: 'Taggo وTaggo Captain وThe Events' },
       { label: 'أحدث إصدار', value: 'draggable_floating_window 0.0.1 · 8 أكتوبر 2026' },
       { label: 'أتعلّم', value: 'Node.js وتصميم الأنظمة' },
