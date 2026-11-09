@@ -1,6 +1,7 @@
-// Builds the 4:3 thumbnails of the More projects grid, so every card frames its screens the same way:
-// whole screens, never cropped, centred on a dark stage tinted with the app's colour. The same stages,
-// at 1200×630, are the link previews (og:image) of the case studies.
+// Builds the 4:3 thumbnails of the More projects grid and the link previews (og:image) of the case studies,
+// on a dark stage tinted with the app's colour. The thumbnails show the screens as Selected Work does: in
+// dark device bodies, two of them tilted and overlapping, running off the bottom edge. The link previews
+// keep whole, flat screens side by side, which read better at 1200×630.
 //
 //   node scripts/card-images.mjs [id ...]
 //
@@ -86,6 +87,61 @@ async function phonesCard(c) {
   return sharp(stage(c.tint, c.glow)).composite(layers);
 }
 
+// Selected Work's devices (global.css: .phone, .tablet, .v-two): a dark body with rounded corners around
+// the screen, filled from the top, and a soft shadow below.
+async function device(file, w, h, kind) {
+  const pad = Math.round(w * (kind === 'tablet' ? 0.016 : 0.022));
+  const outer = Math.round(w * (kind === 'tablet' ? 0.05 : 0.1));
+  const inner = Math.round(outer * 0.8);
+  const [sw, sh] = [w - pad * 2, h - pad * 2];
+  const screen = await sharp(SRC + file)
+    .resize(sw, sh, { fit: 'cover', position: 'top', kernel: 'lanczos3' })
+    .composite([{ input: Buffer.from(`<svg width="${sw}" height="${sh}"><rect width="${sw}" height="${sh}" rx="${inner}" fill="#fff"/></svg>`), blend: 'dest-in' }])
+    .png()
+    .toBuffer();
+  const body = await sharp(Buffer.from(`<svg width="${w}" height="${h}"><rect width="${w}" height="${h}" rx="${outer}" fill="#0b0d10"/><rect x="1.5" y="1.5" width="${w - 3}" height="${h - 3}" rx="${outer - 1.5}" fill="none" stroke="#fff" stroke-opacity="0.22" stroke-width="3"/></svg>`))
+    .composite([{ input: screen, left: pad, top: pad }])
+    .png()
+    .toBuffer();
+  const m = Math.round(w * 0.16);
+  const shadow = await sharp(Buffer.from(`<svg width="${w + m * 2}" height="${h + m * 2}"><rect x="${m}" y="${m + Math.round(w * 0.07)}" width="${w}" height="${h}" rx="${outer}" fill="#000" fill-opacity="0.55"/></svg>`))
+    .blur(Math.round(w * 0.06))
+    .png()
+    .toBuffer();
+  return { input: await sharp(shadow).composite([{ input: body, left: m, top: m }]).png().toBuffer(), margin: m };
+}
+
+// Two devices as on a Selected Work card: phones 9:19.5 tilted apart (-6° and 5°), tablets 3:4 straight and
+// stepped. Laid out on a taller sheet so they can run off the bottom, then cut to the thumbnail.
+async function mockupCard(c) {
+  const tablet = c.radius !== undefined;
+  const place = tablet
+    ? [{ x: 0.06, y: 0.1, w: 0.5, deg: 0 }, { x: 0.44, y: 0.2, w: 0.5, deg: 0 }]
+    : [{ x: 0.16, y: 0.09, w: 0.33, deg: -6 }, { x: 0.51, y: 0.16, w: 0.33, deg: 5 }];
+  const layers = [];
+  for (const [i, file] of c.phones.entries()) {
+    const p = place[i];
+    const w = Math.round(W * p.w);
+    const h = Math.round(tablet ? (w * 4) / 3 : (w * 19.5) / 9);
+    const { input, margin } = await device(file, w, h, tablet ? 'tablet' : 'phone');
+    const turned = p.deg ? await sharp(input).rotate(p.deg, { background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer() : input;
+    const t = await sharp(turned).metadata();
+    // Keep the device's centre where an untilted one would have it.
+    const cx = W * p.x + w / 2;
+    const cy = H * p.y + h / 2;
+    layers.push({ input: turned, left: Math.round(cx - t.width / 2), top: Math.round(cy - t.height / 2), _m: margin });
+  }
+  const pad = Math.round(W * 0.3);
+  const sheet = await sharp({ create: { width: W + pad * 2, height: H * 2 + pad * 2, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    .composite([
+      { input: await sharp(stage(c.tint, c.glow)).png().toBuffer(), left: pad, top: pad },
+      ...layers.map((l) => ({ input: l.input, left: l.left + pad, top: l.top + pad })),
+    ])
+    .png()
+    .toBuffer();
+  return sharp(await sharp(sheet).extract({ left: pad, top: pad, width: W, height: H }).png().toBuffer());
+}
+
 // A ready-made still (a mockup or a film frame): shown whole, its own background carried out to 4:3.
 async function stillCard(c) {
   const m = await sharp(SRC + c.still).metadata();
@@ -104,8 +160,8 @@ async function stillCard(c) {
   return sharp(img).extend({ left: x, right: W - w - x, top: y, bottom: H - h - y, extendWith: 'copy' });
 }
 
-async function write(c, file) {
-  const img = c.phones ? await phonesCard(c) : await stillCard(c);
+async function write(c, file, mockup = false) {
+  const img = c.phones ? await (mockup ? mockupCard(c) : phonesCard(c)) : await stillCard(c);
   // Flatten in a second pass: composite layers resolve before resize/format options apply.
   const flat = await img.png().toBuffer();
   await sharp(flat).sharpen({ sigma: 0.5 }).jpeg({ quality: 88, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile(file);
@@ -117,7 +173,7 @@ const chosen = only.length ? cards.filter((c) => only.includes(c.id)) : cards;
 if (only.length && chosen.length !== only.length) throw new Error(`unknown card id in: ${only.join(', ')}`);
 
 await mkdir(OUT, { recursive: true });
-for (const c of chosen) await write(c, `${OUT}${c.id}.jpg`);
+for (const c of chosen) await write(c, `${OUT}${c.id}.jpg`, true);
 
 [W, H] = [1200, 630];
 await mkdir(SHARE, { recursive: true });
