@@ -40,7 +40,7 @@ export const profile = {
   },
   headline: 'I build mobile apps that stay live.',
   intro:
-    'Real-time tracking, background execution, iOS Live Activities and payments, shipped in Taggo, Taggo Captain and The Events. Author of three Flutter packages.',
+    'Real-time tracking, background execution, iOS Live Activities, payments and crash monitoring, shipped in Taggo, Taggo Captain and The Events. Author of three Flutter packages.',
   description:
     'Ahmed Zein, Senior Mobile Engineer in Abu Dhabi. Real-time tracking, background execution, iOS Live Activities and payments in Flutter apps live in the UAE stores.',
   now: [

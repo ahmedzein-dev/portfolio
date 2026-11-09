@@ -16,7 +16,7 @@ export const ar = {
     },
     headline: 'أبني تطبيقات جوّال لا تتوقف.',
     intro:
-      'تتبّع لحظي، وتشغيل في الخلفية، وLive Activities على iOS، ومدفوعات إلكترونية، في تطبيقات منشورة: Taggo وTaggo Captain وThe Events. ومؤلف ثلاث حزم Flutter مفتوحة المصدر.',
+      'تتبّع لحظي، وتشغيل في الخلفية، وLive Activities على iOS، ومدفوعات إلكترونية، ورصد الأعطال، في تطبيقات منشورة: Taggo وTaggo Captain وThe Events. ومؤلف ثلاث حزم Flutter مفتوحة المصدر.',
     description:
       'أحمد زين، مهندس تطبيقات جوّال أول في أبوظبي. تتبّع لحظي وتشغيل في الخلفية وLive Activities على iOS ومدفوعات، في تطبيقات Flutter منشورة على متاجر الإمارات.',
     now: [
