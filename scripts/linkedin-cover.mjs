@@ -40,7 +40,7 @@ const page = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" h
     <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0b0f15"/><stop offset="1" stop-color="#121925"/></linearGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#fade)"/><rect width="${W}" height="${H}" fill="url(#glow)"/>
-  <text x="${tx}" y="104" font-family="Menlo" font-size="19" letter-spacing="3" fill="#d4aa7d">SENIOR MOBILE ENGINEER · FLUTTER</text>
+  <text x="${tx}" y="104" font-family="Menlo" font-size="17" letter-spacing="2" fill="#d4aa7d">SENIOR SOFTWARE ENGINEER · MOBILE (FLUTTER, iOS &amp; ANDROID)</text>
   <text x="${tx}" y="178" font-family="Helvetica Neue" font-weight="700" font-size="60" fill="#f2ede5">I build mobile apps</text>
   <text x="${tx}" y="244" font-family="Helvetica Neue" font-weight="700" font-size="60" fill="#f2ede5">that stay live.</text>
   <text x="${tx}" y="300" font-family="Helvetica Neue" font-size="21" fill="#a3a9b5">Real-time tracking · Background execution · iOS Live Activities · Payments</text>
