@@ -8,7 +8,7 @@ export const ar = {
   profile: {
     name: 'أحمد زين',
     fullName: 'أحمد زين العابدين',
-    title: 'Senior Mobile Engineer',
+    title: 'Senior Software Engineer',
     location: 'أبوظبي',
     availability: {
       long: 'متاح لوظائف بدوام كامل ولأعمال حرة',
@@ -18,7 +18,7 @@ export const ar = {
     intro:
       'تتبّع لحظي، وتشغيل في الخلفية، وLive Activities على iOS، ومدفوعات إلكترونية، ورصد الأعطال، في تطبيقات منشورة: Taggo وTaggo Captain وThe Events. ومؤلف ثلاث حزم Flutter مفتوحة المصدر.',
     description:
-      'أحمد زين، Senior Mobile Engineer في أبوظبي. تتبّع لحظي وتشغيل في الخلفية وLive Activities على iOS ومدفوعات، في تطبيقات Flutter منشورة على متاجر الإمارات.',
+      'أحمد زين، Senior Software Engineer في أبوظبي. تتبّع لحظي وتشغيل في الخلفية وLive Activities على iOS ومدفوعات، في تطبيقات Flutter منشورة على متاجر الإمارات.',
     now: [
       { label: 'الآن', value: 'Senior\u00a0Software\u00a0Engineer في Kief، أبوظبي' },
       // Non-breaking spaces (\u00a0) keep each product name on one line when the row wraps.

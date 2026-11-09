@@ -29,7 +29,7 @@ import sparkCard from '../assets/cards/spark-fitness.jpg';
 export const profile = {
   name: 'Ahmed Zein',
   fullName: 'Ahmed Zein Elabedin',
-  title: 'Senior Mobile Engineer',
+  title: 'Senior Software Engineer',
   location: 'Abu Dhabi',
   email: 'ahmed.zein1896@gmail.com',
   phone: '+971544626234',
@@ -44,7 +44,7 @@ export const profile = {
   intro:
     'Real-time tracking, background execution, iOS Live Activities, payments and crash monitoring, shipped in Taggo, Taggo Captain and The Events. Author of three Flutter packages.',
   description:
-    'Ahmed Zein, Senior Mobile Engineer in Abu Dhabi. Real-time tracking, background execution, iOS Live Activities and payments in Flutter apps live in the UAE stores.',
+    'Ahmed Zein, Senior Software Engineer in Abu Dhabi. Real-time tracking, background execution, iOS Live Activities and payments in Flutter apps live in the UAE stores.',
   now: [
     { label: 'Now', value: 'Senior Software Engineer at Kief, Abu Dhabi' },
     { label: 'Shipping', value: 'Taggo, Taggo Captain and The Events' },

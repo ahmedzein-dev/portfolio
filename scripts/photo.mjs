@@ -71,7 +71,7 @@ await png(180, 'public/apple-touch-icon.png');
     <rect x="${px - 8}" y="${py - 8}" width="${pw + 16}" height="${ph + 16}" rx="41" fill="url(#ring)"/>
     <rect x="${px - 4}" y="${py - 4}" width="${pw + 8}" height="${ph + 8}" rx="37" fill="#0e1219"/>
     <text x="${tx}" y="232" font-family="Helvetica Neue" font-weight="700" font-size="88" fill="#f2ede5">Ahmed Zein</text>
-    <text x="${tx}" y="300" font-family="Helvetica Neue" font-weight="500" font-size="40" fill="#d4aa7d">Senior Mobile Engineer</text>
+    <text x="${tx}" y="300" font-family="Helvetica Neue" font-weight="500" font-size="40" fill="#d4aa7d">Senior Software Engineer</text>
     <text x="${tx}" y="400" font-family="Helvetica Neue" font-weight="700" font-size="46" fill="#f2ede5">I build mobile apps</text>
     <text x="${tx}" y="458" font-family="Helvetica Neue" font-weight="700" font-size="46" fill="#f2ede5">that stay live.</text>
   </svg>`);
