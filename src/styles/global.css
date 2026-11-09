@@ -821,7 +821,10 @@ a.mw-card { text-decoration: none; color: inherit; }
 :root:lang(ar) :is(h2, h3, .scard h3, .constraint) { line-height: 1.35; }
 :root:lang(ar) h2 { font-weight: 720; }
 /* The small mono labels are sized for Latin capitals; Arabic at that size is too small to read. */
-:root:lang(ar) :is(.label, .eyebrow) { font-size: 0.8rem; }
+:root:lang(ar) .eyebrow { font-size: 0.8rem; }
+/* Section labels in Arabic: the text font, a step bigger and a little bolder; the number stays mono. */
+:root:lang(ar) .label { font-family: var(--body); font-stretch: normal; letter-spacing: normal; text-transform: none; font-size: 0.95rem; font-weight: 600; }
+:root:lang(ar) .label .n { font-family: var(--mono); font-stretch: 87.5%; font-weight: 500; }
 /* The title under the name: in the text font, as written, and big enough to sit beside Arabic. */
 :root:lang(ar) .hero-meta .eyebrow { font-family: var(--body); font-stretch: normal; text-transform: none; letter-spacing: normal; font-size: 0.95rem; }
 :root:lang(ar) :is(.scard-eyebrow, .case-meta dt, .pkg-stats dt, .status-panel div > span:first-child, .mw-card .yr) { font-size: 0.72rem; }
