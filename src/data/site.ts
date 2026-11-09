@@ -116,7 +116,7 @@ export const flagships: Flagship[] = [
     card: { year: '2025 to now', platforms: 'Mobile', summary: 'Rides, cargo and recovery, rider and driver apps.', kinds: ['mobile'], image: taggoCard },
     theme: 'taggo',
     shots: [
-      { src: taggoRider, alt: 'Taggo rider app home: live ride, cargo delivery, VIP service and airport travel', kind: 'phone' },
+      { src: taggoRider, alt: 'Taggo rider app home: Where to?, then live ride, cargo, car recovery, bike delivery and car rental, and Taggo Plus', kind: 'phone' },
       { src: taggoDriver, alt: 'Taggo Captain at the pickup: you have arrived, the free-wait countdown, the rider and Start ride', kind: 'phone' },
     ],
     constraint: 'An offer the driver never hears is lost income.',

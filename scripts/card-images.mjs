@@ -2,7 +2,9 @@
 // whole screens, never cropped, centred on a dark stage tinted with the app's colour. The same stages,
 // at 1200×630, are the link previews (og:image) of the case studies.
 //
-//   node scripts/card-images.mjs
+//   node scripts/card-images.mjs [id ...]
+//
+// With ids (taggo, the-events, ...), only those cards are built, so the others keep their bytes and URLs.
 //
 // Writes src/assets/cards/<id>.jpg (1600×1200) and public/share/<slug>.jpg (1200×630), metadata-free.
 import sharp from 'sharp';
@@ -110,9 +112,13 @@ async function write(c, file) {
   console.log(file);
 }
 
+const only = process.argv.slice(2);
+const chosen = only.length ? cards.filter((c) => only.includes(c.id)) : cards;
+if (only.length && chosen.length !== only.length) throw new Error(`unknown card id in: ${only.join(', ')}`);
+
 await mkdir(OUT, { recursive: true });
-for (const c of cards) await write(c, `${OUT}${c.id}.jpg`);
+for (const c of chosen) await write(c, `${OUT}${c.id}.jpg`);
 
 [W, H] = [1200, 630];
 await mkdir(SHARE, { recursive: true });
-for (const c of cards.filter((c) => c.id in PAGES)) await write(c, `${SHARE}${PAGES[c.id]}.jpg`);
+for (const c of chosen.filter((c) => c.id in PAGES)) await write(c, `${SHARE}${PAGES[c.id]}.jpg`);
