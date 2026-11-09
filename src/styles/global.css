@@ -157,7 +157,7 @@ h2 { font-size: clamp(1.9rem, 4.2vw, 3.1rem); font-weight: 760; font-stretch: 11
 h3 { font-size: clamp(1.3rem, 2.3vw, 1.75rem); font-weight: 720; font-stretch: 106%; line-height: 1.1; }
 h4 { font-size: 1.05rem; font-weight: 700; font-stretch: 102%; line-height: 1.25; }
 .label {
-  font-family: var(--mono); font-stretch: 87.5%; font-size: 0.7rem; font-weight: 500;
+  font-family: var(--mono); font-stretch: 87.5%; font-size: 0.78rem; font-weight: 500;
   letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
 }
@@ -268,7 +268,7 @@ code { font-size: 0.86em; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand .az { font-family: var(--display); font-weight: 800; font-stretch: 125%; color: var(--accent); font-size: 1.1rem; letter-spacing: 0.01em; }
 .brand .nm { font-weight: 600; font-size: 0.95rem; }
-.toplinks { display: flex; gap: 22px; margin-inline-start: auto; font-size: 0.9rem; color: var(--muted); }
+.toplinks { display: flex; gap: 18px; margin-inline-start: auto; font-size: 0.9rem; color: var(--muted); }
 .toplinks a { text-decoration: none; }
 .toplinks a:hover { color: var(--text); }
 .theme-btn {
@@ -276,16 +276,28 @@ code { font-size: 0.86em; }
   display: grid; place-items: center; cursor: pointer; color: var(--text);
 }
 .theme-btn svg { width: 16px; height: 16px; }
-/* Phones: the links drop to a second row under the brand, the island and the theme button. */
-@media (max-width: 760px) {
+/* The language switch: an outlined button beside the theme button, so it reads as a switch, not a link. */
+.lang-link {
+  display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px; border-radius: 10px;
+  border: 1px solid var(--line-strong); color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; white-space: nowrap;
+}
+.lang-link:hover { border-color: var(--accent); color: var(--accent); }
+.lang-link svg { width: 15px; height: 15px; flex: none; }
+.lang-in-nav { display: none; }
+/* Below 1180px the centred island would cover the first links, so they drop to a second row under the
+   brand, the island, the language button and the theme button; on phones they spread across it. */
+@media (max-width: 1180px) {
   .topbar { flex-wrap: wrap; height: auto; column-gap: 14px; row-gap: 0; }
   .topbar .brand { height: 72px; }
-  .topbar .theme-btn { margin-inline-start: auto; }
-  .toplinks {
-    order: 3; width: 100%; margin: 0; justify-content: space-between; gap: 8px;
-    padding: 10px 0 14px; font-size: 0.88rem; border-top: 1px solid var(--line);
-  }
+  .topbar .lang-link { margin-inline-start: auto; }
+  .toplinks { order: 3; width: 100%; margin: 0; padding: 10px 0 14px; border-top: 1px solid var(--line); }
   .toplinks a { padding: 4px 0; }
+}
+@media (max-width: 760px) {
+  .topbar .lang-top { display: none; }
+  .topbar .theme-btn { margin-inline-start: auto; }
+  .toplinks { justify-content: space-between; align-items: center; gap: 8px; font-size: 0.88rem; }
+  .toplinks .lang-in-nav { display: inline-flex; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 0.86rem; color: var(--text); }
 }
 @media (max-width: 560px) { .brand .nm { display: none; } }
 
