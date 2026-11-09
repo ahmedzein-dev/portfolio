@@ -1,6 +1,6 @@
 # ahmedzein.dev
 
-Personal site of Ahmed Zein, Senior Software Engineer (mobile, Flutter). Built with [Astro](https://astro.build) as a static site and deployed to GitHub Pages.
+Personal site of Ahmed Zein, Senior Software Engineer (mobile: Flutter, iOS and Android). Built with [Astro](https://astro.build) as a static site and deployed to GitHub Pages.
 
 The previous Flutter-web version of the site lives on the `flutter-legacy` branch.
 

@@ -29,7 +29,7 @@ import sparkCard from '../assets/cards/spark-fitness.jpg';
 export const profile = {
   name: 'Ahmed Zein',
   fullName: 'Ahmed Zein Elabedin',
-  title: 'Senior Software Engineer · Mobile (Flutter)',
+  title: 'Senior Software Engineer · Mobile (Flutter, iOS & Android)',
   location: 'Abu Dhabi',
   email: 'ahmed.zein1896@gmail.com',
   phone: '+971544626234',
