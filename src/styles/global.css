@@ -21,6 +21,9 @@
   --island-live: #57d0be;
   /* The contact card: in dark, the raised surface with a warm glow; in light, the island's dark (set below). */
   --contact-bg: radial-gradient(120% 90% at 100% 0%, rgba(212, 170, 125, 0.13), transparent 62%), var(--raised);
+  /* The island's menu and the status panel: in dark, the raised surface like the cards; in light, the island's dark. */
+  --pop-bg: var(--raised);
+  --pop-line: var(--line-strong);
   --scrim: rgba(4, 6, 10, 0.6);
   --shadow: 0 28px 56px -30px rgba(0, 0, 0, 0.75);
   --taggo: #f4c430;
@@ -54,6 +57,8 @@
     --flag: #a3461f;
     --scrim: rgba(18, 24, 33, 0.35);
     --contact-bg: var(--island);
+    --pop-bg: var(--island);
+    --pop-line: rgba(255, 255, 255, 0.09);
     --shadow: 0 2px 4px rgba(16, 24, 40, 0.05), 0 26px 50px -30px rgba(16, 24, 40, 0.35);
   }
 }
@@ -74,6 +79,8 @@
   --flag: #a3461f;
   --scrim: rgba(18, 24, 33, 0.35);
   --contact-bg: var(--island);
+  --pop-bg: var(--island);
+  --pop-line: rgba(255, 255, 255, 0.09);
   --shadow: 0 2px 4px rgba(16, 24, 40, 0.05), 0 26px 50px -30px rgba(16, 24, 40, 0.35);
 }
 
@@ -164,8 +171,8 @@ code { font-size: 0.86em; }
 .island.toasting .island-toast { display: flex; animation: islandIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .island.info .island-toast svg { display: none; }
 .island-panel {
-  margin-top: 8px; width: min(360px, calc(100vw - 24px)); background: var(--island); color: var(--island-ink);
-  border-radius: 24px; padding: 8px; border: 1px solid rgba(255, 255, 255, 0.09);
+  margin-top: 8px; width: min(360px, calc(100vw - 24px)); background: var(--pop-bg); color: var(--island-ink);
+  border-radius: 24px; padding: 8px; border: 1px solid var(--pop-line);
   box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7); transform-origin: 50% 0; animation: islandIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .island-panel ol { list-style: none; padding: 0; display: grid; gap: 2px; }
@@ -265,8 +272,8 @@ code { font-size: 0.86em; }
 .status[aria-expanded='true'] .chev { transform: rotate(180deg); }
 .status-panel {
   position: absolute; z-index: 5; left: 0; top: calc(100% + 8px); width: min(340px, 86vw);
-  background: var(--island); color: var(--island-ink); border-radius: 22px; padding: 14px 16px; display: grid; gap: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.09); box-shadow: 0 26px 50px -20px rgba(0, 0, 0, 0.7);
+  background: var(--pop-bg); color: var(--island-ink); border-radius: 22px; padding: 14px 16px; display: grid; gap: 10px;
+  border: 1px solid var(--pop-line); box-shadow: 0 26px 50px -20px rgba(0, 0, 0, 0.7);
   transform-origin: 20% 0; animation: islandIn 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .status-panel div { display: grid; gap: 1px; font-size: 0.86rem; }
