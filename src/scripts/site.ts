@@ -76,28 +76,32 @@ document.addEventListener('click', (e) => {
   }
 });
 
-/* ---------- theme toggle: system → light → dark ---------- */
+/* ---------- theme toggle: one tap flips light and dark ---------- */
+// Each tap shows the other theme. Landing on the system's own theme drops the saved choice, so the
+// page follows the system again from then on.
 const themeBtn = $<HTMLButtonElement>('#theme-btn');
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+const shownTheme = () => document.documentElement.dataset.theme ?? (systemDark.matches ? 'dark' : 'light');
 function applyThemeLabel() {
   if (!themeBtn) return;
-  const t = document.documentElement.dataset.theme ?? 'system';
-  themeBtn.dataset.mode = t;
-  themeBtn.setAttribute('aria-label', `Theme: ${t}. Change theme`);
-  themeBtn.title = `Theme: ${t}`;
+  const other = shownTheme() === 'dark' ? 'light' : 'dark';
+  themeBtn.dataset.mode = shownTheme();
+  themeBtn.setAttribute('aria-label', `Switch to ${other} theme`);
+  themeBtn.title = `Switch to ${other} theme`;
 }
 themeBtn?.addEventListener('click', () => {
-  const order = ['system', 'light', 'dark'];
-  const current = document.documentElement.dataset.theme ?? 'system';
-  const next = order[(order.indexOf(current) + 1) % order.length];
-  if (next === 'system') delete document.documentElement.dataset.theme;
+  const next = shownTheme() === 'dark' ? 'light' : 'dark';
+  const followsSystem = next === (systemDark.matches ? 'dark' : 'light');
+  if (followsSystem) delete document.documentElement.dataset.theme;
   else document.documentElement.dataset.theme = next;
   try {
-    if (next === 'system') localStorage.removeItem('theme');
+    if (followsSystem) localStorage.removeItem('theme');
     else localStorage.setItem('theme', next);
   } catch {}
   applyThemeLabel();
-  toast(next === 'system' ? 'Theme follows your system' : `${next[0].toUpperCase()}${next.slice(1)} theme`);
+  toast(next === 'dark' ? 'Dark theme' : 'Light theme');
 });
+systemDark.addEventListener('change', applyThemeLabel);
 applyThemeLabel();
 
 /* ---------- status pill in the hero ---------- */
