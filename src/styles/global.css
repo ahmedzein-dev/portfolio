@@ -320,6 +320,15 @@ code { font-size: 0.86em; }
 .status-panel .vg { visibility: hidden; }
 .status-panel div.wait { opacity: 0; }
 .status-panel div { transition: opacity 0.2s ease; }
+/* Phones: both drop-downs (the section menu and the status panel) narrower and tighter. */
+@media (max-width: 560px) {
+  .island-panel { width: min(230px, calc(100vw - 48px)); border-radius: 18px; padding: 5px; }
+  .island-panel ol { gap: 0; }
+  .island-panel a { padding: 7px 10px; gap: 10px; border-radius: 12px; font-size: 13px; }
+  /* It opens from the pill beside the photo, so it gets the width left of the photo (about 100vw - 148px). */
+  .status-panel { width: max-content; max-width: min(260px, calc(100vw - 148px)); border-radius: 16px; padding: 10px 12px; gap: 7px; }
+  .status-panel div { font-size: 0.8rem; }
+}
 .eyebrow { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .hero-sub { color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.12rem); max-width: 60ch; }
 .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
