@@ -46,7 +46,7 @@ export const ar = {
       pitch: 'طلب رحلات وشحن بضائع وسحب مركبات في الإمارات، مع تتبّع لحظي وLive Activities.',
       summary:
         'طلب رحلات وشحن بضائع وسحب مركبات في الإمارات، منشور على App Store وGoogle Play. توزيع الطلبات والتتبّع اللحظي عبر Socket.IO، وموقع السائق في الخلفية، وLive Activities، وStripe مع 3D Secure، وTaggo Buddy: مساعد صوتي بالضغط للتحدث مبني على Gemini Live.',
-      role: 'المهندس الرئيسي لتطبيقات الجوّال، Kief Consultancy & Technology',
+      role: 'Mobile Team Lead, Kief Consultancy & Technology',
       period: `2025 ${now}`,
       platforms: 'iOS وAndroid',
       card: { year: `2025 ${now}`, platforms: 'جوّال', summary: 'رحلات وشحن وسحب مركبات، بتطبيقين للراكب والسائق.' },
@@ -79,7 +79,7 @@ export const ar = {
       pitch: 'هدايا ومناسبات وتسوق في تسع دول خليجية، مع Telr وApple Pay وGoogle Pay.',
       summary:
         'سوق إلكتروني متعدد البائعين للهدايا والمناسبات والتسوق في تسع دول خليجية. انخفض زمن فتح التطبيق من نحو 12 ثانية إلى نحو 3 ثوانٍ على الهاتف نفسه، بتحميل أقسام الرئيسية عند الحاجة، وإزالة الطلبات المكررة، وشاشة بداية أصلية، وهياكل تحميل. والدفع عبر Telr وApple Pay وGoogle Pay.',
-      role: 'المهندس الرئيسي لتطبيقات الجوّال، Kief Consultancy & Technology',
+      role: 'Mobile Team Lead, Kief Consultancy & Technology',
       period: `أبريل 2025 ${now}`,
       platforms: 'iOS وAndroid',
       tags: ['أداء الإقلاع', 'Telr', 'Apple Pay', 'Google Pay', 'التحديث الإجباري'],
@@ -263,7 +263,7 @@ export const ar = {
 
   // Job titles stay in English, as on the CV and LinkedIn, so they match when checked.
   experience: [
-    { when: `أبريل 2025 ${now}`, place: 'أبوظبي، الإمارات', note: 'المهندس الرئيسي لتطبيقات الجوّال في Taggo وTaggo Captain وThe Events.' },
+    { when: `أبريل 2025 ${now}`, place: 'أبوظبي، الإمارات', note: 'Mobile\u00a0Team\u00a0Lead لتطبيقات Taggo وTaggo\u00a0Captain وThe\u00a0Events.' },
     { when: 'مايو 2024 حتى أبريل 2025', place: 'رأس الخيمة، الإمارات', note: 'BA3 Business Solutions وAmber Drive. ومن هنا بدأت document_camera_frame.' },
     { when: 'فبراير حتى مايو 2024', place: 'عن بُعد، لندن، المملكة المتحدة · عقد بالمشروع', note: 'بحث في الملاحظات مع التمييز، وتلخيص وترجمة على الجهاز.' },
     { when: 'يناير 2022 حتى يناير 2024', place: 'القاهرة، مصر', note: 'تطبيقات جوّال من الفكرة حتى النشر.' },
