@@ -349,6 +349,9 @@ code { font-size: 0.86em; }
 .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
 .short { display: none; }
 @media (max-width: 680px) {
+  /* The title under the name in plain text, as on /ar/: narrower than spaced capitals, so it takes two lines
+     instead of three at the same size, and iOS keeps its spelling. */
+  .hero-meta .eyebrow { font-family: var(--body); font-stretch: normal; font-size: 0.84rem; letter-spacing: normal; text-transform: none; line-height: 1.4; }
   .hero-avatar { width: 96px; height: 120px; border-radius: 18px; }
   .hero-avatar img { border-radius: 15px; }
   .hero-id { gap: 16px; }
