@@ -298,7 +298,14 @@ code { font-size: 0.86em; }
   .topbar .theme-btn { margin-inline-start: auto; }
   .toplinks { justify-content: space-between; align-items: center; gap: 8px; font-size: 0.88rem; }
   /* No auto margin here (the one the top-row button has): it took all the free space and packed the links together. */
-  .toplinks .lang-in-nav { display: inline-flex; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 0.86rem; color: var(--text); margin-inline-start: 0; }
+  .toplinks .lang-in-nav { display: inline-flex; height: 34px; padding: 0 10px; border-radius: 10px; font-size: 0.9rem; color: var(--text); margin-inline-start: 0; }
+  .toplinks a { white-space: nowrap; }
+}
+/* Small phones (iPhone SE and the like): a step smaller, so the five fit on one row with the globe. */
+@media (max-width: 380px) {
+  .toplinks { font-size: 0.8rem; gap: 4px; }
+  .toplinks .lang-in-nav { padding: 0 7px; gap: 4px; font-size: 0.82rem; height: 32px; }
+  .toplinks .lang-in-nav svg { width: 13px; height: 13px; }
 }
 @media (max-width: 560px) { .brand .nm { display: none; } }
 
