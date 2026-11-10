@@ -247,9 +247,11 @@ function updateStack() {
 let ticking = false;
 const toTop = $<HTMLButtonElement>('#to-top');
 const toTopRing = $<SVGCircleElement>('#to-top-ring');
-toTop?.addEventListener('click', () => {
+toTop?.addEventListener('click', (e) => {
   window.scrollTo({ top: 0, behavior: reduced() ? 'auto' : 'smooth' });
-  $('.brand')?.focus({ preventScroll: true });
+  // From the keyboard (no pointer: detail 0), focus moves to the top with the page. Not after a tap: iOS
+  // Safari would draw the focus ring around the whole brand box.
+  if (e.detail === 0) $('.brand')?.focus({ preventScroll: true });
 });
 
 function frame() {

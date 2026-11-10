@@ -297,7 +297,8 @@ code { font-size: 0.86em; }
   .topbar .lang-top { display: none; }
   .topbar .theme-btn { margin-inline-start: auto; }
   .toplinks { justify-content: space-between; align-items: center; gap: 8px; font-size: 0.88rem; }
-  .toplinks .lang-in-nav { display: inline-flex; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 0.86rem; color: var(--text); }
+  /* No auto margin here (the one the top-row button has): it took all the free space and packed the links together. */
+  .toplinks .lang-in-nav { display: inline-flex; height: 30px; padding: 0 9px; border-radius: 9px; font-size: 0.86rem; color: var(--text); margin-inline-start: 0; }
 }
 @media (max-width: 560px) { .brand .nm { display: none; } }
 
