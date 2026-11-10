@@ -29,7 +29,7 @@ const photo = (px: number) => fingerprinted(`/photo/ahmed-zein-${px}.jpg`);
     <div class="hero-meta">
       <p class="hero-name">{profile.name}</p>
       {/* <bdi>: the English title stays in one piece, parentheses included, inside an Arabic line. */}
-      <p class="eyebrow"><bdi>{profile.title}</bdi> · {profile.location}</p>
+      <p class="eyebrow"><bdi>{profile.title}</bdi> <span class="nowrap">· {profile.location}</span></p>
       <button class="status" id="status-btn" type="button" aria-expanded="false" aria-controls="status-panel">
         <i aria-hidden="true"></i>
         <span><span class="long">{profile.availability.long}</span><span class="short">{profile.availability.short}</span></span>

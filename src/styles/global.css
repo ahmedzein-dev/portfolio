@@ -342,6 +342,8 @@ code { font-size: 0.86em; }
   .status-panel { width: max-content; max-width: min(260px, calc(100vw - 148px)); border-radius: 16px; padding: 10px 12px; gap: 7px; }
   .status-panel div { font-size: 0.8rem; }
 }
+/* The city stays on one line with its dot ("· Abu Dhabi", not "Abu" / "Dhabi"). */
+.nowrap { white-space: nowrap; }
 .eyebrow { font-family: var(--mono); font-stretch: 87.5%; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .hero-sub { color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.12rem); max-width: 60ch; }
 .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
