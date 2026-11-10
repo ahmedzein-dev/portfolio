@@ -275,7 +275,16 @@ code { font-size: 0.86em; }
   width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line-strong); background: transparent;
   display: grid; place-items: center; cursor: pointer; color: var(--text);
 }
-.theme-btn svg { width: 16px; height: 16px; }
+.theme-btn svg { width: 18px; height: 18px; animation: themeIcon 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+/* Sun while dark (tap for light), moon while light (tap for dark), by the theme the page shows. */
+.theme-btn .moon { display: none; }
+:root[data-theme='light'] .theme-btn .sun { display: none; }
+:root[data-theme='light'] .theme-btn .moon { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) .theme-btn .sun { display: none; }
+  :root:not([data-theme='dark']) .theme-btn .moon { display: block; }
+}
+@keyframes themeIcon { from { opacity: 0; rotate: -60deg; scale: 0.6; } }
 /* The language switch: an outlined button beside the theme button, so it reads as a switch, not a link. */
 .lang-link {
   display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px; border-radius: 10px;
