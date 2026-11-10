@@ -275,7 +275,10 @@ code { font-size: 0.86em; }
   width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line-strong); background: transparent;
   display: grid; place-items: center; cursor: pointer; color: var(--text);
 }
-.theme-btn svg { width: 18px; height: 18px; animation: themeIcon 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.theme-btn svg { width: 18px; height: 18px; color: var(--accent); animation: themeIcon 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+/* In the site's gold: the sun warm and lit (a filled centre), the moon in the light theme's deeper gold. */
+.theme-btn .sun circle { fill: currentColor; }
+.theme-btn .moon path { fill: color-mix(in srgb, var(--accent-fill) 55%, transparent); }
 /* Sun while dark (tap for light), moon while light (tap for dark), by the theme the page shows. */
 .theme-btn .moon { display: none; }
 :root[data-theme='light'] .theme-btn .sun { display: none; }
