@@ -295,7 +295,7 @@ code { font-size: 0.86em; }
 }
 .lang-link:hover { border-color: var(--accent); color: var(--accent); }
 .lang-link svg { width: 15px; height: 15px; flex: none; }
-.lang-in-nav { display: none; }
+.lang-short { display: none; }
 /* Below 1180px the centred island would cover the first links, so they drop to a second row under the
    brand, the island, the language button and the theme button; on phones they spread across it. */
 @media (max-width: 1180px) {
@@ -305,19 +305,24 @@ code { font-size: 0.86em; }
   .toplinks { order: 3; width: 100%; margin: 0; padding: 10px 0 14px; border-top: 1px solid var(--line); }
   .toplinks a { padding: 4px 0; }
 }
+/* Phones: the language and theme buttons side by side, two squares of the same size (the island leaves no
+   room for the globe and the word); the links row is only links. */
 @media (max-width: 760px) {
-  .topbar .lang-top { display: none; }
-  .topbar .theme-btn { margin-inline-start: auto; }
+  .topbar { column-gap: 8px; }
+  .topbar .lang-top { width: 36px; padding: 0; justify-content: center; font-size: 0.88rem; }
+  .lang-top svg, .lang-top .lang-full { display: none; }
+  .lang-top .lang-short { display: inline; }
+  .lang-top .lang-short:lang(ar) { font-size: 1.05rem; line-height: 1; }
   .toplinks { justify-content: space-between; align-items: center; gap: 8px; font-size: 0.88rem; }
-  /* No auto margin here (the one the top-row button has): it took all the free space and packed the links together. */
-  .toplinks .lang-in-nav { display: inline-flex; height: 34px; padding: 0 10px; border-radius: 10px; font-size: 0.9rem; color: var(--text); margin-inline-start: 0; }
   .toplinks a { white-space: nowrap; }
 }
-/* Small phones (iPhone SE and the like): a step smaller, so the five fit on one row with the globe. */
+/* Small phones (iPhone SE and the like): the island drops its ring (the back-to-top button still shows how far
+   down you are) and the two buttons are a little smaller, so the island clears them. */
 @media (max-width: 380px) {
-  .toplinks { font-size: 0.8rem; gap: 4px; }
-  .toplinks .lang-in-nav { padding: 0 7px; gap: 4px; font-size: 0.82rem; height: 32px; }
-  .toplinks .lang-in-nav svg { width: 13px; height: 13px; }
+  .island-btn { gap: 8px; padding: 0 14px; }
+  .island:not(.toasting) .island-ring { display: none; }
+  .topbar .lang-top, .topbar .theme-btn { width: 34px; height: 34px; }
+  .topbar { column-gap: 6px; }
 }
 @media (max-width: 560px) { .brand .nm { display: none; } }
 
