@@ -289,40 +289,55 @@ code { font-size: 0.86em; }
 }
 @keyframes themeIcon { from { opacity: 0; rotate: -60deg; scale: 0.6; } }
 /* The language switch: an outlined button beside the theme button, so it reads as a switch, not a link. */
-.lang-link {
-  display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 10px; border-radius: 10px;
-  border: 1px solid var(--line-strong); color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; white-space: nowrap;
+.lang-switch {
+  display: inline-flex; align-items: center; gap: 2px; height: 36px; padding: 3px; border-radius: 12px;
+  border: 1px solid var(--line-strong);
 }
-.lang-link:hover { border-color: var(--accent); color: var(--accent); }
-.lang-link svg { width: 15px; height: 15px; flex: none; }
-.lang-short { display: none; }
+.lang-switch > * {
+  display: grid; place-items: center; min-width: 36px; height: 100%; padding: 0 8px; border-radius: 9px;
+  font-family: var(--font-mono), ui-monospace, monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--muted); text-decoration: none; transition: color 0.15s ease, background-color 0.15s ease;
+}
+.lang-switch [aria-current] { background: var(--raised); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); }
+.lang-switch a:hover { color: var(--accent); }
+:root[dir='rtl'] .lang-switch { flex-direction: row-reverse; }
 /* Below 1180px the centred island would cover the first links, so they drop to a second row under the
-   brand, the island, the language button and the theme button; on phones they spread across it. */
+   brand, the island, the language switch and the theme button; on phones they spread across it. */
 @media (max-width: 1180px) {
   .topbar { flex-wrap: wrap; height: auto; column-gap: 14px; row-gap: 0; }
   .topbar .brand { height: 72px; }
-  .topbar .lang-link { margin-inline-start: auto; }
+  .topbar .lang-switch { margin-inline-start: auto; }
   .toplinks { order: 3; width: 100%; margin: 0; padding: 10px 0 14px; border-top: 1px solid var(--line); }
   .toplinks a { padding: 4px 0; }
 }
-/* Phones: the language and theme buttons side by side, two squares of the same size (the island leaves no
-   room for the globe and the word); the links row is only links. */
+/* Phones: the switch beside the theme button, both a little smaller so the island clears them; the links row
+   is only links. */
 @media (max-width: 760px) {
-  .topbar { column-gap: 8px; }
-  .topbar .lang-top { width: 36px; padding: 0; justify-content: center; font-size: 0.88rem; }
-  .lang-top svg, .lang-top .lang-full { display: none; }
-  .lang-top .lang-short { display: inline; }
-  .lang-top .lang-short:lang(ar) { font-size: 1.05rem; line-height: 1; }
+  .topbar { column-gap: 6px; }
+  .topbar .theme-btn { width: 34px; height: 34px; }
+  .lang-switch { height: 34px; padding: 2px; }
+  .lang-switch > * { min-width: 28px; padding: 0 4px; font-size: 0.66rem; }
   .toplinks { justify-content: space-between; align-items: center; gap: 8px; font-size: 0.88rem; }
   .toplinks a { white-space: nowrap; }
 }
-/* Small phones (iPhone SE and the like): the island drops its ring (the back-to-top button still shows how far
-   down you are) and the two buttons are a little smaller, so the island clears them. */
-@media (max-width: 380px) {
-  .island-btn { gap: 8px; padding: 0 14px; }
+/* Phones: the island is a little narrower and drops its ring (the back-to-top button still shows how far
+   down you are); on the smallest, its dot too. */
+@media (max-width: 430px) {
+  .island-btn { gap: 7px; padding: 0 12px; font-size: 12.5px; }
   .island:not(.toasting) .island-ring { display: none; }
-  .topbar .lang-top, .topbar .theme-btn { width: 34px; height: 34px; }
-  .topbar { column-gap: 6px; }
+}
+/* Small phones: the controls a step smaller, and the island nudged toward the logo, where the row has room
+   (mirrored on /ar/ by --x). */
+@media (max-width: 380px) {
+  .topbar .theme-btn { width: 32px; height: 32px; }
+  .lang-switch { height: 32px; }
+  .lang-switch > * { min-width: 25px; padding: 0 3px; font-size: 0.62rem; }
+  .island { translate: calc(-10px * var(--x)) 0; }
+}
+@media (max-width: 350px) {
+  .island:not(.toasting) .island-dot { display: none; }
+  .island-btn { font-size: 12px; padding: 0 11px; }
+  .island { translate: calc(-20px * var(--x)) 0; }
 }
 @media (max-width: 560px) { .brand .nm { display: none; } }
 

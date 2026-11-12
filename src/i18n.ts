@@ -25,7 +25,7 @@ const en = {
   home: (name: string) => `${name}, home`,
   nav: { label: 'Main', work: 'Work', openSource: 'Open source', experience: 'Experience', contact: 'Contact' },
   /** The link to the page in the other language, written in that language. */
-  switchTo: { label: 'عربي', short: 'ع', title: 'اقرأ الموقع بالعربية', lang: 'ar' },
+  switchTo: { label: 'عربي', title: 'اقرأ الموقع بالعربية', lang: 'ar' },
   theme: 'Change theme',
   sectionsNav: 'Sections',
   rail: 'Route through the page',
@@ -93,7 +93,7 @@ const ar: Ui = {
   skip: 'انتقل إلى المحتوى',
   home: (name) => `${name}، الصفحة الرئيسية`,
   nav: { label: 'القائمة الرئيسية', work: 'الأعمال', openSource: 'مفتوح المصدر', experience: 'الخبرة', contact: 'تواصل' },
-  switchTo: { label: 'English', short: 'EN', title: 'Read the site in English', lang: 'en' },
+  switchTo: { label: 'English', title: 'Read the site in English', lang: 'en' },
   theme: 'تغيير المظهر',
   sectionsNav: 'الأقسام',
   rail: 'مسار الصفحة',

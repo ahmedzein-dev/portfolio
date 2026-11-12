@@ -3,9 +3,10 @@ import { getContent } from '../data/content';
 import { langOf, otherPath } from '../i18n';
 
 // The bar at the top of every page. On the home page the links jump within it; elsewhere they lead back
-// to its sections. The language button, beside the theme button, opens this same page in the other language;
-// on phones it is a square showing the language's short name, as the island leaves little room.
-const { t, profile, link } = getContent(langOf(Astro.url));
+// to its sections. Beside the theme button, a two-way AR | EN switch: the page's language lit, the other a link
+// to this same page in that language.
+const lang = langOf(Astro.url);
+const { t, profile, link } = getContent(lang);
 const onHome = Astro.url.pathname === link('/');
 const to = (hash: string) => (onHome ? hash : link(`/${hash}`));
 const other = otherPath(Astro.url);
@@ -19,12 +20,19 @@ const other = otherPath(Astro.url);
     <a href={to('#experience')}>{t.nav.experience}</a>
     <a href={to('#contact')}>{t.nav.contact}</a>
   </nav>
-  <a class="lang-link lang-top" href={other.path} lang={t.switchTo.lang} hreflang={t.switchTo.lang} title={t.switchTo.title}>
-    <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"></circle><path d="M1.5 8h13M8 1.5c-2 2-2.8 4.2-2.8 6.5S6 12.5 8 14.5M8 1.5c2 2 2.8 4.2 2.8 6.5S10 12.5 8 14.5" fill="none" stroke="currentColor" stroke-width="1.3"></path></svg>
-    <span class="lang-full">{t.switchTo.label}</span>
-    {/* Phones: a square button beside the theme one, with the language's short name. */}
-    <span class="lang-short" aria-hidden="true">{t.switchTo.short}</span>
-  </a>
+  {/* AR | EN in that order on both pages (global.css reverses the row on /ar/), like a switch, not a list that flips with the page. */}
+  <div class="lang-switch" role="group" aria-label={lang === 'ar' ? 'اللغة' : 'Language'}>
+    {lang === 'ar' ? (
+      <span aria-current="true">AR</span>
+    ) : (
+      <a href={other.path} lang="ar" hreflang="ar" title={t.switchTo.title}>AR</a>
+    )}
+    {lang === 'en' ? (
+      <span aria-current="true">EN</span>
+    ) : (
+      <a href={other.path} lang="en" hreflang="en" title={t.switchTo.title}>EN</a>
+    )}
+  </div>
   <button class="theme-btn" id="theme-btn" type="button" aria-label={t.theme}>
     {/* The sun in dark, to switch to light; the moon in light, to switch to dark (global.css shows one). */}
     <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.9"></circle><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.55 1.55M17.15 17.15l1.55 1.55M5.3 18.7l1.55-1.55M17.15 6.85l1.55-1.55" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"></path></svg>
